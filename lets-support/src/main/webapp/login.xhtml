@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:jsf="http://xmlns.jcp.org/jsf"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+    <link rel="stylesheet" type="text/css" href="styles/login.css"/>
+    
+<f:view contentType="text/xhtml;charset=UTF-8" encoding="UTF-8">
+    <h:body style="text-align:center; margin: 0; padding: 0;">
+        <div class="body">
+            <label class="title">Iniciar Sesion</label>
+            <div class="container">
+                <div style="display: block;">
+                    <form onsubmit="" action="/app/home/">
+                        <label style="display: block;" for="username">Username:</label>
+                        <input id="username" style="background-color: white; width: 90%; height: 30px; margin: 10px;"
+                            placeholder="usuario1" type="text" />
+                        <label style="display: block;" for="password">Password:</label>
+                        <input id="password" style="background-color: white; width: 90%; height: 30px; margin: 10px;"
+                            placeholder="*********" type="password" />
+                        <button class="button" type="submit">Ingresar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</f:view>
+
+</html>
