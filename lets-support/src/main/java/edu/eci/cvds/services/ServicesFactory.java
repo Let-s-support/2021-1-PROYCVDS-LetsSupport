@@ -1,11 +1,9 @@
 package edu.eci.cvds.services;
 
 import com.google.inject.Injector;
-
 import static com.google.inject.Guice.createInjector;
 
 import java.util.Optional;
-
 import org.mybatis.guice.XMLMyBatisModule;
 import org.mybatis.guice.datasource.helper.JdbcHelper;
 
@@ -30,18 +28,18 @@ public class ServicesFactory {
         optInjector = Optional.empty();
     }
 
-    public Services getServices(){
+    public UserServices getServices(){
         if (!optInjector.isPresent()) {
             optInjector = Optional.of(myBatisInjector("development","mybatis-config.xml"));
         }
-        return optInjector.get().getInstance(Services.class);
+        return optInjector.get().getInstance(UserServices.class);
     }
  
-    public Services getServicesTesting(){
+    public UserServices getServicesTesting(){
         if (!optInjector.isPresent()) {
             optInjector = Optional.of(myBatisInjector("test","mybatis-config-h2.xml"));
         }
-        return optInjector.get().getInstance(Services.class);
+        return optInjector.get().getInstance(UserServices.class);
     }
  
     public static ServicesFactory getInstance(){

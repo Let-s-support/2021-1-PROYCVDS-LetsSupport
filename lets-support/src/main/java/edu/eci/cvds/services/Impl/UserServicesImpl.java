@@ -1,5 +1,5 @@
 package edu.eci.cvds.services.Impl;
 
-public class ServicesImpl {
+public class UserServicesImpl {
     
 }

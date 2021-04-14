@@ -1,5 +1,7 @@
 package edu.eci.cvds.entities;
 
-public enum Rol {
+import java.io.Serializable;
+
+public enum Rol implements Serializable{
     ESTUDIANTE, PROFESOR, ADMINISTRADOR, EGRESADO, ADMINISTRATIVO
 }

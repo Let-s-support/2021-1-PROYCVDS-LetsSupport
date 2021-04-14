@@ -1,6 +1,8 @@
 package edu.eci.cvds.entities;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
     private int id;
     private String fullName;
     private String username;
