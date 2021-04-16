@@ -4,6 +4,14 @@ import com.google.inject.Injector;
 import static com.google.inject.Guice.createInjector;
 
 import java.util.Optional;
+
+import edu.eci.cvds.dao.CategoriesDAO;
+import edu.eci.cvds.dao.NeedsDAO;
+import edu.eci.cvds.dao.UserDAO;
+import edu.eci.cvds.dao.mybatis.MyBatisCategoriesDAO;
+import edu.eci.cvds.dao.mybatis.MyBatisNeedsDAO;
+import edu.eci.cvds.dao.mybatis.MyBatisUserDAO;
+import edu.eci.cvds.services.Impl.UserServicesImpl;
 import org.mybatis.guice.XMLMyBatisModule;
 import org.mybatis.guice.datasource.helper.JdbcHelper;
 
@@ -19,6 +27,11 @@ public class ServicesFactory {
                 install(JdbcHelper.PostgreSQL);
                 setEnvironmentId(env);
                 setClassPathResource(path);
+                bind(CategoriesDAO.class).to(MyBatisCategoriesDAO.class);
+                bind(NeedsDAO.class).to(MyBatisNeedsDAO.class);
+                bind(UserDAO.class).to(MyBatisUserDAO.class);
+                bind(UserDAO.class).to(MyBatisUserDAO.class);
+                bind(UserServices.class).to(UserServicesImpl.class);
             }
 
         });

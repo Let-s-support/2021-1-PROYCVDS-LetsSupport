@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.eci.cvds.dao.mybatis.mappers.CategoriesMapper">
+
+    <resultMap id="CategoriesResult" type="Categories">
+        <id property="id" column="id"/>
+        <result property="value" column="value"/>
+        <result property="description" column="description"/>
+
+        <result property="status" column="status"/>
+
+        <result property="creationdate" column="creationdate"/>
+        <result property="modificationdate" column="modificationdate"/>
+    </resultMap>
+
+    <insert parameterType="map" id="agregarCategoria">
+        insert into categories values(#{newid},#{newvalue},#{newdescription},#{newstatus},#{newcreationdate},#{newmodificationdate})
+    </insert>
+
+    <update parameterType="map" id="ModificarCategoria">
+        update users set nombre=#{upnombre}, descripcion=#{updescripcion}, estado=#{upestado} 
+        WHERE id=#{upid}
+    </update>
+
+</mapper>

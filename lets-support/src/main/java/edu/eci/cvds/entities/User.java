@@ -8,18 +8,20 @@ public class User implements Serializable{
     private String username;
     private String passwd;
     private Rol rol;
-    private boolean isActive;
+    private boolean isactive;
+    private String correo;
 
     public User() {
     }
 
-    public User(int id, String fullName, String username, String passwd, Rol rol, boolean isActive) {
+    public User(int id, String fullName, String username, String passwd, Rol rol, boolean isactive, String correo) {
         this.id = id;
         this.fullName = fullName;
         this.username = username;
         this.passwd = passwd;
         this.rol = rol;
-        this.isActive = isActive;
+        this.isactive = isactive;
+        this.correo = correo;
     }
 
     public int getId() {

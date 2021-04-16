@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.eci.cvds.dao.mybatis.mappers.UserMapper">
+    <resultMap id="UserResult" type="User">
+        <id property="id" column="id"/>
+        <result property="fullName" column="fullName"/>
+        <result property="username" column="username"/>
+        <result property="passwd" column="passwd"/>
+        
+        <result property="rol" column="rol"/>
+        
+        <result property="isactive" column="isactive"/>
+        <result property="correo" column="correo"/>
+    </resultMap>
+    
+    <select parameterType="map" id="IngresarSesion" resultMap="UserResult">
+        select 
+            passwd    
+        FROM 
+            users
+        WHERE
+            correo = #{concorreo}
+    </select>
+
+    <update parameterType="map" id="ModificarRol">
+        update users set rol=#{uprol} WHERE correo=#{upcorreo}
+    </update>
+
+    <update parameterType="map" id="DesactivarUser">
+        update users set isactive=#{upisactive} WHERE correo=#{upcorreo}
+    </update>
+
+    <insert parameterType="map" id="agregarUsuario">
+        insert into users values(#{newid},#{newfullname},#{newusername},#{newpasswd},#{newrol},#{newisactive},#{newcorreo})
+    </insert>
+
+
+</mapper>

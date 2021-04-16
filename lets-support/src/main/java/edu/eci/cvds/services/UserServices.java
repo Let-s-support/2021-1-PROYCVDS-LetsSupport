@@ -1,44 +1,19 @@
 package edu.eci.cvds.services;
+import java.util.Date;
 import java.util.List;
 
+import edu.eci.cvds.dao.PersistenceException;
+import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.entities.Rol;
+import edu.eci.cvds.entities.Status;
 import edu.eci.cvds.entities.User;
 
 public interface UserServices {
-    
-    /**
-   * @obj add user to Database
-   * @param id user Identifier
-   * @param fullName first and last User name 
-   * @param username short name
-   * @param passwd unique password identified
-   * @param rol rol as Student, Professor, administrative, graduate, administrator
-   * @param isActive if the user is active in the system
-   * @throws UserServiceException if the information is not complete or if the identifier already exists
-   */
-    public abstract void addUser(int id, String fullName, String username, String passwd, Rol rol, boolean isActive) throws UserServiceException;
-
-    /**
-   * @obj see user' info 
-   * @param id user Identifier
-   * @return Basic User info  identified by 'id' 
-   * @throws UserServiceException If identifier is wrong
-   */   
-    public abstract User seeUser(int id) throws UserServiceException;
-    //public abstract User seeRolUser() throws UserServiceException;
-
-    /**
-   * @obj see user's info 
-   * @return List with Basic Users info 
-   * @throws UserServiceException 
-   */   
-    public abstract List<User> seeUsers() throws UserServiceException;
-
-    
-    /**
-   * @obj see which users are active or inactive in the system
-   * @return List with id,fullname,username and user state
-   * @throws UserServiceException 
-   */   
-    public abstract List<User> seeActiveUsers() throws UserServiceException;
+    public void agregarCategoria(int id, String nombre, String descripcion, Status estado, Date fecha_creacion, Date fecha_modificacion) throws UserServiceException;
+    public void ModificarCategoria(int nombre, String descripcion, Status estado) throws UserServiceException;
+    public void agregarNecesidades(int id, String nombre, String descripcion, Status estado, Date fecha_creacion, Date fecha_modificacion, Categories category_id) throws UserServiceException;
+    public void agregarUsuario(int id, String fullname, String username, String passwd, Rol rol, boolean isactive, String correo) throws UserServiceException;
+    public String IngresarSesion(String correo) throws UserServiceException;
+    public void ModificarRol(Rol rol, String correo) throws UserServiceException;
+    public void EstadoUser(boolean isactive, String correo) throws UserServiceException;
 }
