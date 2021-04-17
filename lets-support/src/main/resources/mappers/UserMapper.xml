@@ -28,13 +28,34 @@
         update users set rol=#{uprol} WHERE correo=#{upcorreo}
     </update>
 
-    <update parameterType="map" id="DesactivarUser">
+    <update parameterType="map" id="EstadoUser">
         update users set isactive=#{upisactive} WHERE correo=#{upcorreo}
     </update>
 
     <insert parameterType="map" id="agregarUsuario">
         insert into users values(#{newid},#{newfullname},#{newusername},#{newpasswd},#{newrol},#{newisactive},#{newcorreo})
     </insert>
+
+    <select parameterType="map" id="traerUserNameUsers" resultMap="UserResult">
+        select
+            username
+        FROM
+            users
+    </select>
+
+    <select parameterType="map" id="traerIdUsers" resultMap="UserResult">
+        select
+            id
+        FROM
+            users
+    </select>
+
+    <select parameterType="map" id="traerCorreoUsers" resultMap="UserResult">
+        select
+            correo
+        FROM
+            users
+    </select>
 
 
 </mapper>

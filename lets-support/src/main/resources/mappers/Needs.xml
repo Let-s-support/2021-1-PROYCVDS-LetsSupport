@@ -17,7 +17,21 @@
     </resultMap>
 
     <insert parameterType="map" id="agregarNecesidades">
-        insert into needs values(#{newid},#{newvalue},#{newdescription},#{newstatus},#{newcreationdate},#{newmodificationdate},#{newcategory_id})
+        insert into needs values(#{newid},#{newvalue},#{newdescription},#{newstatus},#{newcreationdate},#{newmodificationdate},#{newcategory_id},#{newurgencia})
     </insert>
+
+    <select parameterType="map" id="traerValuesNeeds" resultMap="UserResult">
+        select
+            value
+        FROM
+            needs
+    </select>
+
+    <select parameterType="map" id="traerIdNeeds" resultMap="UserResult">
+        select
+            id
+        FROM
+            needs
+    </select>
 
 </mapper>

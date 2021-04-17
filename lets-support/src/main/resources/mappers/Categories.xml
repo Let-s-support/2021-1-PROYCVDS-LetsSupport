@@ -20,8 +20,22 @@
     </insert>
 
     <update parameterType="map" id="ModificarCategoria">
-        update users set nombre=#{upnombre}, descripcion=#{updescripcion}, estado=#{upestado} 
+        update users set nombre=#{upvalue}, descripcion=#{updescripcion}, estado=#{upestado}
         WHERE id=#{upid}
     </update>
+
+    <select parameterType="map" id="traerValuesCategories" resultMap="UserResult">
+        select
+            value
+        FROM
+            categories
+    </select>
+
+    <select parameterType="map" id="traerIdCategories" resultMap="UserResult">
+        select
+            id
+        FROM
+            categories
+    </select>
 
 </mapper>

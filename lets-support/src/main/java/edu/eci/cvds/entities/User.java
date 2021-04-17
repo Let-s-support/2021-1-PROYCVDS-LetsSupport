@@ -1,5 +1,7 @@
 package edu.eci.cvds.entities;
 
+import edu.eci.cvds.dao.PersistenceException;
+
 import java.io.Serializable;
 
 public class User implements Serializable{
@@ -11,12 +13,26 @@ public class User implements Serializable{
     private boolean isactive;
     private String correo;
 
+    /**
+     * Constructos de users el cual hace super a la interfaz Serializable
+     */
     public User() {
+        super();
     }
 
-    public User(int id, String fullName, String username, String passwd, Rol rol, boolean isactive, String correo) {
+    /**
+     * Constructor de users el cual genera un nuevo user
+     * @param id valor del id del elemento a registrar en categories
+     * @param fullname nombre completo del usuario que se va a registrar
+     * @param username username del usuario que se va a registrar
+     * @param passwd contraseña del usuario que se va a registrar
+     * @param rol rol que posee el usuario que se va a registrar
+     * @param isactive estado del usuario
+     * @param correo correo del usuario que se va a registrar
+     */
+    public User(int id, String fullname, String username, String passwd, Rol rol, boolean isactive, String correo) {
         this.id = id;
-        this.fullName = fullName;
+        this.fullName = fullname;
         this.username = username;
         this.passwd = passwd;
         this.rol = rol;
@@ -24,68 +40,132 @@ public class User implements Serializable{
         this.correo = correo;
     }
 
+    /**
+     * Obtiene el Id del user
+     * @return int
+     */
     public int getId() {
-        return this.id;
+        return id;
     }
 
+    /**
+     * Cambia el id del user
+     * @param id nuevo id del user
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Obtiene el fullName del user
+     * @return String
+     */
     public String getFullName() {
-        return this.fullName;
+        return fullName;
     }
 
+    /**
+     * Cambia el fullName del user
+     * @param fullName nuevo fullName del user
+     */
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 
+    /**
+     * Obtiene el username del user
+     * @return String
+     */
     public String getUsername() {
-        return this.username;
+        return username;
     }
 
+    /**
+     * Cambia el username del user
+     * @param username nuevo username del user
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Obtiene el passwd del user
+     * @return String
+     */
     public String getPasswd() {
-        return this.passwd;
+        return passwd;
     }
 
+    /**
+     * Cambia el passwd del user
+     * @param passwd nuevo passwd del user
+     */
     public void setPasswd(String passwd) {
         this.passwd = passwd;
     }
 
+    /**
+     * Obtiene el rol del user
+     * @return Rol
+     */
     public Rol getRol() {
-        return this.rol;
+        return rol;
     }
 
+    /**
+     * Cambia el rol del user
+     * @param rol nuevo rol del user
+     */
     public void setRol(Rol rol) {
         this.rol = rol;
     }
 
-    public boolean isIsActive() {
-        return this.isActive;
+    /**
+     * Obtiene el isIsactive del user
+     * @return boolean
+     */
+    public boolean isIsactive() {
+        return isactive;
     }
 
-    public boolean getIsActive() {
-        return this.isActive;
+    /**
+     * Cambia el isactive del user
+     * @param isactive nuevo rol del user
+     */
+    public void setIsactive(boolean isactive) {
+        this.isactive = isactive;
     }
 
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+    /**
+     * Obtiene el correo del user
+     * @return String
+     */
+    public String getCorreo() {
+        return correo;
     }
 
+    /**
+     * Convierte a cadena todos los datos de un user y la retorna
+     * @return String
+     */
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", fullName='" + getFullName() + "'" +
-            ", username='" + getUsername() + "'" +
-            ", passwd='" + getPasswd() + "'" +
-            ", rol='" + getRol() + "'" +
-            ", isActive='" + isIsActive() + "'" +
-            "}";
+        return "User{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", username='" + username + '\'' +
+                ", passwd='" + passwd + '\'' +
+                ", rol=" + rol +
+                ", isactive=" + isactive +
+                ", correo='" + correo + '\'' +
+                '}';
     }
 
+    /**
+     * Cambia el correo del user
+     * @param correo nuevo correo del user
+     */
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 }
