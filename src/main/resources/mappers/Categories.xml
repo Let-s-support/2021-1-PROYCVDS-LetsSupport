@@ -24,7 +24,7 @@
         WHERE id=#{oldvalue}
     </update>
 
-    <select parameterType="map" id="traerValuesCategories" resultMap="UserResult">
+    <select parameterType="map" id="traerValuesCategories" resultMap="CategoriesResult">
         select *
         FROM categories
         WHERE value=#{oldvalue}

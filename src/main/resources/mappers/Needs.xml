@@ -18,7 +18,7 @@
         insert into needs (value,description,status,creationdate,modificationdate,category_id,urgnecia) values(#{need.value},#{need.description},#{need.status},#{CURRENT_DATE},#{CURRENT_DATE},#{need.category_id},#{need.urgencia})
     </insert>
 
-    <select parameterType="map" id="traerValuesNeeds" resultMap="UserResult">
+    <select parameterType="map" id="traerValuesNeeds" resultMap="NeedsResult">
         select *
         FROM needs
         WHERE value=#{oldvalue}

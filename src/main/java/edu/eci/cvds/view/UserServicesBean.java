@@ -17,7 +17,6 @@ public class UserServicesBean extends BasePageBean{
     private int id;
     private String fullname;
     private String username;
-    private String passwd;
     private int rol;
     private boolean isactive;
 
@@ -26,9 +25,11 @@ public class UserServicesBean extends BasePageBean{
      * @return String
      * @throws ServicesException controlador de excepciones
      */
-    public String IngresarSesion() throws ServicesException {
+    public void IngresarSesion() throws ServicesException {
         try {
-            return userServices.IngresarSesion(correo);
+            if(!userServices.IngresarSesion(correo,password).isEmpty()){
+                isactive=true;
+            }
         } catch (ServicesException ex) {
             throw new ServicesException("Error al ingresar sesion",ex);
         }
@@ -56,14 +57,6 @@ public class UserServicesBean extends BasePageBean{
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPasswd() {
-        return passwd;
-    }
-
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
     }
 
     public int getRol() {

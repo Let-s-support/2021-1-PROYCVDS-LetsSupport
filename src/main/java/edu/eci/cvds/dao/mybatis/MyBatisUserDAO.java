@@ -6,6 +6,8 @@ import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.dao.UserDAO;
 import edu.eci.cvds.dao.mybatis.mappers.UserMapper;
 
+import java.util.List;
+
 public class MyBatisUserDAO implements UserDAO {
     @Inject
     UserMapper userMapper;
@@ -17,9 +19,9 @@ public class MyBatisUserDAO implements UserDAO {
      * @throws PersistenceException controlador de excepciones
      */
     @Override
-    public String IngresarSesion(String correo) throws PersistenceException {
+    public List<String> IngresarSesion(String correo, String passwd) throws PersistenceException {
         try {
-            return userMapper.IngresarSesion(correo);
+            return userMapper.IngresarSesion(correo,passwd);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al iniciar sesion: ", e);
         }

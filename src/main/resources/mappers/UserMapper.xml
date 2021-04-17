@@ -16,9 +16,9 @@
     </resultMap>
     
     <select parameterType="map" id="IngresarSesion" resultMap="UserResult">
-        select passwd
+        select *
         FROM users
-        WHERE correo = #{concorreo}
+        WHERE correo = #{concorreo},
     </select>
 
 </mapper>

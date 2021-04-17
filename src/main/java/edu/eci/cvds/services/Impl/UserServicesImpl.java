@@ -7,6 +7,8 @@ import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.UserServices;
 import edu.eci.cvds.dao.UserDAO;
 
+import java.util.List;
+
 public class UserServicesImpl implements UserServices {
 
     @Inject
@@ -19,9 +21,9 @@ public class UserServicesImpl implements UserServices {
      * @throws ServicesException controlador de excepciones
      */
     @Override
-    public String IngresarSesion(String correo) throws ServicesException {
+    public List<String> IngresarSesion(String correo, String passwd) throws ServicesException {
         try {
-            return userDAO.IngresarSesion(correo);
+            return userDAO.IngresarSesion(correo,passwd);
         } catch (PersistenceException ex) {
             throw new ServicesException("Error al ingresar sesion",ex);
         }

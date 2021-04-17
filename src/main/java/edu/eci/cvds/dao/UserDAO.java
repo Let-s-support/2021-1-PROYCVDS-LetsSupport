@@ -1,5 +1,7 @@
 package edu.eci.cvds.dao;
 
+import java.util.List;
+
 public interface UserDAO {
 
     /**
@@ -8,6 +10,6 @@ public interface UserDAO {
      * @return String
      * @throws PersistenceException controlador de excepciones
      */
-    String IngresarSesion(String correo) throws PersistenceException;
+    List<String> IngresarSesion(String correo, String passwd) throws PersistenceException;
 
 }

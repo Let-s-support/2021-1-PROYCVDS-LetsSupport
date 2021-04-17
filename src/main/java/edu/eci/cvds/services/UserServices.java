@@ -1,5 +1,7 @@
 package edu.eci.cvds.services;
 
+import java.util.List;
+
 public interface UserServices {
 
     /**
@@ -8,6 +10,6 @@ public interface UserServices {
      * @return String
      * @throws ServicesException controlador de excepciones
      */
-    String IngresarSesion(String correo) throws ServicesException;
+    List<String> IngresarSesion(String correo, String passwd) throws ServicesException;
 
 }

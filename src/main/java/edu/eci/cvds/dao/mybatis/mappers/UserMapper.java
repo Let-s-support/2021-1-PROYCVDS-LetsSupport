@@ -2,6 +2,8 @@ package edu.eci.cvds.dao.mybatis.mappers;
 
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UserMapper {
 
     /**
@@ -9,6 +11,7 @@ public interface UserMapper {
      * @param correo  correo con el cual se buscara el usuario
      * @return String
      */
-     String IngresarSesion(@Param("concorreo")String correo);
+    List<String> IngresarSesion(@Param("concorreo")String correo,
+                                 @Param("conpasswd")String passwd);
 
 }
