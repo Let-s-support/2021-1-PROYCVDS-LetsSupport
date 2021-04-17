@@ -10,8 +10,8 @@ public interface CategoriesMapper {
   //   * @param categorie objeto de tipo categoria, que contiene los datos de la nueva categoria que se va a crear
      */
      void agregarCategoria(@Param("value") String value,
-                           @Param("status") String status,
-                           @Param("description") String description);
+                           @Param("description") String description,
+                           @Param("status") int status);
 
     /**
      * Envia la información que viene de MyBatisCategories y lo envia a CategoriesMapper.xml para realizar la moficacion de los valores de la categoria
