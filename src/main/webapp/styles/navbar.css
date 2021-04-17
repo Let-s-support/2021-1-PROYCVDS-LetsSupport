@@ -89,7 +89,7 @@
 
 /* Add a grey background color to dropdown links on hover */
 
-.dropdown-content, .navbar a:hover {
+.dropdown-content {
   background-color: #ddd;
 }
 
