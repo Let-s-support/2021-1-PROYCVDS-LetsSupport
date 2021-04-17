@@ -4,6 +4,7 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
 <link rel="stylesheet" type="text/css" href="styles/home.css" />
+<link rel="stylesheet" type="text/css" href="styles/navbar.css" />
 
 <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
 
@@ -14,7 +15,7 @@
         <div class="body">
             <h:form>
                 <div class="navbar">
-                    <a href="/app/login.xhtml">Home</a>
+                    <a href="/app/home.xhtml">Home</a>
                     <div class="dropdown">
                         <button class="dropbtn">Categorias
                             <i class="fa fa-caret-down"></i>
@@ -22,11 +23,22 @@
                         <div class="dropdown-content">
                             <a href="/app/createCategory.xhtml">Crear</a>
                             <a href="#">Buscar</a>
+                            <a href="/app/updateCategory.xhtml">Actualizar</a>
+                            <a href="#">Eliminar</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropbtn">Necesidades
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="/app/createNeed.xhtml">Crear</a>
+                            <a href="#">Buscar</a>
                             <a href="#">Actualizar</a>
                             <a href="#">Eliminar</a>
                         </div>
                     </div>
-                    <h:commandButton class="button-nav" style="float: right;" action="#{navigationController.loginScreen()}" title="Salir"/>
+                    <h:commandButton value="Salir" class="button-nav" style="float: right;" action="#{navigationController.loginScreen()}" title="Salir"/>
                 </div>
             </h:form>
         </div>

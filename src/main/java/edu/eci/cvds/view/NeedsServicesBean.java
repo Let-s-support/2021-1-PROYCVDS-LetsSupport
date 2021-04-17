@@ -5,7 +5,9 @@ import edu.eci.cvds.entities.Needs;
 import edu.eci.cvds.services.NeedsServices;
 import edu.eci.cvds.services.ServicesException;
 import java.util.Date;
+import javax.faces.bean.ManagedBean;
 
+@ManagedBean(name = "needBean")
 public class NeedsServicesBean extends BasePageBean{
     @Inject
     NeedsServices needsServices;

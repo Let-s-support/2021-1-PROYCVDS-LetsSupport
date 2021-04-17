@@ -40,7 +40,7 @@
                 </div>
             </h:form>
 
-            <h1 class="title">Crear Categoria</h1>
+            <h1 class="title">Actualizar Categoria</h1>
             <div>
                 <h:form>
                     <p:growl autoUpdate="true" />
@@ -53,10 +53,15 @@
                                     <h:inputText id="value" value="#{categoryBean.value}" required="true" label="Nombre" />
                                     Descripción
                                     <p:inputTextarea maxlength="500" id="description" rows="6" cols="33" value="#{categoryBean.description}" label="Descripción"/>
+                                    Estado
+                                    <select>
+                                        <option>Abierta</option>
+                                        <option>Cerrada</option>
+                                    </select>
                                 </div>
                             </h:panelGrid>
                             <h:form>
-                                <h:commandButton value="Crear" title="Crear" action="#{categoryBean.agregarCategoria()}" class="button" />
+                                <h:commandButton value="Actualizar" title="Crear" action="#{categoryBean.agregarCategoria()}" class="button" />
                         </h:form>
                         </p:panel>
                     </div>
