@@ -3,9 +3,9 @@ package edu.eci.cvds.services.Impl;
 import com.google.inject.Inject;
 import edu.eci.cvds.dao.CategoriesDAO;
 import edu.eci.cvds.dao.PersistenceException;
-import edu.eci.cvds.entities.Status;
 import edu.eci.cvds.services.CategoriesServices;
 import edu.eci.cvds.services.ServicesException;
+import jdk.internal.org.jline.utils.Status;
 
 import java.util.Date;
 import java.util.List;
@@ -54,7 +54,7 @@ public class CategoriesServicesImpl implements CategoriesServices {
      * @throws ServicesException controlador de excepciones
      */
     @Override
-    public void agregarCategoria(int id, String value, String description, Status status, Date creationdate, Date modificationdate) throws ServicesException {
+    public void agregarCategoria(int id, String value, String description, int status, Date creationdate, Date modificationdate) throws ServicesException {
         try {
             List<String> values = traerValuesCategories();
             List<Integer> ids = traerIdCategories();
@@ -69,18 +69,19 @@ public class CategoriesServicesImpl implements CategoriesServices {
     /**
      * Es usado por CategoriesServices para desplegar la funcionalidad de ModificarCategoria y lo despliega en CategoriesDAO
      * @param value nuevo nombre de la categoria que se va a modificar
-     * @param descripcion nueva descripción de la categoria que se va a modificar
-     * @param estado nuevo estado de la categoria que se va a modificar
+     * @param description nueva descripción de la categoria que se va a modificar
+     * @param status nuevo estado de la categoria que se va a modificar
      * @throws ServicesException controlador de excepciones
      */
+
     @Override
-    public void ModificarCategoria(String value, String descripcion, Status estado) throws ServicesException {
+    public void ModificarCategoria(String value, String description, int status) throws ServicesException {
         try {
             List values = traerValuesCategories();
             if (!values.contains(value)) {
-                categoriesDAO.ModificarCategoria(value, descripcion, estado);
+                categoriesDAO.ModificarCategoria(value, description, status);
             }
-        } catch (PersistenceException ex) {
+        } catch (ServicesException | PersistenceException ex) {
             throw new ServicesException("Error al modificar categoria",ex);
         }
     }

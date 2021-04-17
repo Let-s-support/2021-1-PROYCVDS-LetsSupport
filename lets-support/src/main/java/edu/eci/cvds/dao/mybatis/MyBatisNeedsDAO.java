@@ -5,7 +5,6 @@ import edu.eci.cvds.dao.NeedsDAO;
 import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.dao.mybatis.mappers.NeedsMapper;
 import edu.eci.cvds.entities.Categories;
-import edu.eci.cvds.entities.Status;
 
 import java.util.Date;
 import java.util.List;
@@ -27,7 +26,7 @@ public class MyBatisNeedsDAO implements NeedsDAO {
      * @throws PersistenceException controlador de excepciones
      */
     @Override
-    public void agregarNecesidades(int id, String value, String description, Status status, Date creationdate, Date modificationdate, Categories category_id, int urgencia) throws PersistenceException {
+    public void agregarNecesidades(int id, String value, String description, int status, Date creationdate, Date modificationdate, Categories category_id, int urgencia) throws PersistenceException {
         try {
             needsMapper.agregarNecesidades(id, value, description, status, creationdate, modificationdate, category_id, urgencia);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {

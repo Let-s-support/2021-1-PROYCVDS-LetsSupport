@@ -1,7 +1,6 @@
 package edu.eci.cvds.dao.mybatis.mappers;
 
 import edu.eci.cvds.entities.Categories;
-import edu.eci.cvds.entities.Status;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -22,7 +21,7 @@ public interface NeedsMapper {
      void agregarNecesidades(@Param("newid")int id,
                              @Param("newvalue") String value,
                              @Param("newdescription") String description,
-                             @Param("newstatus") Status status,
+                             @Param("newstatus") int status,
                              @Param("newcreationdate") Date creationdate,
                              @Param("newmodificationdate")Date modificationdate,
                              @Param("newcategory_id") Categories category_id,

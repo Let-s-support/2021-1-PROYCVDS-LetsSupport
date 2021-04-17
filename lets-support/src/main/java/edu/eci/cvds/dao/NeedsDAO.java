@@ -1,7 +1,6 @@
 package edu.eci.cvds.dao;
 
 import edu.eci.cvds.entities.Categories;
-import edu.eci.cvds.entities.Status;
 
 import java.util.Date;
 import java.util.List;
@@ -19,7 +18,7 @@ public interface NeedsDAO {
      * @Param urgencia urgencia que tiene la need
      * @throws PersistenceException controlador de excepciones
      */
-    void agregarNecesidades(int id, String value, String description, Status status, Date creationdate, Date modificationdate, Categories category_id, int urgencia) throws PersistenceException;
+    void agregarNecesidades(int id, String value, String description, int status, Date creationdate, Date modificationdate, Categories category_id, int urgencia) throws PersistenceException;
 
     /**
      * Retorna una lista con los nombres de las necesidades existentes que llama desde MyBatisNeedsDAO

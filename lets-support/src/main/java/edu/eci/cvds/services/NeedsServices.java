@@ -1,7 +1,6 @@
 package edu.eci.cvds.services;
 
 import edu.eci.cvds.entities.Categories;
-import edu.eci.cvds.entities.Status;
 
 import java.util.Date;
 import java.util.List;
@@ -20,7 +19,7 @@ public interface NeedsServices {
      * @Param urgencia urgencia que tiene la need
      * @throws ServicesException controlador de excepciones
      */
-    void agregarNecesidades(int id, String value, String description, Status status, Date creationdate, Date modificationdate, Categories category_id, int urgencia) throws ServicesException;
+    void agregarNecesidades(int id, String value, String description, int status, Date creationdate, Date modificationdate, Categories category_id, int urgencia) throws ServicesException;
 
     /**
      * Es usado por NeedsServicesBean para desplegar la funcionalidad de traerValuesNeeds y asi obtener la información de los nombres de las needs existentes, la envia a NeedsServicesImpl

@@ -1,6 +1,5 @@
 package edu.eci.cvds.dao.mybatis.mappers;
 
-import edu.eci.cvds.entities.Status;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -19,7 +18,7 @@ public interface CategoriesMapper {
      void agregarCategoria(@Param("newid")int id,
                                 @Param("newvalue") String value,
                                 @Param("newdescription") String description,
-                                @Param("newstatus") Status status,
+                                @Param("newstatus") int status,
                                 @Param("newcreationdate") Date creationdate,
                                 @Param("newmodificationdate")Date modificationdate);
 
@@ -31,7 +30,7 @@ public interface CategoriesMapper {
      */
     void ModificarCategoria(@Param("upvalue")String value,
                                     @Param("updescripcion") String descripcion,
-                                    @Param("upestado") Status estado);
+                                    @Param("upestado") int estado);
 
     /**
      * Retorna una lista con los nombres de las categorias existentes que trae desde CategoriesMapper.xml

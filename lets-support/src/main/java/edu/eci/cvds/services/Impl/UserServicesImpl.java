@@ -3,7 +3,6 @@ package edu.eci.cvds.services.Impl;
 import com.google.inject.Inject;
 
 import edu.eci.cvds.dao.PersistenceException;
-import edu.eci.cvds.entities.Rol;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.UserServices;
 import edu.eci.cvds.dao.UserDAO;
@@ -27,7 +26,7 @@ public class UserServicesImpl implements UserServices {
      * @throws ServicesException controlador de excepciones
      */
     @Override
-    public void agregarUsuario(int id, String fullname, String username, String passwd, Rol rol, boolean isactive, String correo) throws ServicesException {
+    public void agregarUsuario(int id, String fullname, String username, String passwd, int rol, boolean isactive, String correo) throws ServicesException {
         try {
             List<String> correos = userDAO.traerCorreoUsers();
             List<Integer> ids = userDAO.traerIdUsers();
@@ -61,7 +60,7 @@ public class UserServicesImpl implements UserServices {
      * @throws ServicesException controlador de excepciones
      */
     @Override
-    public void ModificarRol(Rol rol, String correo) throws ServicesException {
+    public void ModificarRol(int rol, String correo) throws ServicesException {
         try {
             userDAO.ModificarRol(rol,correo);
         } catch (PersistenceException ex) {

@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import edu.eci.cvds.dao.NeedsDAO;
 import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.entities.Categories;
-import edu.eci.cvds.entities.Status;
 import edu.eci.cvds.services.NeedsServices;
 import edu.eci.cvds.services.ServicesException;
 
@@ -29,14 +28,14 @@ public class NeedsServicesImpl implements NeedsServices {
      * @throws ServicesException controlador de excepciones
      */
     @Override
-    public void agregarNecesidades(int id, String value, String description, Status status, Date creationdate, Date modificationdate, Categories category_id, int urgencia) throws ServicesException {
+    public void agregarNecesidades(int id, String value, String description, int status, Date creationdate, Date modificationdate, Categories category_id, int urgencia) throws ServicesException {
         try {
             List<String> values = traerValuesNeeds();
             List<Integer> ids = traerIdNeeds();
             if (!values.contains(value) && !ids.contains(id)){
                 needsDAO.agregarNecesidades(id, value, description, status, creationdate, modificationdate, category_id, urgencia);
             }
-        } catch (PersistenceException ex) {
+        } catch (ServicesException | PersistenceException ex) {
             throw new ServicesException("Error al agregar la necesidad",ex);
         }
     }

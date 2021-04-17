@@ -1,6 +1,5 @@
 package edu.eci.cvds.dao.mybatis.mappers;
 
-import edu.eci.cvds.entities.Rol;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -20,7 +19,7 @@ public interface UserMapper {
                                 @Param("newfullname") String fullname,
                                 @Param("newusername") String username,
                                 @Param("newpasswd")String passwd,                                 
-                                @Param("newrol") Rol rol,
+                                @Param("newrol") int rol,
                                 @Param("newisactive")boolean isactive,
                                 @Param("newcorreo")String correo);
 
@@ -36,7 +35,7 @@ public interface UserMapper {
      * @param rol nuevo rol que tendra el usuario
      * @param correo correo con el cual se buscara el usuario
      */
-    void ModificarRol(@Param("uprol")Rol rol,
+    void ModificarRol(@Param("uprol")int rol,
                                 @Param("upcorreo")String correo);
 
     /**

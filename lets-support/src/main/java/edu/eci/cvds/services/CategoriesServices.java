@@ -1,7 +1,7 @@
 package edu.eci.cvds.services;
 
 import edu.eci.cvds.dao.PersistenceException;
-import edu.eci.cvds.entities.Status;
+import jdk.internal.org.jline.utils.Status;
 
 import java.util.Date;
 import java.util.List;
@@ -18,16 +18,16 @@ public interface CategoriesServices {
      * @param modificationdate fecha de modificacion del  elemento, en este caso la fecha de creacion del elemento a registrar en categories
      * @throws ServicesException controlador de excepciones
      */
-    void agregarCategoria(int id, String value, String description, Status status, Date creationdate, Date modificationdate) throws ServicesException;
+    void agregarCategoria(int id, String value, String description, int status, Date creationdate, Date modificationdate) throws ServicesException;
 
     /**
      * Es usado por CategoriesServicesBean para desplegar la funcionalidad de ModificarCategoria y la envia a CategoriesServicesImpl
      * @param value nuevo nombre de la categoria que se va a modificar
-     * @param descripcion nueva descripción de la categoria que se va a modificar
-     * @param estado nuevo estado de la categoria que se va a modificar
+     * @param description nueva descripción de la categoria que se va a modificar
+     * @param status nuevo estado de la categoria que se va a modificar
      * @throws ServicesException controlador de excepciones
      */
-    void ModificarCategoria(String value, String descripcion, Status estado) throws ServicesException;
+    void ModificarCategoria(String value, String description, int status) throws ServicesException;
 
     /**
      * Es usado por CategoriesServicesBean para desplegar la funcionalidad de traerValuesCategories y asi obtener la información de los nombres de las categorias existentes, la envia a CategoriesServicesImpl

@@ -1,6 +1,5 @@
 package edu.eci.cvds.services;
 
-import edu.eci.cvds.entities.Rol;
 import java.util.List;
 
 public interface UserServices {
@@ -16,7 +15,7 @@ public interface UserServices {
      * @param correo correo del usuario que se va a registrar
      * @throws ServicesException controlador de excepciones
      */
-    void agregarUsuario(int id, String fullname, String username, String passwd, Rol rol, boolean isactive, String correo) throws ServicesException;
+    void agregarUsuario(int id, String fullname, String username, String passwd, int rol, boolean isactive, String correo) throws ServicesException;
 
     /**
      * Es usado por UserServicesBean para desplegar la funcionalidad de IngresarSesion y asi obtener la contraseña del user por medio del correo, la envia a UserServicesImpl
@@ -31,7 +30,7 @@ public interface UserServices {
      * @param correo correo del user con el que se va a realizar la busqueda
      * @throws ServicesException controlador de excepciones
      */
-    void ModificarRol(Rol rol, String correo) throws ServicesException;
+    void ModificarRol(int rol, String correo) throws ServicesException;
 
     /**
      * Es usado por UserServicesBean para desplegar la funcionalidad de EstadoUser y la envia a UserServicesImpl para realizar el cambio de estado del user

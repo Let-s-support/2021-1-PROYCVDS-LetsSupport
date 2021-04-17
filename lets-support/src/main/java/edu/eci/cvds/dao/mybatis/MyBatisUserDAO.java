@@ -5,7 +5,6 @@ import com.google.inject.Inject;
 import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.dao.UserDAO;
 import edu.eci.cvds.dao.mybatis.mappers.UserMapper;
-import edu.eci.cvds.entities.Rol;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class MyBatisUserDAO implements UserDAO {
      * @throws PersistenceException controlador de excepciones
      */
     @Override
-    public void agregarUsuario(int id, String fullname, String username, String passwd, Rol rol, boolean isactive, String correo) throws PersistenceException {
+    public void agregarUsuario(int id, String fullname, String username, String passwd, int rol, boolean isactive, String correo) throws PersistenceException {
         try {
             userMapper.agregarUsuario(id, fullname, username, passwd, rol, isactive, correo);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
@@ -55,7 +54,7 @@ public class MyBatisUserDAO implements UserDAO {
      * @throws PersistenceException controlador de excepciones
      */
     @Override
-    public void ModificarRol(Rol rol, String correo) throws PersistenceException {
+    public void ModificarRol(int rol, String correo) throws PersistenceException {
         try {
             userMapper.ModificarRol(rol, correo);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {

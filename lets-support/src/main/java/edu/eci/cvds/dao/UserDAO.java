@@ -1,7 +1,5 @@
 package edu.eci.cvds.dao;
 
-import edu.eci.cvds.entities.Rol;
-
 import java.util.List;
 
 public interface UserDAO {
@@ -17,7 +15,7 @@ public interface UserDAO {
      * @param correo correo del usuario que se va a registrar
      * @throws PersistenceException controlador de excepciones
      */
-    void agregarUsuario(int id, String fullname, String username, String passwd, Rol rol, boolean isactive, String correo) throws PersistenceException;
+    void agregarUsuario(int id, String fullname, String username, String passwd, int rol, boolean isactive, String correo) throws PersistenceException;
 
     /**
      * Retorna un valor que es el password del usuario que intenta acceder que llama desde MyBatisUserDAO
@@ -33,7 +31,7 @@ public interface UserDAO {
      * @param correo correo con el cual se buscara el usuario
      * @throws PersistenceException controlador de excepciones
      */
-    void ModificarRol(Rol rol, String correo) throws PersistenceException;
+    void ModificarRol(int rol, String correo) throws PersistenceException;
 
     /**
      * Envia la información que viene de UsersServicesImpl hacia MyBatisUserDAO, para modificar el estado del usuario
