@@ -10,12 +10,14 @@ import edu.eci.cvds.services.UserServices;
 
 import java.util.List;
 
-@javax.faces.bean.ManagedBean(name = "UserServices")
+@javax.faces.bean.ManagedBean(name = "userBean")
 @ApplicationScoped
 public class UserServicesBean extends BasePageBean{
 
     @Inject
-    UserServices userServices;
+    private UserServices userServices;
+    private String correo;
+    private String password;
 
     /**
      * Es usado para controlar la funcionalidad de crear usuario desde la interfaz
@@ -41,7 +43,7 @@ public class UserServicesBean extends BasePageBean{
      * @return String
      * @throws ServicesException controlador de excepciones
      */
-    public String IngresarSesion(String correo) throws ServicesException {
+    public String IngresarSesion() throws ServicesException {
         try {
             return userServices.IngresarSesion(correo);
         } catch (ServicesException ex) {
@@ -76,4 +78,31 @@ public class UserServicesBean extends BasePageBean{
             throw new ServicesException("Error al modificar estado",ex);
         }
     }
+
+
+    public UserServices getUserServices() {
+        return this.userServices;
+    }
+
+    public void setUserServices(UserServices userServices) {
+        this.userServices = userServices;
+    }
+
+    public String getCorreo() {
+        return this.correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
 }

@@ -24,7 +24,7 @@ public interface NeedsMapper {
                              @Param("newstatus") int status,
                              @Param("newcreationdate") Date creationdate,
                              @Param("newmodificationdate")Date modificationdate,
-                             @Param("newcategory_id") Categories category_id,
+                             @Param("newcategory_id") int category_id,
                              @Param("newurgencia") int urgencia);
 
      /**

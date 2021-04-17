@@ -9,7 +9,7 @@ import edu.eci.cvds.services.ServicesException;
 import java.util.Date;
 import java.util.List;
 
-public class NeedsServicesBean {
+public class NeedsServicesBean extends BasePageBean{
     @Inject
     NeedsServices needsServices;
 
@@ -25,7 +25,7 @@ public class NeedsServicesBean {
      * @Param urgencia urgencia que tiene la need
      * @throws ServicesException controlador de excepciones
      */
-    public void agregarNecesidades(int id, String value, String description, int status, Date creationdate, Date modificationdate, Categories category_id, int urgencia) throws ServicesException {
+    public void agregarNecesidades(int id, String value, String description, int status, Date creationdate, Date modificationdate, int category_id, int urgencia) throws ServicesException {
         try {
             needsServices.agregarNecesidades(id, value, description, status, creationdate, modificationdate, category_id, urgencia);
         } catch (ServicesException ex) {

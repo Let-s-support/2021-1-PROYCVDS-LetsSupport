@@ -10,9 +10,7 @@
         <result property="status" column="status"/>
         <result property="creationdate" column="creationdate"/>
         <result property="modificationdate" column="modificationdate"/>
-
         <result property="category_id" column="category_id"/>
-
         <result property="urgencia" column="urgencia"/>
     </resultMap>
 

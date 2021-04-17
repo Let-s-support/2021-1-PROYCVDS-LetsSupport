@@ -11,6 +11,8 @@ import edu.eci.cvds.dao.UserDAO;
 import edu.eci.cvds.dao.mybatis.MyBatisCategoriesDAO;
 import edu.eci.cvds.dao.mybatis.MyBatisNeedsDAO;
 import edu.eci.cvds.dao.mybatis.MyBatisUserDAO;
+import edu.eci.cvds.services.Impl.CategoriesServicesImpl;
+import edu.eci.cvds.services.Impl.NeedsServicesImpl;
 import edu.eci.cvds.services.Impl.UserServicesImpl;
 import org.mybatis.guice.XMLMyBatisModule;
 import org.mybatis.guice.datasource.helper.JdbcHelper;
@@ -32,6 +34,8 @@ public class ServicesFactory {
                 bind(UserDAO.class).to(MyBatisUserDAO.class);
                 bind(UserDAO.class).to(MyBatisUserDAO.class);
                 bind(UserServices.class).to(UserServicesImpl.class);
+                bind(CategoriesServices.class).to(CategoriesServicesImpl.class);
+                bind(NeedsServices.class).to(NeedsServicesImpl.class);
             }
 
         });

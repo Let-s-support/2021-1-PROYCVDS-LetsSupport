@@ -26,7 +26,7 @@ public class MyBatisNeedsDAO implements NeedsDAO {
      * @throws PersistenceException controlador de excepciones
      */
     @Override
-    public void agregarNecesidades(int id, String value, String description, int status, Date creationdate, Date modificationdate, Categories category_id, int urgencia) throws PersistenceException {
+    public void agregarNecesidades(int id, String value, String description, int status, Date creationdate, Date modificationdate, int category_id, int urgencia) throws PersistenceException {
         try {
             needsMapper.agregarNecesidades(id, value, description, status, creationdate, modificationdate, category_id, urgencia);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {

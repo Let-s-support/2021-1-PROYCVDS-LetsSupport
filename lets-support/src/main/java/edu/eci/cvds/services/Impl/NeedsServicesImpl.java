@@ -28,7 +28,7 @@ public class NeedsServicesImpl implements NeedsServices {
      * @throws ServicesException controlador de excepciones
      */
     @Override
-    public void agregarNecesidades(int id, String value, String description, int status, Date creationdate, Date modificationdate, Categories category_id, int urgencia) throws ServicesException {
+    public void agregarNecesidades(int id, String value, String description, int status, Date creationdate, Date modificationdate, int category_id, int urgencia) throws ServicesException {
         try {
             List<String> values = traerValuesNeeds();
             List<Integer> ids = traerIdNeeds();

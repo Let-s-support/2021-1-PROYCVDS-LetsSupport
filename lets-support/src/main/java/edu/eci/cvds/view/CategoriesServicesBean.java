@@ -8,7 +8,7 @@ import edu.eci.cvds.services.ServicesException;
 import java.util.Date;
 import java.util.List;
 
-public class CategoriesServicesBean {
+public class CategoriesServicesBean extends BasePageBean{
     @Inject
     CategoriesServices categoriesServices;
     /**

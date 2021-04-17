@@ -8,7 +8,12 @@ import edu.eci.cvds.dao.UserDAO;
 import edu.eci.cvds.dao.mybatis.MyBatisCategoriesDAO;
 import edu.eci.cvds.dao.mybatis.MyBatisNeedsDAO;
 import edu.eci.cvds.dao.mybatis.MyBatisUserDAO;
+import edu.eci.cvds.services.Impl.CategoriesServicesImpl;
+import edu.eci.cvds.services.Impl.NeedsServicesImpl;
 import edu.eci.cvds.services.Impl.UserServicesImpl;
+import edu.eci.cvds.view.NeedsServicesBean;
+import edu.eci.cvds.services.CategoriesServices;
+import edu.eci.cvds.services.NeedsServices;
 import edu.eci.cvds.services.UserServices;
 import org.mybatis.guice.XMLMyBatisModule;
 import org.mybatis.guice.datasource.helper.JdbcHelper;
@@ -28,7 +33,7 @@ public class GuiceContextListener implements ServletContextListener {
         Injector injector = Guice.createInjector(new XMLMyBatisModule() {
             @Override
             protected void initialize() {
-                install(JdbcHelper.MySQL);
+                install(JdbcHelper.PostgreSQL);
                 setEnvironmentId("development");
                 setClassPathResource("mybatis-config.xml");
                 bind(CategoriesDAO.class).to(MyBatisCategoriesDAO.class);
@@ -36,6 +41,8 @@ public class GuiceContextListener implements ServletContextListener {
                 bind(UserDAO.class).to(MyBatisUserDAO.class);
                 bind(UserDAO.class).to(MyBatisUserDAO.class);
                 bind(UserServices.class).to(UserServicesImpl.class);
+                bind(CategoriesServices.class).to(CategoriesServicesImpl.class);
+                bind(NeedsServices.class).to(NeedsServicesImpl.class);
             }
         });
 

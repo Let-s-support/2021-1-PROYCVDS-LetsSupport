@@ -3,24 +3,34 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:jsf="http://xmlns.jcp.org/jsf"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
-    <link rel="stylesheet" type="text/css" href="styles/login.css"/>
-    
-<f:view contentType="text/xhtml;charset=UTF-8" encoding="UTF-8">
-    <h:body style="text-align:center; margin: 0; padding: 0;">
+<link rel="stylesheet" type="text/css" href="styles/login.css" />
+
+<f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
+    <h:head>
+    </h:head>
+    <h:body style="padding: 0%; margin: 0%;">
         <div class="body">
-            <label class="title">Iniciar Sesión</label>
-            <div class="container">
-                <div style="display: block;">
-                    <form onsubmit="" action="/app/home/">
-                        <label style="display: block;" for="username">Username:</label>
-                        <input id="username" style="background-color: white; width: 90%; height: 30px; margin: 10px;"
-                            placeholder="usuario1" type="text" />
-                        <label style="display: block;" for="password">Password:</label>
-                        <input id="password" style="background-color: white; width: 90%; height: 30px; margin: 10px;"
-                            placeholder="*********" type="password" />
-                        <button class="button" type="submit">Ingresar</button>
-                    </form>
-                </div>
+            <h1 class="title">Let's Support</h1>
+            <div>
+                <h:form>
+                    <p:growl autoUpdate="true" />
+                    <div style="width: 400px; margin: 0 auto;">
+                        <p:panel class="container">
+                            <f:facet name="header">Datos de acceso</f:facet>
+                            <h:panelGrid columns="1" style="margin: 0 auto;">
+                                <div class="">
+                                    Correo electrónico
+                                    <h:inputText id="correo" value="#{userBean.correo}" required="true" label="login" />
+                                    Contraseña
+                                    <h:inputSecret id="password" value="#{userBean.password}" required="true"
+                                        label="password" />
+                                </div>
+                            </h:panelGrid>
+                            <p:commandButton value="Ingresar" action="#{userBean.IngresarSesion()}" ajax="false"
+                                class="button" />
+                        </p:panel>
+                    </div>
+                </h:form>
             </div>
         </div>
     </h:body>
