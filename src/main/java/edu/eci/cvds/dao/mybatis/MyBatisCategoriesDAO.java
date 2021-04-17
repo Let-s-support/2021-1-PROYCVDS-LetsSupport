@@ -19,7 +19,7 @@ public class MyBatisCategoriesDAO implements CategoriesDAO {
     @Override
     public void agregarCategoria(Categories categorie) throws PersistenceException {
         try {
-            categoriesMapper.agregarCategoria(categorie.getValue(),categorie.getDescription(),categorie.getStatus());
+            categoriesMapper.agregarCategoria(categorie);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al insertar nueva categoria: " + categorie.getId(), e);
         }
