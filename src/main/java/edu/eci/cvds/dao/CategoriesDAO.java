@@ -1,7 +1,5 @@
 package edu.eci.cvds.dao;
 
-import jdk.internal.org.jline.utils.Status;
-
 import java.util.Date;
 import java.util.List;
 

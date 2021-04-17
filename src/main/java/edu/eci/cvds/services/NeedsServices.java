@@ -1,6 +1,5 @@
 package edu.eci.cvds.services;
 
-import edu.eci.cvds.entities.Categories;
 
 import java.util.Date;
 import java.util.List;

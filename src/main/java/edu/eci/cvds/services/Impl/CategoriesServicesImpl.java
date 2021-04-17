@@ -5,7 +5,6 @@ import edu.eci.cvds.dao.CategoriesDAO;
 import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.services.CategoriesServices;
 import edu.eci.cvds.services.ServicesException;
-import jdk.internal.org.jline.utils.Status;
 
 import java.util.Date;
 import java.util.List;
