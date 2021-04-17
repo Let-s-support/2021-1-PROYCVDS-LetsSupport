@@ -1,13 +1,12 @@
 package edu.eci.cvds.view;
 
-import javax.faces.bean.ApplicationScoped;
-
+import javax.faces.bean.SessionScoped;
 import com.google.inject.Inject;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.UserServices;
 
 @javax.faces.bean.ManagedBean(name = "userBean")
-@ApplicationScoped
+@SessionScoped
 public class UserServicesBean extends BasePageBean{
 
     @Inject

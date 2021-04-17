@@ -4,11 +4,11 @@ import com.google.inject.Inject;
 import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.services.CategoriesServices;
 import edu.eci.cvds.services.ServicesException;
-import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.SessionScoped;
 import java.util.Date;
 
 @javax.faces.bean.ManagedBean(name = "categoryBean")
-@ApplicationScoped
+@SessionScoped
 public class CategoriesServicesBean extends BasePageBean{
 
     private int id;

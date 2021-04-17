@@ -6,8 +6,10 @@ import edu.eci.cvds.services.NeedsServices;
 import edu.eci.cvds.services.ServicesException;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "needBean")
+@SessionScoped
 public class NeedsServicesBean extends BasePageBean{
     @Inject
     NeedsServices needsServices;
