@@ -1,14 +1,10 @@
 package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
-import edu.eci.cvds.dao.PersistenceException;
-import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.entities.Needs;
 import edu.eci.cvds.services.NeedsServices;
 import edu.eci.cvds.services.ServicesException;
-
 import java.util.Date;
-import java.util.List;
 
 public class NeedsServicesBean extends BasePageBean{
     @Inject

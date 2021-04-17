@@ -1,7 +1,5 @@
 package edu.eci.cvds.entities;
 
-import edu.eci.cvds.dao.PersistenceException;
-
 import java.io.Serializable;
 import java.util.Date;
 

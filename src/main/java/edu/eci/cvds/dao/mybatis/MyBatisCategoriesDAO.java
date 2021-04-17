@@ -5,8 +5,6 @@ import edu.eci.cvds.dao.CategoriesDAO;
 import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.dao.mybatis.mappers.CategoriesMapper;
 import edu.eci.cvds.entities.Categories;
-
-import java.util.Date;
 import java.util.List;
 
 public class MyBatisCategoriesDAO implements CategoriesDAO {

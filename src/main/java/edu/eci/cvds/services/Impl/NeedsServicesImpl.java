@@ -3,12 +3,9 @@ package edu.eci.cvds.services.Impl;
 import com.google.inject.Inject;
 import edu.eci.cvds.dao.NeedsDAO;
 import edu.eci.cvds.dao.PersistenceException;
-import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.entities.Needs;
 import edu.eci.cvds.services.NeedsServices;
 import edu.eci.cvds.services.ServicesException;
-
-import java.util.Date;
 import java.util.List;
 
 public class NeedsServicesImpl implements NeedsServices {

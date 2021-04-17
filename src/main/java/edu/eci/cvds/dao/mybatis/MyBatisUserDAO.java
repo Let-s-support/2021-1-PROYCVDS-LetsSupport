@@ -6,8 +6,6 @@ import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.dao.UserDAO;
 import edu.eci.cvds.dao.mybatis.mappers.UserMapper;
 
-import java.util.List;
-
 public class MyBatisUserDAO implements UserDAO {
     @Inject
     UserMapper userMapper;

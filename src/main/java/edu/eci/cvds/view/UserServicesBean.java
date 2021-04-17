@@ -3,12 +3,8 @@ package edu.eci.cvds.view;
 import javax.faces.bean.ApplicationScoped;
 
 import com.google.inject.Inject;
-
-import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.UserServices;
-
-import java.util.List;
 
 @javax.faces.bean.ManagedBean(name = "userBean")
 @ApplicationScoped

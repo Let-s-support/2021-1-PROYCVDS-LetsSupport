@@ -11,7 +11,6 @@ import edu.eci.cvds.dao.mybatis.MyBatisUserDAO;
 import edu.eci.cvds.services.Impl.CategoriesServicesImpl;
 import edu.eci.cvds.services.Impl.NeedsServicesImpl;
 import edu.eci.cvds.services.Impl.UserServicesImpl;
-import edu.eci.cvds.view.NeedsServicesBean;
 import edu.eci.cvds.services.CategoriesServices;
 import edu.eci.cvds.services.NeedsServices;
 import edu.eci.cvds.services.UserServices;

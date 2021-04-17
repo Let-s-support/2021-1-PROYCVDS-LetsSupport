@@ -1,10 +1,7 @@
 package edu.eci.cvds.dao.mybatis.mappers;
 
-import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.entities.Needs;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.Date;
 import java.util.List;
 
 public interface NeedsMapper {

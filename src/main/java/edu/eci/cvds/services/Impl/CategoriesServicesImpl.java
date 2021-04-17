@@ -6,8 +6,6 @@ import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.services.CategoriesServices;
 import edu.eci.cvds.services.ServicesException;
-
-import java.util.Date;
 import java.util.List;
 
 public class CategoriesServicesImpl implements CategoriesServices {

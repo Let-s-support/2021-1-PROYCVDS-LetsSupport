@@ -1,14 +1,11 @@
 package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
-import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.services.CategoriesServices;
 import edu.eci.cvds.services.ServicesException;
-
 import javax.faces.bean.ApplicationScoped;
 import java.util.Date;
-import java.util.List;
 
 @javax.faces.bean.ManagedBean(name = "categoryBean")
 @ApplicationScoped

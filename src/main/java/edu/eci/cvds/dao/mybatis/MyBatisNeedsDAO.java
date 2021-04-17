@@ -4,10 +4,7 @@ import com.google.inject.Inject;
 import edu.eci.cvds.dao.NeedsDAO;
 import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.dao.mybatis.mappers.NeedsMapper;
-import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.entities.Needs;
-
-import java.util.Date;
 import java.util.List;
 
 public class MyBatisNeedsDAO implements NeedsDAO {
