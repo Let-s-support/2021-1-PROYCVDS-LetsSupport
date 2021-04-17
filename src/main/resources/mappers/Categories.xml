@@ -16,26 +16,18 @@
     </resultMap>
 
     <insert parameterType="map" id="agregarCategoria">
-        insert into categories values(#{newid},#{newvalue},#{newdescription},#{newstatus},#{newcreationdate},#{newmodificationdate})
+        insert into categories (value,description,status,creationdate,modificationdate) values(#{category.value},#{category.description},#{category.status},#{CURRENT_DATE},#{CURRENT_DATE})
     </insert>
 
     <update parameterType="map" id="ModificarCategoria">
-        update users set nombre=#{upvalue}, descripcion=#{updescripcion}, estado=#{upestado}
-        WHERE id=#{upid}
+        update users set value=#{upvalue}, description=#{updescription}, estado=#{upestado}, modificationDate=#{CURRENT_DATE}
+        WHERE id=#{oldvalue}
     </update>
 
     <select parameterType="map" id="traerValuesCategories" resultMap="UserResult">
-        select
-            value
-        FROM
-            categories
-    </select>
-
-    <select parameterType="map" id="traerIdCategories" resultMap="UserResult">
-        select
-            id
-        FROM
-            categories
+        select *
+        FROM categories
+        WHERE value=#{oldvalue}
     </select>
 
 </mapper>

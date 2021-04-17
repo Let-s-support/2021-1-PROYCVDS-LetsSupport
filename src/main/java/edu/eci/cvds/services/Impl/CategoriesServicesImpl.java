@@ -3,6 +3,7 @@ package edu.eci.cvds.services.Impl;
 import com.google.inject.Inject;
 import edu.eci.cvds.dao.CategoriesDAO;
 import edu.eci.cvds.dao.PersistenceException;
+import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.services.CategoriesServices;
 import edu.eci.cvds.services.ServicesException;
 
@@ -16,49 +17,30 @@ public class CategoriesServicesImpl implements CategoriesServices {
 
     /**
      * Es usado por CategoriesServices para desplegar la funcionalidad de traerValuesCategories y asi obtener la información de los nombres de las categorias existentes, lo despliega a CategoriesDAO
+     * @param oldvalue nombre a verificar si existe en la tabla
      * @return List
      * @throws ServicesException controlador de excepciones
      */
     @Override
-    public List<String> traerValuesCategories() throws ServicesException {
+    public List<String> traerValuesCategories(String oldvalue) throws ServicesException {
         try {
-            return categoriesDAO.traerValuesCategories();
+            return categoriesDAO.traerValuesCategories(oldvalue);
         }catch (PersistenceException ex){
             throw new ServicesException("Error al consultar nombres",ex);
         }
     }
 
     /**
-     * Es usado por CategoriesServices para desplegar la funcionalidad de traerIdCategories y asi obtener la información de los ids de las categorias existentes, lo despliega a CategoriesDAO
-     * @return List
-     * @throws ServicesException controlador de excepciones
-     */
-    @Override
-    public List<Integer> traerIdCategories() throws ServicesException {
-        try {
-            return categoriesDAO.traerIdCategories();
-        }catch (PersistenceException ex){
-            throw new ServicesException("Error al consultar ids",ex);
-        }
-    }
-
-    /**
      * Es usado por CategoriesServices para desplegar la funcionalidad de agregarCategoria y lo despliega en CategoriesDAO
-     * @param id valor del id del elemento a registrar en categories
-     * @param value nombre del elemento a registrar en categories
-     * @param description descripcion del elemento a registrar en categories
-     * @param status estado del elemento a registrar en categories
-     * @param creationdate fecha en la que se crea el  elemento a registrar en categories
-     * @param modificationdate fecha de modificacion del  elemento, en este caso la fecha de creacion del elemento a registrar en categories
+     * @param categorie objeto de tipo categoria, que contiene los datos de la nueva categoria que se va a crear
      * @throws ServicesException controlador de excepciones
      */
     @Override
-    public void agregarCategoria(int id, String value, String description, int status, Date creationdate, Date modificationdate) throws ServicesException {
+    public void agregarCategoria(Categories categorie) throws ServicesException {
         try {
-            List<String> values = traerValuesCategories();
-            List<Integer> ids = traerIdCategories();
-            if (!values.contains(value) && !ids.contains(id)) {
-                categoriesDAO.agregarCategoria(id, value, description, status, creationdate, modificationdate);
+            List<String> values = traerValuesCategories(categorie.getValue());
+            if (values.isEmpty()) {
+                categoriesDAO.agregarCategoria(categorie);
             }
         } catch (PersistenceException ex) {
             throw new ServicesException("El item no esta registrado",ex);
@@ -70,15 +52,16 @@ public class CategoriesServicesImpl implements CategoriesServices {
      * @param value nuevo nombre de la categoria que se va a modificar
      * @param description nueva descripción de la categoria que se va a modificar
      * @param status nuevo estado de la categoria que se va a modificar
+     * @param oldvalue nombre por el medio del cual se esta consultando el dato que se va a cambiar
      * @throws ServicesException controlador de excepciones
      */
 
     @Override
-    public void ModificarCategoria(String value, String description, int status) throws ServicesException {
+    public void ModificarCategoria(String value, String description, int status, String oldvalue) throws ServicesException {
         try {
-            List values = traerValuesCategories();
-            if (!values.contains(value)) {
-                categoriesDAO.ModificarCategoria(value, description, status);
+            List values = traerValuesCategories(oldvalue);
+            if (!values.isEmpty()) {
+                categoriesDAO.ModificarCategoria(value, description, status, oldvalue);
             }
         } catch (ServicesException | PersistenceException ex) {
             throw new ServicesException("Error al modificar categoria",ex);

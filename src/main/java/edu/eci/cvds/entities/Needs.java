@@ -17,23 +17,17 @@ public class Needs implements Serializable {
 
     /**
      * Constructor de needs el cual genera una nueva need
-     * @param id valor del id del elemento a registrar en needs
      * @param value nombre del elemento a registrar en needs
      * @param description descripcion del elemento a registrar en needs
      * @param status estado del elemento a registrar en needs
-     * @param creationdate fecha en la que se crea el  elemento a registrar en needs
-     * @param modificationdate fecha de modificacion del  elemento, en este caso la fecha de creacion del elemento a registrar en needs
      * @Param category_id  Categoria a la que pertenece la need
      */
-    public Needs(int id, String value, String description, int status, Date creationdate, Date modificationdate, int category_id, int urgencia) {
-        this.id = id;
+    public Needs(String value, String description, int status, int category_id, int urgencia) {
         this.value = value;
         this.value = value;
         this.description = description;
         this.urgencia = urgencia;
         this.status = status;
-        this.creationdate = creationdate;
-        this.modificationdate = modificationdate;
         this.category_id = category_id;
         this.urgencia = urgencia;
     }

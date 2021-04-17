@@ -14,20 +14,14 @@ public class Categories implements Serializable {
 
     /**
      * Constructor de categories el cual genera una nueva category
-     * @param id valor del id del elemento a registrar en categories
      * @param value nombre del elemento a registrar en categories
      * @param description descripcion del elemento a registrar en categories
      * @param status estado del elemento a registrar en categories
-     * @param creationdate fecha en la que se crea el  elemento a registrar en categories
-     * @param modificationdate fecha de modificacion del  elemento, en este caso la fecha de creacion del elemento a registrar en categories
      */
-    public Categories(int id, String value, String description, int status, Date creationdate, Date modificationdate) {
-        this.id = id;
+    public Categories(String value, String description, int status) {
         this.value = value;
         this.description = description;
         this.status = status;
-        this.creationdate = creationdate;
-        this.modificationdate = modificationdate;
     }
 
     /**

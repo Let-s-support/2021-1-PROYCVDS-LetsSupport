@@ -22,7 +22,6 @@ public class User implements Serializable{
 
     /**
      * Constructor de users el cual genera un nuevo user
-     * @param id valor del id del elemento a registrar en categories
      * @param fullname nombre completo del usuario que se va a registrar
      * @param username username del usuario que se va a registrar
      * @param passwd contraseña del usuario que se va a registrar
@@ -30,8 +29,7 @@ public class User implements Serializable{
      * @param isactive estado del usuario
      * @param correo correo del usuario que se va a registrar
      */
-    public User(int id, String fullname, String username, String passwd, int rol, boolean isactive, String correo) {
-        this.id = id;
+    public User( String fullname, String username, String passwd, int rol, boolean isactive, String correo) {
         this.fullName = fullname;
         this.username = username;
         this.passwd = passwd;

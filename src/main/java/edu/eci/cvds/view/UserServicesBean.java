@@ -18,25 +18,12 @@ public class UserServicesBean extends BasePageBean{
     private UserServices userServices;
     private String correo;
     private String password;
-
-    /**
-     * Es usado para controlar la funcionalidad de crear usuario desde la interfaz
-     * @param id valor del id del elemento a registrar en categories
-     * @param fullname nombre completo del usuario que se va a registrar
-     * @param username username del usuario que se va a registrar
-     * @param passwd contraseña del usuario que se va a registrar
-     * @param rol rol que posee el usuario que se va a registrar
-     * @param isactive estado del usuario
-     * @param correo correo del usuario que se va a registrar
-     * @throws ServicesException controlador de excepciones
-     */
-    public void agregarUsuario(int id, String fullname, String username, String passwd, int rol, boolean isactive, String correo) throws ServicesException {
-        try {
-            userServices.agregarUsuario(id, fullname, username, passwd, rol, isactive, correo);
-        } catch (ServicesException ex) {
-            throw new ServicesException("Error al agregar usuario",ex);
-        }
-    }
+    private int id;
+    private String fullname;
+    private String username;
+    private String passwd;
+    private int rol;
+    private boolean isactive;
 
     /**
      * Es usado para controlar la funcionalidad de iniciar sesion desde la interfaz
@@ -51,34 +38,53 @@ public class UserServicesBean extends BasePageBean{
         }
     }
 
-    /**
-     * Es usado para controlar la funcionalidad de moddificar rol de usuario desde la interfaz
-     * @param rol nuevo rol del user
-     * @param correo correo del user con el que se va a realizar la busqueda
-     * @throws ServicesException controlador de excepciones
-     */
-    public void ModificarRol(int rol, String correo) throws ServicesException {
-        try {
-            userServices.ModificarRol(rol,correo);
-        } catch (ServicesException ex) {
-            throw new ServicesException("Error al modificar rol",ex);
-        }
+    public int getId() {
+        return id;
     }
 
-    /**
-     * Es usado para controlar la funcionalidad de modificar estado de usuario desde la interfaz
-     * @param isactive nuevo estado del usr
-     * @param correo correo del user con el que se va a realizar la busqueda
-     * @throws ServicesException controlador de excepciones
-     */
-    public void EstadoUser(boolean isactive, String correo) throws ServicesException {
-        try {
-            userServices.EstadoUser(isactive, correo);
-        } catch (ServicesException ex) {
-            throw new ServicesException("Error al modificar estado",ex);
-        }
+    public void setId(int id) {
+        this.id = id;
     }
 
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
+
+    public int getRol() {
+        return rol;
+    }
+
+    public void setRol(int rol) {
+        this.rol = rol;
+    }
+
+    public boolean isIsactive() {
+        return isactive;
+    }
+
+    public void setIsactive(boolean isactive) {
+        this.isactive = isactive;
+    }
 
     public UserServices getUserServices() {
         return this.userServices;
@@ -103,6 +109,7 @@ public class UserServicesBean extends BasePageBean{
     public void setPassword(String password) {
         this.password = password;
     }
+
 
 
 }

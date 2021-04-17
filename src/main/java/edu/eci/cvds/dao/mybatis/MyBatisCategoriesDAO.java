@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import edu.eci.cvds.dao.CategoriesDAO;
 import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.dao.mybatis.mappers.CategoriesMapper;
+import edu.eci.cvds.entities.Categories;
 
 import java.util.Date;
 import java.util.List;
@@ -14,20 +15,15 @@ public class MyBatisCategoriesDAO implements CategoriesDAO {
 
     /**
      * Envia la información que viene de CategoriesDAO hacia CategoriesMapper para registrar en la base de datos
-     * @param id valor del id del elemento a registrar en categories
-     * @param value nombre del elemento a registrar en categories
-     * @param description descripcion del elemento a registrar en categories
-     * @param status estado del elemento a registrar en categories
-     * @param creationdate fecha en la que se crea el  elemento a registrar en categories
-     * @param modificationdate fecha de modificacion del  elemento, en este caso la fecha de creacion del elemento a registrar en categories
+     * @param categorie objeto de tipo categoria, que contiene los datos de la nueva categoria que se va a crear
      * @throws PersistenceException controlador de excepciones
      */
     @Override
-    public void agregarCategoria(int id, String value, String description, int status, Date creationdate, Date modificationdate) throws PersistenceException {
+    public void agregarCategoria(Categories categorie) throws PersistenceException {
         try {
-            categoriesMapper.agregarCategoria(id,value,description,status,creationdate,modificationdate);
+            categoriesMapper.agregarCategoria(categorie);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
-            throw new PersistenceException("Error al insertar nueva categoria: " + id, e);
+            throw new PersistenceException("Error al insertar nueva categoria: " + categorie.getId(), e);
         }
     }
 
@@ -36,12 +32,13 @@ public class MyBatisCategoriesDAO implements CategoriesDAO {
      * @param value nuevo nombre de la categoria que se va a modificar
      * @param description nueva descripción de la categoria que se va a modificar
      * @param status nuevo estado de la categoria que se va a modificar
+     * @param oldvalue nombre por el medio del cual se esta consultando el dato que se va a cambiar
      * @throws PersistenceException controlador de excepciones
      */
     @Override
-    public void ModificarCategoria(String value, String description, int status) throws PersistenceException {
+    public void ModificarCategoria(String value, String description, int status,String oldvalue) throws PersistenceException {
         try {
-            categoriesMapper.ModificarCategoria(value,description,status);
+            categoriesMapper.ModificarCategoria(value,description,status,oldvalue);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al modificar la categoria", e);
         }
@@ -49,29 +46,17 @@ public class MyBatisCategoriesDAO implements CategoriesDAO {
 
     /**
      * Retorna una lista con los nombres de las categorias existentes que llama desde CategoriesMapper
+     * @param oldvalue nombre a verificar si existe en la tabla
      * @return List
      * @throws PersistenceException controlador de excepciones
      */
     @Override
-    public List<String> traerValuesCategories() throws PersistenceException {
+    public List<String> traerValuesCategories(String oldvalue) throws PersistenceException {
         try {
-            return categoriesMapper.traerValuesCategories();
+            return categoriesMapper.traerValuesCategories(oldvalue);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al consultar nombres", e);
         }
     }
 
-    /**
-     * Retorna una lista con los ids de las categorias existentes que llama desde CategoriesMapper
-     * @return List
-     * @throws PersistenceException controlador de excepciones
-     */
-    @Override
-    public List<Integer> traerIdCategories() throws PersistenceException {
-        try {
-            return categoriesMapper.traerIdCategories();
-        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
-            throw new PersistenceException("Error al consultar ids", e);
-        }
-    }
 }

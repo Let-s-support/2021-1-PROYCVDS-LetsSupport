@@ -1,6 +1,7 @@
 package edu.eci.cvds.dao.mybatis.mappers;
 
 import edu.eci.cvds.entities.Categories;
+import edu.eci.cvds.entities.Needs;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -9,33 +10,15 @@ import java.util.List;
 public interface NeedsMapper {
     /**
      * Envia la información que viene de MyBatisNeedsDAO hacia NeedsMapper.xml, a través de params para registrar en la base de datos
-     * @param id valor del id del elemento a registrar en needs
-     * @param value nombre del elemento a registrar en needs
-     * @param description descripcion del elemento a registrar en needs
-     * @param status estado del elemento a registrar en needs
-     * @param creationdate fecha en la que se crea el  elemento a registrar en needs
-     * @Param category_id  Categoria a la que pertenece la need
-     * @Param urgencia urgencia que tiene la need
-     * @param modificationdate fecha de modificacion del  elemento, en este caso la fecha de creacion del elemento a registrar en needs
+     * @param need objeto de tipo needs que leva los datos de la necesidad a crear
      */
-     void agregarNecesidades(@Param("newid")int id,
-                             @Param("newvalue") String value,
-                             @Param("newdescription") String description,
-                             @Param("newstatus") int status,
-                             @Param("newcreationdate") Date creationdate,
-                             @Param("newmodificationdate")Date modificationdate,
-                             @Param("newcategory_id") int category_id,
-                             @Param("newurgencia") int urgencia);
+     void agregarNecesidades(@Param("need")Needs need);
 
      /**
      * Retorna una lista con los nombres de las necesidades existentes que trae desde NeedsMapper.xml
+      * @param oldvalue nombre a verificar si existe en la tabla
      * @return List
      */
-     List<String> traerValuesNeeds();
+     List<String> traerValuesNeeds(@Param("oldvalue") String oldvalue);
 
-     /**
-     * Retorna una lista con los ids de las necesidades existentes que trae desde NeedsMapper.xml
-     * @return List
-     */
-     List<Integer> traerIdNeeds();
 }

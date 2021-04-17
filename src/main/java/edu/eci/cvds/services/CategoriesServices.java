@@ -1,6 +1,7 @@
 package edu.eci.cvds.services;
 
 import edu.eci.cvds.dao.PersistenceException;
+import edu.eci.cvds.entities.Categories;
 
 import java.util.Date;
 import java.util.List;
@@ -9,36 +10,27 @@ public interface CategoriesServices {
 
     /**
      * Es usado por CategoriesServicesBean para desplegar la funcionalidad de agregarCategoria y la envia a CategoriesServicesImpl
-     * @param id valor del id del elemento a registrar en categories
-     * @param value nombre del elemento a registrar en categories
-     * @param description descripcion del elemento a registrar en categories
-     * @param status estado del elemento a registrar en categories
-     * @param creationdate fecha en la que se crea el  elemento a registrar en categories
-     * @param modificationdate fecha de modificacion del  elemento, en este caso la fecha de creacion del elemento a registrar en categories
+     * @param categorie objeto de tipo categoria, que contiene los datos de la nueva categoria que se va a crear
      * @throws ServicesException controlador de excepciones
      */
-    void agregarCategoria(int id, String value, String description, int status, Date creationdate, Date modificationdate) throws ServicesException;
+    void agregarCategoria(Categories categorie) throws ServicesException;
 
     /**
      * Es usado por CategoriesServicesBean para desplegar la funcionalidad de ModificarCategoria y la envia a CategoriesServicesImpl
      * @param value nuevo nombre de la categoria que se va a modificar
      * @param description nueva descripción de la categoria que se va a modificar
      * @param status nuevo estado de la categoria que se va a modificar
+     * @param oldvalue nombre por el medio del cual se esta consultando el dato que se va a cambiar
      * @throws ServicesException controlador de excepciones
      */
-    void ModificarCategoria(String value, String description, int status) throws ServicesException;
+    void ModificarCategoria(String value, String description, int status, String oldvalue) throws ServicesException;
 
     /**
-     * Es usado por CategoriesServicesBean para desplegar la funcionalidad de traerValuesCategories y asi obtener la información de los nombres de las categorias existentes, la envia a CategoriesServicesImpl
+     * Es usado para desplegar la funcionalidad de traerValuesCategories y asi obtener la información de los nombres de las categorias existentes, la envia a CategoriesServicesImpl
+     * @param oldvalue nombre a verificar si existe en la tabla
      * @return List
      * @throws ServicesException controlador de excepciones
      */
-    List<String> traerValuesCategories() throws PersistenceException, ServicesException;
+    List<String> traerValuesCategories(String oldvalue) throws PersistenceException, ServicesException;
 
-    /**
-     * Es usado por CategoriesServicesBean para desplegar la funcionalidad de traerIdCategories y asi obtener la información de los ids de las categorias existentes, la envia a CategoriesServicesImpl
-     * @return List
-     * @throws ServicesException controlador de excepciones
-     */
-    List<Integer> traerIdCategories() throws ServicesException;
 }
