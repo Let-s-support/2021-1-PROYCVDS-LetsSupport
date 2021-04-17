@@ -16,7 +16,7 @@
     </resultMap>
 
     <insert parameterType="map" id="agregarCategoria">
-        insert into categories (value,description,status,creationdate,modificationdate) values(#{category.getValue()},#{category.description},#{category.status},CURRENT_DATE(),CURRENT_DATE())
+        insert into categories (value,description,status,creationdate,modificationdate) values(#{value},#{description},#{status},CURRENT_DATE(),CURRENT_DATE())
     </insert>
 
     <update parameterType="map" id="ModificarCategoria">
