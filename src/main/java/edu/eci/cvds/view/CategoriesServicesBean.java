@@ -14,7 +14,7 @@ public class CategoriesServicesBean extends BasePageBean{
     private int id;
     private String value;
     private String description;
-    private int status;
+    private int status = 1;
     private Date creationdate;
     private Date modificationdate;
     private String oldvalue;
