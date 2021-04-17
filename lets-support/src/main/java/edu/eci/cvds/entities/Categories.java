@@ -7,7 +7,7 @@ public class Categories implements Serializable {
     private int id;
     private String value;
     private String description;
-    private Status status;
+    private int status;
     private Date creationdate;
     private Date modificationdate;
 
@@ -21,7 +21,7 @@ public class Categories implements Serializable {
      * @param creationdate fecha en la que se crea el  elemento a registrar en categories
      * @param modificationdate fecha de modificacion del  elemento, en este caso la fecha de creacion del elemento a registrar en categories
      */
-    public Categories(int id, String value, String description, Status status, Date creationdate, Date modificationdate) {
+    public Categories(int id, String value, String description, int status, Date creationdate, Date modificationdate) {
         this.id = id;
         this.value = value;
         this.description = description;
@@ -105,7 +105,7 @@ public class Categories implements Serializable {
      * Obtiene estado de la category
      * @return Status
      */
-    public Status getStatus() {
+    public int getStatus() {
         return status;
     }
 
@@ -113,7 +113,7 @@ public class Categories implements Serializable {
      * Cambia Status de la category
      * @param status nuevo status de la category
      */
-    public void setStatus(Status status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

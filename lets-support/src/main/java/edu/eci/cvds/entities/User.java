@@ -9,7 +9,7 @@ public class User implements Serializable{
     private String fullName;
     private String username;
     private String passwd;
-    private Rol rol;
+    private int rol;
     private boolean isactive;
     private String correo;
 
@@ -30,7 +30,7 @@ public class User implements Serializable{
      * @param isactive estado del usuario
      * @param correo correo del usuario que se va a registrar
      */
-    public User(int id, String fullname, String username, String passwd, Rol rol, boolean isactive, String correo) {
+    public User(int id, String fullname, String username, String passwd, int rol, boolean isactive, String correo) {
         this.id = id;
         this.fullName = fullname;
         this.username = username;
@@ -108,7 +108,7 @@ public class User implements Serializable{
      * Obtiene el rol del user
      * @return Rol
      */
-    public Rol getRol() {
+    public int getRol() {
         return rol;
     }
 
@@ -116,7 +116,7 @@ public class User implements Serializable{
      * Cambia el rol del user
      * @param rol nuevo rol del user
      */
-    public void setRol(Rol rol) {
+    public void setRol(int rol) {
         this.rol = rol;
     }
 

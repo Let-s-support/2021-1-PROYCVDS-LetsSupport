@@ -9,7 +9,7 @@ public class Needs implements Serializable {
     private int id;
     private String value;
     private String description;
-    private Status status;
+    private int status;
     private Date creationdate;
     private Date modificationdate;
     private Categories category_id;
@@ -25,7 +25,7 @@ public class Needs implements Serializable {
      * @param modificationdate fecha de modificacion del  elemento, en este caso la fecha de creacion del elemento a registrar en needs
      * @Param category_id  Categoria a la que pertenece la need
      */
-    public Needs(int id, String value, String description, Status status, Date creationdate, Date modificationdate, Categories category_id, int urgencia) {
+    public Needs(int id, String value, String description, int status, Date creationdate, Date modificationdate, Categories category_id, int urgencia) {
         this.id = id;
         this.value = value;
         this.value = value;
@@ -115,7 +115,7 @@ public class Needs implements Serializable {
      * Obtiene estado de la need
      * @return Status
      */
-    public Status getStatus() {
+    public int getStatus() {
         return status;
     }
 
@@ -123,7 +123,7 @@ public class Needs implements Serializable {
      * Cambia Status de la need
      * @param status nuevo status de la need
      */
-    public void setStatus(Status status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
