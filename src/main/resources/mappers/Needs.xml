@@ -15,7 +15,7 @@
     </resultMap>
 
     <insert parameterType="map" id="agregarNecesidades">
-        insert into needs (value,description,status,creationdate,modificationdate,category_id,urgnecia) values(#{need.value},#{need.description},#{need.status},#{CURRENT_DATE},#{CURRENT_DATE},#{need.category_id},#{need.urgencia})
+        insert into needs (value,description,status,creationdate,modificationdate,category_id,urgnecia) values(#{need.value},#{need.description},#{need.status},current_date,current_date,#{need.category_id},#{need.urgencia})
     </insert>
 
     <select parameterType="map" id="traerValuesNeeds" resultMap="NeedsResult">

@@ -20,7 +20,7 @@
     </insert>
 
     <update parameterType="map" id="ModificarCategoria">
-        update users set value=#{upvalue}, description=#{updescription}, estado=#{upestado}, modificationDate=CURRENT_DATE
+        update users set value=#{upvalue}, description=#{updescription}, estado=#{upestado}, modificationDate=current_date
         WHERE id=#{oldvalue}
     </update>
 
