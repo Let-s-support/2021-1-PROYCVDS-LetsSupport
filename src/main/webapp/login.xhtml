@@ -12,21 +12,21 @@
         <div class="body">
             <h1 class="title">Let's Support</h1>
             <div>
-                <h:form>
+                <h:form >
                     <p:growl autoUpdate="true" />
                     <div style="width: 400px; margin: 0 auto;">
                         <p:panel class="container">
                             <f:facet name="header">Datos de acceso</f:facet>
                             <h:panelGrid columns="1" style="margin: 0 auto;">
                                 <div class="">
-                                    Correo electrónico
-                                    <h:inputText id="correo" value="#{userBean.correo}" required="true" label="login" />
+                                    Usuario
+                                    <h:inputText id="correo" value="#{userBean.username}" required="true" label="login" />
                                     Contraseña
                                     <h:inputSecret id="password" value="#{userBean.password}" required="true"
                                         label="password" />
                                 </div>
                             </h:panelGrid>
-                            <h:commandButton value="Ingresar" action="#{userBean.IngresarSesion()}" class="button" />
+                            <h:commandButton  value="Ingresar" action="#{userBean.IngresarSesion()}" class="button" />
                         </p:panel>
                     </div>
                 </h:form>

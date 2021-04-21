@@ -12,6 +12,7 @@ public class Needs implements Serializable {
     private Date modificationdate;
     private int category_id;
     private int urgencia;
+    private int idsolicitante;
 
     /**
      * Constructor de needs el cual genera una nueva need
@@ -181,5 +182,13 @@ public class Needs implements Serializable {
      */
     public void setUrgencia(int urgencia) {
         this.urgencia = urgencia;
+    }
+
+    public int getIdsolicitante() {
+        return idsolicitante;
+    }
+
+    public void setIdsolicitante(int idsolicitante) {
+        this.idsolicitante = idsolicitante;
     }
 }

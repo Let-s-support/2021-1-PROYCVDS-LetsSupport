@@ -59,7 +59,19 @@ public class CategoriesServicesImpl implements CategoriesServices {
         try {
             List values = traerValuesCategories(oldvalue);
             if (!values.isEmpty()) {
-                categoriesDAO.ModificarCategoria(value, description, status, oldvalue);
+                if(!value.isEmpty()){
+                    categoriesDAO.ModificarValue(value, oldvalue);
+                }
+                if(!description.isEmpty()){
+                    categoriesDAO.ModificarDescription(description, oldvalue);
+                }
+                if (!(status ==0)){
+                    categoriesDAO.ModificarStatus(status, oldvalue);
+                }
+                if(!value.isEmpty() || !description.isEmpty() || !(status ==0)){
+                    categoriesDAO.ModificarDate(oldvalue);
+                }
+
             }
         } catch (ServicesException | PersistenceException ex) {
             throw new ServicesException("Error al modificar categoria",ex);

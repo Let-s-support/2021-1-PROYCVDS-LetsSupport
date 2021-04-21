@@ -18,7 +18,7 @@
     <select parameterType="map" id="IngresarSesion" resultMap="UserResult">
         select *
         FROM users
-        WHERE correo = #{concorreo},
+        WHERE username = #{conusername}
     </select>
 
 </mapper>

@@ -5,7 +5,9 @@ import com.google.inject.Inject;
 import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.dao.UserDAO;
 import edu.eci.cvds.dao.mybatis.mappers.UserMapper;
+import edu.eci.cvds.entities.User;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 public class MyBatisUserDAO implements UserDAO {
@@ -14,14 +16,14 @@ public class MyBatisUserDAO implements UserDAO {
 
     /**
      * Retorna un valor que es el password del usuario que intenta acceder que llama desde UsersMapper
-     * @param correo  correo con el cual se buscara el usuario
+     * @param username  es el username con el cual se consultaran los datos
      * @return String
      * @throws PersistenceException controlador de excepciones
      */
     @Override
-    public List<String> IngresarSesion(String correo, String passwd) throws PersistenceException {
+    public List<User> IngresarSesion(String username) throws PersistenceException {
         try {
-            return userMapper.IngresarSesion(correo,passwd);
+            return userMapper.IngresarSesion(username);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al iniciar sesion: ", e);
         }

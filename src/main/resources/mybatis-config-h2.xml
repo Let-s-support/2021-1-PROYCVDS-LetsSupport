@@ -21,8 +21,8 @@
     </environments>
 
     <mappers>
-        <mapper resource="mappers/Categories.xml"></mapper>
-        <mapper resource="mappers/Needs.xml"></mapper>
+        <mapper resource="mappers/CategoriesMapper.xml"></mapper>
+        <mapper resource="mappers/NeedsMapper.xml"></mapper>
         <mapper resource="mappers/UserMapper.xml"></mapper>
     </mappers>
 

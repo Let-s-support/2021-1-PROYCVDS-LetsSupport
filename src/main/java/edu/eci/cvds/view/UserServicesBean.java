@@ -2,8 +2,13 @@ package edu.eci.cvds.view;
 
 import javax.faces.bean.SessionScoped;
 import com.google.inject.Inject;
+import edu.eci.cvds.entities.User;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.UserServices;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 
 @javax.faces.bean.ManagedBean(name = "userBean")
 @SessionScoped
@@ -26,8 +31,27 @@ public class UserServicesBean extends BasePageBean{
      */
     public void IngresarSesion() throws ServicesException {
         try {
-            if(!userServices.IngresarSesion(correo,password).isEmpty()){
-                isactive=true;
+            System.out.println(username);
+            List<User> datos=userServices.IngresarSesion(username);
+            if(!datos.isEmpty()){
+                if(password.equals(datos.get(0).getPasswd())) {
+                    isactive=datos.get(0).isIsactive();
+                    if(isactive) {
+                        id = datos.get(0).getId();
+                        fullname = datos.get(0).getFullName();
+                        rol = datos.get(0).getRol();
+                        correo=datos.get(0).getCorreo();
+                    }
+                    {
+                        new ServicesException("Usuario inactivo");
+                    }
+                }
+                else {
+                    new ServicesException("Contraseña equivocada");
+                }
+            }
+            else {
+                new ServicesException("Usuario inexistente");
             }
         } catch (ServicesException ex) {
             throw new ServicesException("Error al ingresar sesion",ex);
