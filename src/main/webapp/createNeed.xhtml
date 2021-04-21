@@ -51,16 +51,17 @@
                                 <div class="">
                                     Categoria
                                     <h:selectOneMenu value="#{needBean.selectedCategory}">
-                                        <f:selectItems value="#{categoryBean.categories}" />
+                                        <f:selectItems value="#{categoryBean.traerCategories()}" />
                                     </h:selectOneMenu>
                                     Nombre
                                     <h:inputText id="value" value="#{needBean.value}" required="true" label="Nombre" />
                                     Descripción
                                     <p:inputTextarea maxlength="500" id="description" rows="6" cols="33" value="#{needBean.description}" label="Descripción"/>
+                                    <!--Falta implementar el campo para urgencia (int)-->
                                 </div>
                             </h:panelGrid>
                             <h:form>
-                                <h:commandButton value="Crear" title="Crear" action="#{needBean.sendData()}" class="button" ajax="false"/>
+                                <h:commandButton value="Crear" title="Crear" action="#{needBean.agregarNecesidades())}" class="button" ajax="false"/>
                         </h:form>
                         </p:panel>
                     </div>

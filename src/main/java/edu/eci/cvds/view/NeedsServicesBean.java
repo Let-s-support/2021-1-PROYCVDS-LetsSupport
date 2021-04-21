@@ -10,7 +10,7 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "needBean")
 @SessionScoped
-public class NeedsServicesBean extends BasePageBean{
+public class NeedsServicesBean extends BasePageBean {
     @Inject
     NeedsServices needsServices;
 
@@ -26,19 +26,18 @@ public class NeedsServicesBean extends BasePageBean{
 
     /**
      * Es usado para controlar la funcionalidad de crear necesidad desde la interfaz
+     * 
      * @throws ServicesException controlador de excepciones
      */
     public void agregarNecesidades() throws ServicesException {
         try {
-            Needs need = new Needs(value, description, status, category_id, urgencia);
+            category_id = CategoriesServicesBean.getCategories_id()
+                    .get(CategoriesServicesBean.getCategories().indexOf(selectedCategory));
+            Needs need = new Needs(value, description, 1, category_id, urgencia);
             needsServices.agregarNecesidades(need);
         } catch (ServicesException ex) {
-            throw new ServicesException("Error al agregar la necesidad",ex);
+            throw new ServicesException("Error al agregar la necesidad", ex);
         }
-    }
-
-    public void sendData(){
-        System.out.print(selectedCategory);
     }
 
     public NeedsServices getNeedsServices() {

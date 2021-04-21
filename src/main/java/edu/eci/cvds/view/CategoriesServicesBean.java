@@ -9,12 +9,14 @@ import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.StatusServices;
 
 import javax.faces.bean.SessionScoped;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @javax.faces.bean.ManagedBean(name = "categoryBean")
 @SessionScoped
-public class CategoriesServicesBean extends BasePageBean{
+public class CategoriesServicesBean extends BasePageBean {
 
     private int id;
     private String value;
@@ -23,30 +25,38 @@ public class CategoriesServicesBean extends BasePageBean{
     private Date creationdate;
     private Date modificationdate;
     private String oldvalue;
-    private List<String> categories;
-    private List<Integer> categories_id;
+    private static List<String> categories;
+    public static List<Integer> categories_id;
     private List<String> statuses;
     private String selectedStatus;
 
     @Inject
     CategoriesServices categoriesServices;
 
-    /*@Inject
+    @Inject
     StatusServices statusServices;
 
+    public CategoriesServicesBean() throws ServicesException {
+        categories = new ArrayList<String>();
+        categories_id = new ArrayList<Integer>();
+        statuses = new ArrayList<String>();
+    }
+
     public void status() throws ServicesException {
+        statuses.clear();
         try {
-            List<Status>statuses1= statusServices.traerStatus();
-            for (int i=0;i<statuses1.size();i++){
+            List<Status> statuses1 = statusServices.traerStatus();
+            for (int i = 0; i < statuses1.size(); i++) {
                 statuses.add(statuses1.get(i).getValue());
             }
         } catch (ServicesException ex) {
-            throw new ServicesException("Error al modificar categoria",ex);
+            throw new ServicesException("Error al modificar categoria", ex);
         }
-    }*/
+    }
 
     /**
      * Es usado para controlar la funcionalidad de crear categoria desde la interfaz
+     * 
      * @throws ServicesException controlador de excepciones
      */
     public void agregarCategoria() throws ServicesException {
@@ -55,33 +65,41 @@ public class CategoriesServicesBean extends BasePageBean{
             Categories categorie = new Categories(value, description, status);
             categoriesServices.agregarCategoria(categorie);
         } catch (ServicesException ex) {
-            throw new ServicesException("El item no esta registrado",ex);
+            throw new ServicesException("El item no esta registrado", ex);
         }
     }
 
-
     /**
-     * Es usado controlar la funcionalidad de modificar datos de categoria desde la interfaz
+     * Es usado controlar la funcionalidad de modificar datos de categoria desde la
+     * interfaz
+     * 
      * @throws ServicesException controlador de excepciones
      */
     public void ModificarCategoria() throws ServicesException {
         try {
-            categoriesServices.ModificarCategoria(value, description, status,oldvalue);
+            categoriesServices.ModificarCategoria(value, description, status, oldvalue);
         } catch (ServicesException ex) {
-            throw new ServicesException("Error al modificar categoria",ex);
+            throw new ServicesException("Error al modificar categoria", ex);
         }
     }
 
-    public void traerCategories() throws ServicesException {
+    public List<String> traerCategories() throws ServicesException {
+        status();
+        categories.clear();
+        categories_id.clear();
         try {
-            List<Categories>categories1=categoriesServices.traerCategories();
-            for (int i=0;i<categories1.size();i++){
-                categories_id.add(categories1.get(i).getId());
-                categories.add(categories1.get(i).getValue());
+            List<Categories> categories1 = categoriesServices.traerCategories();
+            for (int i = 0; i < categories1.size(); i++) {
+                if (!categories.contains(categories1.get(i).getValue())) {
+                    categories_id.add(categories1.get(i).getId());
+                    categories.add(categories1.get(i).getValue());
+                }
             }
         } catch (ServicesException | PersistenceException ex) {
-            throw new ServicesException("Error al modificar categoria",ex);
+            throw new ServicesException("Error al modificar categoria", ex);
         }
+
+        return categories;
     }
 
     public int getId() {
@@ -112,8 +130,8 @@ public class CategoriesServicesBean extends BasePageBean{
         return status;
     }
 
-    public List<String> getCategories() {
-        return this.categories;
+    public static List<String> getCategories() {
+        return categories;
     }
 
     public void setCategories(List<String> categories) {
@@ -180,8 +198,8 @@ public class CategoriesServicesBean extends BasePageBean{
         this.categoriesServices = categoriesServices;
     }
 
-    public List<Integer> getCategories_id() {
-        return this.categories_id;
+    public static List<Integer> getCategories_id() {
+        return categories_id;
     }
 
     public void setCategories_id(List<Integer> categories_id) {
