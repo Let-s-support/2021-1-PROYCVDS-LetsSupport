@@ -10,6 +10,10 @@ import javax.faces.bean.RequestScoped;
 
 public class NavigationController implements Serializable {
     public String loginScreen() {
-        return "login";
+        return "login.xhtml";
+    }
+
+    public String Home(){
+        return "home.xhtml";
     }
 }

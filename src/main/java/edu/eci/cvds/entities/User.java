@@ -120,7 +120,7 @@ public class User implements Serializable{
      * Obtiene el isIsactive del user
      * @return boolean
      */
-    public boolean isIsactive() {
+    public boolean getIsactive() {
         return isactive;
     }
 

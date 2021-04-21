@@ -8,11 +8,12 @@ import edu.eci.cvds.services.UserServices;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @javax.faces.bean.ManagedBean(name = "userBean")
 @SessionScoped
-public class UserServicesBean extends BasePageBean{
+public class UserServicesBean extends BasePageBean {
 
     @Inject
     private UserServices userServices;
@@ -22,40 +23,47 @@ public class UserServicesBean extends BasePageBean{
     private String fullname;
     private String username;
     private int rol;
-    private boolean isactive;
+    private boolean isactive = false;
 
     /**
      * Es usado para controlar la funcionalidad de iniciar sesion desde la interfaz
+     * 
      * @return String
      * @throws ServicesException controlador de excepciones
      */
-    public void IngresarSesion() throws ServicesException {
+    public String IngresarSesion() throws ServicesException {
+        String res = "";
         try {
-            System.out.println(username);
-            List<User> datos=userServices.IngresarSesion(username);
-            if(!datos.isEmpty()){
-                if(password.equals(datos.get(0).getPasswd())) {
-                    isactive=datos.get(0).isIsactive();
-                    if(isactive) {
+            List<User> datos = userServices.IngresarSesion(username);
+            if (!datos.isEmpty()) {
+                if (password.equals(datos.get(0).getPasswd())) {
+                    isactive = datos.get(0).getIsactive();
+                    System.out.println(isactive);
+                    if (isactive) {
                         id = datos.get(0).getId();
                         fullname = datos.get(0).getFullName();
                         rol = datos.get(0).getRol();
-                        correo=datos.get(0).getCorreo();
-                    }
-                    {
+                        correo = datos.get(0).getCorreo();
+                        res = "home.xhtml";
+                    }else{
                         new ServicesException("Usuario inactivo");
+                        res = "login.xhtml";
                     }
-                }
-                else {
+                } else {
                     new ServicesException("Contraseña equivocada");
+                    res = "login.xhtml";
                 }
-            }
-            else {
+            } else {
                 new ServicesException("Usuario inexistente");
+                res = "login.xhtml";
             }
         } catch (ServicesException ex) {
-            throw new ServicesException("Error al ingresar sesion",ex);
+            ex.printStackTrace();
+            throw new ServicesException("Error al ingresar sesion", ex);
         }
+
+        System.out.println(res);
+        return res;
     }
 
     public int getId() {
@@ -121,7 +129,5 @@ public class UserServicesBean extends BasePageBean{
     public void setPassword(String password) {
         this.password = password;
     }
-
-
 
 }
