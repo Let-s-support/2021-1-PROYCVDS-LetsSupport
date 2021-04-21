@@ -26,7 +26,6 @@ public class ServicesFactory {
                 bind(CategoriesDAO.class).to(MyBatisCategoriesDAO.class);
                 bind(NeedsDAO.class).to(MyBatisNeedsDAO.class);
                 bind(UserDAO.class).to(MyBatisUserDAO.class);
-                bind(UserDAO.class).to(MyBatisUserDAO.class);
                 bind(MaxiumRequerementsDAO.class).to(MyBatisMaxiumRequerementsDAO.class);
                 bind(RolesDAO.class).to(MyBatisRolesDAO.class);
                 bind(StatusDAO.class).to(MyBatisStatusDAO.class);
