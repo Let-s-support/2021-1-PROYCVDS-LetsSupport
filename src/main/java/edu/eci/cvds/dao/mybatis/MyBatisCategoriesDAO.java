@@ -91,9 +91,17 @@ public class MyBatisCategoriesDAO implements CategoriesDAO {
      * @throws PersistenceException controlador de excepciones
      */
     @Override
-    public List<String> traerValuesCategories(String oldvalue) throws PersistenceException {
+    public List<Categories> traerValuesCategories(String oldvalue) throws PersistenceException {
         try {
             return categoriesMapper.traerValuesCategories(oldvalue);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al consultar nombres", e);
+        }
+    }
+    @Override
+    public List<Categories> traerCategories() throws PersistenceException {
+        try {
+            return categoriesMapper.traerCategories();
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al consultar nombres", e);
         }

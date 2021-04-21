@@ -45,4 +45,9 @@
         WHERE value=#{oldvalue}
     </select>
 
+    <select parameterType="map" id="traerCategories" resultMap="CategoriesResult">
+        select *
+        FROM categories
+    </select>
+
 </mapper>

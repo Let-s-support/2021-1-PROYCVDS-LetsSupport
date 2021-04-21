@@ -51,6 +51,6 @@ public interface CategoriesDAO {
      * @return List
      * @throws PersistenceException controlador de excepciones
      */
-    List<String> traerValuesCategories(String oldvalue) throws PersistenceException;
-
+    List<Categories> traerValuesCategories(String oldvalue) throws PersistenceException;
+    List<Categories> traerCategories() throws PersistenceException;
 }

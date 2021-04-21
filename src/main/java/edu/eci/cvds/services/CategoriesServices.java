@@ -29,6 +29,6 @@ public interface CategoriesServices {
      * @return List
      * @throws ServicesException controlador de excepciones
      */
-    List<String> traerValuesCategories(String oldvalue) throws PersistenceException, ServicesException;
-
+    List<Categories> traerValuesCategories(String oldvalue) throws PersistenceException, ServicesException;
+    List<Categories> traerCategories() throws PersistenceException, ServicesException;
 }

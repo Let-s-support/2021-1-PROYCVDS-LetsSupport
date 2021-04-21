@@ -19,6 +19,6 @@ public interface NeedsServices {
      * @return List
      * @throws ServicesException controlador de excepciones
      */
-    List<String> traerValuesNeeds(String oldvalue) throws ServicesException;
+    List<Needs> traerValuesNeeds(String oldvalue) throws ServicesException;
 
 }

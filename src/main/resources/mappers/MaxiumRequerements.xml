@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.eci.cvds.dao.mybatis.mappers.MaxiumRequerementsMapper">
+    <resultMap id="MaxiumRequerementsResult" type="MaxiumRequerements">
+        <id property="id" column="id"/>
+        <result property="moffers" column="moffers"/>
+        <result property="mneeds" column="mneeds"/>
+    </resultMap>
+    <select parameterType="map" id="traerMaxiumOffers" resultMap="MaxiumRequerementsResult">
+        select moffers
+        FROM maxiumrequerements
+        where id=1
+    </select>
+    <select parameterType="map" id="traerMaxiumNeeds" resultMap="MaxiumRequerementsResult">
+        select mneeds
+        FROM maxiumrequerements
+        WHERE id=1
+    </select>
+    <update parameterType="map" id="ModificarOffers">
+        update maxiumrequerements set moffers=#{nmoffers}
+        WHERE id=1
+    </update>
+    <update parameterType="map" id="ModificarNeeds">
+        update maxiumrequerements set mneeds=#{nmneeds}
+        WHERE id=1
+    </update>
+</mapper>

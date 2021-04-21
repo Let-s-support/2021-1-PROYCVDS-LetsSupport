@@ -17,6 +17,6 @@ public interface NeedsDAO {
      * @return List
      * @throws PersistenceException controlador de excepciones
      */
-    List<String> traerValuesNeeds(String oldvalue) throws PersistenceException;
+    List<Needs> traerValuesNeeds(String oldvalue) throws PersistenceException;
 
 }

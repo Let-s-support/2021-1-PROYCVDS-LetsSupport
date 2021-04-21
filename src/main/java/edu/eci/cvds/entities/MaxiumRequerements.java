@@ -3,6 +3,7 @@ package edu.eci.cvds.entities;
 import java.io.Serializable;
 
 public class MaxiumRequerements implements Serializable {
+    private int id;
     private int moffers;
     private int mneeds;
 

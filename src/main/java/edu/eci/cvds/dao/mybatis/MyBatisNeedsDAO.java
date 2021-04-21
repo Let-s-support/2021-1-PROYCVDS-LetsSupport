@@ -32,7 +32,7 @@ public class MyBatisNeedsDAO implements NeedsDAO {
      * @throws PersistenceException controlador de excepciones
      */
     @Override
-    public List<String> traerValuesNeeds(String oldvalue) throws PersistenceException {
+    public List<Needs> traerValuesNeeds(String oldvalue) throws PersistenceException {
         try {
             return needsMapper.traerValuesNeeds(oldvalue);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {

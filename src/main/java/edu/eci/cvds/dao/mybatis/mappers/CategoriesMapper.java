@@ -46,5 +46,6 @@ public interface CategoriesMapper {
      * @param oldvalue nombre a verificar si existe en la tabla
      * @return List
      */
-    List<String> traerValuesCategories(@Param("oldvalue") String oldvalue);
+    List<Categories> traerValuesCategories(@Param("oldvalue") String oldvalue);
+    List<Categories> traerCategories();
 }

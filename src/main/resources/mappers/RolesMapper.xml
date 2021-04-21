@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.eci.cvds.dao.mybatis.mappers.RolesMapper">
+    <resultMap id="RolesResult" type="RolesMapper">
+        <id property="id" column="id"/>
+        <result property="value" column="value"/>
+    </resultMap>
+    <select parameterType="map" id="traerRoles" resultMap="RolesResult">
+        select *
+        FROM roles
+    </select>
+</mapper>
+

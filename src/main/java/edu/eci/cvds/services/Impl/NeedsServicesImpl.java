@@ -21,7 +21,7 @@ public class NeedsServicesImpl implements NeedsServices {
     @Override
     public void agregarNecesidades(Needs need) throws ServicesException {
         try {
-            List<String> values = traerValuesNeeds(need.getValue());
+            List<Needs> values = traerValuesNeeds(need.getValue());
             if (values.isEmpty()){
                 needsDAO.agregarNecesidades(need);
             }
@@ -37,7 +37,7 @@ public class NeedsServicesImpl implements NeedsServices {
      * @throws ServicesException controlador de excepciones
      */
     @Override
-    public List<String> traerValuesNeeds(String oldvalue) throws ServicesException {
+    public List<Needs> traerValuesNeeds(String oldvalue) throws ServicesException {
         try {
             return needsDAO.traerValuesNeeds(oldvalue);
         }catch (PersistenceException ex){

@@ -1,11 +1,13 @@
 package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
+import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.services.CategoriesServices;
 import edu.eci.cvds.services.ServicesException;
 import javax.faces.bean.SessionScoped;
 import java.util.Date;
+import java.util.List;
 
 @javax.faces.bean.ManagedBean(name = "categoryBean")
 @SessionScoped
@@ -18,6 +20,7 @@ public class CategoriesServicesBean extends BasePageBean{
     private Date creationdate;
     private Date modificationdate;
     private String oldvalue;
+    private List<String> categories;
 
     @Inject
     CategoriesServices categoriesServices;
@@ -43,6 +46,17 @@ public class CategoriesServicesBean extends BasePageBean{
         try {
             categoriesServices.ModificarCategoria(value, description, status,oldvalue);
         } catch (ServicesException ex) {
+            throw new ServicesException("Error al modificar categoria",ex);
+        }
+    }
+
+    public void traerCategories() throws ServicesException {
+        try {
+            List<Categories>categories1=categoriesServices.traerCategories();
+            for (int i=0;i<categories1.size();i++){
+                categories.add(categories1.get(i).getValue());
+            }
+        } catch (ServicesException | PersistenceException ex) {
             throw new ServicesException("Error al modificar categoria",ex);
         }
     }

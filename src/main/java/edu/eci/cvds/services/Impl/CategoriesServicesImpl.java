@@ -20,7 +20,7 @@ public class CategoriesServicesImpl implements CategoriesServices {
      * @throws ServicesException controlador de excepciones
      */
     @Override
-    public List<String> traerValuesCategories(String oldvalue) throws ServicesException {
+    public List<Categories> traerValuesCategories(String oldvalue) throws ServicesException {
         try {
             return categoriesDAO.traerValuesCategories(oldvalue);
         }catch (PersistenceException ex){
@@ -36,7 +36,7 @@ public class CategoriesServicesImpl implements CategoriesServices {
     @Override
     public void agregarCategoria(Categories categorie) throws ServicesException {
         try {
-            List<String> values = traerValuesCategories(categorie.getValue());
+            List<Categories> values = traerValuesCategories(categorie.getValue());
             if (values.isEmpty()) {
                 categoriesDAO.agregarCategoria(categorie);
             }
@@ -78,5 +78,12 @@ public class CategoriesServicesImpl implements CategoriesServices {
         }
     }
 
-
+    @Override
+    public List<Categories> traerCategories() throws ServicesException {
+        try {
+            return categoriesDAO.traerCategories();
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al consultar nombres",ex);
+        }
+    }
 }
