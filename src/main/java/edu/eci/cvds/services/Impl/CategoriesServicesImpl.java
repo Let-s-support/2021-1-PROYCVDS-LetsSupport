@@ -57,7 +57,7 @@ public class CategoriesServicesImpl implements CategoriesServices {
     @Override
     public void ModificarCategoria(String value, String description, int status, String oldvalue) throws ServicesException {
         try {
-            List values = traerValuesCategories(oldvalue);
+            List<Categories> values = traerValuesCategories(oldvalue);
             if (!values.isEmpty()) {
                 if(!value.isEmpty()){
                     categoriesDAO.ModificarValue(value, oldvalue);
@@ -65,7 +65,7 @@ public class CategoriesServicesImpl implements CategoriesServices {
                 if(!description.isEmpty()){
                     categoriesDAO.ModificarDescription(description, oldvalue);
                 }
-                if (!(status ==0)){
+                if (!(status == 0)){
                     categoriesDAO.ModificarStatus(status, oldvalue);
                 }
                 if(!value.isEmpty() || !description.isEmpty() || !(status ==0)){

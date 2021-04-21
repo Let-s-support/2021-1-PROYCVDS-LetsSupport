@@ -27,6 +27,7 @@ public class CategoriesServicesBean extends BasePageBean {
     private String oldvalue;
     private static List<String> categories;
     public static List<Integer> categories_id;
+    public static List<Categories> allCategories;
     private List<String> statuses;
     private String selectedStatus;
 
@@ -36,13 +37,20 @@ public class CategoriesServicesBean extends BasePageBean {
     @Inject
     StatusServices statusServices;
 
+    public void handleChange() throws ServicesException{
+        value = allCategories.get(categories.indexOf(oldvalue)).getValue();
+        description = allCategories.get(categories.indexOf(oldvalue)).getDescription();
+        selectedStatus = statuses.get(allCategories.get(categories.indexOf(oldvalue)).getStatus() - 1);
+    }
+
     public CategoriesServicesBean() throws ServicesException {
         categories = new ArrayList<String>();
+        allCategories = new ArrayList<Categories>();
         categories_id = new ArrayList<Integer>();
         statuses = new ArrayList<String>();
     }
 
-    public void status() throws ServicesException {
+    public List<String> status() throws ServicesException {
         statuses.clear();
         try {
             List<Status> statuses1 = statusServices.traerStatus();
@@ -52,6 +60,8 @@ public class CategoriesServicesBean extends BasePageBean {
         } catch (ServicesException ex) {
             throw new ServicesException("Error al modificar categoria", ex);
         }
+
+        return statuses;
     }
 
     /**
@@ -77,7 +87,10 @@ public class CategoriesServicesBean extends BasePageBean {
      */
     public void ModificarCategoria() throws ServicesException {
         try {
-            categoriesServices.ModificarCategoria(value, description, status, oldvalue);
+            categoriesServices.ModificarCategoria(value, description, 
+                selectedStatus == "Cerrado" ? 4 : selectedStatus == "En Proceso" ? 2 
+                : selectedStatus == "Resuelta" ? 3 : 1
+                , oldvalue);
         } catch (ServicesException ex) {
             throw new ServicesException("Error al modificar categoria", ex);
         }
@@ -88,11 +101,11 @@ public class CategoriesServicesBean extends BasePageBean {
         categories.clear();
         categories_id.clear();
         try {
-            List<Categories> categories1 = categoriesServices.traerCategories();
-            for (int i = 0; i < categories1.size(); i++) {
-                if (!categories.contains(categories1.get(i).getValue())) {
-                    categories_id.add(categories1.get(i).getId());
-                    categories.add(categories1.get(i).getValue());
+            allCategories = categoriesServices.traerCategories();
+            for (int i = 0; i < allCategories.size(); i++) {
+                if (!categories.contains(allCategories.get(i).getValue())) {
+                    categories_id.add(allCategories.get(i).getId());
+                    categories.add(allCategories.get(i).getValue());
                 }
             }
         } catch (ServicesException | PersistenceException ex) {
@@ -134,8 +147,8 @@ public class CategoriesServicesBean extends BasePageBean {
         return categories;
     }
 
-    public void setCategories(List<String> categories) {
-        this.categories = categories;
+    public static void setCategories(List<String> newCategories) {
+        categories = newCategories;
     }
 
     public List<String> getStatuses() {
@@ -202,7 +215,7 @@ public class CategoriesServicesBean extends BasePageBean {
         return categories_id;
     }
 
-    public void setCategories_id(List<Integer> categories_id) {
-        this.categories_id = categories_id;
+    public static void setCategories_id(List<Integer> categories_id2) {
+        categories_id = categories_id2;
     }
 }
