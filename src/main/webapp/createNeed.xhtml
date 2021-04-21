@@ -58,11 +58,11 @@
                                     Descripción
                                     <p:inputTextarea maxlength="500" id="description" rows="6" cols="33" value="#{needBean.description}" label="Descripción"/>
                                     Urgencia
-                                    <h:inputText type="number" id="value" value="#{needBean.urgencia}" required="true" label="Urgencia" />
+                                    <h:inputText type="number" id="urgencia" value="#{needBean.urgencia}" required="true" label="Urgencia" />
                                 </div>
                             </h:panelGrid>
                             <h:form>
-                                <h:commandButton value="Crear" title="Crear" action="#{needBean.agregarNecesidades())}" class="button" ajax="false"/>
+                                <h:commandButton value="Crear" title="Crear" action="#{needBean.agregarNecesidades()}" class="button" ajax="false"/>
                         </h:form>
                         </p:panel>
                     </div>
