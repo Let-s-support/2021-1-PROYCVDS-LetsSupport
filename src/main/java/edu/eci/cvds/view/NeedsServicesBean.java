@@ -22,6 +22,8 @@ public class NeedsServicesBean extends BasePageBean{
     private Date modificationdate;
     private int category_id;
     private int urgencia;
+    private String selectedCategory;
+
     /**
      * Es usado para controlar la funcionalidad de crear necesidad desde la interfaz
      * @throws ServicesException controlador de excepciones
@@ -33,6 +35,10 @@ public class NeedsServicesBean extends BasePageBean{
         } catch (ServicesException ex) {
             throw new ServicesException("Error al agregar la necesidad",ex);
         }
+    }
+
+    public void sendData(){
+        System.out.print(selectedCategory);
     }
 
     public NeedsServices getNeedsServices() {
@@ -61,6 +67,14 @@ public class NeedsServicesBean extends BasePageBean{
 
     public String getDescription() {
         return description;
+    }
+
+    public String getSelectedCategory() {
+        return this.selectedCategory;
+    }
+
+    public void setSelectedCategory(String selectedCategory) {
+        this.selectedCategory = selectedCategory;
     }
 
     public void setDescription(String description) {

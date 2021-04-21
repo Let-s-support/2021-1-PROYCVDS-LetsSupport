@@ -49,6 +49,10 @@
                             <f:facet name="header">Información</f:facet>
                             <h:panelGrid columns="1" style="margin: 0 auto;">
                                 <div class="">
+                                    Categoria
+                                    <h:selectOneMenu value="#{needBean.selectedCategory}">
+                                        <f:selectItems value="#{categoryBean.categories}" />
+                                    </h:selectOneMenu>
                                     Nombre
                                     <h:inputText id="value" value="#{needBean.value}" required="true" label="Nombre" />
                                     Descripción
@@ -56,7 +60,7 @@
                                 </div>
                             </h:panelGrid>
                             <h:form>
-                                <h:commandButton value="Crear" title="Crear" action="#{needBean.agregarNecesidades()}" class="button" />
+                                <h:commandButton value="Crear" title="Crear" action="#{needBean.sendData()}" class="button" ajax="false"/>
                         </h:form>
                         </p:panel>
                     </div>

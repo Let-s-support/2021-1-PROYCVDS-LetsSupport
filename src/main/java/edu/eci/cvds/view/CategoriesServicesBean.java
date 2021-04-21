@@ -24,6 +24,7 @@ public class CategoriesServicesBean extends BasePageBean{
     private Date modificationdate;
     private String oldvalue;
     private List<String> categories;
+    private List<Integer> categories_id;
     private List<String> statuses;
     private String selectedStatus;
 
@@ -75,6 +76,7 @@ public class CategoriesServicesBean extends BasePageBean{
         try {
             List<Categories>categories1=categoriesServices.traerCategories();
             for (int i=0;i<categories1.size();i++){
+                categories_id.add(categories1.get(i).getId());
                 categories.add(categories1.get(i).getValue());
             }
         } catch (ServicesException | PersistenceException ex) {
@@ -176,5 +178,13 @@ public class CategoriesServicesBean extends BasePageBean{
 
     public void setCategoriesServices(CategoriesServices categoriesServices) {
         this.categoriesServices = categoriesServices;
+    }
+
+    public List<Integer> getCategories_id() {
+        return this.categories_id;
+    }
+
+    public void setCategories_id(List<Integer> categories_id) {
+        this.categories_id = categories_id;
     }
 }
