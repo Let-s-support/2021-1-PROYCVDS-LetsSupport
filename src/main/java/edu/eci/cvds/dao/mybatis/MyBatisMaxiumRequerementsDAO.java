@@ -1,15 +1,14 @@
 package edu.eci.cvds.dao.mybatis;
 
 import com.google.inject.Inject;
+import edu.eci.cvds.dao.MaxiumRequerementsDAO;
 import edu.eci.cvds.dao.PersistenceException;
-import edu.eci.cvds.dao.mybatis.mappers.CategoriesMapper;
 import edu.eci.cvds.dao.mybatis.mappers.MaxiumRequerementsMapper;
-import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.entities.MaxiumRequerements;
 
 import java.util.List;
 
-public class MyBatisMaxiumRequrementsDAO implements MaxiumRequerementsMapper {
+public class MyBatisMaxiumRequerementsDAO implements MaxiumRequerementsDAO {
     @Inject
     MaxiumRequerementsMapper maxiumRequerementsMapper;
     @Override

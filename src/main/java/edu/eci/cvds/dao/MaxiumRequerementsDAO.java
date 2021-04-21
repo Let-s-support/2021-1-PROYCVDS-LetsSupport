@@ -4,7 +4,7 @@ import edu.eci.cvds.entities.MaxiumRequerements;
 
 import java.util.List;
 
-public interface MaxiumRequermentsDAO {
+public interface MaxiumRequerementsDAO {
     List<MaxiumRequerements> traerMaxiumOffers( ) throws PersistenceException;
     List<MaxiumRequerements> traerMaxiumNeeds() throws PersistenceException;
     void ModificarOffers(int moffers) throws PersistenceException;
