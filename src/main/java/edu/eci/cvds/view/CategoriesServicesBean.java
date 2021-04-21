@@ -25,6 +25,7 @@ public class CategoriesServicesBean extends BasePageBean{
     private String oldvalue;
     private List<String> categories;
     private List<String> statuses;
+    private String selectedStatus;
 
     @Inject
     CategoriesServices categoriesServices;
@@ -107,6 +108,38 @@ public class CategoriesServicesBean extends BasePageBean{
 
     public int getStatus() {
         return status;
+    }
+
+    public List<String> getCategories() {
+        return this.categories;
+    }
+
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
+    }
+
+    public List<String> getStatuses() {
+        return this.statuses;
+    }
+
+    public void setStatuses(List<String> statuses) {
+        this.statuses = statuses;
+    }
+
+    public String getSelectedStatus() {
+        return this.selectedStatus;
+    }
+
+    public void setSelectedStatus(String selectedStatus) {
+        this.selectedStatus = selectedStatus;
+    }
+
+    public StatusServices getStatusServices() {
+        return this.statusServices;
+    }
+
+    public void setStatusServices(StatusServices statusServices) {
+        this.statusServices = statusServices;
     }
 
     public void setStatus(int status) {
