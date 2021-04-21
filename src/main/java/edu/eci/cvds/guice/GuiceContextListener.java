@@ -2,18 +2,11 @@ package edu.eci.cvds.guice;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import edu.eci.cvds.dao.CategoriesDAO;
-import edu.eci.cvds.dao.NeedsDAO;
-import edu.eci.cvds.dao.UserDAO;
-import edu.eci.cvds.dao.mybatis.MyBatisCategoriesDAO;
-import edu.eci.cvds.dao.mybatis.MyBatisNeedsDAO;
-import edu.eci.cvds.dao.mybatis.MyBatisUserDAO;
-import edu.eci.cvds.services.Impl.CategoriesServicesImpl;
-import edu.eci.cvds.services.Impl.NeedsServicesImpl;
-import edu.eci.cvds.services.Impl.UserServicesImpl;
-import edu.eci.cvds.services.CategoriesServices;
-import edu.eci.cvds.services.NeedsServices;
-import edu.eci.cvds.services.UserServices;
+import edu.eci.cvds.dao.*;
+import edu.eci.cvds.dao.mybatis.*;
+import edu.eci.cvds.entities.Status;
+import edu.eci.cvds.services.*;
+import edu.eci.cvds.services.Impl.*;
 import org.mybatis.guice.XMLMyBatisModule;
 import org.mybatis.guice.datasource.helper.JdbcHelper;
 
@@ -39,9 +32,16 @@ public class GuiceContextListener implements ServletContextListener {
                 bind(NeedsDAO.class).to(MyBatisNeedsDAO.class);
                 bind(UserDAO.class).to(MyBatisUserDAO.class);
                 bind(UserDAO.class).to(MyBatisUserDAO.class);
+                bind(MaxiumRequerementsDAO.class).to(MyBatisMaxiumRequerementsDAO.class);
+                bind(RolesDAO.class).to(MyBatisRolesDAO.class);
+                bind(StatusDAO.class).to(MyBatisStatusDAO.class);
                 bind(UserServices.class).to(UserServicesImpl.class);
                 bind(CategoriesServices.class).to(CategoriesServicesImpl.class);
+                bind(MaxiumRequerementsServices.class).to(MaxiumRequerementsServiceImpl.class);
+                bind(RolesServices.class).to(RolesServicesImpl.class);
+                bind(StatusServices.class).to(StatusServicesImpl.class);
                 bind(NeedsServices.class).to(NeedsServicesImpl.class);
+
             }
         });
 

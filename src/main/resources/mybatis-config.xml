@@ -5,6 +5,9 @@
         <typeAlias type="edu.eci.cvds.entities.User" alias="User" />
         <typeAlias type="edu.eci.cvds.entities.Needs" alias="Needs" />
         <typeAlias type="edu.eci.cvds.entities.Categories" alias="Categories" />
+        <typeAlias type="edu.eci.cvds.entities.MaxiumRequerements" alias="MaxiumRequerements"/>
+        <typeAlias type="edu.eci.cvds.entities.Roles" alias="Roles"/>
+        <typeAlias type="edu.eci.cvds.entities.Status" alias="Status"/>
     </typeAliases>
 
     <environments default="development">
@@ -23,6 +26,9 @@
         <mapper resource="mappers/CategoriesMapper.xml"></mapper>
         <mapper resource="mappers/NeedsMapper.xml"></mapper>
         <mapper resource="mappers/UserMapper.xml"></mapper>
+        <mapper resource="mappers/MaxiumRequerementsMapper.xml"></mapper>
+        <mapper resource="mappers/RolesMapper.xml"></mapper>
+        <mapper resource="mappers/StatusMapper.xml"></mapper>
     </mappers>
 
 

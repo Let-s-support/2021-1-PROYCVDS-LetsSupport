@@ -3,8 +3,11 @@ package edu.eci.cvds.view;
 import com.google.inject.Inject;
 import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.entities.Categories;
+import edu.eci.cvds.entities.Status;
 import edu.eci.cvds.services.CategoriesServices;
 import edu.eci.cvds.services.ServicesException;
+import edu.eci.cvds.services.StatusServices;
+
 import javax.faces.bean.SessionScoped;
 import java.util.Date;
 import java.util.List;
@@ -21,9 +24,24 @@ public class CategoriesServicesBean extends BasePageBean{
     private Date modificationdate;
     private String oldvalue;
     private List<String> categories;
+    private List<String> statuses;
 
     @Inject
     CategoriesServices categoriesServices;
+
+    @Inject
+    StatusServices statusServices;
+
+    public void status() throws ServicesException {
+        try {
+            List<Status>statuses1= statusServices.traerStatus();
+            for (int i=0;i<statuses1.size();i++){
+                statuses.add(statuses1.get(i).getValue());
+            }
+        } catch (ServicesException ex) {
+            throw new ServicesException("Error al modificar categoria",ex);
+        }
+    }
 
     /**
      * Es usado para controlar la funcionalidad de crear categoria desde la interfaz
@@ -31,12 +49,14 @@ public class CategoriesServicesBean extends BasePageBean{
      */
     public void agregarCategoria() throws ServicesException {
         try {
+
             Categories categorie = new Categories(value, description, status);
             categoriesServices.agregarCategoria(categorie);
         } catch (ServicesException ex) {
             throw new ServicesException("El item no esta registrado",ex);
         }
     }
+
 
     /**
      * Es usado controlar la funcionalidad de modificar datos de categoria desde la interfaz
