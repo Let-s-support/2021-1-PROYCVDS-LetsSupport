@@ -19,24 +19,9 @@
         insert into categories (value,description,status,creationdate,modificationdate) values(#{category.value},#{category.description},#{category.status},current_date,current_date)
     </insert>
 
-    <update parameterType="map" id="ModificarValue">
-        update users set value=#{upvalue}
-        WHERE id=#{oldvalue}
-    </update>
-
-    <update parameterType="map" id="ModificarDescription">
-        update users set description=#{updescription}
-        WHERE id=#{oldvalue}
-    </update>
-
-    <update parameterType="map" id="ModificarStatus">
-        update users set estado=#{upestado}
-        WHERE id=#{oldvalue}
-    </update>
-
-    <update parameterType="map" id="ModificarDate">
-        update users set modificationDate=current_date
-        WHERE id=#{oldvalue}
+    <update parameterType="map" id="ModificarCategoria">
+        update categories set value=#{upvalue}, description=#{updescription}, status=#{upestado}, modificationDate=current_date
+        WHERE value=#{oldvalue}
     </update>
 
     <select parameterType="map" id="traerValuesCategories" resultMap="CategoriesResult">

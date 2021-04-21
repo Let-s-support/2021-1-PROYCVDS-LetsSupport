@@ -19,7 +19,7 @@ public class UserServicesBean extends BasePageBean {
     private UserServices userServices;
     private String correo;
     private String password;
-    private int id;
+    private static int id;
     private String fullname;
     private String username;
     private int rol;
@@ -66,7 +66,7 @@ public class UserServicesBean extends BasePageBean {
         return res;
     }
 
-    public int getId() {
+    public static int getId() {
         return id;
     }
 
@@ -129,5 +129,6 @@ public class UserServicesBean extends BasePageBean {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
 }

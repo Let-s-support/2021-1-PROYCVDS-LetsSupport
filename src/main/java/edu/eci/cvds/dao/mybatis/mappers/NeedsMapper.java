@@ -19,4 +19,6 @@ public interface NeedsMapper {
      */
      List<Needs> traerValuesNeeds(@Param("oldvalue") String oldvalue) throws PersistenceException;
 
+     List<Needs> cantidadNeedsUser(@Param("thisidsolicitante") int idsolicitante) throws PersistenceException;
+
 }

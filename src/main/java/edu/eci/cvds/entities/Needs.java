@@ -21,7 +21,7 @@ public class Needs implements Serializable {
      * @param status estado del elemento a registrar en needs
      * @Param category_id  Categoria a la que pertenece la need
      */
-    public Needs(String value, String description, int status, int category_id, int urgencia) {
+    public Needs(String value, String description, int status, int category_id, int urgencia, int idsolicitante) {
         this.value = value;
         this.value = value;
         this.description = description;
@@ -29,6 +29,7 @@ public class Needs implements Serializable {
         this.status = status;
         this.category_id = category_id;
         this.urgencia = urgencia;
+        this.idsolicitante=idsolicitante;
     }
 
     /**

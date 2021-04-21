@@ -19,4 +19,6 @@ public interface NeedsDAO {
      */
     List<Needs> traerValuesNeeds(String oldvalue) throws PersistenceException;
 
+    List<Needs> cantidadNeedsUser(int idsolicitante) throws PersistenceException;
+
 }

@@ -15,13 +15,19 @@
     </resultMap>
 
     <insert parameterType="map" id="agregarNecesidades">
-        insert into needs (value,description,status,creationdate,modificationdate,category_id,urgnecia) values(#{need.value},#{need.description},#{need.status},current_date,current_date,#{need.category_id},#{need.urgencia})
+        insert into needs (value,description,status,creationdate,modificationdate,category_id,urgencia,idsolicitante) values(#{need.value},#{need.description},#{need.status},current_date,current_date,#{need.category_id},#{need.urgencia},#{need.idsolicitante})
     </insert>
 
     <select parameterType="map" id="traerValuesNeeds" resultMap="NeedsResult">
         select *
         FROM needs
         WHERE value=#{oldvalue}
+    </select>
+
+    <select parameterType="map" id="cantidadNeedsUser" resultMap="NeedsResult">
+        select *
+        FROM needs
+        WHERE idsolicitante=#{thisidsolicitante}
     </select>
 
 </mapper>

@@ -12,29 +12,16 @@ public interface CategoriesMapper {
      void agregarCategoria(@Param("category") Categories categorie);
 
     /**
-     * Envia la información que viene de MyBatisCategories y lo envia a CategoriesMapper.xml para realizar la moficacion de value
+     * Envia la información que viene de MyBatisCategories y lo envia a CategoriesMapper.xml para realizar la moficacion de los valores de la categoria
      * @param value nuevo nombre de la categoria que se va a modificar
-     * @param oldvalue nombre por el medio del cual se esta consultando el dato que se va a cambiar
-     */
-    void ModificarValue(@Param("upvalue")String value,
-                        @Param("oldvalue") String oldvalue);
-
-    /**
-     * Envia la información que viene de MyBatisCategories y lo envia a CategoriesMapper.xml para realizar la moficacion de description
      * @param descripcion nueva descripción de la categoria que se va a modificar
-     * @param oldvalue nombre por el medio del cual se esta consultando el dato que se va a cambiar
-     */
-    void ModificarDescription(@Param("updescripcion") String descripcion,
-                            @Param("oldvalue") String oldvalue);
-
-    /**
-     * Envia la información que viene de MyBatisCategories y lo envia a CategoriesMapper.xml para realizar la moficacion de status
      * @param estado nuevo estado de la categoria que se va a modificar
      * @param oldvalue nombre por el medio del cual se esta consultando el dato que se va a cambiar
      */
-    void ModificarStatus(@Param("upestado") int estado,
+    void ModificarCategoria(@Param("upvalue")String value,
+                            @Param("updescription") String descripcion,
+                            @Param("upestado") int estado,
                             @Param("oldvalue") String oldvalue);
-
     /**
      * Envia la información que viene de MyBatisCategories y lo envia a CategoriesMapper.xml para realizar la moficacion de date
      * @param oldvalue nombre por el medio del cual se esta consultando el dato que se va a cambiar

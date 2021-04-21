@@ -39,4 +39,13 @@ public class MyBatisNeedsDAO implements NeedsDAO {
             throw new PersistenceException("No se pudo consultar los nombres", e);
         }
     }
+
+    @Override
+    public List<Needs> cantidadNeedsUser(int idsolicitante) throws PersistenceException {
+        try {
+            return needsMapper.cantidadNeedsUser(idsolicitante);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("No se pudo consultar los nombres", e);
+        }
+    }
 }

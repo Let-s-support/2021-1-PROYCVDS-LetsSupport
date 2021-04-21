@@ -21,4 +21,6 @@ public interface NeedsServices {
      */
     List<Needs> traerValuesNeeds(String oldvalue) throws ServicesException;
 
+    List<Needs> cantidadNeedsUser(int idsolicitante) throws ServicesException;
+
 }
