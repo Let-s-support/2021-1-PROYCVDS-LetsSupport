@@ -32,7 +32,7 @@ public class CategoriesServicesBean extends BasePageBean{
     @Inject
     StatusServices statusServices;
 
-    public void status() throws ServicesException {
+    /*public void status() throws ServicesException {
         try {
             List<Status>statuses1= statusServices.traerStatus();
             for (int i=0;i<statuses1.size();i++){
@@ -41,7 +41,7 @@ public class CategoriesServicesBean extends BasePageBean{
         } catch (ServicesException ex) {
             throw new ServicesException("Error al modificar categoria",ex);
         }
-    }
+    }*/
 
     /**
      * Es usado para controlar la funcionalidad de crear categoria desde la interfaz
