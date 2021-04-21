@@ -30,10 +30,10 @@ public class CategoriesServicesBean extends BasePageBean{
     @Inject
     CategoriesServices categoriesServices;
 
-    @Inject
+    /*@Inject
     StatusServices statusServices;
 
-    /*public void status() throws ServicesException {
+    public void status() throws ServicesException {
         try {
             List<Status>statuses1= statusServices.traerStatus();
             for (int i=0;i<statuses1.size();i++){
