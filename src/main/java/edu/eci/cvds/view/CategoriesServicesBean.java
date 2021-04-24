@@ -30,7 +30,7 @@ public class CategoriesServicesBean extends BasePageBean {
     public static List<Integer> categories_id;
     public static List<Categories> allCategories;
     private List<String> statuses;
-    private String selectedStatus;
+    private boolean selectedStatus;
 
     @Inject
     CategoriesServices categoriesServices;
@@ -41,7 +41,7 @@ public class CategoriesServicesBean extends BasePageBean {
     public void handleChange() throws ServicesException{
         value = allCategories.get(categories.indexOf(oldvalue)).getValue();
         description = allCategories.get(categories.indexOf(oldvalue)).getDescription();
-        selectedStatus = statuses.get(allCategories.get(categories.indexOf(oldvalue)).getStatus() - 1);
+        selectedStatus = allCategories.get(categories.indexOf(oldvalue)).getStatus();
     }
 
     public CategoriesServicesBean() throws ServicesException {
@@ -88,10 +88,7 @@ public class CategoriesServicesBean extends BasePageBean {
      */
     public void ModificarCategoria() throws ServicesException {
         try {
-            categoriesServices.ModificarCategoria(value, description, 
-                selectedStatus == "Cerrado" ? 4 : selectedStatus == "En Proceso" ? 2 
-                : selectedStatus == "Resuelta" ? 3 : 1
-                , oldvalue);
+            categoriesServices.ModificarCategoria(value, description, selectedStatus, oldvalue);
         } catch (ServicesException ex) {
             throw new ServicesException("Error al modificar categoria", ex);
         }
@@ -140,7 +137,7 @@ public class CategoriesServicesBean extends BasePageBean {
         this.description = description;
     }
 
-    public int getStatus() {
+    public boolean getStatus() {
         return status;
     }   
 
@@ -160,11 +157,11 @@ public class CategoriesServicesBean extends BasePageBean {
         this.statuses = statuses;
     }
 
-    public String getSelectedStatus() {
+    public boolean getSelectedStatus() {
         return this.selectedStatus;
     }
 
-    public void setSelectedStatus(String selectedStatus) {
+    public void setSelectedStatus(boolean selectedStatus) {
         this.selectedStatus = selectedStatus;
     }
 
@@ -176,7 +173,7 @@ public class CategoriesServicesBean extends BasePageBean {
         this.statusServices = statusServices;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
