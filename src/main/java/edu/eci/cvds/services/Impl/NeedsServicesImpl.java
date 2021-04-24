@@ -45,4 +45,13 @@ public class NeedsServicesImpl implements NeedsServices {
         }
     }
 
+    @Override
+    public List<Needs> cantidadNeedsUser(int idsolicitante) throws ServicesException {
+        try {
+            return needsDAO.cantidadNeedsUser(idsolicitante);
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al consultar nombres",ex);
+        }
+    }
+
 }

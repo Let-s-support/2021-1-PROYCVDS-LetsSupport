@@ -26,59 +26,17 @@ public class MyBatisCategoriesDAO implements CategoriesDAO {
     }
 
     /**
-     * Envia la información que viene de CategoriesDAO y lo envia a CategoriesMapper para realizar la moficacion de value
+     * Envia la información que viene de CategoriesDAO y lo envia a CategoriesMapper para realizar la moficacion de los valores de la categoria
      * @param value nuevo nombre de la categoria que se va a modificar
-     * @param oldvalue nombre por el medio del cual se esta consultando el dato que se va a cambiar
-     * @throws PersistenceException controlador de excepciones
-     */
-    @Override
-    public void ModificarValue(String value,String oldvalue) throws PersistenceException {
-        try {
-            categoriesMapper.ModificarValue(value,oldvalue);
-        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
-            throw new PersistenceException("Error al modificar la categoria", e);
-        }
-    }
-
-    /**
-     * Envia la información que viene de CategoriesDAO y lo envia a CategoriesMapper para realizar la moficacion de description
      * @param description nueva descripción de la categoria que se va a modificar
-     * @param oldvalue nombre por el medio del cual se esta consultando el dato que se va a cambiar
-     * @throws PersistenceException controlador de excepciones
-     */
-    @Override
-    public void ModificarDescription(String description,String oldvalue) throws PersistenceException {
-        try {
-            categoriesMapper.ModificarDescription(description,oldvalue);
-        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
-            throw new PersistenceException("Error al modificar la categoria", e);
-        }
-    }
-
-    /**
-     * Envia la información que viene de CategoriesDAO y lo envia a CategoriesMapper para realizar la moficacion de status
      * @param status nuevo estado de la categoria que se va a modificar
      * @param oldvalue nombre por el medio del cual se esta consultando el dato que se va a cambiar
      * @throws PersistenceException controlador de excepciones
      */
     @Override
-    public void ModificarStatus(int status,String oldvalue) throws PersistenceException {
+    public void ModificarCategoria(String value, String description, int status,String oldvalue) throws PersistenceException {
         try {
-            categoriesMapper.ModificarStatus(status,oldvalue);
-        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
-            throw new PersistenceException("Error al modificar la categoria", e);
-        }
-    }
-
-    /**
-     * Envia la información que viene de CategoriesDAO y lo envia a CategoriesMapper para realizar la moficacion de los valores de date
-     * @param oldvalue nombre por el medio del cual se esta consultando el dato que se va a cambiar
-     * @throws PersistenceException controlador de excepciones
-     */
-    @Override
-    public void ModificarDate(String oldvalue) throws PersistenceException {
-        try {
-            categoriesMapper.ModificarDate(oldvalue);
+            categoriesMapper.ModificarCategoria(value,description,status,oldvalue);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al modificar la categoria", e);
         }

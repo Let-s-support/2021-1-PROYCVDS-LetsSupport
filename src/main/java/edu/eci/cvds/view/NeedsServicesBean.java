@@ -2,6 +2,7 @@ package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
 import edu.eci.cvds.entities.Needs;
+import edu.eci.cvds.services.MaxiumRequerementsServices;
 import edu.eci.cvds.services.NeedsServices;
 import edu.eci.cvds.services.ServicesException;
 import java.util.Date;
@@ -14,6 +15,9 @@ public class NeedsServicesBean extends BasePageBean {
     @Inject
     NeedsServices needsServices;
 
+    @Inject
+    MaxiumRequerementsServices maxiumRequerementsServices;
+
     private int id;
     private String value;
     private String description;
@@ -23,6 +27,8 @@ public class NeedsServicesBean extends BasePageBean {
     private int category_id;
     private int urgencia;
     private String selectedCategory;
+    private int idsolicitante;
+
 
     /**
      * Es usado para controlar la funcionalidad de crear necesidad desde la interfaz
@@ -31,10 +37,14 @@ public class NeedsServicesBean extends BasePageBean {
      */
     public void agregarNecesidades() throws ServicesException {
         try {
-            category_id = CategoriesServicesBean.getCategories_id()
-                    .get(CategoriesServicesBean.getCategories().indexOf(selectedCategory));
-            Needs need = new Needs(value, description, 1, category_id, urgencia);
-            needsServices.agregarNecesidades(need);
+            idsolicitante = UserServicesBean.getId();
+            if (needsServices.cantidadNeedsUser(idsolicitante).size()<=maxiumRequerementsServices.traerMaxiumNeeds().get(0).getMneeds()) {
+                category_id = CategoriesServicesBean.getCategories_id()
+                        .get(CategoriesServicesBean.getCategories().indexOf(selectedCategory));
+
+                Needs need = new Needs(value, description, 1, category_id, urgencia, idsolicitante);
+                needsServices.agregarNecesidades(need);
+            }
         } catch (ServicesException ex) {
             throw new ServicesException("Error al agregar la necesidad", ex);
         }

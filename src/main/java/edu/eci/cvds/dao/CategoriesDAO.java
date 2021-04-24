@@ -17,34 +17,15 @@ public interface CategoriesDAO {
      * @param oldvalue nombre por el medio del cual se esta consultando el dato que se va a cambiar
      * @throws PersistenceException controlador de excepciones
      */
-    void ModificarValue(String value,String oldvalue) throws PersistenceException;
-
     /**
-     * Envia la información que viene de CategoriesInterfaceImpl y lo envia a CategoriesDAO para realizar la moficacion de description
+     * Envia la información que viene de CategoriesInterfaceImpl y lo envia a CategoriesDAO para realizar la moficacion de los valores de la categoria
+     * @param value nuevo nombre de la categoria que se va a modificar
      * @param description nueva descripción de la categoria que se va a modificar
-     * @param oldvalue nombre por el medio del cual se esta consultando el dato que se va a cambiar
-     * @throws PersistenceException controlador de excepciones
-     */
-
-    void ModificarDescription(String description,String oldvalue) throws PersistenceException;
-
-    /**
-     * Envia la información que viene de CategoriesInterfaceImpl y lo envia a CategoriesDAO para realizar la moficacion de status
      * @param status nuevo estado de la categoria que se va a modificar
      * @param oldvalue nombre por el medio del cual se esta consultando el dato que se va a cambiar
      * @throws PersistenceException controlador de excepciones
      */
-
-    void ModificarStatus(int status,String oldvalue) throws PersistenceException;
-
-    /**
-     * Envia la información que viene de CategoriesInterfaceImpl y lo envia a CategoriesDAO para realizar la moficacion de date
-     * @param oldvalue nombre por el medio del cual se esta consultando el dato que se va a cambiar
-     * @throws PersistenceException controlador de excepciones
-     */
-
-    void ModificarDate(String oldvalue) throws PersistenceException;
-
+    void ModificarCategoria(String value, String description, int status, String oldvalue) throws PersistenceException;
     /**
      * Retorna una lista con los nombres de las categorias existentes que llama desde CategoriesDAO
      * @param oldvalue nombre a verificar si existe en la tabla
