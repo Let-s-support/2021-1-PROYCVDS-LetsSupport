@@ -7,7 +7,6 @@ import javax.faces.bean.RequestScoped;
 
 @ManagedBean(name = "navigationController", eager = true)
 @RequestScoped
-
 public class NavigationController implements Serializable {
     public String loginScreen() {
         return "login.xhtml";
@@ -15,5 +14,9 @@ public class NavigationController implements Serializable {
 
     public String Home(){
         return "home.xhtml";
+    }
+
+    public String showMessage(String msg){
+        return null;
     }
 }

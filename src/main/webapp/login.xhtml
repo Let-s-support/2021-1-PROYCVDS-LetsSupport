@@ -10,22 +10,27 @@
     </h:head>
     <h:body style="padding: 0%; margin: 0%;">
         <div class="body">
+            <p:messages id="messages" showDetail="true" closable="true">
+                <p:autoUpdate />
+            </p:messages>
             <h1 class="title">Let's Support</h1>
             <div>
-                <h:form >
+                <h:form>
                     <div style="width: 400px; margin: 0 auto;">
                         <p:panel class="container">
                             <f:facet name="header">Datos de acceso</f:facet>
                             <h:panelGrid columns="1" style="margin: 0 auto;">
                                 <div class="">
                                     Usuario
-                                    <h:inputText id="correo" value="#{userBean.username}" required="true" label="login" />
+                                    <h:inputText id="correo" value="#{userBean.username}" required="true"
+                                        label="login" />
                                     Contraseña
                                     <h:inputSecret id="password" value="#{userBean.password}" required="true"
                                         label="password" />
                                 </div>
                             </h:panelGrid>
-                            <h:commandButton value="Ingresar" action="#{userBean.IngresarSesion()}" class="button" ajax="false"/>
+                            <h:commandButton value="Ingresar" action="#{userBean.IngresarSesion()}" class="button"
+                                ajax="false" />
                         </p:panel>
                     </div>
                 </h:form>

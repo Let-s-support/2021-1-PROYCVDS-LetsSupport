@@ -8,6 +8,7 @@ import edu.eci.cvds.services.CategoriesServices;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.StatusServices;
 
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 @javax.faces.bean.ManagedBean(name = "categoryBean")
-@SessionScoped
+@RequestScoped
 public class CategoriesServicesBean extends BasePageBean {
 
     private int id;

@@ -1,6 +1,9 @@
 package edu.eci.cvds.view;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
 import com.google.inject.Inject;
 import edu.eci.cvds.entities.User;
 import edu.eci.cvds.services.ServicesException;
@@ -31,8 +34,7 @@ public class UserServicesBean extends BasePageBean {
      * @return String
      * @throws ServicesException controlador de excepciones
      */
-    public String IngresarSesion() throws ServicesException {
-        String res = "";
+    public void IngresarSesion() throws Exception {
         try {
             List<User> datos = userServices.IngresarSesion(username);
             if (!datos.isEmpty()) {
@@ -44,26 +46,24 @@ public class UserServicesBean extends BasePageBean {
                         fullname = datos.get(0).getFullName();
                         rol = datos.get(0).getRol();
                         correo = datos.get(0).getCorreo();
-                        res = "home.xhtml";
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
                     }else{
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "El usuario esta inactivo"));
                         new ServicesException("Usuario inactivo");
-                        res = "login.xhtml";
                     }
                 } else {
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Wrong Password"));
                     new ServicesException("Contraseña equivocada");
-                    res = "login.xhtml";
                 }
             } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "El usuario no existe"));
                 new ServicesException("Usuario inexistente");
-                res = "login.xhtml";
             }
-        } catch (ServicesException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Ha ocurrido un error interno"));
             throw new ServicesException("Error al ingresar sesion", ex);
         }
-
-        System.out.println(res);
-        return res;
     }
 
     public int getId() {
