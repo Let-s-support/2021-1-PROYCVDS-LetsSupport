@@ -21,7 +21,7 @@ public interface CategoriesServices {
      * @param oldvalue nombre por el medio del cual se esta consultando el dato que se va a cambiar
      * @throws ServicesException controlador de excepciones
      */
-    void ModificarCategoria(String value, String description, int status, String oldvalue) throws ServicesException;
+    void ModificarCategoria(String value, String description, boolean status, String oldvalue) throws ServicesException;
 
     /**
      * Es usado para desplegar la funcionalidad de traerValuesCategories y asi obtener la información de los nombres de las categorias existentes, la envia a CategoriesServicesImpl

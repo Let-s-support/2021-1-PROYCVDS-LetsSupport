@@ -55,7 +55,7 @@ public class CategoriesServicesImpl implements CategoriesServices {
      */
 
     @Override
-    public void ModificarCategoria(String value, String description, int status, String oldvalue) throws ServicesException {
+    public void ModificarCategoria(String value, String description, boolean status, String oldvalue) throws ServicesException {
         try {
             List values = traerValuesCategories(oldvalue);
             if (!values.isEmpty()) {

@@ -34,7 +34,7 @@ public class MyBatisCategoriesDAO implements CategoriesDAO {
      * @throws PersistenceException controlador de excepciones
      */
     @Override
-    public void ModificarCategoria(String value, String description, int status,String oldvalue) throws PersistenceException {
+    public void ModificarCategoria(String value, String description, boolean status,String oldvalue) throws PersistenceException {
         try {
             categoriesMapper.ModificarCategoria(value,description,status,oldvalue);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {

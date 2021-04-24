@@ -22,7 +22,7 @@ public class CategoriesServicesBean extends BasePageBean {
     private int id;
     private String value;
     private String description;
-    private int status = 1;
+    private boolean status = true;
     private Date creationdate;
     private Date modificationdate;
     private String oldvalue;
