@@ -142,7 +142,7 @@ public class CategoriesServicesBean extends BasePageBean {
 
     public int getStatus() {
         return status;
-    }
+    }   
 
     public static List<String> getCategories() {
         return categories;
