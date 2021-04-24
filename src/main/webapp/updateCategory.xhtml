@@ -10,7 +10,7 @@
     <h:head>
     </h:head>
     <h:body style="margin: 0%;">
-        <div class="body">
+        <div class="body" style="height: auto; padding-bottom: 5%;">
             <h:form>
                 <div class="navbar">
                     <a href="/app/home.xhtml">Home</a>
@@ -36,13 +36,24 @@
                             <a href="#">Eliminar</a>
                         </div>
                     </div>
+                    <div class="dropdown">
+                        <button class="dropbtn">Ofertas
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="/app/createOffer.xhtml">Crear</a>
+                            <a href="#">Buscar</a>
+                            <a href="/app/updateOffer.xhtml">Actualizar</a>
+                            <a href="#">Eliminar</a>
+                        </div>
+                    </div>
                     <h:commandButton value="Salir" class="button-nav" style="float: right;"
                         action="#{navigationController.loginScreen()}" title="Salir" />
                 </div>
             </h:form>
 
             <h1 class="title">Actualizar Categoria</h1>
-            <div>
+            <div style="height: auto;">
                 <h:form id="form">
                     <p:growl autoUpdate="true" />
                     <div style="width: 60%; margin: 0 auto;">
@@ -54,19 +65,17 @@
                                     <div style="flex-direction:row;">
                                         <!--Actualizar el estilo-->
                                         <div>
-                                            <h:selectOneMenu 
-                                                value="#{categoryBean.oldvalue}"
-                                            >
+                                            <h:selectOneMenu value="#{categoryBean.oldvalue}">
                                                 <f:selectItems value="#{categoryBean.traerCategories()}" />
                                             </h:selectOneMenu>
                                         </div>
                                         <div>
-                                            <h:commandButton value="Actualizar" title="Crear" action="#{categoryBean.handleChange()}"/>
+                                            <h:commandButton value="Actualizar" title="Crear"
+                                                action="#{categoryBean.handleChange()}" />
                                         </div>
                                     </div>
                                     Nombre
-                                    <h:inputText id="value" value="#{categoryBean.value}"
-                                        label="Nombre" />
+                                    <h:inputText id="value" value="#{categoryBean.value}" label="Nombre" />
                                     Descripción
                                     <p:inputTextarea maxlength="500" id="description" rows="6" cols="33"
                                         value="#{categoryBean.description}" label="Descripción" />

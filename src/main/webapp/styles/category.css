@@ -1,11 +1,7 @@
 .body {
   margin: 0%;
-  display: block;
   background-color: #B40001;
-  height: 100vh;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
+  height: 150vh;
 }
 
 .title {
@@ -35,7 +31,7 @@
 .button:hover {
   cursor: pointer;
   display: block;
-  width: 45%;
+  width: 35%;
   margin: auto;
   height: 30px;
   background-color: black;

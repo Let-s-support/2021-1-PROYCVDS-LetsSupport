@@ -32,7 +32,7 @@
                         <div class="dropdown-content">
                             <a href="/app/createNeed.xhtml">Crear</a>
                             <a href="#">Buscar</a>
-                            <a href="app/updateCategory.xhtml">Actualizar</a>
+                            <a href="#">Actualizar</a>
                             <a href="#">Eliminar</a>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                 </div>
             </h:form>
 
-            <h1 class="title">Crear Categoria</h1>
+            <h1 class="title">Crear Oferta</h1>
             <div>
                 <h:form>
                     <p:growl autoUpdate="true" />
@@ -60,14 +60,18 @@
                             <f:facet name="header">Información</f:facet>
                             <h:panelGrid columns="1" style="margin: 0 auto;">
                                 <div class="">
+                                    Categoria
+                                    <h:selectOneMenu value="#{offerBean.selectedCategory}">
+                                        <f:selectItems value="#{offerBean.traerCategories()}" />
+                                    </h:selectOneMenu>
                                     Nombre
-                                    <h:inputText id="value" value="#{categoryBean.value}" required="true" label="Nombre" />
+                                    <h:inputText id="value" value="#{offerBean.value}" required="true" label="Nombre" />
                                     Descripción
-                                    <p:inputTextarea maxlength="500" id="description" rows="6" cols="33" value="#{categoryBean.description}" label="Descripción"/>
+                                    <p:inputTextarea maxlength="500" id="description" rows="6" cols="33" value="#{offerBean.description}" label="Descripción"/>
                                 </div>
                             </h:panelGrid>
                             <h:form>
-                                <h:commandButton value="Crear" title="Crear" action="#{categoryBean.agregarCategoria()}" class="button" />
+                                <h:commandButton value="Crear" title="Crear" action="#{offerBean.agregarOferta()}" class="button" ajax="false"/>
                         </h:form>
                         </p:panel>
                     </div>
