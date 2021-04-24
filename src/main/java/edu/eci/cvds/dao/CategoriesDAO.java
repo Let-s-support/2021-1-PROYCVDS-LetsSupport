@@ -25,7 +25,7 @@ public interface CategoriesDAO {
      * @param oldvalue nombre por el medio del cual se esta consultando el dato que se va a cambiar
      * @throws PersistenceException controlador de excepciones
      */
-    void ModificarCategoria(String value, String description, int status, String oldvalue) throws PersistenceException;
+    void ModificarCategoria(String value, String description, boolean status, String oldvalue) throws PersistenceException;
     /**
      * Retorna una lista con los nombres de las categorias existentes que llama desde CategoriesDAO
      * @param oldvalue nombre a verificar si existe en la tabla

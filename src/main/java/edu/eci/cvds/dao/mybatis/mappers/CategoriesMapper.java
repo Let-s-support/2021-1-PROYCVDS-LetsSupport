@@ -20,7 +20,7 @@ public interface CategoriesMapper {
      */
     void ModificarCategoria(@Param("upvalue")String value,
                             @Param("updescription") String descripcion,
-                            @Param("upestado") int estado,
+                            @Param("upestado") boolean estado,
                             @Param("oldvalue") String oldvalue);
     /**
      * Envia la información que viene de MyBatisCategories y lo envia a CategoriesMapper.xml para realizar la moficacion de date

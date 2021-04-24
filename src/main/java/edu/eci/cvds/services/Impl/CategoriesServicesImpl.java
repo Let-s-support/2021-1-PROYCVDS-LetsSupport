@@ -8,6 +8,9 @@ import edu.eci.cvds.services.CategoriesServices;
 import edu.eci.cvds.services.ServicesException;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 public class CategoriesServicesImpl implements CategoriesServices {
 
     @Inject
@@ -39,6 +42,9 @@ public class CategoriesServicesImpl implements CategoriesServices {
             List<Categories> values = traerValuesCategories(categorie.getValue());
             if (values.isEmpty()) {
                 categoriesDAO.agregarCategoria(categorie);
+            }else{
+                FacesContext.getCurrentInstance().addMessage(null, 
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La catagoria ya existe"));
             }
         } catch (PersistenceException ex) {
             throw new ServicesException("El item no esta registrado",ex);
@@ -55,7 +61,7 @@ public class CategoriesServicesImpl implements CategoriesServices {
      */
 
     @Override
-    public void ModificarCategoria(String value, String description, int status, String oldvalue) throws ServicesException {
+    public void ModificarCategoria(String value, String description, boolean status, String oldvalue) throws ServicesException {
         try {
             List values = traerValuesCategories(oldvalue);
             if (!values.isEmpty()) {
