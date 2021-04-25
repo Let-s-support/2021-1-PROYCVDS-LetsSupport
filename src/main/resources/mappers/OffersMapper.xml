@@ -36,7 +36,7 @@
         WHERE status==1 or status==2;
     </select>
 
-    <select parameterType="map" id="AllOffers" resultMap="NeedsResult">
+    <select parameterType="map" id="AllOffers" resultMap="OffersResult">
         select *
         FROM offers
     </select>
