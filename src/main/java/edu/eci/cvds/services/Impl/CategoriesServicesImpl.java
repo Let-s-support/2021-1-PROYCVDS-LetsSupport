@@ -67,6 +67,10 @@ public class CategoriesServicesImpl implements CategoriesServices {
             if (!values.isEmpty()) {
                 categoriesDAO.ModificarCategoria(value, description, status, oldvalue);
             }
+            else {
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La catagoria ya existe"));
+            }
         } catch (ServicesException | PersistenceException ex) {
             throw new ServicesException("Error al modificar categoria",ex);
         }

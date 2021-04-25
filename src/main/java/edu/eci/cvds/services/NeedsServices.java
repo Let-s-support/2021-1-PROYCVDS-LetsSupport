@@ -1,6 +1,7 @@
 package edu.eci.cvds.services;
 
 
+import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.entities.Needs;
 import java.util.List;
 
@@ -22,5 +23,9 @@ public interface NeedsServices {
     List<Needs> traerValuesNeeds(String oldvalue) throws ServicesException;
 
     List<Needs> cantidadNeedsUser(int idsolicitante) throws ServicesException;
+
+    void  ModificarEstadoNeed(String value, Integer newstatus)  throws ServicesException;
+
+    List<Needs> AllNeeds() throws ServicesException;
 
 }

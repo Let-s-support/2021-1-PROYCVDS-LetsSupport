@@ -8,6 +8,8 @@
         <typeAlias type="edu.eci.cvds.entities.Roles" alias="Roles" />
         <typeAlias type="edu.eci.cvds.entities.Status" alias="Status"/>
         <typeAlias type="edu.eci.cvds.entities.MaxiumRequerements" alias="MaxiumRequerements"/>
+        <typeAlias type="edu.eci.cvds.entities.Offers" alias="Offers"/>
+        <typeAlias type="edu.eci.cvds.entities.Answers" alias="Answers"/>
     </typeAliases>
 
     <environments default="development">
@@ -29,6 +31,8 @@
         <mapper resource="mappers/RolesMapper.xml"></mapper>
         <mapper resource="mappers/StatusMapper.xml"></mapper>
         <mapper resource="mappers/MaxiumRequerementsMapper.xml"></mapper>
+        <mapper resource="mappers/OffersMapper.xml"></mapper>
+        <mapper resource="mappers/AnswersMapper.xml"></mapper>
     </mappers>
 
 

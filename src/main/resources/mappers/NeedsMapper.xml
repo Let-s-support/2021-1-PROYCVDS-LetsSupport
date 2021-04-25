@@ -12,6 +12,7 @@
         <result property="modificationdate" column="modificationdate"/>
         <result property="category_id" column="category_id"/>
         <result property="urgencia" column="urgencia"/>
+        <result property="idsolicitante" column="idsolicitante"/>
     </resultMap>
 
     <insert parameterType="map" id="agregarNecesidades">
@@ -29,5 +30,21 @@
         FROM needs
         WHERE idsolicitante=#{thisidsolicitante}
     </select>
+
+    <select parameterType="map" id="NeedsToAnswer" resultMap="NeedsResult">
+        select *
+        FROM needs
+        WHERE status==1 or status==2;
+    </select>
+
+    <select parameterType="map" id="AllNeeds" resultMap="NeedsResult">
+        select *
+        FROM needs
+    </select>
+
+    <update parameterType="map" id="ModificarEstadoNeed">
+        update needs set status=#{newstatus}
+        WHERE value=#{value}
+    </update>
 
 </mapper>

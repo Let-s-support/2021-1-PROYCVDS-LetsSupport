@@ -1,6 +1,8 @@
 package edu.eci.cvds.dao;
 
 import edu.eci.cvds.entities.Needs;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface NeedsDAO {
@@ -21,4 +23,9 @@ public interface NeedsDAO {
 
     List<Needs> cantidadNeedsUser(int idsolicitante) throws PersistenceException;
 
+    List<Needs> NeedsToAnswer() throws PersistenceException;
+
+    void  ModificarEstadoNeed(String value, Integer newstatus)  throws PersistenceException ;
+
+    List<Needs> AllNeeds() throws PersistenceException;
 }

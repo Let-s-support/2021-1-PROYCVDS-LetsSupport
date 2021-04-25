@@ -21,4 +21,10 @@ public interface NeedsMapper {
 
      List<Needs> cantidadNeedsUser(@Param("thisidsolicitante") int idsolicitante) throws PersistenceException;
 
+     List<Needs> NeedsToAnswer() throws PersistenceException;
+
+     void  ModificarEstadoNeed(@Param("value") String value,
+                               @Param("newstatus") Integer newstatus)  throws PersistenceException ;
+
+     List<Needs> AllNeeds() throws PersistenceException;
 }

@@ -48,4 +48,31 @@ public class MyBatisNeedsDAO implements NeedsDAO {
             throw new PersistenceException("No se pudo consultar los nombres", e);
         }
     }
+
+    @Override
+    public List<Needs> NeedsToAnswer() throws PersistenceException {
+        try {
+            return needsMapper.NeedsToAnswer();
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("No se pudo consultar los nombres", e);
+        }
+    }
+
+    @Override
+    public void ModificarEstadoNeed(String value, Integer newstatus)  throws PersistenceException {
+        try {
+            needsMapper.ModificarEstadoNeed(value,newstatus);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("No se pudo consultar los nombres", e);
+        }
+    }
+
+    @Override
+    public List<Needs> AllNeeds()  throws PersistenceException {
+        try {
+            return needsMapper.AllNeeds();
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("No se pudo consultar los nombres", e);
+        }
+    }
 }

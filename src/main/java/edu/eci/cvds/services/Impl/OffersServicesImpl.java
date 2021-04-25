@@ -1,47 +1,62 @@
 package edu.eci.cvds.services.Impl;
+import com.google.inject.Inject;
 import edu.eci.cvds.dao.OffersDAO;
+import edu.eci.cvds.dao.PersistenceException;
+import edu.eci.cvds.entities.Offers;
 import edu.eci.cvds.services.OffersServices;
-import java.util.List;
+import edu.eci.cvds.services.ServicesException;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+import java.util.List;
 
 public class OffersServicesImpl implements OffersServices {
     @Inject
-    OffersDAO  offersDAO;
+    OffersDAO offersDAO;
 
     @Override
-    public void RegistrarOferta(Offer oferta) throws ServicesException {
+    public void agregarOfertas(Offers offer) throws ServicesException {
         try {
-            List<Offers> values = traerValuesCategories(oferta.getValue());
-            if (values.isEmpty()) {
-                offersDAO.agregarOferta(oferta);
+            List<Offers> values = traerValuesOffers(offer.getValue());
+            if (values.isEmpty()){
+                offersDAO.agregarOfertas(offer);
             }
-            else{
-                FacesContext.getCurrentInstance().addMessage(FacesMessage.SEVERITY_ERROR, "Error la oferta ya existe");
-            }
-        } catch (PersistenceException ex) {
-            throw new ServicesException("La oferta no pudo ser Registrada",ex);
+        } catch (ServicesException | PersistenceException ex) {
+            throw new ServicesException("Error al agregar la necesidad",ex);
         }
     }
-    @Override
-    public List<Offer> traerValuesOffers(String oldvalue) throws ServicesException {
-            try {
-                return offersDAO.traerValuesOffers(oldvalue);
-            }catch (PersistenceException ex){
-                FacesContext.getCurrentInstance().addMessage(FacesMessage.SEVERITY_ERROR, "Error al Obtener Oferta");
-                throw new ServicesException("Error al consultar ofertas",ex);
-            }
-        }
-    @Override
-    public List<Categories> traerOffers() throws ServicesException {
-            try {
-                return offersDAO.traerOffers();
-            }catch (PersistenceException ex){
-                FacesContext.getCurrentInstance().addMessage(FacesMessage.SEVERITY_ERROR, "Error al Consultar Oferta");
-                throw new ServicesException("Error al consultar Ofertas",ex);
-            }
-        }
 
-    
+    @Override
+    public List<Offers> traerValuesOffers(String oldvalue) throws ServicesException {
+        try {
+            return offersDAO.traerValuesOffers(oldvalue);
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al consultar nombres",ex);
+        }
+    }
+
+    @Override
+    public List<Offers> cantidadOffersUser(int idsolicitante) throws ServicesException {
+        try {
+            return offersDAO.cantidadOffersUser(idsolicitante);
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al consultar nombres",ex);
+        }
+    }
+
+    @Override
+    public void  ModificarEstadoOffer(String value,Integer newstatus) throws ServicesException {
+        try {
+            offersDAO.ModificarEstadoOffer(value, newstatus);
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al consultar nombres",ex);
+        }
+    }
+
+    @Override
+    public List<Offers> AllOffers() throws ServicesException {
+        try {
+            return offersDAO.AllOffers();
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al consultar nombres",ex);
+        }
+    }
 }

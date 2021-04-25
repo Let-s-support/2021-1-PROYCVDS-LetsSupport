@@ -2,21 +2,24 @@ package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
 import edu.eci.cvds.entities.Needs;
+import edu.eci.cvds.entities.Offers;
 import edu.eci.cvds.services.MaxiumRequerementsServices;
 import edu.eci.cvds.services.NeedsServices;
+import edu.eci.cvds.services.OffersServices;
 import edu.eci.cvds.services.ServicesException;
-import java.util.Date;
-import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import java.util.Date;
+import java.util.List;
 
-@ManagedBean(name = "needBean")
+@ManagedBean(name = "offerBean")
 @SessionScoped
-public class NeedsServicesBean extends BasePageBean {
+public class OffersServicesBean extends BasePageBean {
     @Inject
-    NeedsServices needsServices;
+    OffersServices offersServices;
 
     @Inject
     MaxiumRequerementsServices maxiumRequerementsServices;
@@ -28,59 +31,59 @@ public class NeedsServicesBean extends BasePageBean {
     private Date creationdate;
     private Date modificationdate;
     private int category_id;
-    private int urgencia;
     private String selectedCategory;
     private int idsolicitante;
-    private List<Needs> AllNeeds;
+    private List<Offers> AllOffers;
 
-
-    /**
-     * Es usado para controlar la funcionalidad de crear necesidad desde la interfaz
-     * 
-     * @throws ServicesException controlador de excepciones
-     */
-    public void agregarNecesidades() throws ServicesException {
+    public void agregarOfertas() throws ServicesException {
         try {
             idsolicitante = UserServicesBean.getId();
-            if (needsServices.cantidadNeedsUser(idsolicitante).size()<maxiumRequerementsServices.traerMaxiumNeeds().get(0).getMneeds()) {
+            if (offersServices.cantidadOffersUser(idsolicitante).size()<maxiumRequerementsServices.traerMaxiumOffers().get(0).getMoffers()) {
                 category_id = CategoriesServicesBean.getCategories_id()
                         .get(CategoriesServicesBean.getCategories().indexOf(selectedCategory));
 
-                Needs need = new Needs(value, description, 1, category_id, urgencia, idsolicitante);
-                needsServices.agregarNecesidades(need);
+                Offers offer = new Offers(value, description, 1, category_id,  idsolicitante);
+                offersServices.agregarOfertas(offer);
             }
             else {
                 FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Su usuario ha alcanzado la cantidad maxima de necesidades que podia registrar"));
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Su usuario ha alcanzado la cantidad maxima de ofertas que podia registrar"));
             }
         } catch (ServicesException ex) {
             throw new ServicesException("Error al agregar la necesidad", ex);
         }
     }
 
-    public void AllNeeds() throws ServicesException{
+    public void AllOffers() throws ServicesException{
         try{
-            AllNeeds=needsServices.AllNeeds();
+            AllOffers=offersServices.AllOffers();
         }catch (Exception ex){
             throw new ServicesException("Error al agregar la necesidad", ex);
         }
     }
 
-    public void ModificarEstadoNeed() throws ServicesException{
+    public void ModificarEstadoOffer() throws ServicesException{
         try{
-            needsServices.ModificarEstadoNeed(value,status);
+            offersServices.ModificarEstadoOffer(value,status);
         }catch (Exception ex){
             throw new ServicesException("Error al agregar la necesidad", ex);
         }
     }
 
-
-    public NeedsServices getNeedsServices() {
-        return needsServices;
+    public OffersServices getOffersServices() {
+        return offersServices;
     }
 
-    public void setNeedsServices(NeedsServices needsServices) {
-        this.needsServices = needsServices;
+    public void setOffersServices(OffersServices offersServices) {
+        this.offersServices = offersServices;
+    }
+
+    public MaxiumRequerementsServices getMaxiumRequerementsServices() {
+        return maxiumRequerementsServices;
+    }
+
+    public void setMaxiumRequerementsServices(MaxiumRequerementsServices maxiumRequerementsServices) {
+        this.maxiumRequerementsServices = maxiumRequerementsServices;
     }
 
     public int getId() {
@@ -101,14 +104,6 @@ public class NeedsServicesBean extends BasePageBean {
 
     public String getDescription() {
         return description;
-    }
-
-    public String getSelectedCategory() {
-        return this.selectedCategory;
-    }
-
-    public void setSelectedCategory(String selectedCategory) {
-        this.selectedCategory = selectedCategory;
     }
 
     public void setDescription(String description) {
@@ -147,11 +142,19 @@ public class NeedsServicesBean extends BasePageBean {
         this.category_id = category_id;
     }
 
-    public int getUrgencia() {
-        return urgencia;
+    public String getSelectedCategory() {
+        return selectedCategory;
     }
 
-    public void setUrgencia(int urgencia) {
-        this.urgencia = urgencia;
+    public void setSelectedCategory(String selectedCategory) {
+        this.selectedCategory = selectedCategory;
+    }
+
+    public int getIdsolicitante() {
+        return idsolicitante;
+    }
+
+    public void setIdsolicitante(int idsolicitante) {
+        this.idsolicitante = idsolicitante;
     }
 }

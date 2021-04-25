@@ -6,6 +6,9 @@ import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.entities.Needs;
 import edu.eci.cvds.services.NeedsServices;
 import edu.eci.cvds.services.ServicesException;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import java.util.List;
 
 public class NeedsServicesImpl implements NeedsServices {
@@ -24,6 +27,10 @@ public class NeedsServicesImpl implements NeedsServices {
             List<Needs> values = traerValuesNeeds(need.getValue());
             if (values.isEmpty()){
                 needsDAO.agregarNecesidades(need);
+            }
+            else {
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La necesidad ya existe"));
             }
         } catch (ServicesException | PersistenceException ex) {
             throw new ServicesException("Error al agregar la necesidad",ex);
@@ -49,6 +56,24 @@ public class NeedsServicesImpl implements NeedsServices {
     public List<Needs> cantidadNeedsUser(int idsolicitante) throws ServicesException {
         try {
             return needsDAO.cantidadNeedsUser(idsolicitante);
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al consultar nombres",ex);
+        }
+    }
+
+    @Override
+    public void  ModificarEstadoNeed(String value, Integer newstatus) throws ServicesException {
+        try {
+            needsDAO.ModificarEstadoNeed(value, newstatus);
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al consultar nombres",ex);
+        }
+    }
+
+    @Override
+    public List<Needs> AllNeeds() throws ServicesException {
+        try {
+            return needsDAO.AllNeeds();
         }catch (PersistenceException ex){
             throw new ServicesException("Error al consultar nombres",ex);
         }
