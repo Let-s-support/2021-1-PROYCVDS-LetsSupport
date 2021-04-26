@@ -35,6 +35,10 @@ public class OffersServicesBean extends BasePageBean {
     private int idsolicitante;
     private List<Offers> AllOffers;
 
+    /**
+     * Crea una nueva oferta
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     public void agregarOfertas() throws ServicesException {
         try {
             idsolicitante = UserServicesBean.getId();
@@ -54,6 +58,10 @@ public class OffersServicesBean extends BasePageBean {
         }
     }
 
+    /**
+     * Obtiene todas las ofertas
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     public void AllOffers() throws ServicesException{
         try{
             AllOffers=offersServices.AllOffers();
@@ -62,6 +70,10 @@ public class OffersServicesBean extends BasePageBean {
         }
     }
 
+    /**
+     * Modifica el estado de la oferta
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     public void ModificarEstadoOffer() throws ServicesException{
         try{
             offersServices.ModificarEstadoOffer(value,status);

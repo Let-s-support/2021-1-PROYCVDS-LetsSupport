@@ -8,5 +8,10 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface RolesMapper {
+    /**
+     * Retorna los roles registrados en la base de datos
+     * @return List de tipo Roles
+     * @throws PersistenceException Controlador de errores de persistencia
+     */
     List<Roles> traerRoles() throws PersistenceException;
 }

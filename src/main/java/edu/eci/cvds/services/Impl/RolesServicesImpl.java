@@ -14,6 +14,12 @@ import java.util.List;
 public class RolesServicesImpl implements RolesServices {
     @Inject
     RolesDAO rolesDAO;
+
+    /**
+     * Retorna los roles registrados en la base de datos
+     * @return List de tipo Roles
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     @Override
     public List<Roles> traerRoles() throws ServicesException {
         try {

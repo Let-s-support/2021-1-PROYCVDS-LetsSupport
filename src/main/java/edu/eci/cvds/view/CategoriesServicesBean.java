@@ -31,6 +31,7 @@ public class CategoriesServicesBean extends BasePageBean {
     public static List<Categories> allCategories;
     private List<String> statuses;
     private boolean selectedStatus;
+    private List<Boolean> estado;
 
     @Inject
     CategoriesServices categoriesServices;
@@ -38,12 +39,20 @@ public class CategoriesServicesBean extends BasePageBean {
     @Inject
     StatusServices statusServices;
 
+    /**
+     * Realiza el cambio de los datos para mostrarlos en pantalla, dependiendo de la categoria seleccionada
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     public void handleChange() throws ServicesException{
         value = allCategories.get(categories.indexOf(oldvalue)).getValue();
         description = allCategories.get(categories.indexOf(oldvalue)).getDescription();
         selectedStatus = allCategories.get(categories.indexOf(oldvalue)).getStatus();
     }
 
+    /**
+     * Inicaliza la listas como vacias
+     * @throws ServicesException
+     */
     public CategoriesServicesBean() throws ServicesException {
         categories = new ArrayList<String>();
         allCategories = new ArrayList<Categories>();
@@ -51,6 +60,11 @@ public class CategoriesServicesBean extends BasePageBean {
         statuses = new ArrayList<String>();
     }
 
+    /**
+     * Obtiene una cadena con todos los estados y guarrda los nombres de estos en una lista
+     * @return List de tipo string
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     public List<String> status() throws ServicesException {
         statuses.clear();
         try {
@@ -63,6 +77,13 @@ public class CategoriesServicesBean extends BasePageBean {
         }
 
         return statuses;
+    }
+
+    public List<Boolean> estado() throws ServicesException{
+        estado=new ArrayList<>();
+        estado.add(true);
+        estado.add(false);
+        return estado;
     }
 
     /**
@@ -94,6 +115,11 @@ public class CategoriesServicesBean extends BasePageBean {
         }
     }
 
+    /**
+     * Obtiene todas las categorias existentes y guarda en listas los nombres de las categorias existentes
+     * @return List de tipo string
+     * @throws ServicesException
+     */
     public List<String> traerCategories() throws ServicesException {
         status();
         categories.clear();

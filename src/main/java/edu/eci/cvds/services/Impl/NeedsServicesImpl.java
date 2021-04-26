@@ -19,7 +19,7 @@ public class NeedsServicesImpl implements NeedsServices {
     /**
      * Es usado por NeedsServices para desplegar la funcionalidad de agregarNecesidades y la despliega en NeedsDAO
      * @param need objeto de tipo needs que leva los datos de la necesidad a crear
-     * @throws ServicesException controlador de excepciones
+     * @throws ServicesException controlador de errores de la capa de services
      */
     @Override
     public void agregarNecesidades(Needs need) throws ServicesException {
@@ -40,8 +40,8 @@ public class NeedsServicesImpl implements NeedsServices {
     /**
      * Es usado por NeedsServices para desplegar la funcionalidad de traerValuesNeeds y asi obtener la información de los nombres de las needs existentes, la despliega en NeedsDAO
      * @param oldvalue nombre a verificar si existe en la tabla
-     * @return List
-     * @throws ServicesException controlador de excepciones
+     * @return List de tipo Needs
+     * @throws ServicesException controlador de errores de la capa de services
      */
     @Override
     public List<Needs> traerValuesNeeds(String oldvalue) throws ServicesException {
@@ -52,6 +52,12 @@ public class NeedsServicesImpl implements NeedsServices {
         }
     }
 
+    /**
+     * Retorna una lista con todas las necesidades que tiene registradas un usuario
+     * @param idsolicitante id de quien esta intentando inscribir una nueva necesidad
+     * @return List de tipo needs
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     @Override
     public List<Needs> cantidadNeedsUser(int idsolicitante) throws ServicesException {
         try {
@@ -61,6 +67,12 @@ public class NeedsServicesImpl implements NeedsServices {
         }
     }
 
+    /**
+     * Se encarga de enviar datos parametrizados a la capa de mybatis, los cuales provienen desde el impl para modificar el estado de  la necesidad
+     * @param value nombre de la necesidad que se va a modificar
+     * @param newstatus nuevo estado de la necesidad
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     @Override
     public void  ModificarEstadoNeed(String value, Integer newstatus) throws ServicesException {
         try {
@@ -70,6 +82,11 @@ public class NeedsServicesImpl implements NeedsServices {
         }
     }
 
+    /**
+     * Obtiene todas las necesidades registradas
+     * @return List de tipo needs
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     @Override
     public List<Needs> AllNeeds() throws ServicesException {
         try {

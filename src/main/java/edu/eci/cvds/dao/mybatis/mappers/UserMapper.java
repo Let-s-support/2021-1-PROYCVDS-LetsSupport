@@ -9,9 +9,9 @@ import java.util.List;
 public interface UserMapper {
 
     /**
-     * Retorna un valor que es el password del usuario que intenta acceder que trae desde UsersMapper.xml
+     * Retorna una lista con la información de un usruaio consultado
      * @param username  es el username con el cual se consultaran los datos
-     * @return String
+     * @return List de tipo User
      */
     List<User> IngresarSesion(@Param("conusername")String username);
 

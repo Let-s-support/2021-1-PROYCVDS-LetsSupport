@@ -185,10 +185,18 @@ public class Needs implements Serializable {
         this.urgencia = urgencia;
     }
 
+    /**
+     * Obtiene el id de quien creo la necesidad
+     * @return int
+     */
     public int getIdsolicitante() {
         return idsolicitante;
     }
 
+    /**
+     * Modifica el id de quien creo la necesidad
+     * @param idsolicitante nuevo id del creador de la necesidad
+     */
     public void setIdsolicitante(int idsolicitante) {
         this.idsolicitante = idsolicitante;
     }

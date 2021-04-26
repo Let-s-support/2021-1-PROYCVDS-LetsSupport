@@ -17,10 +17,10 @@ public class UserServicesImpl implements UserServices {
     UserDAO userDAO;
 
     /**
-     * Es usado por UserServices para desplegar la funcionalidad de IngresarSesion y asi obtener la contraseña del user por medio del correo, lo despliega en UserDAO
-     * @return String
-     * @param username es el username con el cual se consultara los datos
-     * @throws ServicesException controlador de excepciones
+     * Retorna una lista con la información de un usruaio consultado
+     * @param username  es el username con el cual se consultaran los datos
+     * @return List de tipo User
+     * @throws ServicesException controlador de errores de la capa de services
      */
     @Override
     public List<User> IngresarSesion(String username) throws ServicesException {

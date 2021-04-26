@@ -13,6 +13,12 @@ import java.util.List;
 public class MaxiumRequerementsServiceImpl implements MaxiumRequerementsServices {
     @Inject
     MaxiumRequerementsDAO maxiumRequerementsDAO;
+
+    /**
+     * Retorna la maxima cantidad de ofertas que puede registrar un usuario
+     * @return List de tipo MaxiumRequeriments
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     @Override
     public List<MaxiumRequerements> traerMaxiumOffers() throws ServicesException {
         try {
@@ -21,6 +27,12 @@ public class MaxiumRequerementsServiceImpl implements MaxiumRequerementsServices
             throw new ServicesException("Error al consultar nombres",ex);
         }
     }
+
+    /**
+     * Retorna la maxima cantidad de necesidades que puede registrar un usuario
+     *  @return List de tipo MaxiumRequeriments
+     *  @throws ServicesException controlador de errores de la capa de services
+     */
     @Override
     public List<MaxiumRequerements> traerMaxiumNeeds() throws ServicesException {
         try {
@@ -29,6 +41,12 @@ public class MaxiumRequerementsServiceImpl implements MaxiumRequerementsServices
             throw new ServicesException("Error al consultar nombres",ex);
         }
     }
+
+    /**
+     * Modifica el maximo de ofertas que puede registrar un usuario
+     * @param moffers nuevo maximo de ofertas que podra registrar un usuario
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     @Override
     public void ModificarOffers(int moffers) throws ServicesException {
         try {
@@ -37,6 +55,12 @@ public class MaxiumRequerementsServiceImpl implements MaxiumRequerementsServices
             throw new ServicesException("Error al agregar la necesidad", ex);
         }
     }
+
+    /**
+     * Modifica el maximo de necesidades que puede registrar un usuario
+     * @param mneeds nuevo maximo de necesidades que podra registrar un usuario
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     @Override
     public void agregarNecesidades(int mneeds) throws ServicesException {
         try {

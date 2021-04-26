@@ -20,6 +20,11 @@ public class AnswersServicesImpl implements AnswersServices {
     @Inject
     AnswersDAO answersDAO;
 
+    /**
+     * Metodo que se comunica con el metodo agregarRespuesta de answer de la capa DAO para agregar la respuesta
+     * @param answer objeto de tipo Answers , el cual es la respuesta que se desea registrar
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     public void agregarRespuesta(Answers answer) throws ServicesException {
         try {
             answersDAO.agregarRespuesta(answer);
@@ -28,6 +33,11 @@ public class AnswersServicesImpl implements AnswersServices {
         }
     }
 
+    /**
+     * Metodo que se comunica con el metodo NeedsToAnswer de Needs de la capa DAO
+     * @return List de tipo Needs
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     public List<Needs> NeedsToAnswer() throws  ServicesException {
         try{
             return needsDAO.NeedsToAnswer();
@@ -36,6 +46,11 @@ public class AnswersServicesImpl implements AnswersServices {
         }
     }
 
+    /**
+     * Metodo que se comunica con el metodo OffersToAnswer de Offers de la capa DAO
+     * @return List de tipo Offers
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     public List<Offers> OffersToAnswer() throws ServicesException {
         try{
             return offersDAO.OffersToAnswer();

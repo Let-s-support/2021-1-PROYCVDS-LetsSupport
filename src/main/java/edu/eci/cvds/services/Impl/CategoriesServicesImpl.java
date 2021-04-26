@@ -19,8 +19,8 @@ public class CategoriesServicesImpl implements CategoriesServices {
     /**
      * Es usado por CategoriesServices para desplegar la funcionalidad de traerValuesCategories y asi obtener la información de los nombres de las categorias existentes, lo despliega a CategoriesDAO
      * @param oldvalue nombre a verificar si existe en la tabla
-     * @return List
-     * @throws ServicesException controlador de excepciones
+     * @return List de tipo categories
+     * @throws ServicesException controlador de errores de la capa de services
      */
     @Override
     public List<Categories> traerValuesCategories(String oldvalue) throws ServicesException {
@@ -34,7 +34,7 @@ public class CategoriesServicesImpl implements CategoriesServices {
     /**
      * Es usado por CategoriesServices para desplegar la funcionalidad de agregarCategoria y lo despliega en CategoriesDAO
      * @param categorie objeto de tipo categoria, que contiene los datos de la nueva categoria que se va a crear
-     * @throws ServicesException controlador de excepciones
+     * @throws ServicesException controlador de errores de la capa de services
      */
     @Override
     public void agregarCategoria(Categories categorie) throws ServicesException {
@@ -57,7 +57,7 @@ public class CategoriesServicesImpl implements CategoriesServices {
      * @param description nueva descripción de la categoria que se va a modificar
      * @param status nuevo estado de la categoria que se va a modificar
      * @param oldvalue nombre por el medio del cual se esta consultando el dato que se va a cambiar
-     * @throws ServicesException controlador de excepciones
+     * @throws ServicesException controlador de errores de la capa de services@throws ServicesException controlador de excepciones
      */
 
     @Override
@@ -76,6 +76,11 @@ public class CategoriesServicesImpl implements CategoriesServices {
         }
     }
 
+    /**
+     * Retorna todos los registros de categories de la base de datos, obtiene los datos a traves de la capa del DAO
+     * @return Lst de tipo categories
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     @Override
     public List<Categories> traerCategories() throws ServicesException {
         try {

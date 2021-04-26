@@ -56,6 +56,11 @@ public class MyBatisCategoriesDAO implements CategoriesDAO {
             throw new PersistenceException("Error al consultar nombres", e);
         }
     }
+
+    /**
+     * Retorna todos los registros de categories de la base de datos, obtiene los datos a traves del mapper
+     * @return Lst de tipo categories
+     */
     @Override
     public List<Categories> traerCategories() throws PersistenceException {
         try {

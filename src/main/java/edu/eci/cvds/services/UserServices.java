@@ -8,10 +8,10 @@ import java.util.List;
 public interface UserServices {
 
     /**
-     * Es usado por UserServicesBean para desplegar la funcionalidad de IngresarSesion y asi obtener la contraseña del user por medio del correo, la envia a UserServicesImpl
-     * @param username es el username con el cual se consultaran los datos
-     * @return String
-     * @throws ServicesException controlador de excepciones
+     * Retorna una lista con la información de un usruaio consultado
+     * @param username  es el username con el cual se consultaran los datos
+     * @return List de tipo User
+     * @throws ServicesException controlador de errores de la capa de services
      */
     List<User> IngresarSesion(String username) throws ServicesException;
 

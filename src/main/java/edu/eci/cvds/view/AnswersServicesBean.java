@@ -28,20 +28,36 @@ public class AnswersServicesBean {
     private List<Offers> ofertas;
     private List<Needs> necesidades;
 
+    /**
+     * Metodo para agregar una nueva respuesta de una necesidad
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     public void agregarRespuestaNeed() throws ServicesException{
         Answers answer = new Answers(value, comentary, need_id, owner, true);
         answersServices.agregarRespuesta(answer);
     }
 
+    /**
+     * Metodo para agrefar una nueva respuesta de una oferta
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     public void agregarRespuestaOffer() throws ServicesException{
         Answers answer = new Answers(value, comentary, offer_id, owner, false);
         answersServices.agregarRespuesta(answer);
     }
 
+    /**
+     * Obtiene las necesidades que se encuentran en estado 'Activa' o 'En proceso'
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     public void NeedsToAnswer() throws ServicesException{
         necesidades=answersServices.NeedsToAnswer();
     }
 
+    /**
+     * Obtiene las ofertas que se enuentran en estado 'Activa' o 'En proceso'
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     public void OffersToAnswer() throws ServicesException{
         ofertas=answersServices.OffersToAnswer();
     }

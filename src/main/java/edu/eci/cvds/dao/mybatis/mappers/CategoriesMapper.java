@@ -31,8 +31,13 @@ public interface CategoriesMapper {
     /**
      * Retorna una lista con los nombres de las categorias existentes que trae desde CategoriesMapper.xml
      * @param oldvalue nombre a verificar si existe en la tabla
-     * @return List
+     * @return List de tipo categories
      */
     List<Categories> traerValuesCategories(@Param("oldvalue") String oldvalue);
+
+    /**
+     * Retorna todos los registros de categories de la base de datos, obtiene los datos a traves del xml
+     * @return Lst de tipo categories
+     */
     List<Categories> traerCategories();
 }

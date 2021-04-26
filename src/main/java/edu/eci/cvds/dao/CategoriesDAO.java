@@ -26,12 +26,18 @@ public interface CategoriesDAO {
      * @throws PersistenceException controlador de excepciones
      */
     void ModificarCategoria(String value, String description, boolean status, String oldvalue) throws PersistenceException;
+
     /**
-     * Retorna una lista con los nombres de las categorias existentes que llama desde CategoriesDAO
+     * Retorna una lista con los nombres de las categorias existentes que llama desde el mybatis
      * @param oldvalue nombre a verificar si existe en la tabla
      * @return List
      * @throws PersistenceException controlador de excepciones
      */
     List<Categories> traerValuesCategories(String oldvalue) throws PersistenceException;
+
+    /**
+     * Retorna todos los registros de categories de la base de datos, obtiene los datos a traves del mybatis
+     * @return Lst de tipo categories
+     */
     List<Categories> traerCategories() throws PersistenceException;
 }

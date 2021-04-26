@@ -13,6 +13,12 @@ import java.util.List;
 public class MyBatisStatusDAO implements StatusDAO {
     @Inject
     StatusMapper statusMapper;
+
+    /**
+     * Retorna una lista con los tipos de status registrados
+     * @return List de tipo Status
+     * @throws PersistenceException Controlador de errores de persistencia
+     */
     @Override
     public List<Status> traerStatus( ) throws PersistenceException {
         try {

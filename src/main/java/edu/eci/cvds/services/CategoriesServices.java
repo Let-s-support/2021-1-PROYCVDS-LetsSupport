@@ -26,9 +26,15 @@ public interface CategoriesServices {
     /**
      * Es usado para desplegar la funcionalidad de traerValuesCategories y asi obtener la información de los nombres de las categorias existentes, la envia a CategoriesServicesImpl
      * @param oldvalue nombre a verificar si existe en la tabla
-     * @return List
+     * @return List de tipo categories
      * @throws ServicesException controlador de excepciones
      */
     List<Categories> traerValuesCategories(String oldvalue) throws PersistenceException, ServicesException;
+
+    /**
+     * Retorna todos los registros de categories de la base de datos, obtiene los datos a traves del impl
+     * @return Lst de tipo categories
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     List<Categories> traerCategories() throws PersistenceException, ServicesException;
 }

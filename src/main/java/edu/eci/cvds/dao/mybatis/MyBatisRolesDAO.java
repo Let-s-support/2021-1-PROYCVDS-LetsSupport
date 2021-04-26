@@ -12,6 +12,12 @@ import java.util.List;
 public class MyBatisRolesDAO implements RolesDAO {
     @Inject
     RolesMapper rolesMapper;
+
+    /**
+     * Retorna los roles registrados en la base de datos
+     * @return List de tipo Roles
+     * @throws PersistenceException Controlador de errores de persistencia
+     */
     @Override
     public List<Roles> traerRoles( ) throws PersistenceException {
         try {

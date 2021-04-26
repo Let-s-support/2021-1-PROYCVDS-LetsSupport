@@ -58,6 +58,10 @@ public class NeedsServicesBean extends BasePageBean {
         }
     }
 
+    /**
+     * Obtiene todas las necesidades registradas
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     public void AllNeeds() throws ServicesException{
         try{
             AllNeeds=needsServices.AllNeeds();
@@ -66,6 +70,10 @@ public class NeedsServicesBean extends BasePageBean {
         }
     }
 
+    /**
+     * Modifica el estado de la necesidad
+     * @throws ServicesException controlador de errores de la capa de services
+     */
     public void ModificarEstadoNeed() throws ServicesException{
         try{
             needsServices.ModificarEstadoNeed(value,status);
@@ -73,7 +81,6 @@ public class NeedsServicesBean extends BasePageBean {
             throw new ServicesException("Error al agregar la necesidad", ex);
         }
     }
-
 
     public NeedsServices getNeedsServices() {
         return needsServices;

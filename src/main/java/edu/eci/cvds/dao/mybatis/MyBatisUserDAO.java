@@ -15,10 +15,9 @@ public class MyBatisUserDAO implements UserDAO {
     UserMapper userMapper;
 
     /**
-     * Retorna un valor que es el password del usuario que intenta acceder que llama desde UsersMapper
+     * Retorna una lista con la información de un usruaio consultado
      * @param username  es el username con el cual se consultaran los datos
-     * @return String
-     * @throws PersistenceException controlador de excepciones
+     * @return List de tipo User
      */
     @Override
     public List<User> IngresarSesion(String username) throws PersistenceException {

@@ -40,6 +40,12 @@ public class MyBatisNeedsDAO implements NeedsDAO {
         }
     }
 
+    /**
+     * Retorna una lista con todas las necesidades que tiene registradas un usuario
+     * @param idsolicitante id de quien esta intentando inscribir una nueva necesidad
+     * @return List de tipo needs
+     * @throws PersistenceException Controlador de errores de persistencia
+     */
     @Override
     public List<Needs> cantidadNeedsUser(int idsolicitante) throws PersistenceException {
         try {
@@ -49,6 +55,11 @@ public class MyBatisNeedsDAO implements NeedsDAO {
         }
     }
 
+    /**
+     * Retorna todas las necesidades que sencuentren en estado 'Abierta' o 'En proceso'
+     * @return List de tipo needs
+     * @throws PersistenceException Controlador de errores de persistencia
+     */
     @Override
     public List<Needs> NeedsToAnswer() throws PersistenceException {
         try {
@@ -58,6 +69,12 @@ public class MyBatisNeedsDAO implements NeedsDAO {
         }
     }
 
+    /**
+     * Se encarga de enviar datos al mapper, los cuales trae desde la capa de DAO, para modificar el estado de  la necesidad
+     * @param value nombre de la necesidad que se va a modificar
+     * @param newstatus nuevo estado de la necesidad
+     * @throws PersistenceException Controlador de errores de persistencia
+     */
     @Override
     public void ModificarEstadoNeed(String value, Integer newstatus)  throws PersistenceException {
         try {
@@ -67,6 +84,11 @@ public class MyBatisNeedsDAO implements NeedsDAO {
         }
     }
 
+    /**
+     * Obtiene todas las necesidades registradas
+     * @return List de tipo needs
+     * @throws PersistenceException Controlador de errores de persistencia
+     */
     @Override
     public List<Needs> AllNeeds()  throws PersistenceException {
         try {

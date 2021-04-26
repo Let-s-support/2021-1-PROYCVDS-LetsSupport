@@ -11,6 +11,11 @@ public class MyBatisAnswersDAO implements AnswersDAO {
     @Inject
     AnswersMapper answersMapper;
 
+    /**
+     * Enlaza la capa DAO de answer con el mapper para crear una respuesta, sea de una necesidad o una oferta
+     * @param answer objeto de tipo answer el cual sera la respuesta que se esta creando
+     * @throws PersistenceException controlador de excepciones de persistencia
+     */
     @Override
     public void agregarRespuesta(Answers answer) throws PersistenceException {
         try {

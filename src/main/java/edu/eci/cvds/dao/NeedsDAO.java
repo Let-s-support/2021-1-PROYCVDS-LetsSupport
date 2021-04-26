@@ -21,11 +21,33 @@ public interface NeedsDAO {
      */
     List<Needs> traerValuesNeeds(String oldvalue) throws PersistenceException;
 
+    /**
+     * Retorna una lista con todas las necesidades que tiene registradas un usuario
+     * @param idsolicitante id de quien esta intentando inscribir una nueva necesidad
+     * @return List de tipo needs
+     * @throws PersistenceException Controlador de errores de persistencia
+     */
     List<Needs> cantidadNeedsUser(int idsolicitante) throws PersistenceException;
 
+    /**
+     * Retorna todas las necesidades que sencuentren en estado 'Abierta' o 'En proceso'
+     * @return List de tipo needs
+     * @throws PersistenceException Controlador de errores de persistencia
+     */
     List<Needs> NeedsToAnswer() throws PersistenceException;
 
+    /**
+     * Se encarga de enviar datos parametrizados a la capa de mybatis, los cuales provienen desde el impl para modificar el estado de  la necesidad
+     * @param value nombre de la necesidad que se va a modificar
+     * @param newstatus nuevo estado de la necesidad
+     * @throws PersistenceException Controlador de errores de persistencia
+     */
     void  ModificarEstadoNeed(String value, Integer newstatus)  throws PersistenceException ;
 
+    /**
+     * Obtiene todas las necesidades registradas
+     * @return List de tipo needs
+     * @throws PersistenceException Controlador de errores de persistencia
+     */
     List<Needs> AllNeeds() throws PersistenceException;
 }

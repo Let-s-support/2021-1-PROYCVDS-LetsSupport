@@ -4,6 +4,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import edu.eci.cvds.dao.*;
 import edu.eci.cvds.dao.mybatis.*;
+import edu.eci.cvds.entities.Answers;
 import edu.eci.cvds.entities.Roles;
 import edu.eci.cvds.entities.Status;
 import edu.eci.cvds.services.*;
@@ -34,6 +35,8 @@ public class GuiceContextListener implements ServletContextListener {
                 bind(UserDAO.class).to(MyBatisUserDAO.class);
                 bind(RolesDAO.class).to(MyBatisRolesDAO.class);
                 bind(StatusDAO.class).to(MyBatisStatusDAO.class);
+                bind(OffersDAO.class).to(MyBatisOffersDAO.class);
+                bind(AnswersDAO.class).to(MyBatisAnswersDAO.class);
                 bind(MaxiumRequerementsDAO.class).to(MyBatisMaxiumRequerementsDAO.class);
                 bind(UserServices.class).to(UserServicesImpl.class);
                 bind(CategoriesServices.class).to(CategoriesServicesImpl.class);
@@ -41,7 +44,8 @@ public class GuiceContextListener implements ServletContextListener {
                 bind(RolesServices.class).to(RolesServicesImpl.class);
                 bind(StatusServices.class).to(StatusServicesImpl.class);
                 bind(MaxiumRequerementsServices.class).to(MaxiumRequerementsServiceImpl.class);
-
+                bind(OffersServices.class).to(OffersServicesImpl.class);
+                bind(AnswersServices.class).to(AnswersServicesImpl.class);
             }
         });
 

@@ -5,5 +5,10 @@ import edu.eci.cvds.entities.Answers;
 import org.apache.ibatis.annotations.Param;
 
 public interface AnswersMapper {
+    /**
+     * Enlaza la capa mybatis de answer con el xml para crear una respuesta, sea de una necesidad o una oferta
+     * @param answer objeto de tipo answer el cual sera la respuesta que se esta creando
+     * @throws PersistenceException controlador de excepciones de persistencia
+     */
     void agregarRespuesta(@Param("answer") Answers answer) throws PersistenceException;
 }
