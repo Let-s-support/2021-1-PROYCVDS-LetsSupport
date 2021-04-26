@@ -5,15 +5,20 @@ import edu.eci.cvds.entities.Needs;
 import edu.eci.cvds.services.MaxiumRequerementsServices;
 import edu.eci.cvds.services.NeedsServices;
 import edu.eci.cvds.services.ServicesException;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "needBean")
-@SessionScoped
+@ViewScoped
 public class NeedsServicesBean extends BasePageBean {
     @Inject
     NeedsServices needsServices;
@@ -32,7 +37,6 @@ public class NeedsServicesBean extends BasePageBean {
     private String selectedCategory;
     private int idsolicitante;
     private List<Needs> AllNeeds;
-
 
     /**
      * Es usado para controlar la funcionalidad de crear necesidad desde la interfaz
@@ -62,11 +66,13 @@ public class NeedsServicesBean extends BasePageBean {
      * Obtiene todas las necesidades registradas
      * @throws ServicesException controlador de errores de la capa de services
      */
-    public void AllNeeds() throws ServicesException{
+    public List<Needs> AllNeeds(){
         try{
             AllNeeds=needsServices.AllNeeds();
+            return AllNeeds;
         }catch (Exception ex){
-            throw new ServicesException("Error al agregar la necesidad", ex);
+            ex.printStackTrace();
+            return new ArrayList<Needs>();
         }
     }
 
@@ -161,4 +167,30 @@ public class NeedsServicesBean extends BasePageBean {
     public void setUrgencia(int urgencia) {
         this.urgencia = urgencia;
     }
+
+    public MaxiumRequerementsServices getMaxiumRequerementsServices() {
+        return this.maxiumRequerementsServices;
+    }
+
+    public void setMaxiumRequerementsServices(MaxiumRequerementsServices maxiumRequerementsServices) {
+        this.maxiumRequerementsServices = maxiumRequerementsServices;
+    }
+
+    public int getIdsolicitante() {
+        return this.idsolicitante;
+    }
+
+    public void setIdsolicitante(int idsolicitante) {
+        this.idsolicitante = idsolicitante;
+    }
+
+    public List<Needs> getAllNeeds() {
+        return this.AllNeeds;
+    }
+
+    public void setAllNeeds(List<Needs> AllNeeds) {
+        this.AllNeeds = AllNeeds;
+    }
+
+
 }

@@ -3,18 +3,14 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:jsf="http://xmlns.jcp.org/jsf"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
-<link rel="stylesheet" type="text/css" href="styles/navbar.css" />
 <link rel="stylesheet" type="text/css" href="styles/category.css" />
+<link rel="stylesheet" type="text/css" href="styles/navbar.css" />
 
 <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
     <h:head>
     </h:head>
     <h:body style="margin: 0%;">
-    
-        <p:messages id="messages" showDetail="true" closable="true">
-            <p:autoUpdate />
-        </p:messages>
-        <div class="body">
+        <div class="body" style="padding-bottom: 5%;">
             <h:form>
                 <div class="navbar">
                     <a href="/app/home.xhtml">Home</a>
@@ -56,28 +52,48 @@
                 </div>
             </h:form>
 
-            <h1 class="title" style="text-align: center;">Crear Oferta</h1>
-            <div style="align-items: center;">
+            <h1 class="title" style="text-align:center">Realizar Respuesta</h1>
+            <div>
                 <h:form>
                     <p:growl autoUpdate="true" />
                     <div style="width: 60%; margin: 0 auto;">
                         <p:panel class="container">
-                            <f:facet name="header">Información</f:facet>
+                            <f:facet style="background-color:green;" name="header">Datos de tu respuesta</f:facet>
                             <h:panelGrid columns="1" style="margin: 0 auto;">
-                                <div class="">
-                                    Categoria
-                                    <h:selectOneMenu value="#{offerBean.selectedCategory}">
-                                        <f:selectItems value="#{categoryBean.traerCategories()}" />
-                                    </h:selectOneMenu>
-                                    Nombre
-                                    <h:inputText id="value" value="#{offerBean.value}" required="true" label="Nombre" />
-                                    Descripción
-                                    <p:inputTextarea maxlength="500" id="description" rows="6" cols="33"
-                                        value="#{offerBean.description}" label="Descripción" />
+                                <ui:fragment rendered="#{answerBean.type == 'offer'}">
+                                    <div>
+                                        <h:outputLabel style="font-weight: bold;" value="Necesidad: " />
+                                        <h:outputLabel value="#{answerBean.value}" />
+                                    </div>
+                                    <div>
+                                        <h:outputLabel style="font-weight: bold;" value="Descripción: " />
+                                        <h:outputLabel value="#{answerBean.description}" />
+                                    </div>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{answerBean.type == 'need'}">
+                                    <div>
+                                        <h:outputLabel style="font-weight: bold;" value="Necesidad: " />
+                                        <h:outputLabel value="#{answerBean.value}" />
+                                    </div>
+                                    <div>
+                                        <h:outputLabel style="font-weight: bold;" value="Descripción: " />
+                                        <h:outputLabel value="#{answerBean.description}" />
+                                    </div>
+                                </ui:fragment>
+                                <div style="display: inline;">
+                                    <div style="margin-top: 20px;">
+                                        <h:outputLabel style="font-weight: bold;" value="Titulo" />
+                                        <h:inputText id="value" value="#{needBean.value}" required="true" label="Nombre" />
+                                    </div>
+                                    <div style="margin-top: 20px;">
+                                        <h:outputLabel style="font-weight: bold;" value="Comentarios: " />
+                                        <p:inputTextarea id="comentary" rows="6" cols="33" value="#{answerBean.comentary}"
+                                            label="Comentarios" />
+                                    </div>
                                 </div>
                             </h:panelGrid>
                             <h:form>
-                                <h:commandButton value="Crear" title="Crear" action="#{offerBean.agregarOfertas()}"
+                                <h:commandButton value="Enviar Respuesta" title="Enviar Respuesta" action="#{answerBean.agregarRespuesta()}"
                                     class="button" ajax="false" />
                             </h:form>
                         </p:panel>

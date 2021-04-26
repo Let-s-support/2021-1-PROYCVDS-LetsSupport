@@ -2,6 +2,7 @@
   display: block;
   background-color: #B40001;
   height: 100vh;
+  margin: 0%;
   text-align: center;
   align-items: center;
   justify-content: center;
@@ -20,6 +21,9 @@
   padding: 15px;
   border: #000 2px solid;
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  justify-content: center;
+  align-content: center;
 }
 
 .button {

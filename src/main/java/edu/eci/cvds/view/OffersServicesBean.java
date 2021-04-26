@@ -1,6 +1,9 @@
 package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
+
+import org.primefaces.PrimeFaces;
+
 import edu.eci.cvds.entities.Needs;
 import edu.eci.cvds.entities.Offers;
 import edu.eci.cvds.services.MaxiumRequerementsServices;
@@ -8,15 +11,18 @@ import edu.eci.cvds.services.NeedsServices;
 import edu.eci.cvds.services.OffersServices;
 import edu.eci.cvds.services.ServicesException;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 
 @ManagedBean(name = "offerBean")
-@SessionScoped
+@ViewScoped
 public class OffersServicesBean extends BasePageBean {
     @Inject
     OffersServices offersServices;
@@ -37,49 +43,80 @@ public class OffersServicesBean extends BasePageBean {
 
     /**
      * Crea una nueva oferta
+     * 
      * @throws ServicesException controlador de errores de la capa de services
      */
     public void agregarOfertas() throws ServicesException {
         try {
             idsolicitante = UserServicesBean.getId();
-            if (offersServices.cantidadOffersUser(idsolicitante).size()<maxiumRequerementsServices.traerMaxiumOffers().get(0).getMoffers()) {
+            if (offersServices.cantidadOffersUser(idsolicitante).size() < maxiumRequerementsServices.traerMaxiumOffers()
+                    .get(0).getMoffers()) {
                 category_id = CategoriesServicesBean.getCategories_id()
                         .get(CategoriesServicesBean.getCategories().indexOf(selectedCategory));
 
-                Offers offer = new Offers(value, description, 1, category_id,  idsolicitante);
-                offersServices.agregarOfertas(offer);
-            }
-            else {
-                FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Su usuario ha alcanzado la cantidad maxima de ofertas que podia registrar"));
+                try {
+                    Offers offer = new Offers(value, description, 1, category_id, idsolicitante);
+                    offersServices.agregarOfertas(offer);
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message",
+                            "Oferta creada correctamente");
+                    PrimeFaces.current().dialog().showMessageDynamic(message);
+                    //FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
+                    System.out.println("Categoria creada");
+                } catch (Exception e) {
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+                            "Ha ocurrido un error");
+                    PrimeFaces.current().dialog().showMessageDynamic(message);
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+                            "Su usuario ha alcanzado la cantidad maxima de ofertas que podia registrar");
+                    PrimeFaces.current().dialog().showMessageDynamic(message);
+                    //FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         } catch (ServicesException ex) {
             throw new ServicesException("Error al agregar la necesidad", ex);
         }
+
+        cleanData();
     }
 
     /**
      * Obtiene todas las ofertas
+     * 
      * @throws ServicesException controlador de errores de la capa de services
      */
-    public void AllOffers() throws ServicesException{
-        try{
-            AllOffers=offersServices.AllOffers();
-        }catch (Exception ex){
-            throw new ServicesException("Error al agregar la necesidad", ex);
+    public List<Offers> AllOffers(){
+        try {
+            AllOffers = offersServices.AllOffers();
+            return AllOffers;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<Offers>();
         }
     }
 
     /**
      * Modifica el estado de la oferta
+     * 
      * @throws ServicesException controlador de errores de la capa de services
      */
-    public void ModificarEstadoOffer() throws ServicesException{
-        try{
-            offersServices.ModificarEstadoOffer(value,status);
-        }catch (Exception ex){
+    public void ModificarEstadoOffer() throws ServicesException {
+        try {
+            offersServices.ModificarEstadoOffer(value, status);
+        } catch (Exception ex) {
             throw new ServicesException("Error al agregar la necesidad", ex);
         }
+    }
+
+    public void cleanData() {
+        this.value = "";
+        this.description = "";
+        this.selectedCategory = "";
     }
 
     public OffersServices getOffersServices() {
@@ -168,5 +205,13 @@ public class OffersServicesBean extends BasePageBean {
 
     public void setIdsolicitante(int idsolicitante) {
         this.idsolicitante = idsolicitante;
+    }
+
+    public List<Offers> getAllOffers() {
+        return this.AllOffers;
+    }
+
+    public void setAllOffers(List<Offers> AllOffers) {
+        this.AllOffers = AllOffers;
     }
 }

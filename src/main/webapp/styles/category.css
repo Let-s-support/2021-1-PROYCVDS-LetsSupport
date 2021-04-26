@@ -1,20 +1,27 @@
 .body {
+  display: block;
   margin: 0%;
   background-color: #B40001;
   height: 150vh;
+  align-items: center;
+  justify-content: center;
 }
 
 .title {
   font-size: 60px;
   color: white;
+  text-align: center;
 }
 
 .container {
   display: block;
-  background-color: white;
+  background-color: black;
   padding: 15px;
   border: #000 2px solid;
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  justify-content: center;
+  align-content: center;
 }
 
 .button {
