@@ -20,17 +20,12 @@ public class Answers implements Serializable {
      * @param owner id de quien realizo el comentario
      * @param type tipo que indica si es una respuesta para una necesidad o para una oferta
      */
-    public Answers (String value, String comentary, int type_id, int owner, boolean type){
+    public Answers (String value, String comentary, int need_id,int offer_id, int owner){
         this.value=value;
         this.comentary=comentary;
         this.owner=owner;
-        if(type){
-            this.need_id=type_id;
-            this.offer_id=0;
-        }else {
-            this.need_id=0;
-            this.offer_id=type_id;
-        }
+        this.need_id=need_id;
+        this.offer_id=offer_id;
     }
 
     /**

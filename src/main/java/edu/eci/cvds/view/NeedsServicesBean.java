@@ -18,7 +18,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "needBean")
-@ViewScoped
+@SessionScoped
 public class NeedsServicesBean extends BasePageBean {
     @Inject
     NeedsServices needsServices;

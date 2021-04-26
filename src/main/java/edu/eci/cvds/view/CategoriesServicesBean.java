@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 @javax.faces.bean.ManagedBean(name = "categoryBean")
-@RequestScoped
+@SessionScoped
 public class CategoriesServicesBean extends BasePageBean {
 
     private int id;

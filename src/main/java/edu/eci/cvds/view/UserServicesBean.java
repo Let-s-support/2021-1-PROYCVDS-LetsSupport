@@ -22,7 +22,7 @@ public class UserServicesBean extends BasePageBean {
     private UserServices userServices;
     private String correo;
     private String password;
-    private static int id;
+    public static int id;
     private String fullname;
     private String username;
     private int rol;

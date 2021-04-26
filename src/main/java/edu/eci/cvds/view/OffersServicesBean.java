@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @ManagedBean(name = "offerBean")
-@ViewScoped
+@SessionScoped
 public class OffersServicesBean extends BasePageBean {
     @Inject
     OffersServices offersServices;
@@ -30,7 +30,7 @@ public class OffersServicesBean extends BasePageBean {
     @Inject
     MaxiumRequerementsServices maxiumRequerementsServices;
 
-    private int id;
+    public static int id;
     private String value;
     private String description;
     private int status;
@@ -135,7 +135,7 @@ public class OffersServicesBean extends BasePageBean {
         this.maxiumRequerementsServices = maxiumRequerementsServices;
     }
 
-    public int getId() {
+    public static int getId() {
         return id;
     }
 

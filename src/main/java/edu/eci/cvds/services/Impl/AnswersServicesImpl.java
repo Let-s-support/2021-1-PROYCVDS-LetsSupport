@@ -27,6 +27,7 @@ public class AnswersServicesImpl implements AnswersServices {
      */
     public void agregarRespuesta(Answers answer) throws ServicesException {
         try {
+            System.out.println(answer.toString());
             answersDAO.agregarRespuesta(answer);
         }catch (PersistenceException ex) {
             throw new ServicesException("El item no esta registrado",ex);

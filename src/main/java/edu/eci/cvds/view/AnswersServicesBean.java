@@ -37,7 +37,7 @@ public class AnswersServicesBean {
 
     public void agregarRespuesta(){
         try {
-            if(this.type == "offer"){
+            if(this.type.equals("offer")){
                 agregarRespuestaOffer();
             }else{
                 agregarRespuestaNeed();
@@ -52,7 +52,7 @@ public class AnswersServicesBean {
      * @throws ServicesException controlador de errores de la capa de services
      */
     public void agregarRespuestaNeed() throws ServicesException{
-        Answers answer = new Answers(value, comentary, need_id, owner, true);
+        Answers answer = new Answers(value, comentary, need_id,0, UserServicesBean.getId());
         answersServices.agregarRespuesta(answer);
     }
 
@@ -61,7 +61,7 @@ public class AnswersServicesBean {
      * @throws ServicesException controlador de errores de la capa de services
      */
     public void agregarRespuestaOffer() throws ServicesException{
-        Answers answer = new Answers(value, comentary, offer_id, owner, false);
+        Answers answer = new Answers(value, comentary,0, offer_id, UserServicesBean.getId());
         answersServices.agregarRespuesta(answer);
     }
 

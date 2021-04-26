@@ -4,9 +4,10 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean; 
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "navigationController", eager = true)
-@RequestScoped
+@SessionScoped
 public class NavigationController implements Serializable {
 
     private boolean showOffers = true;
