@@ -44,4 +44,10 @@
     <dispatcher>INCLUDE</dispatcher>
     <dispatcher>ERROR</dispatcher>
 </filter-mapping>
+
+<error-page>
+        <error-code>401</error-code>
+        <location>/Error_401.html</location>
+</error-page>
+
 </web-app>
