@@ -18,7 +18,7 @@ import java.util.List;
 
 @ManagedBean(name = "answerBean")
 @SessionScoped
-public class AnswersServicesBean {
+public class AnswersServicesBean extends BasePageBean{
     
     @Inject
     AnswersServices answersServices;
@@ -95,9 +95,8 @@ public class AnswersServicesBean {
         }
     }
 
-
     public AnswersServices getAnswersServices() {
-        return this.answersServices;
+        return answersServices;
     }
 
     public void setAnswersServices(AnswersServices answersServices) {
