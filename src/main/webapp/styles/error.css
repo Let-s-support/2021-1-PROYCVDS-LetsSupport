@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans');
+:root {
+  --blue: #0e0620;
+  --white: #fff;
+  --red: #df4531;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family:"Nunito Sans";
+  color: var(--blue);
+  font-size: 1em;
+}
+button {
+    font-family:"Nunito Sans";
+}
+button:hover {
+    color: var(--white);
+    background: var(--red);
+    transition: 0.2s ease;
+}
+.btn {
+    overflow: hidden;
+    background: transparent;
+    position: relative;
+    padding: 8px 50px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1em;
+}
+.cont{
+    display: grid;
+    grid-template-columns: 300px 600px;
+}
+h1 {
+  font-size: 7.5em;
+  margin: 15px 0px;
+  font-weight:bold;
+}
+h2 {
+  font-weight:bold;
+}
