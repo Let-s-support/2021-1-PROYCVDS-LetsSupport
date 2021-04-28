@@ -31,7 +31,7 @@ public class CategoriesServicesBean extends BasePageBean {
     public static List<Categories> allCategories;
     private List<String> statuses;
     private boolean selectedStatus;
-    private List<Boolean> estado;
+    private List<String> estado;
 
     @Inject
     CategoriesServices categoriesServices;
@@ -79,10 +79,10 @@ public class CategoriesServicesBean extends BasePageBean {
         return statuses;
     }
 
-    public List<Boolean> estado() throws ServicesException{
+    public List<String> estado() throws ServicesException{
         estado=new ArrayList<>();
-        estado.add(true);
-        estado.add(false);
+        estado.add("Activo");
+        estado.add("Inactivo");
         return estado;
     }
 

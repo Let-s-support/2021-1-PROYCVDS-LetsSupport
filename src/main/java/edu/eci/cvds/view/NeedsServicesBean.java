@@ -16,6 +16,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 
 @ManagedBean(name = "needBean")
 @SessionScoped
@@ -33,10 +34,14 @@ public class NeedsServicesBean extends BasePageBean {
     private Date creationdate;
     private Date modificationdate;
     private int category_id;
+    private String selectedValue;
     private int urgencia;
     private String selectedCategory;
+    private String selectedStatus;
     private int idsolicitante;
     private List<Needs> AllNeeds;
+    private List<String> statusList;
+    private List<String> names;
 
     /**
      * Es usado para controlar la funcionalidad de crear necesidad desde la interfaz
@@ -46,16 +51,16 @@ public class NeedsServicesBean extends BasePageBean {
     public void agregarNecesidades() throws ServicesException {
         try {
             idsolicitante = UserServicesBean.getId();
-            if (needsServices.cantidadNeedsUser(idsolicitante).size()<maxiumRequerementsServices.traerMaxiumNeeds().get(0).getMneeds()) {
+            if (needsServices.cantidadNeedsUser(idsolicitante).size() < maxiumRequerementsServices.traerMaxiumNeeds()
+                    .get(0).getMneeds()) {
                 category_id = CategoriesServicesBean.getCategories_id()
                         .get(CategoriesServicesBean.getCategories().indexOf(selectedCategory));
 
                 Needs need = new Needs(value, description, 1, category_id, urgencia, idsolicitante);
                 needsServices.agregarNecesidades(need);
-            }
-            else {
-                FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Su usuario ha alcanzado la cantidad maxima de necesidades que podia registrar"));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Error", "Su usuario ha alcanzado la cantidad maxima de necesidades que podia registrar"));
             }
         } catch (ServicesException ex) {
             throw new ServicesException("Error al agregar la necesidad", ex);
@@ -64,28 +69,79 @@ public class NeedsServicesBean extends BasePageBean {
 
     /**
      * Obtiene todas las necesidades registradas
+     * 
      * @throws ServicesException controlador de errores de la capa de services
      */
-    public List<Needs> AllNeeds(){
-        try{
-            AllNeeds=needsServices.AllNeeds();
+    public List<Needs> AllNeeds() {
+        try {
+            AllNeeds = needsServices.AllNeeds();
             return AllNeeds;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return new ArrayList<Needs>();
         }
     }
 
+    public List<String> getStatusList() {
+        statusList = new ArrayList<String>(List.of("Activa", "En Proceso", "Resuelta", "Cerrada"));
+        return statusList;
+    }
+
+    public void handleChange(ValueChangeEvent event) {
+        System.out.println("Selected Value:" + selectedValue);
+        System.out.println("Selected status:" + selectedStatus);
+        for(Needs need: AllNeeds){
+            if(need.getValue() == selectedValue){
+                System.out.println(need);
+                selectedStatus = statusList.get(need.getStatus());
+            }
+        }
+        System.out.println("HandleChangeEvent Called!!");
+    }
+
+    public List<String> getNeedsList() {
+        AllNeeds();
+        getStatusList();
+        if(selectedValue == "" || selectedStatus == null){
+            selectedStatus = statusList.get(AllNeeds.get(0).getStatus());
+            selectedValue = AllNeeds.get(0).getValue();
+        }
+        names = new ArrayList<String>();
+        if (AllNeeds != null) {
+            for (Needs need : AllNeeds) {
+                names.add(need.getValue());
+            }
+        } else {
+            System.out.println("Esta vacia");
+        }
+
+        return names;
+    }
+
     /**
      * Modifica el estado de la necesidad
+     * 
      * @throws ServicesException controlador de errores de la capa de services
      */
-    public void ModificarEstadoNeed() throws ServicesException{
-        try{
-            needsServices.ModificarEstadoNeed(value,status);
-        }catch (Exception ex){
+    public void ModificarEstadoNeed() throws ServicesException {
+        try {
+            status = statusList.indexOf(selectedStatus);
+            System.out.println(status + " ___ " +selectedStatus + "___" + selectedValue);
+            needsServices.ModificarEstadoNeed(value, status);
+            cleanData();
+            // FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Estado actualizado correctamente"));
+        } catch (Exception ex) {
             throw new ServicesException("Error al agregar la necesidad", ex);
         }
+    }
+
+    public void cleanData() {
+        this.value = "";
+        this.selectedCategory = "";
+        this.selectedValue = "";
+        this.selectedStatus = "Activa";
     }
 
     public NeedsServices getNeedsServices() {
@@ -136,12 +192,28 @@ public class NeedsServicesBean extends BasePageBean {
         this.status = status;
     }
 
+    public String getSelectedValue() {
+        return this.selectedValue;
+    }
+
+    public void setSelectedValue(String selectedValue) {
+        this.selectedValue = selectedValue;
+    }
+
     public Date getCreationdate() {
         return creationdate;
     }
 
     public void setCreationdate(Date creationdate) {
         this.creationdate = creationdate;
+    }
+
+    public String getSelectedStatus() {
+        return this.selectedStatus;
+    }
+
+    public void setSelectedStatus(String selectedStatus) {
+        this.selectedStatus = selectedStatus;
     }
 
     public Date getModificationdate() {
@@ -191,6 +263,5 @@ public class NeedsServicesBean extends BasePageBean {
     public void setAllNeeds(List<Needs> AllNeeds) {
         this.AllNeeds = AllNeeds;
     }
-
 
 }

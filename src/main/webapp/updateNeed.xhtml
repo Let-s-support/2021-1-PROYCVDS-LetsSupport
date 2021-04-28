@@ -10,7 +10,10 @@
     <h:head>
     </h:head>
     <h:body style="margin: 0%;">
-        <div class="body" style="height: auto; padding-bottom: 5%;">
+        <p:messages id="messages" showDetail="true" closable="true">
+            <p:autoUpdate />
+        </p:messages>
+        <div class="body" style="height: 100vh; padding-bottom: 5%;">
             <h:form>
                 <div class="navbar">
                     <a href="/app/home.xhtml">Home</a>
@@ -52,42 +55,36 @@
                 </div>
             </h:form>
 
-            <h1 class="title">Actualizar Categoria</h1>
+            <h1 class="title">Actualizar Necesidad</h1>
             <div style="height: auto;">
                 <h:form id="form">
                     <p:growl autoUpdate="true" />
-                    <div style="width: 60%; margin: 0 auto;">
+                    <div style="width: 40%; margin: 0 auto;">
                         <p:panel class="container">
                             <f:facet name="header">Información</f:facet>
                             <h:panelGrid columns="1" style="margin: 0 auto;">
                                 <div class="">
-                                    Categoria a modificar
+                                    <label style="font-weight:bold">Necesidad a modificar</label>
                                     <div style="flex-direction:row;">
-                                        <!--Actualizar el estilo-->
                                         <div>
-                                            <h:selectOneMenu value="#{categoryBean.oldvalue}">
-                                                <f:selectItems value="#{categoryBean.traerCategories()}" />
-                                            </h:selectOneMenu>
-                                        </div>
-                                        <div>
-                                            <h:commandButton value="Actualizar" title="Crear"
-                                                action="#{categoryBean.handleChange()}" />
+                                            <p:selectOneMenu value="#{needBean.selectedValue}"
+                                                valueChangeListener="#{needBean.handleChange}">
+                                                <p:ajax update="@this"/>
+                                                <f:selectItems value="#{needBean.getNeedsList()}" />
+                                            </p:selectOneMenu>
                                         </div>
                                     </div>
-                                    Nombre
-                                    <h:inputText id="value" value="#{categoryBean.value}" label="Nombre" />
-                                    Descripción
-                                    <p:inputTextarea maxlength="500" id="description" rows="6" cols="33"
-                                        value="#{categoryBean.description}" label="Descripción" />
-                                    Estado
-                                    <h:selectOneMenu value="#{categoryBean.selectedStatus}">
-                                        <f:selectItems value="#{categoryBean.estado()}" />
+                                    <div style="margin-top: 10px;">
+                                        <label style="font-weight:bold;">Estado</label>
+                                    </div>
+                                    <h:selectOneMenu value="#{needBean.selectedStatus}">
+                                        <f:selectItems value="#{needBean.getStatusList()}" />
                                     </h:selectOneMenu>
                                 </div>
                             </h:panelGrid>
                             <h:form>
                                 <h:commandButton value="Actualizar" title="Crear"
-                                    action="#{categoryBean.ModificarCategoria()}" class="button" />
+                                    action="#{needBean.ModificarEstadoNeed()}" class="button" />
                             </h:form>
                         </p:panel>
                     </div>

@@ -15,8 +15,11 @@
     <h:body style="margin: 0%; background-color: #B40001;">
         <h:outputStylesheet name="home.css" />
         <div class="body">
+            <p:messages id="messages" showDetail="true" closable="true">
+                <p:autoUpdate />
+            </p:messages>
             <h:form>
-                <div class="navbar">
+                <div class="navbar" style="">
                     <a href="/app/home.xhtml">Home</a>
                     <div class="dropdown">
                         <button class="dropbtn">Categorias
@@ -36,7 +39,7 @@
                         <div class="dropdown-content">
                             <a href="/app/createNeed.xhtml">Crear</a>
                             <a href="#">Buscar</a>
-                            <a href="#">Actualizar</a>
+                            <a href="/app/updateNeed.xhtml">Actualizar</a>
                             <a href="#">Eliminar</a>
                         </div>
                     </div>
@@ -56,16 +59,25 @@
                 </div>
             </h:form>
         </div>
-        <div >
+        <div>
             <div>
-                <br />
-                <p:commandButton update="formTable" class="button-table"
-                    action="#{navigationController.setShowOffers(true)}" value="Ofertas" />
-                <p:commandButton update="formTable" class="button-table"
-                    action="#{navigationController.setShowOffers(false)}" value="Necesidades" />
+                <div style="padding-left: 35%;">
+                    <br />
+                    <div style="display: inline;">
+                        <p:commandButton update="formTable" class="button-table" style="color: black; overflow: hidden;"
+                            action="#{navigationController.setShowOffers(true)}" value="Ofertas" />
+                    </div>
+                    <div style="display: inline;">
+                        <p:commandButton update="formTable" class="button-table"
+                            style="align-self:center; color: black;"
+                            action="#{navigationController.setShowOffers(false)}" value="Necesidades" />
+                    </div>
+                </div>
                 <h:form id="formTable">
                     <ui:fragment rendered="#{navigationController.isShowOffers()}">
-                        <h1 style="color: white; display: block; background-color:#4CAF50; text-align:center;">Ofertas
+                        <h1
+                            style="font-size: 50px; color: white; display: block; background-color:#4CAF50; text-align:center;">
+                            Ofertas
                         </h1>
                         <div class="card">
                             <p:dataTable var="offer" value="#{offerBean.AllOffers()}">
@@ -84,9 +96,9 @@
                                 <p:column headerText="Fecha de creacion">
                                     <h:outputText value="#{offer.creationdate}" />
                                 </p:column>
-                                
+
                                 <p:column headerText="Opciones">
-                                    <p:commandButton style="margin-left: 50px;" update="formTable" class="button-table"
+                                    <p:commandButton style="margin-left: 50px;" update="formTable"
                                         action="#{answerBean.setData('offer', offer.value, offer.description, offer.id, offer.idsolicitante)}"
                                         value="Responder" />
                                 </p:column>
@@ -95,7 +107,8 @@
                     </ui:fragment>
 
                     <ui:fragment rendered="#{!navigationController.isShowOffers()}">
-                        <h1 style="color: white; display: block; background-color:#4CAF50; text-align:center;">
+                        <h1
+                            style="font-size: 50px; color: white; display: block; background-color:#4CAF50; text-align:center;">
                             Necesidades</h1>
                         <div class="card">
                             <p:dataTable var="need" value="#{needBean.AllNeeds()}">
@@ -116,7 +129,7 @@
                                 </p:column>
 
                                 <p:column headerText="Opciones">
-                                    <p:commandButton style="margin-left: 50px;" update="formTable" class="button-table"
+                                    <p:commandButton style="margin-left: 50px;" update="formTable"
                                         action="#{answerBean.setData('need', need.value, need.description, need.id, need.idsolicitante)}"
                                         value="Responder" />
                                 </p:column>
