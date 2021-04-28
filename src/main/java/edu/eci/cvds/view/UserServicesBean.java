@@ -59,6 +59,10 @@ public class UserServicesBean extends BasePageBean {
             List<User> datos = userServices.IngresarSesion(username);
             if (!datos.isEmpty())isactive= datos.get(0).getIsactive();
             if (isactive){
+                    id = datos.get(0).getId();
+                    fullname = datos.get(0).getFullName();
+                    rol = datos.get(0).getRol();
+                    correo = datos.get(0).getCorreo();
                     subject.login(token);//crear token activo
                     FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");       
                 }
