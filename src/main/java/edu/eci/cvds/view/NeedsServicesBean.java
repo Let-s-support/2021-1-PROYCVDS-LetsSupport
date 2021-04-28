@@ -127,7 +127,7 @@ public class NeedsServicesBean extends BasePageBean {
         try {
             status = statusList.indexOf(selectedStatus);
             System.out.println(status + " ___ " +selectedStatus + "___" + selectedValue);
-            needsServices.ModificarEstadoNeed(value, status);
+            needsServices.ModificarEstadoNeed(value, status+1);
             cleanData();
             // FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
             FacesContext.getCurrentInstance().addMessage(null,
