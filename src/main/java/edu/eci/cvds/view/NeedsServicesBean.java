@@ -83,7 +83,11 @@ public class NeedsServicesBean extends BasePageBean {
     }
 
     public List<String> getStatusList() {
-        statusList = new ArrayList<String>(List.of("Activa", "En Proceso", "Resuelta", "Cerrada"));
+        statusList = new ArrayList<String>();
+        statusList.add("Activa");
+        statusList.add("En Proceso");
+        statusList.add("Resuelta");
+        statusList.add("Cerrada");
         return statusList;
     }
 
