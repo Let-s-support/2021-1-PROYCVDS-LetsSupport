@@ -97,7 +97,7 @@ public class NeedsServicesBean extends BasePageBean {
         for(Needs need: AllNeeds){
             if(need.getValue() == selectedValue){
                 System.out.println(need);
-                selectedStatus = statusList.get(need.getStatus());
+                selectedStatus = statusList.get(need.getStatus()-1);
             }
         }
         System.out.println("HandleChangeEvent Called!!");
@@ -131,7 +131,7 @@ public class NeedsServicesBean extends BasePageBean {
         try {
             status = statusList.indexOf(selectedStatus);
             System.out.println(status + " ___ " +selectedStatus + "___" + selectedValue);
-            needsServices.ModificarEstadoNeed(value, status+1);
+            needsServices.ModificarEstadoNeed(selectedValue, status+1);
             cleanData();
             // FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
             FacesContext.getCurrentInstance().addMessage(null,

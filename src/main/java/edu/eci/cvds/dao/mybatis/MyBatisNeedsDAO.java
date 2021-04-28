@@ -78,6 +78,7 @@ public class MyBatisNeedsDAO implements NeedsDAO {
     @Override
     public void ModificarEstadoNeed(String value, Integer newstatus)  throws PersistenceException {
         try {
+            System.out.println(value+" "+newstatus);
             needsMapper.ModificarEstadoNeed(value,newstatus);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("No se pudo consultar los nombres", e);

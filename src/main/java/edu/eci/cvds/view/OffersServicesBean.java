@@ -40,6 +40,10 @@ public class OffersServicesBean extends BasePageBean {
     private String selectedCategory;
     private int idsolicitante;
     private List<Offers> AllOffers;
+    private String selectedValue;
+    private String selectedStatus;
+    private List<String> statusList;
+    private List<String> names;
 
     /**
      * Crea una nueva oferta
@@ -107,7 +111,7 @@ public class OffersServicesBean extends BasePageBean {
      */
     public void ModificarEstadoOffer() throws ServicesException {
         try {
-            offersServices.ModificarEstadoOffer(value, status);
+            offersServices.ModificarEstadoOffer(selectedValue, status+1);
         } catch (Exception ex) {
             throw new ServicesException("Error al agregar la necesidad", ex);
         }
@@ -117,6 +121,33 @@ public class OffersServicesBean extends BasePageBean {
         this.value = "";
         this.description = "";
         this.selectedCategory = "";
+    }
+
+    public List<String> getOffersList() {
+        AllOffers();
+        getStatusList();
+        if(selectedValue == "" || selectedStatus == null){
+            selectedStatus = statusList.get(AllOffers.get(0).getStatus());
+            selectedValue = AllOffers.get(0).getValue();
+        }
+        names = new ArrayList<String>();
+        if (AllOffers != null) {
+            for (Offers offer : AllOffers) {
+                names.add(offer.getValue());
+            }
+        } else {
+            System.out.println("Esta vacia");
+        }
+
+        return names;
+    }
+    public List<String> getStatusList() {
+        statusList = new ArrayList<String>();
+        statusList.add("Activa");
+        statusList.add("En Proceso");
+        statusList.add("Resuelta");
+        statusList.add("Cerrada");
+        return statusList;
     }
 
     public OffersServices getOffersServices() {

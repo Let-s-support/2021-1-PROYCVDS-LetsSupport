@@ -76,6 +76,7 @@ public class NeedsServicesImpl implements NeedsServices {
     @Override
     public void  ModificarEstadoNeed(String value, Integer newstatus) throws ServicesException {
         try {
+            System.out.println(value+" "+newstatus);
             needsDAO.ModificarEstadoNeed(value, newstatus);
         }catch (PersistenceException ex){
             throw new ServicesException("Error al consultar nombres",ex);
