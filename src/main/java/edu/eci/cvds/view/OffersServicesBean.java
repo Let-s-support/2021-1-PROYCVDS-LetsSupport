@@ -17,6 +17,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
+
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
@@ -111,7 +113,9 @@ public class OffersServicesBean extends BasePageBean {
      */
     public void ModificarEstadoOffer() throws ServicesException {
         try {
+            status = statusList.indexOf(selectedStatus);
             offersServices.ModificarEstadoOffer(selectedValue, status+1);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Info", "Oferta actualizada"));
         } catch (Exception ex) {
             throw new ServicesException("Error al agregar la necesidad", ex);
         }
@@ -127,7 +131,7 @@ public class OffersServicesBean extends BasePageBean {
         AllOffers();
         getStatusList();
         if(selectedValue == "" || selectedStatus == null){
-            selectedStatus = statusList.get(AllOffers.get(0).getStatus());
+            selectedStatus = statusList.get(AllOffers.get(0).getStatus() - 1);
             selectedValue = AllOffers.get(0).getValue();
         }
         names = new ArrayList<String>();
@@ -141,6 +145,17 @@ public class OffersServicesBean extends BasePageBean {
 
         return names;
     }
+
+    public void handleChange(ValueChangeEvent event) {
+        getOffersList();
+        for(Offers offer: AllOffers){
+            if(offer.getValue().equals(selectedValue)){
+                selectedStatus = statusList.get(offer.getStatus() - 1);
+                System.out.println("HandleChangeEvent Called!!");
+            }
+        }
+    }
+
     public List<String> getStatusList() {
         statusList = new ArrayList<String>();
         statusList.add("Activa");
@@ -200,6 +215,33 @@ public class OffersServicesBean extends BasePageBean {
 
     public Date getCreationdate() {
         return creationdate;
+    }
+
+    public String getSelectedValue() {
+        return this.selectedValue;
+    }
+
+    public void setSelectedValue(String selectedValue) {
+        this.selectedValue = selectedValue;
+    }
+
+    public String getSelectedStatus() {
+        return this.selectedStatus;
+    }
+
+    public void setSelectedStatus(String selectedStatus) {
+        this.selectedStatus = selectedStatus;
+    }
+    public void setStatusList(List<String> statusList) {
+        this.statusList = statusList;
+    }
+
+    public List<String> getNames() {
+        return this.names;
+    }
+
+    public void setNames(List<String> names) {
+        this.names = names;
     }
 
     public void setCreationdate(Date creationdate) {

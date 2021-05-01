@@ -7,19 +7,19 @@
 <h:head>
     <link rel="stylesheet" type="text/css" href="styles/navbar.css" />
     <link rel="stylesheet" type="text/css" href="styles/home.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </h:head>
 
 
 <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
 
     <h:body style="margin: 0%; background-color: #B40001;">
-        <h:outputStylesheet name="home.css" />
         <div class="body">
             <p:messages id="messages" showDetail="true" closable="true">
                 <p:autoUpdate />
             </p:messages>
             <h:form>
-                <div class="navbar" style="">
+                <div class="navbar">
                     <a href="/app/home.xhtml">Home</a>
                     <div class="dropdown">
                         <button class="dropbtn">Categorias
@@ -61,26 +61,30 @@
         </div>
         <div>
             <div>
-                <div style="padding-left: 35%;">
+                <div style="padding-left: 40%;">
                     <br />
-                    <div style="display: inline;">
-                        <p:commandButton update="formTable" class="button-table" style="color: black; overflow: hidden;"
-                            action="#{navigationController.setShowOffers(true)}" value="Ofertas" />
-                    </div>
-                    <div style="display: inline;">
-                        <p:commandButton update="formTable" class="button-table"
-                            style="align-self:center; color: black;"
-                            action="#{navigationController.setShowOffers(false)}" value="Necesidades" />
-                    </div>
+                    <h:form>
+                        <div style="display:inline">
+                            <h:commandButton value="Ofertas" class="button-table" style="margin-inline-end:10px;"
+                                action="#{navigationController.setShowOffers(true)}" />
+                            <h:commandButton value="Necesidades" class="button-table" style="margin:10px;"
+                                action="#{navigationController.setShowOffers(false)}" />
+                        </div>
+                    </h:form>
                 </div>
                 <h:form id="formTable">
                     <ui:fragment rendered="#{navigationController.isShowOffers()}">
                         <h1
-                            style="font-size: 50px; color: white; display: block; background-color:#4CAF50; text-align:center;">
+                            style="font-size: 50px; color: white; display: block; background-color:#333; text-align:center;">
                             Ofertas
                         </h1>
                         <div class="card">
                             <p:dataTable var="offer" value="#{offerBean.AllOffers()}">
+
+                                <p:column headerText="Categoria">
+                                    <h:outputText value="#{offer.category_id}" />
+                                </p:column>
+
                                 <p:column headerText="Nombre">
                                     <h:outputText value="#{offer.value}" />
                                 </p:column>
@@ -89,53 +93,54 @@
                                     <h:outputText value="#{offer.description}" />
                                 </p:column>
 
-                                <p:column headerText="Category">
-                                    <h:outputText value="#{offer.category_id}" />
-                                </p:column>
-
-                                <p:column headerText="Fecha de creacion">
+                                <p:column headerText="Fecha Creacion">
                                     <h:outputText value="#{offer.creationdate}" />
                                 </p:column>
 
                                 <p:column headerText="Opciones">
-                                    <p:commandButton style="margin-left: 50px;" update="formTable"
-                                        action="#{answerBean.setData('offer', offer.value, offer.description, offer.id, offer.idsolicitante)}"
-                                        value="Responder" />
+                                    <p:commandButton value="Responder" icon="fa fa-fw fa-edit" type="button"
+                                        action="#{answerBean.setData('offer', offer.value, offer.description, offer.id, offer.idsolicitante)}" />
+
                                 </p:column>
                             </p:dataTable>
                         </div>
                     </ui:fragment>
 
-                    <ui:fragment rendered="#{!navigationController.isShowOffers()}">
+                    <ui:fragment rendered=" #{!navigationController.isShowOffers()}">
                         <h1
-                            style="font-size: 50px; color: white; display: block; background-color:#4CAF50; text-align:center;">
+                            style="font-size: 50px; color: white; display: block; background-color:#333; text-align:center;">
                             Necesidades</h1>
-                        <div class="card">
-                            <p:dataTable var="need" value="#{needBean.AllNeeds()}">
-                                <p:column headerText="Nombre">
-                                    <h:outputText value="#{need.value}" />
-                                </p:column>
-
-                                <p:column headerText="Descripción">
-                                    <h:outputText value="#{need.description}" />
-                                </p:column>
-
-                                <p:column headerText="Category">
-                                    <h:outputText value="#{need.category_id}" />
-                                </p:column>
-
-                                <p:column headerText="Fecha de creacion">
-                                    <h:outputText value="#{need.creationdate}" />
-                                </p:column>
-
-                                <p:column headerText="Opciones">
-                                    <p:commandButton style="margin-left: 50px;" update="formTable"
-                                        action="#{answerBean.setData('need', need.value, need.description, need.id, need.idsolicitante)}"
-                                        value="Responder" />
-                                </p:column>
-
-                            </p:dataTable>
-                        </div>
+                        <h:form>
+                            <div class="card">
+                                <p:dataTable var="need" value="#{needBean.AllNeeds()}">
+                                    <p:column headerText="Nombre">
+                                        <h:outputText value="#{need.value}" />
+                                    </p:column>
+    
+                                    <p:column headerText="Descripción">
+                                        <h:outputText value="#{need.description}" />
+                                    </p:column>
+    
+                                    <p:column headerText="Category">
+                                        <h:outputText value="#{need.category_id}" />
+                                    </p:column>
+    
+                                    <p:column headerText="Fecha de creacion">
+                                        <h:outputText value="#{need.creationdate}" />
+                                    </p:column>
+    
+                                    <p:column headerText="Opciones">
+                                        <div style="flex-direction: row;">
+                                            <h:commandButton class="button-column" style="display: inline;"
+                                                update="formTable"
+                                                action="#{answerBean.setData('need', need.value, need.description, need.id, need.idsolicitante)}"
+                                                value="Responder" />
+                                        </div>
+                                    </p:column>
+    
+                                </p:dataTable>
+                            </div>
+                        </h:form>
                     </ui:fragment>
                 </h:form>
             </div>

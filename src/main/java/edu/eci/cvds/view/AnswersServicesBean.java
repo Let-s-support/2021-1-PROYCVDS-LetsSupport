@@ -88,8 +88,7 @@ public class AnswersServicesBean extends BasePageBean{
             this.description = description;
             this.owner = author;
             if(this.type.equals("offer")){this.offer_id = id;}else this.need_id = id;
-            System.out.println(type + " " + name + " " + description + " " + id + " " + author + " ");
-            FacesContext.getCurrentInstance().getExternalContext().redirect("createAnswer.xhtml");    
+            FacesContext.getCurrentInstance().getExternalContext().redirect("createAnswer.xhtml");
         } catch (Exception e) {
             e.printStackTrace();
         }
