@@ -67,9 +67,9 @@
                                     <label style="font-weight:bold">Necesidad a modificar</label>
                                     <div style="flex-direction:row;">
                                         <div>
-                                            <p:selectOneMenu value="#{needBean.selectedValue}"
+                                            <p:selectOneMenu update="statusValue" value="#{needBean.selectedValue}" ajax="true"
                                                 valueChangeListener="#{needBean.handleChange}">
-                                                <p:ajax update="@this"/>
+                                                <p:ajax update="@statusValue"/>
                                                 <f:selectItems value="#{needBean.getNeedsList()}" />
                                             </p:selectOneMenu>
                                         </div>
@@ -77,7 +77,8 @@
                                     <div style="margin-top: 10px;">
                                         <label style="font-weight:bold;">Estado</label>
                                     </div>
-                                    <h:selectOneMenu value="#{needBean.selectedStatus}">
+                                    <h:selectOneMenu update="statusValue" id="statusValue" value="#{needBean.selectedStatus}" ajax="true">
+                                        <p:ajax update="statusValue"/>
                                         <f:selectItems value="#{needBean.getStatusList()}" />
                                     </h:selectOneMenu>
                                 </div>
