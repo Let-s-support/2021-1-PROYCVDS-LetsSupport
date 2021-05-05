@@ -98,7 +98,7 @@
                                 </p:column>
 
                                 <p:column headerText="Opciones">
-                                    <p:commandButton value="Responder" icon="fa fa-fw fa-edit" type="button"
+                                    <p:commandButton value="Responder" icon="fa fa-fw fa-edit"  update="formTable"
                                         action="#{answerBean.setData('offer', offer.value, offer.description, offer.id, offer.idsolicitante)}" />
 
                                 </p:column>
@@ -106,7 +106,7 @@
                         </div>
                     </ui:fragment>
 
-                    <ui:fragment rendered=" #{!navigationController.isShowOffers()}">
+                    <ui:fragment rendered="#{!(navigationController.isShowOffers())}">
                         <h1
                             style="font-size: 50px; color: white; display: block; background-color:#333; text-align:center;">
                             Necesidades</h1>
@@ -130,12 +130,10 @@
                                     </p:column>
     
                                     <p:column headerText="Opciones">
-                                        <div style="flex-direction: row;">
-                                            <h:commandButton class="button-column" style="display: inline;"
+                                            <p:commandButton icon="fa fa-fw fa-edit" 
                                                 update="formTable"
                                                 action="#{answerBean.setData('need', need.value, need.description, need.id, need.idsolicitante)}"
                                                 value="Responder" />
-                                        </div>
                                     </p:column>
     
                                 </p:dataTable>
