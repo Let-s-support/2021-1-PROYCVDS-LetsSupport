@@ -1,7 +1,13 @@
 .nav {
   flex-direction: row;
 }
-
+.button{
+  background-color: rgb(218, 214, 214);
+  border-radius: 3px;
+  padding: 5px 15px;
+  font-weight: bold;
+  color: rgb(69, 69, 71);
+}
 .button-table {
   background-color: #333;
   border: none;
@@ -18,7 +24,6 @@
 }
 
 .button-column {
-  background-color: #333;
   border: none;
   color: white;
   padding: 15px 15px;
