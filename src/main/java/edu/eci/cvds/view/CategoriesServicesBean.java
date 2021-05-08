@@ -14,6 +14,7 @@ import edu.eci.cvds.services.StatusServices;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ValueChangeEvent;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,7 +35,7 @@ public class CategoriesServicesBean extends BasePageBean {
     public static List<Integer> categories_id;
     public static List<Categories> allCategories;
     private List<String> statuses;
-    private boolean selectedStatus;
+    private String selectedStatus;
     private List<String> estado;
 
     @Inject
@@ -44,17 +45,8 @@ public class CategoriesServicesBean extends BasePageBean {
     StatusServices statusServices;
 
     /**
-     * Realiza el cambio de los datos para mostrarlos en pantalla, dependiendo de la categoria seleccionada
-     * @throws ServicesException controlador de errores de la capa de services
-     */
-    public void handleChange() throws ServicesException{
-        value = allCategories.get(categories.indexOf(oldvalue)).getValue();
-        description = allCategories.get(categories.indexOf(oldvalue)).getDescription();
-        selectedStatus = allCategories.get(categories.indexOf(oldvalue)).getStatus();
-    }
-
-    /**
      * Inicaliza la listas como vacias
+     * 
      * @throws ServicesException
      */
     public CategoriesServicesBean() throws ServicesException {
@@ -62,10 +54,15 @@ public class CategoriesServicesBean extends BasePageBean {
         allCategories = new ArrayList<Categories>();
         categories_id = new ArrayList<Integer>();
         statuses = new ArrayList<String>();
+        System.out.println("Primer llamado");
+        value = "";
+        description = "";
     }
 
     /**
-     * Obtiene una cadena con todos los estados y guarrda los nombres de estos en una lista
+     * Obtiene una cadena con todos los estados y guarrda los nombres de estos en
+     * una lista
+     * 
      * @return List de tipo string
      * @throws ServicesException controlador de errores de la capa de services
      */
@@ -83,8 +80,8 @@ public class CategoriesServicesBean extends BasePageBean {
         return statuses;
     }
 
-    public List<String> estado() throws ServicesException{
-        estado=new ArrayList<>();
+    public List<String> estado() throws ServicesException {
+        estado = new ArrayList<>();
         estado.add("Activo");
         estado.add("Inactivo");
         return estado;
@@ -97,13 +94,14 @@ public class CategoriesServicesBean extends BasePageBean {
      */
     public void agregarCategoria() throws ServicesException {
         try {
-
+            status = selectedStatus == "Activa" ? true : false;
             Categories categorie = new Categories(value, description, status);
             categoriesServices.agregarCategoria(categorie);
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message",
-                            "Categoria creada correctamente");
-                    PrimeFaces.current().dialog().showMessageDynamic(message);
-                    //FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
+                    "Categoria creada correctamente");
+            PrimeFaces.current().dialog().showMessageDynamic(message);
+            // FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
+            cleanData();
             System.out.println("Categoria creada");
         } catch (ServicesException ex) {
             throw new ServicesException("El item no esta registrado", ex);
@@ -114,7 +112,9 @@ public class CategoriesServicesBean extends BasePageBean {
     public void cleanData() {
         this.value = "";
         this.description = "";
+        this.selectedStatus = "Activa";
     }
+
     /**
      * Es usado controlar la funcionalidad de modificar datos de categoria desde la
      * interfaz
@@ -123,14 +123,34 @@ public class CategoriesServicesBean extends BasePageBean {
      */
     public void ModificarCategoria() throws ServicesException {
         try {
-            categoriesServices.ModificarCategoria(value, description, selectedStatus, oldvalue);
+            status = selectedStatus == "Activa" ? true : false;
+            categoriesServices.ModificarCategoria(value, description, status, oldvalue);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message",
+                    "Categoria actulizada correctamente");
+            PrimeFaces.current().dialog().showMessageDynamic(message);
+            // FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
+            cleanData();
+            System.out.println("Categoria creada");
         } catch (ServicesException ex) {
             throw new ServicesException("Error al modificar categoria", ex);
         }
     }
 
+    public void handleChange(ValueChangeEvent event) {
+        for (Categories categories : allCategories) {
+            if (categories.getValue().equals(event.getNewValue().toString())) {
+                id = categories.getId();
+                value = categories.getValue();
+                description = categories.getDescription();
+                selectedStatus = categories.getStatus() ? "Activa" : "Inactiva";
+            }
+        }
+    }
+
     /**
-     * Obtiene todas las categorias existentes y guarda en listas los nombres de las categorias existentes
+     * Obtiene todas las categorias existentes y guarda en listas los nombres de las
+     * categorias existentes
+     * 
      * @return List de tipo string
      * @throws ServicesException
      */
@@ -179,7 +199,7 @@ public class CategoriesServicesBean extends BasePageBean {
 
     public boolean getStatus() {
         return status;
-    }   
+    }
 
     public static List<String> getCategories() {
         return categories;
@@ -197,11 +217,11 @@ public class CategoriesServicesBean extends BasePageBean {
         this.statuses = statuses;
     }
 
-    public boolean getSelectedStatus() {
+    public String getSelectedStatus() {
         return this.selectedStatus;
     }
 
-    public void setSelectedStatus(boolean selectedStatus) {
+    public void setSelectedStatus(String selectedStatus) {
         this.selectedStatus = selectedStatus;
     }
 
