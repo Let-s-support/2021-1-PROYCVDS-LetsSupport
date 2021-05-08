@@ -69,7 +69,7 @@
                                         <div>
                                             <p:selectOneMenu update="statusValue" value="#{needBean.selectedValue}" ajax="true"
                                                 valueChangeListener="#{needBean.handleChange}">
-                                                <p:ajax update="@statusValue"/>
+                                                <p:ajax update="statusValue"/>
                                                 <f:selectItems value="#{needBean.getNeedsList()}" />
                                             </p:selectOneMenu>
                                         </div>

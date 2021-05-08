@@ -1,6 +1,9 @@
 package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
+
+import org.primefaces.PrimeFaces;
+
 import edu.eci.cvds.entities.Needs;
 import edu.eci.cvds.services.MaxiumRequerementsServices;
 import edu.eci.cvds.services.NeedsServices;
@@ -55,16 +58,25 @@ public class NeedsServicesBean extends BasePageBean {
                     .get(0).getMneeds()) {
                 category_id = CategoriesServicesBean.getCategories_id()
                         .get(CategoriesServicesBean.getCategories().indexOf(selectedCategory));
-
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message",
+                        "Necesidad creada correctamente");
+                PrimeFaces.current().dialog().showMessageDynamic(message);
                 Needs need = new Needs(value, description, 1, category_id, urgencia, idsolicitante);
                 needsServices.agregarNecesidades(need);
             } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        "Error", "Su usuario ha alcanzado la cantidad maxima de necesidades que podia registrar"));
+                try {
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+                            "Ha creado la cantidad maxima de necesidades que podia registrar");
+                    PrimeFaces.current().dialog().showMessageDynamic(message);
+                    //FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         } catch (ServicesException ex) {
             throw new ServicesException("Error al agregar la necesidad", ex);
         }
+        cleanData();
     }
 
     /**

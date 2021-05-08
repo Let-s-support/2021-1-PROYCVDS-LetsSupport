@@ -1,6 +1,9 @@
 package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
+
+import org.primefaces.PrimeFaces;
+
 import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.entities.Status;
@@ -8,6 +11,7 @@ import edu.eci.cvds.services.CategoriesServices;
 import edu.eci.cvds.services.ServicesException;
 import edu.eci.cvds.services.StatusServices;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
@@ -96,11 +100,21 @@ public class CategoriesServicesBean extends BasePageBean {
 
             Categories categorie = new Categories(value, description, status);
             categoriesServices.agregarCategoria(categorie);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message",
+                            "Categoria creada correctamente");
+                    PrimeFaces.current().dialog().showMessageDynamic(message);
+                    //FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
+            System.out.println("Categoria creada");
         } catch (ServicesException ex) {
             throw new ServicesException("El item no esta registrado", ex);
         }
+        cleanData();
     }
 
+    public void cleanData() {
+        this.value = "";
+        this.description = "";
+    }
     /**
      * Es usado controlar la funcionalidad de modificar datos de categoria desde la
      * interfaz

@@ -67,7 +67,7 @@ public class OffersServicesBean extends BasePageBean {
                             "Oferta creada correctamente");
                     PrimeFaces.current().dialog().showMessageDynamic(message);
                     //FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
-                    System.out.println("Categoria creada");
+                    System.out.println("Oferta creada");
                 } catch (Exception e) {
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
                             "Ha ocurrido un error");
