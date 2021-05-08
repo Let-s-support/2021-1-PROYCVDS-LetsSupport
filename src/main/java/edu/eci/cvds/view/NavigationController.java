@@ -1,10 +1,12 @@
 package edu.eci.cvds.view;
 
+import java.io.IOException;
 import java.io.Serializable;  
 
 import javax.faces.bean.ManagedBean; 
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "navigationController", eager = true)
 @SessionScoped
@@ -34,7 +36,12 @@ public class NavigationController implements Serializable {
     }
 
     public void setShowOffers(boolean showOffers) {
-        this.showOffers = showOffers;
+        try {
+            this.showOffers = showOffers;
+            FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
