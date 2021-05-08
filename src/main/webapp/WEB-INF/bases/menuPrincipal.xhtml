@@ -28,6 +28,10 @@
                             <a class="dropdown-item" href="/app/createNeed.xhtml">Crear</a>
                             <a class="dropdown-item" href="/app/updateNeed.xhtml">Actualizar</a>
                             <a class="dropdown-item" href="/app/needReport.xhtml">Generar Reporte</a>
+                            <h:form>
+                            <h:commandButton value="Ofertas" class="dropdown-item" 
+                                action="#{navigationController.setShowOffers(false)}" />
+                            </h:form>
                         </div>
                     </li>
 
