@@ -26,16 +26,6 @@
         </div>
         <div>
             <div>
-                <div class="col-12 mx-auto mt-5 d-flex justify-content-center">
-                    <h:form>
-                        <div class="mx-auto">
-                            <h:commandButton value="Ofertas" class="button-table" style="margin-inline-end:10px;"
-                                action="#{navigationController.setShowOffers(true)}" />
-                            <h:commandButton value="Necesidades" class="button-table" style="margin:10px;"
-                                action="#{navigationController.setShowOffers(false)}" />
-                        </div>
-                    </h:form>
-                </div>
                 <h:form id="formTable">
                     <ui:fragment rendered="#{navigationController.isShowOffers()}">
                         <h1
@@ -53,7 +43,6 @@
                                         <th  class="text-light">Descripcion</th>
                                         <th  class="text-light">Fecha de creacion</th>
                                         <th  class="text-light">Opciones</th>
-                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -94,7 +83,6 @@
                                         <th  >Categoria</th>
                                         <th  >Fecha de creacion</th>
                                         <th  >Opciones</th>
-                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
