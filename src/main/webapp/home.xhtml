@@ -42,71 +42,79 @@
                             style="font-size: 50px; color: white; display: block; background-color:#333; text-align:center;">
                             Ofertas
                         </h1>
-                        <div class="table card">
-                            <p:dataTable var="offer" value="#{offerBean.AllOffers()}">
 
-                                <p:column class="text-center mx-auto"  headerText="Categoria">
-                                    <h:outputText class="text-center mx-auto" value="#{offer.category_id}" />
-                                </p:column>
-
-                                <p:column class="text-center" headerText="Nombre">
-                                    <h:outputText class="text-center mx-auto" value="#{offer.value}" />
-                                </p:column>
-
-                                <p:column class="text-center mx-auto" headerText="Descripción">
-                                    <h:outputText class="text-center mx-auto" value="#{offer.description}" />
-                                </p:column>
-
-                                <p:column class="text-center mx-auto" headerText="Fecha Creacion">
-                                    <h:outputText class="text-center mx-auto" value="#{offer.creationdate}" />
-                                </p:column>
-
-                                <p:column class="text-center mx-auto" headerText="Opciones">
-                                    <div class="mx-auto">
-                                        <h:commandButton value="Responder" class="btn btn-secondary mx-auto"  update="formTable"
-                                            action="#{answerBean.setData('offer', offer.value, offer.description, offer.id, offer.idsolicitante)}" />
-                                    </div>
-
-                                </p:column>
-                            </p:dataTable>
+                        <div class="col-xs-5 container pt-5 text-center">
+                            <table id="initiativeTable" class="display table table-bordered table-light  table-hover">
+        
+                                <thead>
+                                    <tr class="bg-dark">
+                                        <th  class="text-light">Categoria</th>
+                                        <th  class="text-light">Nombre</th>
+                                        <th  class="text-light">Descripcion</th>
+                                        <th  class="text-light">Fecha de creacion</th>
+                                        <th  class="text-light">Opciones</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ui:repeat var="offer" value="#{offerBean.AllOffers()}">
+                                        <tr>
+        
+                                            <td>#{offer.category_id}</td>
+                                            <td>#{offer.value}</td>
+                                            <td>#{offer.description}</td>
+                                            <td>#{offer.creationdate}</td>
+                                            <td>
+                                                <h:form id="formTable">
+                                                    <h:commandButton value="Responder" class="btn btn-secondary mx-auto"  update="formTable"
+                                                    action="#{answerBean.setData('offer', offer.value, offer.description, offer.id, offer.idsolicitante)}" />
+                                                </h:form>
+                                            </td>
+                                        </tr>
+                                    </ui:repeat>
+                                </tbody>
+                            </table>
                         </div>
+
+
                     </ui:fragment>
 
                     <ui:fragment rendered="#{!(navigationController.isShowOffers())}">
                         <h1
                             style="font-size: 50px; color: white; display: block; background-color:#333; text-align:center;">
-                            Necesidades</h1>
-                        <h:form>
-                            <div class="card">
-                                <p:dataTable var="need" value="#{needBean.AllNeeds()}">
-                                    <p:column class="text-center mx-auto" headerText="Nombre">
-                                        <h:outputText class="text-center mx-auto" value="#{need.value}" />
-                                    </p:column>
-    
-                                    <p:column class="text-center mx-auto" headerText="Descripción">
-                                        <h:outputText class="text-center mx-auto" value="#{need.description}" />
-                                    </p:column>
-    
-                                    <p:column class="text-center mx-auto" headerText="Category">
-                                        <h:outputText class="text-center mx-auto" value="#{need.category_id}" />
-                                    </p:column>
-    
-                                    <p:column class="text-center mx-auto" headerText="Fecha de creacion">
-                                        <h:outputText class="text-center" value="#{need.creationdate}" />
-                                    </p:column>
-    
-
-                                    <p:column class="text-center mx-auto" headerText="Opciones">
-                                        <div class="mx-auto">
-                                            <h:commandButton value="Responder" class="btn btn-secondary" update="formTable"
-                                            action="#{answerBean.setData('need', need.value, need.description, need.id, need.idsolicitante)}"/>
-                                        </div>
-
-                                    </p:column>
-    
-                                </p:dataTable>
-                            </div>
-                        </h:form>
+                            Necesidades
+                        </h1>
+                        <div class="col-xs-5 container pt-5 text-center">
+                            <table id="initiativeTable" class="display table table-bordered table-light  table-hover">
+        
+                                <thead>
+                                    <tr class="bg-dark  text-light">
+                                        <th  >Nombre</th>
+                                        <th  >Descripcion</th>
+                                        <th  >Categoria</th>
+                                        <th  >Fecha de creacion</th>
+                                        <th  >Opciones</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ui:repeat var="need" value="#{needBean.AllNeeds()}">
+                                        <tr>
+                                            <td>#{need.value}</td>
+                                            <td>#{need.description}</td>
+                                            <td>#{need.category_id}</td>
+                                            <td>#{need.creationdate}</td>
+                                            <td>
+                                                <h:form id="formTable">
+                                                    <h:commandButton value="Responder" class="btn btn-secondary" update="formTable"
+                                                    action="#{answerBean.setData('need', need.value, need.description, need.id, need.idsolicitante)}"/>
+                                              </h:form>
+                                            </td>
+                                        </tr>
+                                    </ui:repeat>
+                                </tbody>
+                            </table>
+                        </div>
                     </ui:fragment>
                 </h:form>
             </div>
