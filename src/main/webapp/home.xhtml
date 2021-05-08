@@ -26,10 +26,9 @@
         </div>
         <div>
             <div>
-                <div style="padding-left: 40%;">
-                    <br />
+                <div class="col-12 mx-auto mt-5 d-flex justify-content-center">
                     <h:form>
-                        <div style="display:inline">
+                        <div class="mx-auto">
                             <h:commandButton value="Ofertas" class="button-table" style="margin-inline-end:10px;"
                                 action="#{navigationController.setShowOffers(true)}" />
                             <h:commandButton value="Necesidades" class="button-table" style="margin:10px;"
@@ -43,28 +42,30 @@
                             style="font-size: 50px; color: white; display: block; background-color:#333; text-align:center;">
                             Ofertas
                         </h1>
-                        <div class="card">
+                        <div class="table card">
                             <p:dataTable var="offer" value="#{offerBean.AllOffers()}">
 
-                                <p:column headerText="Categoria">
-                                    <h:outputText value="#{offer.category_id}" />
+                                <p:column class="text-center mx-auto"  headerText="Categoria">
+                                    <h:outputText class="text-center mx-auto" value="#{offer.category_id}" />
                                 </p:column>
 
-                                <p:column headerText="Nombre">
-                                    <h:outputText value="#{offer.value}" />
+                                <p:column class="text-center" headerText="Nombre">
+                                    <h:outputText class="text-center mx-auto" value="#{offer.value}" />
                                 </p:column>
 
-                                <p:column headerText="Descripción">
-                                    <h:outputText value="#{offer.description}" />
+                                <p:column class="text-center mx-auto" headerText="Descripción">
+                                    <h:outputText class="text-center mx-auto" value="#{offer.description}" />
                                 </p:column>
 
-                                <p:column headerText="Fecha Creacion">
-                                    <h:outputText value="#{offer.creationdate}" />
+                                <p:column class="text-center mx-auto" headerText="Fecha Creacion">
+                                    <h:outputText class="text-center mx-auto" value="#{offer.creationdate}" />
                                 </p:column>
 
-                                <p:column headerText="Opciones">
-                                    <h:commandButton value="Responder" class="button"  update="formTable"
-                                        action="#{answerBean.setData('offer', offer.value, offer.description, offer.id, offer.idsolicitante)}" />
+                                <p:column class="text-center mx-auto" headerText="Opciones">
+                                    <div class="mx-auto">
+                                        <h:commandButton value="Responder" class="btn btn-secondary mx-auto"  update="formTable"
+                                            action="#{answerBean.setData('offer', offer.value, offer.description, offer.id, offer.idsolicitante)}" />
+                                    </div>
 
                                 </p:column>
                             </p:dataTable>
@@ -78,26 +79,28 @@
                         <h:form>
                             <div class="card">
                                 <p:dataTable var="need" value="#{needBean.AllNeeds()}">
-                                    <p:column headerText="Nombre">
-                                        <h:outputText value="#{need.value}" />
+                                    <p:column class="text-center mx-auto" headerText="Nombre">
+                                        <h:outputText class="text-center mx-auto" value="#{need.value}" />
                                     </p:column>
     
-                                    <p:column headerText="Descripción">
-                                        <h:outputText value="#{need.description}" />
+                                    <p:column class="text-center mx-auto" headerText="Descripción">
+                                        <h:outputText class="text-center mx-auto" value="#{need.description}" />
                                     </p:column>
     
-                                    <p:column headerText="Category">
-                                        <h:outputText value="#{need.category_id}" />
+                                    <p:column class="text-center mx-auto" headerText="Category">
+                                        <h:outputText class="text-center mx-auto" value="#{need.category_id}" />
                                     </p:column>
     
-                                    <p:column headerText="Fecha de creacion">
-                                        <h:outputText value="#{need.creationdate}" />
+                                    <p:column class="text-center mx-auto" headerText="Fecha de creacion">
+                                        <h:outputText class="text-center" value="#{need.creationdate}" />
                                     </p:column>
     
 
-                                    <p:column headerText="Opciones">
-                                        <h:commandButton value="Responder" class="button" update="formTable"
-                                        action="#{answerBean.setData('need', need.value, need.description, need.id, need.idsolicitante)}"/>
+                                    <p:column class="text-center mx-auto" headerText="Opciones">
+                                        <div class="mx-auto">
+                                            <h:commandButton value="Responder" class="btn btn-secondary" update="formTable"
+                                            action="#{answerBean.setData('need', need.value, need.description, need.id, need.idsolicitante)}"/>
+                                        </div>
 
                                     </p:column>
     

@@ -20,43 +20,44 @@
             <p:autoUpdate />
         </p:messages>
         <div class="body" style="height: 100vh; padding-bottom: 5%;">
-            <ui:include src="/WEB-INF/bases/menuPrincipal.xhtml" />    
-            <h1 class="title">Actualizar Oferta</h1>
-            <div style="height: auto;">
-                <h:form id="form">
-                    <p:growl autoUpdate="true" />
-                    <div style="width: 40%; margin: 0 auto;">
-                        <p:panel class="container">
-                            <f:facet name="header">Información</f:facet>
-                            <h:panelGrid columns="1" style="margin: 0 auto;">
-                                <div class="">
-                                    <label style="font-weight:bold">Oferta a modificar</label>
-                                    <div style="flex-direction:row;">
-                                        <div>
-                                            <p:selectOneMenu update="statusValue" id="menuList" value="#{offerBean.selectedValue}"
-                                                valueChangeListener="#{offerBean.handleChange}" ajax="true">
-                                                <p:ajax update="statusValue"/>
-                                                <f:selectItems value="#{offerBean.getOffersList()}" />
-                                            </p:selectOneMenu>
+            <ui:include src="/WEB-INF/bases/menuPrincipal.xhtml" />  
+            <div class="bg-dark mt-5 col-4 mx-auto pb-3">
+                <h1 class="text-light text-center">Actualizar Oferta</h1>
+                <div style="height: auto;">
+                    <h:form id="form">
+                        <p:growl autoUpdate="true" />
+                        <div style="margin: 0">
+                            <p:panel class="container">
+                                <h:panelGrid columns="1" style="margin: 0 auto;">
+                                    <div class="">
+                                        <label style="font-weight:bold">Oferta a modificar</label>
+                                        <div style="flex-direction:row;">
+                                            <div>
+                                                <p:selectOneMenu update="statusValue" id="menuList" value="#{offerBean.selectedValue}"
+                                                    valueChangeListener="#{offerBean.handleChange}" ajax="true">
+                                                    <p:ajax update="statusValue"/>
+                                                    <f:selectItems value="#{offerBean.getOffersList()}" />
+                                                </p:selectOneMenu>
+                                            </div>
                                         </div>
+                                        <div style="margin-top: 10px;">
+                                            <label style="font-weight:bold;">Estado</label>
+                                        </div>
+                                        <h:selectOneMenu id="statusValue" value="#{offerBean.selectedStatus}" ajax="true">
+                                            <p:ajax update="statusValue"/>
+                                            <f:selectItems value="#{offerBean.getStatusList()}" />
+                                        </h:selectOneMenu>
                                     </div>
-                                    <div style="margin-top: 10px;">
-                                        <label style="font-weight:bold;">Estado</label>
-                                    </div>
-                                    <h:selectOneMenu id="statusValue" value="#{offerBean.selectedStatus}" ajax="true">
-                                        <p:ajax update="statusValue"/>
-                                        <f:selectItems value="#{offerBean.getStatusList()}" />
-                                    </h:selectOneMenu>
-                                </div>
-                            </h:panelGrid>
-                            <h:form>
-                                <h:commandButton value="Actualizar" title="Crear"
-                                    action="#{offerBean.ModificarEstadoOffer()}" class="button" />
-                            </h:form>
-                        </p:panel>
-                    </div>
-                </h:form>
-            </div>
+                                </h:panelGrid>
+                                <h:form>
+                                    <h:commandButton value="Actualizar" title="Crear"
+                                        action="#{offerBean.ModificarEstadoOffer()}" class="btn btn-dark pl-5 pr-5 mt-3" />
+                                </h:form>
+                            </p:panel>
+                        </div>
+                    </h:form>
+                </div>
+            </div>  
         </div>
     </h:body>
 </f:view>

@@ -18,53 +18,54 @@
     <h:body style="margin: 0%;">
         <div class="body" style="padding-bottom: 5%;">
             <ui:include src="/WEB-INF/bases/menuPrincipal.xhtml" />
-            <h1 class="title" style="text-align:center">Realizar Respuesta</h1>
-            <div>
-                <h:form>
-                    <p:growl autoUpdate="true" />
-                    <div style="width: 60%; margin: 0 auto;">
-                        <p:panel class="container">
-                            <f:facet style="background-color:green;" name="header">Datos de tu respuesta</f:facet>
-                            <h:panelGrid columns="1" style="margin: 0 auto;">
-                                <ui:fragment rendered="#{answerBean.type == 'offer'}">
-                                    <div>
-                                        <h:outputLabel style="font-weight: bold;" value="Necesidad: " />
-                                        <h:outputLabel value="#{answerBean.value}" />
+            <div class="col-6 bg-dark mx-auto m-0 p-0 pb-3">
+                <h1 class="bg-dark text-light col-12 w-100 mx-auto mt-5" style="text-align:center">Realizar Respuesta</h1>
+                <div class="col-12 m-1 mx-auto">
+                    <h:form>
+                        <p:growl autoUpdate="true" />
+                        <div style="margin: 0;">
+                            <p:panel class="container">
+                                <h:panelGrid columns="1" style="margin: 0 auto;">
+                                    <ui:fragment rendered="#{answerBean.getType() == 'offer'}">
+                                        <div>
+                                            <h:outputLabel style="font-weight: bold;" value="Oferta: " />
+                                            <h:outputLabel value="#{answerBean.value}" />
+                                        </div>
+                                        <div>
+                                            <h:outputLabel style="font-weight: bold;" value="Descripción: " />
+                                            <h:outputLabel value="#{answerBean.description}" />
+                                        </div>
+                                    </ui:fragment>
+                                    <ui:fragment rendered="#{answerBean.getType() == 'need'}">
+                                        <div>
+                                            <h:outputLabel style="font-weight: bold;" value="Necesidad: " />
+                                            <h:outputLabel value="#{answerBean.value}" />
+                                        </div>
+                                        <div>
+                                            <h:outputLabel style="font-weight: bold;" value="Descripción: " />
+                                            <h:outputLabel value="#{answerBean.description}" />
+                                        </div>
+                                    </ui:fragment>
+                                    <div style="display: inline;">
+                                        <div style="margin-top: 20px;">
+                                            <h:outputLabel style="font-weight: bold;" value="Titulo" />
+                                            <h:inputText class="text-center" id="value" value="#{needBean.value}" required="true" label="Nombre" />
+                                        </div>
+                                        <div style="margin-top: 20px;">
+                                            <h:outputLabel  style="font-weight: bold;" value="Comentarios: " />
+                                            <p:inputTextarea class="text-center" id="comentary" rows="6" cols="33" value="#{answerBean.comentary}"
+                                                label="Comentarios" />
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h:outputLabel style="font-weight: bold;" value="Descripción: " />
-                                        <h:outputLabel value="#{answerBean.description}" />
-                                    </div>
-                                </ui:fragment>
-                                <ui:fragment rendered="#{answerBean.type == 'need'}">
-                                    <div>
-                                        <h:outputLabel style="font-weight: bold;" value="Necesidad: " />
-                                        <h:outputLabel value="#{answerBean.value}" />
-                                    </div>
-                                    <div>
-                                        <h:outputLabel style="font-weight: bold;" value="Descripción: " />
-                                        <h:outputLabel value="#{answerBean.description}" />
-                                    </div>
-                                </ui:fragment>
-                                <div style="display: inline;">
-                                    <div style="margin-top: 20px;">
-                                        <h:outputLabel style="font-weight: bold;" value="Titulo" />
-                                        <h:inputText id="value" value="#{needBean.value}" required="true" label="Nombre" />
-                                    </div>
-                                    <div style="margin-top: 20px;">
-                                        <h:outputLabel style="font-weight: bold;" value="Comentarios: " />
-                                        <p:inputTextarea id="comentary" rows="6" cols="33" value="#{answerBean.comentary}"
-                                            label="Comentarios" />
-                                    </div>
-                                </div>
-                            </h:panelGrid>
-                            <h:form>
-                                <h:commandButton value="Enviar Respuesta" title="Enviar Respuesta" action="#{answerBean.agregarRespuesta()}"
-                                    class="button" ajax="false" />
-                            </h:form>
-                        </p:panel>
-                    </div>
-                </h:form>
+                                </h:panelGrid>
+                                <h:form>
+                                    <h:commandButton value="Enviar Respuesta" title="Enviar Respuesta" action="#{answerBean.agregarRespuesta()}"
+                                        class="btn btn-dark" ajax="false" />
+                                </h:form>
+                            </p:panel>
+                        </div>
+                    </h:form>
+                </div>
             </div>
         </div>
     </h:body>

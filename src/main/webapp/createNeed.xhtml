@@ -17,33 +17,37 @@
     <h:body style="margin: 0%;">
         <div class="body" style="padding-bottom: 5%;">
             <ui:include src="/WEB-INF/bases/menuPrincipal.xhtml" />
-            <h1 class="title">Crear Necesidad</h1>
-            <div>
-                <h:form>
-                    <p:growl autoUpdate="true" />
-                    <div style="width: 60%; margin: 0 auto;">
-                        <p:panel class="container">
-                            <f:facet name="header">Información</f:facet>
-                            <h:panelGrid columns="1" style="margin: 0 auto;">
-                                <div class="">
-                                    Categoria
-                                    <h:selectOneMenu value="#{needBean.selectedCategory}">
-                                        <f:selectItems value="#{categoryBean.traerCategories()}" />
-                                    </h:selectOneMenu>
-                                    Nombre
-                                    <h:inputText id="value" value="#{needBean.value}" required="true" label="Nombre" />
-                                    Descripción
-                                    <p:inputTextarea maxlength="500" id="description" rows="6" cols="33" value="#{needBean.description}" label="Descripción"/>
-                                    Urgencia
-                                    <h:inputText type="number" id="urgencia" value="#{needBean.urgencia}" required="true" label="Urgencia" />
-                                </div>
-                            </h:panelGrid>
-                            <h:form>
-                                <h:commandButton value="Crear" title="Crear" action="#{needBean.agregarNecesidades()}" class="button" ajax="false"/>
-                        </h:form>
-                        </p:panel>
-                    </div>
-                </h:form>
+            <div class="mt-5 col-6 mx-auto bg-dark pb-3">
+                <h1 class="text-center mx-auto text-light">Crear Necesidad</h1>
+                <div>
+                    <h:form>
+                        <p:growl autoUpdate="true" />
+                        <div style="margin: 0;">
+                            <p:panel class="container">
+                                <h:panelGrid columns="1" style="margin: 0 auto;">
+                                    <div class="fluid-container">
+                                        <strong class="text-dark">Categoria</strong>
+                                        <h:selectOneMenu value="#{needBean.selectedCategory}">
+                                            <f:selectItems value="#{categoryBean.traerCategories()}" />
+                                        </h:selectOneMenu>
+
+                                        <strong class="text-dark">Nombre</strong>
+                                        <h:inputText id="value" value="#{needBean.value}" required="true" label="Nombre" />
+
+                                        <strong class="text-dark">Descripción</strong>
+                                        <p:inputTextarea maxlength="500" id="description" rows="6" cols="33" value="#{needBean.description}" label="Descripción"/>
+
+                                        <strong class="text-dark">Urgencia</strong>
+                                        <h:inputText type="number" id="urgencia" value="#{needBean.urgencia}" required="true" label="Urgencia" />
+                                    </div>
+                                </h:panelGrid>
+                                <h:form>
+                                    <h:commandButton value="Crear" title="Crear" action="#{needBean.agregarNecesidades()}" class="btn btn-dark pl-5 pr-5 mt-3" ajax="false"/>
+                            </h:form>
+                            </p:panel>
+                        </div>
+                    </h:form>
+                </div>
             </div>
         </div>
     </h:body>

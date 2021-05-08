@@ -8,9 +8,11 @@
   font-weight: bold;
   color: rgb(69, 69, 71);
 }
+
 .button-table {
   background-color: #333;
   border: none;
+  border-radius: 2px;
   color: white;
   padding: 15px 32px;
   text-align: center;

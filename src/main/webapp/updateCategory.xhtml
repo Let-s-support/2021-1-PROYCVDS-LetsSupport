@@ -5,11 +5,18 @@
 
 <link rel="stylesheet" type="text/css" href="styles/category.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
 
 <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
     <h:head>
@@ -17,16 +24,15 @@
     <h:body style="margin: 0%;">
         <div class="body" style="height: auto; padding-bottom: 5%;">
             <ui:include src="/WEB-INF/bases/menuPrincipal.xhtml" />
-            <h1 class="title">Actualizar Categoria</h1>
-            <div style="height: auto;">
-                <h:form id="form">
-                    <p:growl autoUpdate="true" />
-                    <div style="width: 60%; margin: 0 auto;">
-                        <p:panel class="container">
-                            <f:facet name="header">Información</f:facet>
-                            <h:panelGrid columns="1" style="margin: 0 auto;">
-                                <div class="">
-                                    Categoria a modificar
+            <div class="bg-dark col-8 mx-auto mt-5 pb-3">
+                <h1 class="text-light text-center">Actualizar Categoria</h1>
+                <div style="height: auto;">
+                    <h:form id="form">
+                        <p:growl autoUpdate="true" />
+                        <div style="margin: 0;">
+                            <p:panel class="container">
+                                <h:panelGrid columns="1" style="margin: 0 auto;">
+                                    <strong>Categoria a modificar</strong>
                                     <div style="flex-direction:row;">
                                         <!--Actualizar el estilo-->
                                         <div>
@@ -39,24 +45,24 @@
                                                 action="#{categoryBean.handleChange()}" />
                                         </div>
                                     </div>
-                                    Nombre
-                                    <h:inputText id="value" value="#{categoryBean.value}" label="Nombre" />
-                                    Descripción
-                                    <p:inputTextarea maxlength="500" id="description" rows="6" cols="33"
+                                    <strong>Nombre</strong>
+                                    <h:inputText class="text-center" id="value" value="#{categoryBean.value}" label="Nombre" />
+                                    <strong>Descripción</strong>
+                                    <p:inputTextarea class="text-center" maxlength="500" id="description" rows="6" cols="33"
                                         value="#{categoryBean.description}" label="Descripción" />
-                                    Estado
+                                    <strong>Estado</strong>
                                     <h:selectOneMenu value="#{categoryBean.selectedStatus}">
                                         <f:selectItems value="#{categoryBean.estado()}" />
                                     </h:selectOneMenu>
-                                </div>
-                            </h:panelGrid>
-                            <h:form>
-                                <h:commandButton value="Actualizar" title="Crear"
-                                    action="#{categoryBean.ModificarCategoria()}" class="button" />
-                            </h:form>
-                        </p:panel>
-                    </div>
-                </h:form>
+                                </h:panelGrid>
+                                <h:form>
+                                    <h:commandButton value="Actualizar" title="Crear"
+                                        action="#{categoryBean.ModificarCategoria()}" class="btn btn-dark pr-5 pl-5 mt-3" />
+                                </h:form>
+                            </p:panel>
+                        </div>
+                    </h:form>
+                </div>
             </div>
         </div>
     </h:body>
