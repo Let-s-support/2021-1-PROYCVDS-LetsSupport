@@ -104,15 +104,11 @@ public class NeedsServicesBean extends BasePageBean {
     }
 
     public void handleChange(ValueChangeEvent event) {
-        System.out.println("Selected Value:" + selectedValue);
-        System.out.println("Selected status:" + selectedStatus);
         for(Needs need: AllNeeds){
-            if(need.getValue() == selectedValue){
-                System.out.println(need);
+            if(need.getValue().equals(event.getNewValue().toString())){
                 selectedStatus = statusList.get(need.getStatus()-1);
             }
         }
-        System.out.println("HandleChangeEvent Called!!");
     }
 
     public List<String> getNeedsList() {
@@ -142,12 +138,11 @@ public class NeedsServicesBean extends BasePageBean {
     public void ModificarEstadoNeed() throws ServicesException {
         try {
             status = statusList.indexOf(selectedStatus);
-            System.out.println(status + " ___ " +selectedStatus + "___" + selectedValue);
             needsServices.ModificarEstadoNeed(selectedValue, status+1);
             cleanData();
-            // FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Estado actualizado correctamente"));
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message",
+                    "Necesidad actulizada correctamente");
+            PrimeFaces.current().dialog().showMessageDynamic(message);
         } catch (Exception ex) {
             throw new ServicesException("Error al agregar la necesidad", ex);
         }

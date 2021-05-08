@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:jsf="http://xmlns.jcp.org/jsf"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<link rel="stylesheet" type="text/css" href="styles/category.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+<f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
+    <h:head>
+    </h:head>
+    <h:body style="margin: 0%;">
+        <div class="body" style="padding-bottom: 5%;">
+            <ui:include src="/WEB-INF/bases/menuPrincipal.xhtml" />
+            <div class="mt-5 col-6 mx-auto bg-dark pb-3">
+                <h1 class="text-center mx-auto text-light">Eliminar Categoría</h1>
+                <div>
+                    <h:form>
+                        <p:growl autoUpdate="true" />
+                        <div style="margin: 0;">
+                            <p:panel class="container">
+                                <h:panelGrid columns="1" style="margin: 0 auto;">
+                                    <div class="fluid-container">
+                                        <strong class="text-dark">Categoría</strong>
+                                        <h:selectOneMenu valueChangeListener="#{categoryBean.handleChange}"
+                                            value="#{needBean.selectedCategory}" ajax="true" update="nameValue">
+                                            <p:ajax update="nameValue description" />
+                                            <f:selectItems value="#{categoryBean.traerCategories()}" />
+                                        </h:selectOneMenu>
+
+                                        <strong class="text-dark">Nombre</strong>
+                                        <h:inputText id="nameValue" disabled="true" value="#{categoryBean.value}"
+                                            required="true" label="Nombre" />
+
+                                        <strong class="text-dark">Descripción</strong>
+                                        <p:inputTextarea disabled="true" maxlength="500" id="description" rows="6"
+                                            cols="33" value="#{categoryBean.description}" label="Descripción" />
+                                    </div>
+                                </h:panelGrid>
+                                <h:form>
+                                    <h:commandButton value="Eliminar" title="Crear"
+                                        action="#{categoryBean.deleteCategory()}" class="btn btn-dark pl-5 pr-5 mt-3"
+                                        ajax="false" />
+                                </h:form>
+                            </p:panel>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</f:view>
+
+</html>

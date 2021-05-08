@@ -39,11 +39,11 @@
                                         <label style="font-weight:bold">Necesidad a modificar</label>
                                         <div style="flex-direction:row;">
                                             <div>
-                                                <p:selectOneMenu update="statusValue" value="#{needBean.selectedValue}"
+                                                <h:selectOneMenu update="statusValue" value="#{needBean.selectedValue}"
                                                     ajax="true" valueChangeListener="#{needBean.handleChange}">
                                                     <p:ajax update="statusValue" />
                                                     <f:selectItems value="#{needBean.getNeedsList()}" />
-                                                </p:selectOneMenu>
+                                                </h:selectOneMenu>
                                             </div>
                                         </div>
                                         <div style="margin-top: 10px;">

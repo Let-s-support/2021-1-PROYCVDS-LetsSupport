@@ -34,30 +34,29 @@
                                 <h:panelGrid columns="1" style="margin: 0 auto;">
                                     <strong>Categoria a modificar</strong>
                                     <div style="flex-direction:row;">
-                                        <!--Actualizar el estilo-->
                                         <div>
-                                            <h:selectOneMenu value="#{categoryBean.oldvalue}">
+                                            <h:selectOneMenu valueChangeListener="#{categoryBean.handleChange}"
+                                                value="#{categoryBean.oldvalue}" ajax="true" update="nameValue">
+                                                <p:ajax update="nameValue description status" />
                                                 <f:selectItems value="#{categoryBean.traerCategories()}" />
                                             </h:selectOneMenu>
                                         </div>
-                                        <div>
-                                            <h:commandButton value="Actualizar" title="Crear"
-                                                action="#{categoryBean.handleChange()}" />
-                                        </div>
                                     </div>
                                     <strong>Nombre</strong>
-                                    <h:inputText class="text-center" id="value" value="#{categoryBean.value}" label="Nombre" />
+                                    <h:inputText class="text-center" id="nameValue" value="#{categoryBean.value}"
+                                        label="Nombre" />
                                     <strong>Descripción</strong>
-                                    <p:inputTextarea class="text-center" maxlength="500" id="description" rows="6" cols="33"
-                                        value="#{categoryBean.description}" label="Descripción" />
+                                    <p:inputTextarea class="text-center" maxlength="500" id="description" rows="6"
+                                        cols="33" value="#{categoryBean.description}" label="Descripción" />
                                     <strong>Estado</strong>
-                                    <h:selectOneMenu value="#{categoryBean.selectedStatus}">
+                                    <h:selectOneMenu id ="status" value="#{categoryBean.selectedStatus}">
                                         <f:selectItems value="#{categoryBean.estado()}" />
                                     </h:selectOneMenu>
                                 </h:panelGrid>
                                 <h:form>
                                     <h:commandButton value="Actualizar" title="Crear"
-                                        action="#{categoryBean.ModificarCategoria()}" class="btn btn-dark pr-5 pl-5 mt-3" />
+                                        action="#{categoryBean.ModificarCategoria()}"
+                                        class="btn btn-dark pr-5 pl-5 mt-3" />
                                 </h:form>
                             </p:panel>
                         </div>
