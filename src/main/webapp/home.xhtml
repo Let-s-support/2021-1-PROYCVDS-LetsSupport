@@ -26,16 +26,6 @@
         </div>
         <div>
             <div>
-                <div class="col-12 mx-auto mt-5 d-flex justify-content-center">
-                    <h:form>
-                        <div class="mx-auto">
-                            <h:commandButton value="Ofertas" class="button-table" style="margin-inline-end:10px;"
-                                action="#{navigationController.setShowOffers(true)}" />
-                            <h:commandButton value="Necesidades" class="button-table" style="margin:10px;"
-                                action="#{navigationController.setShowOffers(false)}" />
-                        </div>
-                    </h:form>
-                </div>
                 <h:form id="formTable">
                     <ui:fragment rendered="#{navigationController.isShowOffers()}">
                         <h1 class="mt-5 bg-dark mx-auto text-center text-light col-10">Ofertas</h1>
