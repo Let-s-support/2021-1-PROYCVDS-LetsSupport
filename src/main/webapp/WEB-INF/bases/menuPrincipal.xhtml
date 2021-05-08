@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:jsf="http://xmlns.jcp.org/jsf"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">LetsSupport</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/app/home.xhtml">Home <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categoria
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/app/createCategory.xhtml">Crear</a>
+                            <a class="dropdown-item" href="#">Buscar</a>
+                            <a class="dropdown-item" href="/app/updateCategory.xhtml">Actualizar</a>
+                            <a class="dropdown-item" href="#">Eliminar</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Necesidades
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/app/createNeed.xhtml">Crear</a>
+                            <a class="dropdown-item" href="#">Buscar</a>
+                            <a class="dropdown-item" href="/app/updateNeed.xhtml">Actualizar</a>
+                            <a class="dropdown-item" href="#">Eliminar</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Ofertas
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/app/createOffer.xhtml">Crear</a>
+                            <a class="dropdown-item" href="#">Buscar</a>
+                            <a class="dropdown-item" href="/app/updateOffer.xhtml">Actualizar</a>
+                            <a class="dropdown-item" href="#">Eliminar</a>
+                        </div>
+                    </li>
+                </ul>
+                <h:form class="form-inline my-2 my-lg-0">
+                       <h:commandLink action="#{userBean.cerrarSesion()}" class="btn btn-outline-success my-2 my-sm-0" title="Logout">
+                            <span class="glyphicon glyphicon-log-out" style="color: black"></span>
+                            <span style="color: whitesmoke"> Log out</span>
+                        </h:commandLink>
+                </h:form>            
+            </div>
+        </div>
+    </nav>
+</ui:composition>
+                           
