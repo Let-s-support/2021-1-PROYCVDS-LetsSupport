@@ -3,6 +3,10 @@ package edu.eci.cvds.view;
 import com.google.inject.Inject;
 
 import org.primefaces.PrimeFaces;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.ChartSeries;
 
 import edu.eci.cvds.entities.Needs;
 import edu.eci.cvds.services.MaxiumRequerementsServices;
@@ -30,6 +34,7 @@ public class NeedsServicesBean extends BasePageBean {
     @Inject
     MaxiumRequerementsServices maxiumRequerementsServices;
 
+    private BarChartModel graphic;
     private int id;
     private String value;
     private String description;
@@ -146,6 +151,43 @@ public class NeedsServicesBean extends BasePageBean {
         } catch (Exception ex) {
             throw new ServicesException("Error al agregar la necesidad", ex);
         }
+    }
+
+
+    
+    public BarChartModel getGrafico() {
+        createBarModel();
+        return graphic;
+    }
+
+
+    private BarChartModel initBarModel() {
+        BarChartModel model = new BarChartModel();
+        ChartSeries graph = new ChartSeries();
+        graph.setLabel("Algooo");
+
+
+        for(Needs need: AllNeeds){
+            graph.set(need.getValue(),500 );
+        }
+
+        model.addSeries(graph);
+
+        return model;
+    }
+
+    private void createBarModel() {
+        graphic = initBarModel();
+        graphic.setTitle("Algomassss");
+        graphic.setLegendPosition("ne");
+
+        
+        Axis xAxis = graphic.getAxis(AxisType.X);
+
+        Axis yAxis = graphic.getAxis(AxisType.Y);
+        yAxis.setLabel("eje Y");
+        yAxis.setMin(0);
+        yAxis.setMax(1000);
     }
 
     public void cleanData() {
