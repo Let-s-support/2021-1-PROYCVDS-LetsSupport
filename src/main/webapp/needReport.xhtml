@@ -31,41 +31,9 @@
             </p:messages>
             <ui:include src="/WEB-INF/bases/menuPrincipal.xhtml" />
         </div>
-        <div>
-            <div>
-                <h:form id="formTable">
-                    <h1 class="mt-5 bg-dark mx-auto text-center text-light col-10">Reporte de necesidades</h1>
-                    <div class="col-xs-5 container text-center">
-                        <table id="initiativeTable" class="display table table-bordered table-light  table-hover">
-                            <thead>
-                                <tr class="bg-dark text-light">
-                                    <th>ID</th>
-                                    <th>Categoria</th>
-                                    <th>Nombre</th>
-                                    <th>Descripcion</th>
-                                    <th>Fecha de creación</th>
-                                    <th>Fecha de modificación</th>
-                                    <th>Usuario</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <ui:repeat var="need" value="#{needBean.AllNeeds()}">
-                                    <tr>
-                                        <td>#{need.id}</td>
-                                        <td>#{need.category_id}</td>
-                                        <td>#{need.value}</td>
-                                        <td>#{need.description}</td>
-                                        <td>#{need.creationdate}</td>
-                                        <td>#{need.modificationdate}</td>
-                                        <td>#{need.idsolicitante}</td>
-                                    </tr>
-                                </ui:repeat>
-                            </tbody>
-                        </table>
-                    </div>
-                </h:form>
-            </div>
-        </div>
+        <h:form id="formConsutlArea" >
+            <p:chart type="pie" class="bg-primary" model="#{needBean.getPieModel()}" style="width:400px;height:300px"/>
+        </h:form>
     </h:body>
 </f:view>
 
