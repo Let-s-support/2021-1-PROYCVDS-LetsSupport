@@ -167,27 +167,28 @@ public class NeedsServicesBean extends BasePageBean {
 
     private HorizontalBarChartModel initBarModel() {
         HorizontalBarChartModel model = new HorizontalBarChartModel();
-        BarChartSeries chatActives = new BarChartSeries();
-        BarChartSeries chatInactives = new BarChartSeries();
-        chatActives.setLabel("Activas");
-        chatActives.setLabel("Inactivas");
-
-        int[] values = new int[2];
+        BarChartSeries chatSeries = new BarChartSeries();
+        chatSeries.setLabel("Necesidades");
+        model.setSeriesColors("B40001,93b75f,E7E658,cc6666");
+        int[] values = new int[4];
 
         for(Needs need: AllNeeds){
-            if(need.getStatus() == 0){
+            if(need.getStatus() == 1){
                 values[0] +=1;                
-            }else if(need.getStatus() == 1){
+            }else if(need.getStatus() == 2){
                 values[1] +=1;                
             }
+            else if(need.getStatus() == 3){
+                values[2] +=1;                
+            }else if(need.getStatus() == 4){
+                values[3] +=1;                
+            }
         }
-        
-        System.out.println(values);
-        chatInactives.set("Inactiva", values[0]);
-        chatActives.set("Activa", values[1]);
-        model.addSeries(chatActives);
-        model.addSeries(chatInactives);
-
+        chatSeries.set("Abierta", values[0]);
+        chatSeries.set("Cerrada", values[1]);    
+        chatSeries.set("En Proceso ", values[2]);    
+        chatSeries.set("Resuelta", values[3]);        
+        model.addSeries(chatSeries);
         return model;
     }
 
@@ -196,14 +197,10 @@ public class NeedsServicesBean extends BasePageBean {
         graphic = initBarModel();
         graphic.setTitle("Necesidades agrupadas por estado");
         graphic.setLegendPosition("ne");
-
         
         Axis xAxis = graphic.getAxis(AxisType.X);
-
         Axis yAxis = graphic.getAxis(AxisType.Y);
-        yAxis.setLabel("eje Y");
         yAxis.setMin(0);
-        yAxis.setMax(1000);
     }
 
     public void cleanData() {
