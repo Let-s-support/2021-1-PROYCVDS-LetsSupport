@@ -25,12 +25,64 @@
         <p:messages id="messages" showDetail="true" closable="true">
             <p:autoUpdate />
         </p:messages>
-        <div class="body" style="height: 100vh; padding-bottom: 5%;">
+        <div class="body" style="height: auto; padding-bottom: 5%;">
             <ui:include src="/WEB-INF/bases/menuPrincipal.xhtml" />
             <div class="container bg-light mt-5">
                 <h1>Reporte de Necesidad</h1>
                 <p:chart type="bar" model="#{needBean.getGrafico()}" style="height:300px" />
             </div>
+            <h:form>
+                <h1 class="mt-5 bg-dark mx-auto text-center text-light col-10">Necesidades</h1>
+                <div class="col-10 mx-auto">
+                    <p:dataTable id="mydata" var="need" value="#{needBean.AllNeeds()}">
+                        <p:column class="text-center mx-auto" headerText="ID">
+                            <h:outputText class="text-center mx-auto" value="#{need.id}" />
+                        </p:column>
+
+                        <p:column class="text-center mx-auto" headerText="Category">
+                            <h:outputText class="text-center mx-auto" value="#{need.category_id}" />
+                        </p:column>
+
+                        <p:column class="text-center mx-auto" headerText="Nombre">
+                            <h:outputText class="text-center mx-auto" value="#{need.value}" />
+                        </p:column>
+
+                        <p:column class="text-center mx-auto" headerText="Descripción">
+                            <h:outputText class="text-center mx-auto" value="#{need.description}" />
+                        </p:column>
+
+
+                        <p:column class="text-center mx-auto" headerText="Fecha de creacion">
+                            <h:outputText class="text-center" value="#{need.creationdate}" />
+                        </p:column>
+
+                        <p:column class="text-center mx-auto" headerText="Estado">
+                            <h:outputText class="text-center mx-auto" value="#{need.status}" />
+                        </p:column>
+
+                        <p:column class="text-center mx-auto" headerText="Fecha de modificación">
+                            <h:outputText class="text-center mx-auto" value="#{need.modificationdate}" />
+                        </p:column>
+
+                        <p:column class="text-center mx-auto" headerText="Usuario">
+                            <h:outputText class="text-center mx-auto" value="#{need.idsolicitante}" />
+                        </p:column>
+                    </p:dataTable>
+                </div>
+
+                <h1 class="text-center text-light bg-dark col-10 mx-auto mt-5">Exportar</h1>
+                <div class="mx-auto d-flex justify-content-center">
+                    <h:commandLink class="m-3">
+                        <p:graphicImage value="./icons/excel.png" style="width:50px; height:50px;" />
+                        <p:dataExporter type="xls" postProcessor="#{navigationController.postProcessXLS}"
+                            target="mydata" fileName="needReport" />
+                    </h:commandLink>
+                    <h:commandLink class="m-3">
+                        <p:graphicImage value="./icons/pdf.png" style="width:50px; height:50px;" />
+                        <p:dataExporter type="pdf" target="mydata" fileName="needReport" />
+                    </h:commandLink>
+                </div>
+            </h:form>
         </div>
     </h:body>
 </f:view>

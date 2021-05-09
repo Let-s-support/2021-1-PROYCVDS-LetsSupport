@@ -103,6 +103,10 @@ public class NeedsServicesBean extends BasePageBean {
         }
     }
 
+    /**
+     * Obtiene los estados de las necesidades
+     * @return
+     */
     public List<String> getStatusList() {
         statusList = new ArrayList<String>();
         statusList.add("Activa");
@@ -112,6 +116,10 @@ public class NeedsServicesBean extends BasePageBean {
         return statusList;
     }
 
+    /**
+     * Permite detectar el cambio en el "select" de los formularios en front
+     * @param event
+     */
     public void handleChange(ValueChangeEvent event) {
         for(Needs need: AllNeeds){
             if(need.getValue().equals(event.getNewValue().toString())){
@@ -120,6 +128,10 @@ public class NeedsServicesBean extends BasePageBean {
         }
     }
 
+    /**
+     * Devuelve una lista de los nombres de las necesidades
+     * @return
+     */
     public List<String> getNeedsList() {
         AllNeeds();
         getStatusList();
@@ -157,14 +169,20 @@ public class NeedsServicesBean extends BasePageBean {
         }
     }
 
-
-    
+    /**
+     * Obtener el grafico para mostrar en la interfaz grafica
+     * @return
+     */    
     public HorizontalBarChartModel getGrafico() {
         createBarModel();
         return graphic;
     }
 
 
+    /**
+     * Asigna los elementos para mostrar en cada una de las barras
+     * @return
+     */
     private HorizontalBarChartModel initBarModel() {
         HorizontalBarChartModel model = new HorizontalBarChartModel();
         BarChartSeries chatSeries = new BarChartSeries();
@@ -192,6 +210,9 @@ public class NeedsServicesBean extends BasePageBean {
         return model;
     }
 
+    /**
+     * Genera el modelo basico de la grafica
+     */
     private void createBarModel() {
         AllNeeds();
         graphic = initBarModel();
@@ -203,6 +224,9 @@ public class NeedsServicesBean extends BasePageBean {
         yAxis.setMin(0);
     }
 
+    /**
+     * Limpia los campos despues de una accion
+     */
     public void cleanData() {
         this.value = "";
         this.selectedCategory = "";
