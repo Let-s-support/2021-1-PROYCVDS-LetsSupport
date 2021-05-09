@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:jsf="http://xmlns.jcp.org/jsf"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<link rel="stylesheet" type="text/css" href="styles/category.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+<f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
+    <h:head>
+    </h:head>
+    <h:body style="margin: 0%;">
+        <p:messages id="messages" showDetail="true" closable="true">
+            <p:autoUpdate />
+        </p:messages>
+        <div class="body" style="height: auto; padding-bottom: 5%;">
+            <ui:include src="/WEB-INF/bases/menuPrincipal.xhtml" />
+            <div class="container bg-light mt-5">
+                <h1>Reporte de Ofertas</h1>
+                <p:chart type="bar" model="#{offerBean.getGrafico()}" style="height:300px" />
+            </div>
+            <h:form>
+                <h1 class="mt-5 bg-dark mx-auto text-center text-light col-10">Ofertas</h1>
+                <div class="col-10 mx-auto">
+                    <p:dataTable id="mydata" var="offer" value="#{offerBean.AllOffers()}">
+                        <p:column class="text-center mx-auto" headerText="ID">
+                            <h:outputText class="text-center mx-auto" value="#{offer.id}" />
+                        </p:column>
+
+                        <p:column class="text-center mx-auto" headerText="Category">
+                            <h:outputText class="text-center mx-auto" value="#{offer.category_id}" />
+                        </p:column>
+
+                        <p:column class="text-center mx-auto" headerText="Nombre">
+                            <h:outputText class="text-center mx-auto" value="#{offer.value}" />
+                        </p:column>
+
+                        <p:column class="text-center mx-auto" headerText="Descripción">
+                            <h:outputText class="text-center mx-auto" value="#{offer.description}" />
+                        </p:column>
+
+
+                        <p:column class="text-center mx-auto" headerText="Fecha de creacion">
+                            <h:outputText class="text-center" value="#{offer.creationdate}" />
+                        </p:column>
+
+                        <p:column class="text-center mx-auto" headerText="Estado">
+                            <h:outputText class="text-center mx-auto" value="#{offer.status}" />
+                        </p:column>
+
+                        <p:column class="text-center mx-auto" headerText="Fecha de modificación">
+                            <h:outputText class="text-center mx-auto" value="#{offer.modificationdate}" />
+                        </p:column>
+
+                        <p:column class="text-center mx-auto" headerText="Usuario">
+                            <h:outputText class="text-center mx-auto" value="#{offer.idsolicitante}" />
+                        </p:column>
+                    </p:dataTable>
+                </div>
+
+                <h1 class="text-center text-light bg-dark col-10 mx-auto mt-5">Exportar</h1>
+                <div class="mx-auto d-flex justify-content-center">
+                    <h:commandLink class="m-3">
+                        <p:graphicImage value="./icons/excel.png" style="width:50px; height:50px;" />
+                        <p:dataExporter type="xls" postProcessor="#{navigationController.postProcessXLS}"
+                            target="mydata" fileName="offerReport" />
+                    </h:commandLink>
+                    <h:commandLink class="m-3">
+                        <p:graphicImage value="./icons/pdf.png" style="width:50px; height:50px;" />
+                        <p:dataExporter type="pdf" target="mydata" fileName="offerReport" />
+                    </h:commandLink>
+                </div>
+            </h:form>
+        </div>
+    </h:body>
+</f:view>
+
+</html>

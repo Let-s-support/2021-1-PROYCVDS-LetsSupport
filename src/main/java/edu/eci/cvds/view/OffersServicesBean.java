@@ -4,6 +4,14 @@ import com.google.inject.Inject;
 
 import org.primefaces.PrimeFaces;
 
+import org.primefaces.PrimeFaces;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.BarChartSeries;
+import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.HorizontalBarChartModel;
+
 import edu.eci.cvds.entities.Needs;
 import edu.eci.cvds.entities.Offers;
 import edu.eci.cvds.services.MaxiumRequerementsServices;
@@ -32,6 +40,7 @@ public class OffersServicesBean extends BasePageBean {
     @Inject
     MaxiumRequerementsServices maxiumRequerementsServices;
 
+    private HorizontalBarChartModel graphic;
     public static int id;
     private String value;
     private String description;
@@ -119,6 +128,61 @@ public class OffersServicesBean extends BasePageBean {
         } catch (Exception ex) {
             throw new ServicesException("Error al agregar la necesidad", ex);
         }
+    }
+
+    /**
+     * Obtener el grafico para mostrar en la interfaz grafica
+     * @return
+     */    
+    public HorizontalBarChartModel getGrafico() {
+        createBarModel();
+        return graphic;
+    }
+
+
+    /**
+     * Asigna los elementos para mostrar en cada una de las barras
+     * @return
+     */
+    private HorizontalBarChartModel initBarModel() {
+        HorizontalBarChartModel model = new HorizontalBarChartModel();
+        BarChartSeries chatSeries = new BarChartSeries();
+        chatSeries.setLabel("Ofertas");
+        model.setSeriesColors("B40001,93b75f,E7E658,cc6666");
+        int[] values = new int[4];
+
+        for(Offers need: AllOffers){
+            if(need.getStatus() == 1){
+                values[0] +=1;                
+            }else if(need.getStatus() == 2){
+                values[1] +=1;                
+            }
+            else if(need.getStatus() == 3){
+                values[2] +=1;                
+            }else if(need.getStatus() == 4){
+                values[3] +=1;                
+            }
+        }
+        chatSeries.set("Abierta", values[0]);
+        chatSeries.set("Cerrada", values[1]);    
+        chatSeries.set("En Proceso ", values[2]);    
+        chatSeries.set("Resuelta", values[3]);        
+        model.addSeries(chatSeries);
+        return model;
+    }
+
+    /**
+     * Genera el modelo basico de la grafica
+     */
+    private void createBarModel() {
+        AllOffers();
+        graphic = initBarModel();
+        graphic.setTitle("Ofertas agrupadas por estado");
+        graphic.setLegendPosition("ne");
+        
+        Axis xAxis = graphic.getAxis(AxisType.X);
+        Axis yAxis = graphic.getAxis(AxisType.Y);
+        yAxis.setMin(0);
     }
 
     public void cleanData() {
