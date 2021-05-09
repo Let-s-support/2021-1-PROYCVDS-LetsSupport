@@ -6,7 +6,9 @@ import org.primefaces.PrimeFaces;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.BarChartSeries;
 import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.HorizontalBarChartModel;
 
 import edu.eci.cvds.entities.Needs;
 import edu.eci.cvds.services.MaxiumRequerementsServices;
@@ -15,7 +17,9 @@ import edu.eci.cvds.services.ServicesException;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -34,7 +38,7 @@ public class NeedsServicesBean extends BasePageBean {
     @Inject
     MaxiumRequerementsServices maxiumRequerementsServices;
 
-    private BarChartModel graphic;
+    private HorizontalBarChartModel graphic;
     private int id;
     private String value;
     private String description;
@@ -155,30 +159,42 @@ public class NeedsServicesBean extends BasePageBean {
 
 
     
-    public BarChartModel getGrafico() {
+    public HorizontalBarChartModel getGrafico() {
         createBarModel();
         return graphic;
     }
 
 
-    private BarChartModel initBarModel() {
-        BarChartModel model = new BarChartModel();
-        ChartSeries graph = new ChartSeries();
-        graph.setLabel("Algooo");
+    private HorizontalBarChartModel initBarModel() {
+        HorizontalBarChartModel model = new HorizontalBarChartModel();
+        BarChartSeries chatActives = new BarChartSeries();
+        BarChartSeries chatInactives = new BarChartSeries();
+        chatActives.setLabel("Activas");
+        chatActives.setLabel("Inactivas");
 
+        int[] values = new int[2];
 
         for(Needs need: AllNeeds){
-            graph.set(need.getValue(),500 );
+            if(need.getStatus() == 0){
+                values[0] +=1;                
+            }else if(need.getStatus() == 1){
+                values[1] +=1;                
+            }
         }
-
-        model.addSeries(graph);
+        
+        System.out.println(values);
+        chatInactives.set("Inactiva", values[0]);
+        chatActives.set("Activa", values[1]);
+        model.addSeries(chatActives);
+        model.addSeries(chatInactives);
 
         return model;
     }
 
     private void createBarModel() {
+        AllNeeds();
         graphic = initBarModel();
-        graphic.setTitle("Algomassss");
+        graphic.setTitle("Necesidades agrupadas por estado");
         graphic.setLegendPosition("ne");
 
         

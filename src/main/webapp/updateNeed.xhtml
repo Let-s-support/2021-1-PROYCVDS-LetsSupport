@@ -58,12 +58,10 @@
                                 </h:panelGrid>
                                 <h:form>
                                     <h:commandButton value="Actualizar" title="Crear"
-                                        action="#{needBean.ModificarEstadoNeed()}" class="btn btn-dark pl-5 pr-5 mt-3" />
+                                        action="#{needBean.ModificarEstadoNeed()}"
+                                        class="btn btn-dark pl-5 pr-5 mt-3" />
                                 </h:form>
                             </p:panel>
-                            <div class="card">
-                                <p:chart type="bar" model="#{needBean.getGrafico()}" style="height:300px"/>
-                            </div>
                         </div>
                     </h:form>
                 </div>
