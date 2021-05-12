@@ -2,6 +2,7 @@ package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
 
+import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.entities.Needs;
 import edu.eci.cvds.services.*;
 import edu.eci.cvds.services.Impl.UserServicesImpl;
@@ -75,11 +76,15 @@ public class OffersServicesBean extends BasePageBean {
                         .get(CategoriesServicesBean.getCategories().indexOf(selectedCategory));
 
                 try {
-                    Offers offer = new Offers(value, description, 1, category_id, idsolicitante);
-                    offersServices.agregarOfertas(offer);
-
-                    //FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
-                    System.out.println("Oferta creada");
+                    List<Categories> invalida = categoriesServices.categoriaInvalida(category_id);
+                    if(!invalida.get(0).isInvalida()) {
+                        Offers offer = new Offers(value, description, 1, category_id, idsolicitante);
+                        offersServices.agregarOfertas(offer);
+                    }else{
+                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+                                "La categoria seleccionada es una categoria invalida "+invalida.get(0).getComentarioinvalida());
+                        PrimeFaces.current().dialog().showMessageDynamic(message);
+                    }
                 } catch (Exception e) {
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
                             "Ha ocurrido un error");

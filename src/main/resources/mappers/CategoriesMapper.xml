@@ -8,11 +8,12 @@
         <id property="id" column="id"/>
         <result property="value" column="value"/>
         <result property="description" column="description"/>
-
         <result property="status" column="status"/>
-
         <result property="creationdate" column="creationdate"/>
         <result property="modificationdate" column="modificationdate"/>
+        <result property="invalida" column="invalida"/>
+        <result property="eliminada" column="eliminada"/>
+        <result property="comentarioinvalida" column="comentarioinvalida"/>
     </resultMap>
 
     <insert parameterType="map" id="agregarCategoria">
@@ -27,7 +28,7 @@
     <select parameterType="map" id="traerValuesCategories" resultMap="CategoriesResult">
         select *
         FROM categories
-        WHERE value=#{oldvalue}
+        WHERE value=#{oldvalue} and status=true
     </select>
 
     <select parameterType="map" id="traerCategories" resultMap="CategoriesResult">
@@ -46,5 +47,11 @@
         update categories set eliminada=true
         WHERE value=#{value}
     </update>
+
+    <select parameterType="map" id="categoriaInvalida" resultMap="CategoriesResult">
+        select invalida, comentarioinvalida
+        FROM categories
+        WHERE id=#{id}
+    </select>
 
 </mapper>

@@ -112,4 +112,13 @@ public class CategoriesServicesImpl implements CategoriesServices {
             throw new ServicesException("Error al consultar nombres", e);
         }
     }
+
+    @Override
+    public List<Categories> categoriaInvalida(int id) throws ServicesException {
+        try {
+            return categoriesDAO.categoriaInvalida(id);
+        } catch (org.apache.ibatis.exceptions.PersistenceException | PersistenceException e) {
+            throw new ServicesException("Error al consultar nombres", e);
+        }
+    }
 }

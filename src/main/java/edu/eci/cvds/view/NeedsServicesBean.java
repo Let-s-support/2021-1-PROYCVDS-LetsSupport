@@ -5,6 +5,7 @@ import com.google.inject.Inject;
 import edu.eci.cvds.dao.CategoriesDAO;
 import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.dao.UserDAO;
+import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.entities.User;
 import edu.eci.cvds.services.*;
 import org.primefaces.PrimeFaces;
@@ -82,9 +83,15 @@ public class NeedsServicesBean extends BasePageBean {
                     .get(0).getMneeds()) {
                 category_id = CategoriesServicesBean.getCategories_id()
                         .get(CategoriesServicesBean.getCategories().indexOf(selectedCategory));
-
-                Needs need = new Needs(value, description, 1, category_id, urgencia, idsolicitante);
-                needsServices.agregarNecesidades(need);
+                List<Categories> invalida = categoriesServices.categoriaInvalida(category_id);
+                if(!invalida.get(0).isInvalida()) {
+                    Needs need = new Needs(value, description, 1, category_id, urgencia, idsolicitante);
+                    needsServices.agregarNecesidades(need);
+                }else{
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+                            "La categoria seleccionada es una categoria invalida "+invalida.get(0).getComentarioinvalida());
+                    PrimeFaces.current().dialog().showMessageDynamic(message);
+                }
             } else {
                 try {
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",

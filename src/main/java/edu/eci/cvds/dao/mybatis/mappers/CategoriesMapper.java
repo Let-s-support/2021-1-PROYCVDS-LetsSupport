@@ -44,4 +44,6 @@ public interface CategoriesMapper {
     List<Categories> nameCategorie(@Param("id") int id);
 
     void EliminarCategoria(@Param("value") String value);
+
+    List<Categories> categoriaInvalida(@Param("id") int id);
 }
