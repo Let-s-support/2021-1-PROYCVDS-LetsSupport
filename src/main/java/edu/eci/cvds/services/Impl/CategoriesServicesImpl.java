@@ -89,4 +89,13 @@ public class CategoriesServicesImpl implements CategoriesServices {
             throw new ServicesException("Error al consultar nombres",ex);
         }
     }
+
+    @Override
+    public List<Categories> nameCategorie(int id) throws ServicesException{
+        try {
+            return categoriesDAO.nameCategorie(id);
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al consultar nombres",ex);
+        }
+    }
 }

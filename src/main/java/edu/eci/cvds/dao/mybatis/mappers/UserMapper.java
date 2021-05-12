@@ -15,4 +15,6 @@ public interface UserMapper {
      */
     List<User> IngresarSesion(@Param("conusername")String username);
 
+    List<User> NombreUsuario(@Param("id")int id);
+
 }

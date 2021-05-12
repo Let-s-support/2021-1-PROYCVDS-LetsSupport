@@ -35,4 +35,10 @@
         FROM categories
     </select>
 
+    <select parameterType="map" id="nameCategorie" resultMap="CategoriesResult">
+        select value
+        FROM categories
+        WHERE id=#{id}
+    </select>
+
 </mapper>

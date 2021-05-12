@@ -31,4 +31,13 @@ public class UserServicesImpl implements UserServices {
         }
     }
 
+
+    @Override
+    public List<User> NombreUsuario(int id) throws ServicesException{
+        try {
+            return userDAO.NombreUsuario(id);
+        } catch (org.apache.ibatis.exceptions.PersistenceException | PersistenceException e) {
+            throw new ServicesException("Error al iniciar sesion: ", e);
+        }
+    }
 }

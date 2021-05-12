@@ -6,6 +6,7 @@ import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.dao.UserDAO;
 import edu.eci.cvds.dao.mybatis.mappers.UserMapper;
 import edu.eci.cvds.entities.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.sql.ResultSet;
 import java.util.List;
@@ -27,5 +28,12 @@ public class MyBatisUserDAO implements UserDAO {
             throw new PersistenceException("Error al iniciar sesion: ", e);
         }
     }
-
+    @Override
+    public List<User> NombreUsuario(int id) throws PersistenceException{
+        try {
+            return userMapper.NombreUsuario(id);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al iniciar sesion: ", e);
+        }
+    }
 }

@@ -11,5 +11,5 @@ public interface StatusDAO {
      * @return List de tipo Status
      * @throws PersistenceException Controlador de errores de persistencia
      */
-    List<Status> traerStatus( ) throws PersistenceException;
+    List<Status> traerStatus() throws PersistenceException;
 }

@@ -49,5 +49,8 @@ public interface NeedsDAO {
      * @return List de tipo needs
      * @throws PersistenceException Controlador de errores de persistencia
      */
-    List<Needs> AllNeeds() throws PersistenceException;
+    List<Needs> AllNeeds(int id, int rol) throws PersistenceException;
+
+    List<Needs> NeedName(int id) throws PersistenceException;
+
 }

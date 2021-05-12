@@ -40,7 +40,7 @@
                         </p:column>
 
                         <p:column class="text-center mx-auto" headerText="Category">
-                            <h:outputText class="text-center mx-auto" value="#{need.category_id}" />
+                            <h:outputText class="text-center mx-auto" value="#{needBean.nameCategoryNeed(need.category_id)}" />
                         </p:column>
 
                         <p:column class="text-center mx-auto" headerText="Nombre">
@@ -53,19 +53,19 @@
 
 
                         <p:column class="text-center mx-auto" headerText="Fecha de creacion">
-                            <h:outputText class="text-center" value="#{need.creationdate}" />
+                            <h:outputText class="text-center" value="#{needBean.formatofecha(need.creationdate)}" />
                         </p:column>
 
                         <p:column class="text-center mx-auto" headerText="Estado">
-                            <h:outputText class="text-center mx-auto" value="#{need.status}" />
+                            <h:outputText class="text-center mx-auto" value="#{needBean.traerStatus(need.status)}" />
                         </p:column>
 
                         <p:column class="text-center mx-auto" headerText="Fecha de modificación">
-                            <h:outputText class="text-center mx-auto" value="#{need.modificationdate}" />
+                            <h:outputText class="text-center mx-auto" value="#{needBean.formatofecha(need.modificationdate)}" />
                         </p:column>
 
                         <p:column class="text-center mx-auto" headerText="Usuario">
-                            <h:outputText class="text-center mx-auto" value="#{need.idsolicitante}" />
+                            <h:outputText class="text-center mx-auto" value="#{needBean.NombreUsuario(need.idsolicitante)}" />
                         </p:column>
                     </p:dataTable>
                 </div>

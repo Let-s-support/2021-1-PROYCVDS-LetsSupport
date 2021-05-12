@@ -33,17 +33,24 @@
     <select parameterType="map" id="OffersToAnswer" resultMap="OffersResult">
         select *
         FROM offers
-        WHERE status==1 or status==2;
+        WHERE status=1 or status=2;
     </select>
 
     <select parameterType="map" id="AllOffers" resultMap="OffersResult">
         select *
         FROM offers
+        WHERE idsolicitante=#{id} or #{rol}=1
     </select>
 
     <update parameterType="map" id="ModificarEstadoOffer">
         update offers set status=#{newstatus}
         WHERE value=#{value}
     </update>
+
+    <select parameterType="map" id="OfferName" resultMap="OffersResult">
+        select value
+        FROM offers
+        WHERE id=#{id}
+    </select>
 
 </mapper>

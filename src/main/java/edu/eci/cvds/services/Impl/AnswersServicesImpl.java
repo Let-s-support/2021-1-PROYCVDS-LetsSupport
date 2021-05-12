@@ -59,4 +59,13 @@ public class AnswersServicesImpl implements AnswersServices {
             throw new ServicesException("El item no esta registrado",ex);
         }
     }
+
+    @Override
+    public  List<Answers> AllAnswers() throws ServicesException {
+        try {
+            return answersDAO.AllAnswers();
+        } catch (org.apache.ibatis.exceptions.PersistenceException | PersistenceException e) {
+            throw new ServicesException("Error al insertar nueva categoria: " , e);
+        }
+    }
 }

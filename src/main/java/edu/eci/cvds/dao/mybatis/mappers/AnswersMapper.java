@@ -2,7 +2,10 @@ package edu.eci.cvds.dao.mybatis.mappers;
 
 import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.entities.Answers;
+import edu.eci.cvds.entities.Needs;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface AnswersMapper {
     /**
@@ -11,4 +14,6 @@ public interface AnswersMapper {
      * @throws PersistenceException controlador de excepciones de persistencia
      */
     void agregarRespuesta(@Param("answer") Answers answer) throws PersistenceException;
+
+    List<Answers> AllAnswers() throws PersistenceException;
 }

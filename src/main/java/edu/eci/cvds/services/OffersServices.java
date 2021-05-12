@@ -1,7 +1,9 @@
 package edu.eci.cvds.services;
 
 import edu.eci.cvds.dao.PersistenceException;
+import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.entities.Offers;
+import edu.eci.cvds.entities.User;
 
 import java.util.List;
 
@@ -43,5 +45,10 @@ public interface OffersServices {
      * @return List de tipo Offers
      * @throws ServicesException controlador de errores de la capa de services
      */
-    List<Offers> AllOffers() throws ServicesException;
+    List<Offers> AllOffers(int id, int rol) throws ServicesException;
+
+    List<Offers> OfferName(int id) throws ServicesException;
+
+    List<Offers> OffersToAnswer() throws ServicesException;
+
 }

@@ -5,6 +5,8 @@ import edu.eci.cvds.dao.CategoriesDAO;
 import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.dao.mybatis.mappers.CategoriesMapper;
 import edu.eci.cvds.entities.Categories;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public class MyBatisCategoriesDAO implements CategoriesDAO {
@@ -70,4 +72,12 @@ public class MyBatisCategoriesDAO implements CategoriesDAO {
         }
     }
 
+    @Override
+    public List<Categories> nameCategorie(int id) throws PersistenceException {
+        try {
+            return categoriesMapper.nameCategorie(id);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al consultar nombres", e);
+        }
+    }
 }

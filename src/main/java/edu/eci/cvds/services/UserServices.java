@@ -14,5 +14,5 @@ public interface UserServices {
      * @throws ServicesException controlador de errores de la capa de services
      */
     List<User> IngresarSesion(String username) throws ServicesException;
-
+    List<User> NombreUsuario(int id) throws ServicesException;
 }

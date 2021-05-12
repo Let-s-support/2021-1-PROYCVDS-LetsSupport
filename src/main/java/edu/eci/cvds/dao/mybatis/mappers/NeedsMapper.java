@@ -1,6 +1,7 @@
 package edu.eci.cvds.dao.mybatis.mappers;
 
 import edu.eci.cvds.dao.PersistenceException;
+import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.entities.Needs;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -50,5 +51,8 @@ public interface NeedsMapper {
      * @return List de tipo needs
      * @throws PersistenceException Controlador de errores de persistencia
      */
-    List<Needs> AllNeeds() throws PersistenceException;
+    List<Needs> AllNeeds(@Param("id") int id,
+                            @Param("rol") int rol) throws PersistenceException;
+
+    List<Needs> NeedName(@Param("id") int id);
 }

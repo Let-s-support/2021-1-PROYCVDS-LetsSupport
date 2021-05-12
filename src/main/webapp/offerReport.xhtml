@@ -40,7 +40,7 @@
                         </p:column>
 
                         <p:column class="text-center mx-auto" headerText="Category">
-                            <h:outputText class="text-center mx-auto" value="#{offer.category_id}" />
+                            <h:outputText class="text-center mx-auto" value="#{offerBean.nameCategoryOffer(offer.category_id)}" />
                         </p:column>
 
                         <p:column class="text-center mx-auto" headerText="Nombre">
@@ -53,19 +53,19 @@
 
 
                         <p:column class="text-center mx-auto" headerText="Fecha de creacion">
-                            <h:outputText class="text-center" value="#{offer.creationdate}" />
+                            <h:outputText class="text-center" value="#{offerBean.formatofecha(offer.creationdate)}" />
                         </p:column>
 
                         <p:column class="text-center mx-auto" headerText="Estado">
-                            <h:outputText class="text-center mx-auto" value="#{offer.status}" />
+                            <h:outputText class="text-center mx-auto" value="#{offerBean.traerStatus(offer.status)}" />
                         </p:column>
 
                         <p:column class="text-center mx-auto" headerText="Fecha de modificación">
-                            <h:outputText class="text-center mx-auto" value="#{offer.modificationdate}" />
+                            <h:outputText class="text-center mx-auto" value="#{offerBean.formatofecha(offer.modificationdate)}" />
                         </p:column>
 
                         <p:column class="text-center mx-auto" headerText="Usuario">
-                            <h:outputText class="text-center mx-auto" value="#{offer.idsolicitante}" />
+                            <h:outputText class="text-center mx-auto" value="#{offerBean.NombreUsuario(offer.idsolicitante)}" />
                         </p:column>
                     </p:dataTable>
                 </div>

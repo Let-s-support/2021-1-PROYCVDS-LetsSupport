@@ -2,6 +2,11 @@ package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
 
+import edu.eci.cvds.dao.CategoriesDAO;
+import edu.eci.cvds.dao.PersistenceException;
+import edu.eci.cvds.dao.UserDAO;
+import edu.eci.cvds.entities.User;
+import edu.eci.cvds.services.*;
 import org.primefaces.PrimeFaces;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
@@ -11,10 +16,8 @@ import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.HorizontalBarChartModel;
 
 import edu.eci.cvds.entities.Needs;
-import edu.eci.cvds.services.MaxiumRequerementsServices;
-import edu.eci.cvds.services.NeedsServices;
-import edu.eci.cvds.services.ServicesException;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -38,6 +41,15 @@ public class NeedsServicesBean extends BasePageBean {
     @Inject
     MaxiumRequerementsServices maxiumRequerementsServices;
 
+    @Inject
+    UserServices userServices;
+
+    @Inject
+    CategoriesServices categoriesServices;
+
+    @Inject
+    StatusServices statusServices;
+
     private HorizontalBarChartModel graphic;
     private int id;
     private String value;
@@ -54,6 +66,9 @@ public class NeedsServicesBean extends BasePageBean {
     private List<Needs> AllNeeds;
     private List<String> statusList;
     private List<String> names;
+    private List<Needs> NeedsToAnswer;
+    private String Categoryname;
+    private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
      * Es usado para controlar la funcionalidad de crear necesidad desde la interfaz
@@ -95,7 +110,7 @@ public class NeedsServicesBean extends BasePageBean {
      */
     public List<Needs> AllNeeds() {
         try {
-            AllNeeds = needsServices.AllNeeds();
+            AllNeeds = needsServices.AllNeeds(UserServicesBean.getId(),UserServicesBean.getRol());
             return AllNeeds;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -232,6 +247,32 @@ public class NeedsServicesBean extends BasePageBean {
         this.selectedCategory = "";
         this.selectedValue = "";
         this.selectedStatus = "Activa";
+    }
+
+    public String nameCategoryNeed(int id) throws ServicesException {
+        return categoriesServices.nameCategorie(id).get(0).getValue();
+    }
+    public String formatofecha(Date fecha){
+        return formatter.format(fecha);
+    }
+
+    public String NombreUsuario(int id) throws ServicesException {
+        return userServices.NombreUsuario(id).get(0).getFullName();
+    }
+
+    public String traerStatus(int id) throws ServicesException{
+        return statusServices.traerStatus().get(id-1).getValue();
+    }
+
+    public List<Needs> NeedsToAnswer() throws ServicesException{
+        try {
+            NeedsToAnswer = needsServices.NeedsToAnswer();
+            return NeedsToAnswer;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<Needs>();
+        }
+
     }
 
     public NeedsServices getNeedsServices() {

@@ -37,4 +37,6 @@ public interface CategoriesServices {
      * @throws ServicesException controlador de errores de la capa de services
      */
     List<Categories> traerCategories() throws PersistenceException, ServicesException;
+
+    List<Categories> nameCategorie(int id) throws ServicesException;
 }

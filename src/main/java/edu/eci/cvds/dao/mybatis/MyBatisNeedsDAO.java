@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import edu.eci.cvds.dao.NeedsDAO;
 import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.dao.mybatis.mappers.NeedsMapper;
+import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.entities.Needs;
 import java.util.List;
 
@@ -91,11 +92,20 @@ public class MyBatisNeedsDAO implements NeedsDAO {
      * @throws PersistenceException Controlador de errores de persistencia
      */
     @Override
-    public List<Needs> AllNeeds()  throws PersistenceException {
+    public List<Needs> AllNeeds(int id, int rol)  throws PersistenceException {
         try {
-            return needsMapper.AllNeeds();
+            return needsMapper.AllNeeds(id, rol);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("No se pudo consultar los nombres", e);
+        }
+    }
+
+    @Override
+    public List<Needs> NeedName(int id) throws PersistenceException {
+        try {
+            return needsMapper.NeedName(id);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al consultar nombres", e);
         }
     }
 }

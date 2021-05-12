@@ -37,6 +37,7 @@ public class CategoriesServicesBean extends BasePageBean {
     private List<String> statuses;
     private String selectedStatus;
     private List<String> estado;
+    private List<Categories> populares;
 
     @Inject
     CategoriesServices categoriesServices;
@@ -171,6 +172,11 @@ public class CategoriesServicesBean extends BasePageBean {
         }
 
         return categories;
+    }
+
+    public String populares(String nameCategory) throws ServicesException, PersistenceException {
+
+        return nameCategory;
     }
 
     public int getId() {

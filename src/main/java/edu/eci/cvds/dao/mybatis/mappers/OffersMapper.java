@@ -53,6 +53,9 @@ public interface OffersMapper {
      * @return List de tipo Offers
      * @throws PersistenceException Controlador de errores de persistencia
      */
-    List<Offers> AllOffers() throws PersistenceException;
+    List<Offers> AllOffers(@Param("id") int id,
+                           @Param("rol") int rol) throws PersistenceException;
+
+    List<Offers> OfferName(@Param("id") int id);
 }
 

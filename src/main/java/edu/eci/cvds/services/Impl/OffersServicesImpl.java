@@ -1,8 +1,13 @@
 package edu.eci.cvds.services.Impl;
 import com.google.inject.Inject;
+import edu.eci.cvds.dao.CategoriesDAO;
 import edu.eci.cvds.dao.OffersDAO;
 import edu.eci.cvds.dao.PersistenceException;
+import edu.eci.cvds.dao.UserDAO;
+import edu.eci.cvds.entities.Categories;
+import edu.eci.cvds.entities.Needs;
 import edu.eci.cvds.entities.Offers;
+import edu.eci.cvds.entities.User;
 import edu.eci.cvds.services.OffersServices;
 import edu.eci.cvds.services.ServicesException;
 
@@ -80,11 +85,30 @@ public class OffersServicesImpl implements OffersServices {
      * @throws ServicesException controlador de errores de la capa de services
      */
     @Override
-    public List<Offers> AllOffers() throws ServicesException {
+    public List<Offers> AllOffers(int id, int rol) throws ServicesException {
         try {
-            return offersDAO.AllOffers();
+            return offersDAO.AllOffers(id,rol);
         }catch (PersistenceException ex){
             throw new ServicesException("Error al consultar nombres",ex);
         }
     }
+
+    @Override
+    public List<Offers> OfferName(int id) throws ServicesException{
+        try {
+            return offersDAO.OfferName(id);
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al consultar nombres",ex);
+        }
+    }
+
+    @Override
+    public List<Offers> OffersToAnswer() throws ServicesException {
+        try {
+            return offersDAO.OffersToAnswer();
+        } catch (org.apache.ibatis.exceptions.PersistenceException | PersistenceException e) {
+            throw new ServicesException("No se pudo consultar los nombres", e);
+        }
+    }
+
 }

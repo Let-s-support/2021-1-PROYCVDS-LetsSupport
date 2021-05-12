@@ -29,4 +29,6 @@ public interface AnswersServices {
      * @throws ServicesException controlador de errores de la capa de services
      */
     List<Offers> OffersToAnswer() throws ServicesException;
+
+    List<Answers> AllAnswers() throws ServicesException;
 }

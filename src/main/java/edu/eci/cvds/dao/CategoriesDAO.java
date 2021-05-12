@@ -1,6 +1,8 @@
 package edu.eci.cvds.dao;
 
 import edu.eci.cvds.entities.Categories;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface CategoriesDAO {
@@ -40,4 +42,6 @@ public interface CategoriesDAO {
      * @return Lst de tipo categories
      */
     List<Categories> traerCategories() throws PersistenceException;
+
+    List<Categories> nameCategorie(int id) throws PersistenceException;
 }

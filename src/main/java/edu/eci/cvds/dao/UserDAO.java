@@ -14,5 +14,5 @@ public interface UserDAO {
      * @throws PersistenceException Controlador de errores de persistencia
      */
     List<User> IngresarSesion(String username) throws PersistenceException;
-
+    List<User> NombreUsuario(int id) throws PersistenceException;
 }

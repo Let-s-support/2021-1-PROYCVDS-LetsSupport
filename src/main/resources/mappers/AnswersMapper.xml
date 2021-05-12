@@ -18,5 +18,10 @@
         insert into answers (value,comentary,creationdate,offer_id,need_id,owner) values(#{answer.value},#{answer.comentary},current_date,#{answer.offer_id},#{answer.need_id},#{answer.owner})
     </insert>
 
+    <select parameterType="map" id="AllAnswers" resultMap="AnswersResult">
+        select *
+        FROM answers
+    </select>
+
 
 </mapper>

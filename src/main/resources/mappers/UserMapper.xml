@@ -21,4 +21,10 @@
         WHERE username = #{conusername}
     </select>
 
+    <select parameterType="map" id="NombreUsuario" resultMap="UserResult">
+        select fullname
+        FROM users
+        WHERE id = #{id}
+    </select>
+
 </mapper>

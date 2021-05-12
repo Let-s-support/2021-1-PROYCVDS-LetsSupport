@@ -5,14 +5,15 @@ import edu.eci.cvds.entities.Answers;
 import edu.eci.cvds.entities.Needs;
 import edu.eci.cvds.entities.Offers;
 import edu.eci.cvds.services.AnswersServices;
+import edu.eci.cvds.services.NeedsServices;
+import edu.eci.cvds.services.OffersServices;
 import edu.eci.cvds.services.ServicesException;
 
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +23,12 @@ public class AnswersServicesBean extends BasePageBean{
     
     @Inject
     AnswersServices answersServices;
+
+    @Inject
+    NeedsServices needsServices;
+
+    @Inject
+    OffersServices offersServices;
 
     private int id;
     private String type;
@@ -34,6 +41,7 @@ public class AnswersServicesBean extends BasePageBean{
     private int owner;
     private List<Offers> ofertas;
     private List<Needs> necesidades;
+    private List<Answers> AllAnswers;
 
     public void agregarRespuesta(){
         try {
@@ -80,6 +88,25 @@ public class AnswersServicesBean extends BasePageBean{
     public void OffersToAnswer() throws ServicesException{
         ofertas=answersServices.OffersToAnswer();
     }
+    public List<Answers> AllAnswers() throws ServicesException{
+        try {
+            AllAnswers=answersServices.AllAnswers();
+            return AllAnswers;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<Answers>();
+        }
+    }
+    public String clasifica(int offer_id, int need_id) throws ServicesException {
+        String res="Respuesta a";
+        if (offer_id==0){
+            res+=" necesidad "+needsServices.NeedName(need_id);
+        }else {
+            res+=" oferta "+offersServices.OfferName(need_id);
+        }
+        return res;
+    }
+
 
     public void setData(String type, String name, String description, int id, int author){
         try {

@@ -34,12 +34,13 @@
     <select parameterType="map" id="NeedsToAnswer" resultMap="NeedsResult">
         select *
         FROM needs
-        WHERE status==1 or status==2;
+        WHERE status=1 or status=2;
     </select>
 
     <select parameterType="map" id="AllNeeds" resultMap="NeedsResult">
         select *
         FROM needs
+        WHERE idsolicitante=#{id} or #{rol}=1
     </select>
 
     <update parameterType="map" id="ModificarEstadoNeed">
@@ -47,4 +48,9 @@
         WHERE value=#{value}
     </update>
 
+    <select parameterType="map" id="NeedName" resultMap="NeedsResult">
+        select value
+        FROM needs
+        WHERE id=#{id}
+    </select>
 </mapper>

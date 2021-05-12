@@ -2,7 +2,11 @@ package edu.eci.cvds.services;
 
 
 import edu.eci.cvds.dao.PersistenceException;
+import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.entities.Needs;
+import edu.eci.cvds.entities.User;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface NeedsServices {
@@ -43,6 +47,10 @@ public interface NeedsServices {
      * @return List de tipo needs
      * @throws ServicesException controlador de errores de la capa de services
      */
-    List<Needs> AllNeeds() throws ServicesException;
+    List<Needs> AllNeeds(int id, int rol) throws ServicesException;
+
+    List<Needs> NeedName(int id) throws ServicesException;
+
+    List<Needs> NeedsToAnswer() throws ServicesException;
 
 }

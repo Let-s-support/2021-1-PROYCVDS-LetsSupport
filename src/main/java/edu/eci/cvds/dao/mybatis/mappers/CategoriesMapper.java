@@ -40,4 +40,7 @@ public interface CategoriesMapper {
      * @return Lst de tipo categories
      */
     List<Categories> traerCategories();
+
+    List<Categories> nameCategorie(@Param("id") int id);
+
 }

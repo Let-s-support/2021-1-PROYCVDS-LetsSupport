@@ -2,6 +2,8 @@ package edu.eci.cvds.dao;
 
 import edu.eci.cvds.entities.Answers;
 
+import java.util.List;
+
 public interface AnswersDAO {
     /**
      * Enlaza el impl de answer con la capa de mybatis para crear una respuesta, sea de una necesidad o una oferta
@@ -9,4 +11,6 @@ public interface AnswersDAO {
      * @throws PersistenceException controlador de excepciones de persistencia
      */
     void agregarRespuesta(Answers answer) throws PersistenceException;
+
+    List<Answers> AllAnswers() throws PersistenceException;
 }

@@ -93,11 +93,20 @@ public class MyBatisOffersDAO implements OffersDAO {
      * @throws PersistenceException Controlador de errores de persistencia
      */
     @Override
-    public List<Offers> AllOffers()  throws PersistenceException {
+    public List<Offers> AllOffers(int id, int rol)  throws PersistenceException {
         try {
-            return offersMapper.AllOffers();
+            return offersMapper.AllOffers(id,rol);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("No se pudo consultar los nombres", e);
+        }
+    }
+
+    @Override
+    public List<Offers> OfferName(int id) throws PersistenceException {
+        try {
+            return offersMapper.OfferName(id);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al consultar nombres", e);
         }
     }
 }

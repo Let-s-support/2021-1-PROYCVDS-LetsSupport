@@ -51,6 +51,7 @@ public interface OffersDAO {
      * @return List de tipo Offers
      * @throws PersistenceException Controlador de errores de persistencia
      */
-    List<Offers> AllOffers() throws PersistenceException;
+    List<Offers> AllOffers(int id, int rol) throws PersistenceException;
 
+    List<Offers> OfferName(int id) throws PersistenceException;
 }

@@ -40,7 +40,7 @@ public class UserServicesBean extends BasePageBean {
     public static int id;
     private String fullname;
     private String username;
-    private int rol;
+    private static int rol;
     private boolean isactive = false;
     Subject subject;
     private String redirectUrl = "/app/login.xhtml";
@@ -127,7 +127,7 @@ public class UserServicesBean extends BasePageBean {
         this.username = username;
     }
 
-    public int getRol() {
+    public static int getRol() {
         return rol;
     }
 

@@ -1,11 +1,16 @@
 package edu.eci.cvds.services.Impl;
 
 import com.google.inject.Inject;
+import edu.eci.cvds.dao.CategoriesDAO;
 import edu.eci.cvds.dao.NeedsDAO;
 import edu.eci.cvds.dao.PersistenceException;
+import edu.eci.cvds.dao.UserDAO;
+import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.entities.Needs;
+import edu.eci.cvds.entities.User;
 import edu.eci.cvds.services.NeedsServices;
 import edu.eci.cvds.services.ServicesException;
+import org.apache.ibatis.annotations.Param;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -89,12 +94,29 @@ public class NeedsServicesImpl implements NeedsServices {
      * @throws ServicesException controlador de errores de la capa de services
      */
     @Override
-    public List<Needs> AllNeeds() throws ServicesException {
+    public List<Needs> AllNeeds(int id, int rol) throws ServicesException {
         try {
-            return needsDAO.AllNeeds();
+            return needsDAO.AllNeeds(id,rol);
         }catch (PersistenceException ex){
             throw new ServicesException("Error al consultar nombres",ex);
         }
     }
 
+    @Override
+    public List<Needs> NeedName(int id) throws ServicesException{
+        try {
+            return needsDAO.NeedName(id);
+        }catch (PersistenceException ex){
+            throw new ServicesException("Error al consultar nombres",ex);
+        }
+    }
+
+    @Override
+    public List<Needs> NeedsToAnswer() throws ServicesException {
+        try {
+            return needsDAO.NeedsToAnswer();
+        } catch (org.apache.ibatis.exceptions.PersistenceException | PersistenceException e) {
+            throw new ServicesException("No se pudo consultar los nombres", e);
+        }
+    }
 }

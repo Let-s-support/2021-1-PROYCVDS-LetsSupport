@@ -2,31 +2,25 @@ package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
 
+import edu.eci.cvds.entities.Needs;
+import edu.eci.cvds.services.*;
+import edu.eci.cvds.services.Impl.UserServicesImpl;
 import org.primefaces.PrimeFaces;
 
-import org.primefaces.PrimeFaces;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
-import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.BarChartSeries;
-import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.HorizontalBarChartModel;
 
-import edu.eci.cvds.entities.Needs;
 import edu.eci.cvds.entities.Offers;
-import edu.eci.cvds.services.MaxiumRequerementsServices;
-import edu.eci.cvds.services.NeedsServices;
-import edu.eci.cvds.services.OffersServices;
-import edu.eci.cvds.services.ServicesException;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
@@ -39,6 +33,15 @@ public class OffersServicesBean extends BasePageBean {
 
     @Inject
     MaxiumRequerementsServices maxiumRequerementsServices;
+
+    @Inject
+    UserServices userServices;
+
+    @Inject
+    CategoriesServices categoriesServices;
+
+    @Inject
+    StatusServices statusServices;
 
     private HorizontalBarChartModel graphic;
     public static int id;
@@ -55,6 +58,8 @@ public class OffersServicesBean extends BasePageBean {
     private String selectedStatus;
     private List<String> statusList;
     private List<String> names;
+    private List<Offers> OffersToAnswer;
+    private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
      * Crea una nueva oferta
@@ -107,7 +112,7 @@ public class OffersServicesBean extends BasePageBean {
      */
     public List<Offers> AllOffers(){
         try {
-            AllOffers = offersServices.AllOffers();
+            AllOffers = offersServices.AllOffers(UserServicesBean.getId(),UserServicesBean.getRol());
             return AllOffers;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -227,6 +232,32 @@ public class OffersServicesBean extends BasePageBean {
         statusList.add("Resuelta");
         statusList.add("Cerrada");
         return statusList;
+    }
+
+    public String nameCategoryOffer(int id) throws ServicesException {
+        return categoriesServices.nameCategorie(id).get(0).getValue();
+    }
+
+    public String formatofecha(Date fecha){
+        return formatter.format(fecha);
+    }
+
+    public String NombreUsuario(int id) throws ServicesException {
+        return userServices.NombreUsuario(id).get(0).getFullName();
+    }
+
+    public List<Offers> OffersToAnswer() throws ServicesException{
+        try {
+            OffersToAnswer = offersServices.OffersToAnswer();
+            return OffersToAnswer;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<Offers>();
+        }
+    }
+
+    public String traerStatus(int id) throws ServicesException{
+        return statusServices.traerStatus().get(id-1).getValue();
     }
 
     public OffersServices getOffersServices() {
