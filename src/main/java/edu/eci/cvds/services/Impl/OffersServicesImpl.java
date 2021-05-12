@@ -10,7 +10,9 @@ import edu.eci.cvds.entities.Offers;
 import edu.eci.cvds.entities.User;
 import edu.eci.cvds.services.OffersServices;
 import edu.eci.cvds.services.ServicesException;
+import org.primefaces.PrimeFaces;
 
+import javax.faces.application.FacesMessage;
 import java.util.List;
 
 public class OffersServicesImpl implements OffersServices {
@@ -28,6 +30,13 @@ public class OffersServicesImpl implements OffersServices {
             List<Offers> values = traerValuesOffers(offer.getValue());
             if (values.isEmpty()){
                 offersDAO.agregarOfertas(offer);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message",
+                        "Oferta creada correctamente");
+                PrimeFaces.current().dialog().showMessageDynamic(message);
+            }else{
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+                        "La oferta ya existe");
+                PrimeFaces.current().dialog().showMessageDynamic(message);
             }
         } catch (ServicesException | PersistenceException ex) {
             throw new ServicesException("Error al agregar la necesidad",ex);

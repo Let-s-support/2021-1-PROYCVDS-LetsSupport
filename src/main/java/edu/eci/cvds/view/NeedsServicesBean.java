@@ -82,9 +82,7 @@ public class NeedsServicesBean extends BasePageBean {
                     .get(0).getMneeds()) {
                 category_id = CategoriesServicesBean.getCategories_id()
                         .get(CategoriesServicesBean.getCategories().indexOf(selectedCategory));
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message",
-                        "Necesidad creada correctamente");
-                PrimeFaces.current().dialog().showMessageDynamic(message);
+
                 Needs need = new Needs(value, description, 1, category_id, urgencia, idsolicitante);
                 needsServices.agregarNecesidades(need);
             } else {
@@ -176,9 +174,7 @@ public class NeedsServicesBean extends BasePageBean {
             status = statusList.indexOf(selectedStatus);
             needsServices.ModificarEstadoNeed(selectedValue, status+1);
             cleanData();
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message",
-                    "Necesidad actulizada correctamente");
-            PrimeFaces.current().dialog().showMessageDynamic(message);
+
         } catch (Exception ex) {
             throw new ServicesException("Error al agregar la necesidad", ex);
         }

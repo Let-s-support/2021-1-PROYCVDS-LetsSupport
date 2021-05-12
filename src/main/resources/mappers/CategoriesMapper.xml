@@ -16,7 +16,7 @@
     </resultMap>
 
     <insert parameterType="map" id="agregarCategoria">
-        insert into categories (value,description,status,creationdate,modificationdate) values(#{category.value},#{category.description},#{category.status},current_date,current_date)
+        insert into categories (value,description,status,creationdate,modificationdate,invalida,eliminada,commentarioinvalida) values(#{category.value},#{category.description},#{category.status},current_date,current_date,#{category.invalida},#{category.eliminada},#{category.comentarioinvalida})
     </insert>
 
     <update parameterType="map" id="ModificarCategoria">
@@ -33,6 +33,7 @@
     <select parameterType="map" id="traerCategories" resultMap="CategoriesResult">
         select *
         FROM categories
+        WHERE eliminada=false
     </select>
 
     <select parameterType="map" id="nameCategorie" resultMap="CategoriesResult">
@@ -40,5 +41,10 @@
         FROM categories
         WHERE id=#{id}
     </select>
+
+    <update parameterType="map" id="EliminarCategoria">
+        update categories set eliminada=true
+        WHERE value=#{value}
+    </update>
 
 </mapper>

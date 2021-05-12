@@ -10,6 +10,9 @@ public class Categories implements Serializable {
     private boolean status;
     private Date creationdate;
     private Date modificationdate;
+    private boolean invalida;
+    private boolean eliminada;
+    private String comentarioinvalida;
 
 
     /**
@@ -18,10 +21,13 @@ public class Categories implements Serializable {
      * @param description descripcion del elemento a registrar en categories
      * @param status estado del elemento a registrar en categories
      */
-    public Categories(String value, String description, boolean status) {
+    public Categories(String value, String description, boolean status,boolean invalida, boolean eliminada, String comentarioinvalida) {
         this.value = value;
         this.description = description;
         this.status = status;
+        this.invalida=invalida;
+        this.eliminada=eliminada;
+        this.comentarioinvalida=comentarioinvalida;
     }
 
     /**
@@ -44,6 +50,9 @@ public class Categories implements Serializable {
                 ", status=" + status +
                 ", creationdate=" + creationdate +
                 ", modificationdate=" + modificationdate +
+                ", invalida=" + invalida +
+                ", eliminada=" + eliminada +
+                ", comentarioinvalida='" + comentarioinvalida + '\'' +
                 '}';
     }
 
@@ -141,5 +150,33 @@ public class Categories implements Serializable {
      */
     public void setModificationdate(Date modificationdate) {
         this.modificationdate = modificationdate;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public boolean isInvalida() {
+        return invalida;
+    }
+
+    public void setInvalida(boolean invalida) {
+        this.invalida = invalida;
+    }
+
+    public boolean isEliminada() {
+        return eliminada;
+    }
+
+    public void setEliminada(boolean eliminada) {
+        this.eliminada = eliminada;
+    }
+
+    public String getComentarioinvalida() {
+        return comentarioinvalida;
+    }
+
+    public void setComentarioinvalida(String comentarioinvalida) {
+        this.comentarioinvalida = comentarioinvalida;
     }
 }

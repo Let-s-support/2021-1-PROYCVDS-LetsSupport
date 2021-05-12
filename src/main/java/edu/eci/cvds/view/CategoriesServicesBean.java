@@ -14,6 +14,7 @@ import edu.eci.cvds.services.StatusServices;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 
 import java.util.ArrayList;
@@ -38,6 +39,9 @@ public class CategoriesServicesBean extends BasePageBean {
     private String selectedStatus;
     private List<String> estado;
     private List<Categories> populares;
+    private boolean invalida;
+    private boolean eliminada;
+    private String comentarioinvalida;
 
     @Inject
     CategoriesServices categoriesServices;
@@ -96,7 +100,8 @@ public class CategoriesServicesBean extends BasePageBean {
     public void agregarCategoria() throws ServicesException {
         try {
             status = selectedStatus == "Activa" ? true : false;
-            Categories categorie = new Categories(value, description, status);
+            eliminada=false;
+            Categories categorie = new Categories(value, description, status,invalida,eliminada,comentarioinvalida);
             categoriesServices.agregarCategoria(categorie);
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message",
                     "Categoria creada correctamente");
@@ -126,9 +131,7 @@ public class CategoriesServicesBean extends BasePageBean {
         try {
             status = selectedStatus == "Activa" ? true : false;
             categoriesServices.ModificarCategoria(value, description, status, oldvalue);
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message",
-                    "Categoria actulizada correctamente");
-            PrimeFaces.current().dialog().showMessageDynamic(message);
+
             // FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
             cleanData();
             System.out.println("Categoria creada");
@@ -172,6 +175,16 @@ public class CategoriesServicesBean extends BasePageBean {
         }
 
         return categories;
+    }
+
+    public void EliminarCategoria() throws ServicesException{
+        try {
+            categoriesServices.EliminarCategoria(value);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message", "La catagoria Se ha eliminado");
+            PrimeFaces.current().dialog().showMessageDynamic(message);
+        }catch (Exception ex){
+            throw new ServicesException("Error al eliminar la categoria", ex);
+        }
     }
 
     public String populares(String nameCategory) throws ServicesException, PersistenceException {

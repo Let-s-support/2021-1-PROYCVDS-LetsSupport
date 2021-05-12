@@ -44,4 +44,6 @@ public interface CategoriesDAO {
     List<Categories> traerCategories() throws PersistenceException;
 
     List<Categories> nameCategorie(int id) throws PersistenceException;
+
+    void EliminarCategoria(String value) throws PersistenceException;
 }

@@ -11,6 +11,7 @@ import edu.eci.cvds.entities.User;
 import edu.eci.cvds.services.NeedsServices;
 import edu.eci.cvds.services.ServicesException;
 import org.apache.ibatis.annotations.Param;
+import org.primefaces.PrimeFaces;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -32,10 +33,14 @@ public class NeedsServicesImpl implements NeedsServices {
             List<Needs> values = traerValuesNeeds(need.getValue());
             if (values.isEmpty()){
                 needsDAO.agregarNecesidades(need);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message",
+                        "Necesidad creada correctamente");
+                PrimeFaces.current().dialog().showMessageDynamic(message);
             }
             else {
-                FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La necesidad ya existe"));
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+                        "La necesidad ya existe");
+                PrimeFaces.current().dialog().showMessageDynamic(message);
             }
         } catch (ServicesException | PersistenceException ex) {
             throw new ServicesException("Error al agregar la necesidad",ex);
@@ -83,6 +88,9 @@ public class NeedsServicesImpl implements NeedsServices {
         try {
             System.out.println(value+" "+newstatus);
             needsDAO.ModificarEstadoNeed(value, newstatus);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message",
+                    "Necesidad actulizada correctamente");
+            PrimeFaces.current().dialog().showMessageDynamic(message);
         }catch (PersistenceException ex){
             throw new ServicesException("Error al consultar nombres",ex);
         }

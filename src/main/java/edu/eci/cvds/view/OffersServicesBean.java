@@ -77,9 +77,7 @@ public class OffersServicesBean extends BasePageBean {
                 try {
                     Offers offer = new Offers(value, description, 1, category_id, idsolicitante);
                     offersServices.agregarOfertas(offer);
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message",
-                            "Oferta creada correctamente");
-                    PrimeFaces.current().dialog().showMessageDynamic(message);
+
                     //FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
                     System.out.println("Oferta creada");
                 } catch (Exception e) {
@@ -129,7 +127,8 @@ public class OffersServicesBean extends BasePageBean {
         try {
             status = statusList.indexOf(selectedStatus);
             offersServices.ModificarEstadoOffer(selectedValue, status+1);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Info", "Oferta actualizada"));
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message","Oferta actualizada");
+            PrimeFaces.current().dialog().showMessageDynamic(message);
         } catch (Exception ex) {
             throw new ServicesException("Error al agregar la necesidad", ex);
         }

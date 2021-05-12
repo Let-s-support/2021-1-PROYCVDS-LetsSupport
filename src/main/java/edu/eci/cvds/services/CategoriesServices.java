@@ -39,4 +39,6 @@ public interface CategoriesServices {
     List<Categories> traerCategories() throws PersistenceException, ServicesException;
 
     List<Categories> nameCategorie(int id) throws ServicesException;
+
+    void EliminarCategoria(String value) throws ServicesException;
 }

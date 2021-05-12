@@ -80,4 +80,13 @@ public class MyBatisCategoriesDAO implements CategoriesDAO {
             throw new PersistenceException("Error al consultar nombres", e);
         }
     }
+
+    @Override
+    public void EliminarCategoria(String value) throws PersistenceException {
+        try {
+            categoriesMapper.EliminarCategoria(value);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al consultar nombres", e);
+        }
+    }
 }

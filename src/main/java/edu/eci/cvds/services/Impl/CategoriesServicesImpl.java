@@ -6,6 +6,8 @@ import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.services.CategoriesServices;
 import edu.eci.cvds.services.ServicesException;
+import org.primefaces.PrimeFaces;
+
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -64,12 +66,15 @@ public class CategoriesServicesImpl implements CategoriesServices {
     public void ModificarCategoria(String value, String description, boolean status, String oldvalue) throws ServicesException {
         try {
             List values = traerValuesCategories(oldvalue);
-            if (!values.isEmpty()) {
+            if (values.isEmpty()) {
                 categoriesDAO.ModificarCategoria(value, description, status, oldvalue);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message",
+                        "Categoria actulizada correctamente");
+                PrimeFaces.current().dialog().showMessageDynamic(message);
             }
             else {
-                FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La catagoria ya existe"));
+                FacesMessage message =new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La catagoria ya existe");
+                PrimeFaces.current().dialog().showMessageDynamic(message);
             }
         } catch (ServicesException | PersistenceException ex) {
             throw new ServicesException("Error al modificar categoria",ex);
@@ -96,6 +101,15 @@ public class CategoriesServicesImpl implements CategoriesServices {
             return categoriesDAO.nameCategorie(id);
         }catch (PersistenceException ex){
             throw new ServicesException("Error al consultar nombres",ex);
+        }
+    }
+
+    @Override
+    public void EliminarCategoria(String value) throws ServicesException {
+        try {
+            categoriesDAO.EliminarCategoria(value);
+        } catch (org.apache.ibatis.exceptions.PersistenceException | PersistenceException e) {
+            throw new ServicesException("Error al consultar nombres", e);
         }
     }
 }
