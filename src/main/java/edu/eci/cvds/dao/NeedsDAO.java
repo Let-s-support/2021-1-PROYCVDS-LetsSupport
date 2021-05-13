@@ -51,6 +51,12 @@ public interface NeedsDAO {
      */
     List<Needs> AllNeeds(int id, int rol) throws PersistenceException;
 
+    List<Needs> AllNeedsFilterCategory(int id, int rol, int category)  throws PersistenceException;
+
+    List<Needs> AllNeedsFilterStatus(int id, int rol, int status)  throws PersistenceException;
+
+    List<Needs> AllNeedsFilterCategoryStatus(int id, int rol, int category, int status)  throws PersistenceException;
+
     List<Needs> NeedName(int id) throws PersistenceException;
 
 }

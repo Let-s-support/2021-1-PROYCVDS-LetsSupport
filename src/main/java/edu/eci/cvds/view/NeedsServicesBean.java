@@ -6,6 +6,7 @@ import edu.eci.cvds.dao.CategoriesDAO;
 import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.dao.UserDAO;
 import edu.eci.cvds.entities.Categories;
+import edu.eci.cvds.entities.Status;
 import edu.eci.cvds.entities.User;
 import edu.eci.cvds.services.*;
 import org.primefaces.PrimeFaces;
@@ -70,6 +71,11 @@ public class NeedsServicesBean extends BasePageBean {
     private List<Needs> NeedsToAnswer;
     private String Categoryname;
     private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    private String categoriaReporte;
+    private String estadoReporte;
+    private String consulta;
+    private List<String> categoriasReporte;
+    private List<String> estadosReporte;
 
     /**
      * Es usado para controlar la funcionalidad de crear necesidad desde la interfaz
@@ -115,7 +121,39 @@ public class NeedsServicesBean extends BasePageBean {
      */
     public List<Needs> AllNeeds() {
         try {
+            System.out.println(consulta);
             AllNeeds = needsServices.AllNeeds(UserServicesBean.getId(),UserServicesBean.getRol());
+            return AllNeeds;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<Needs>();
+        }
+    }
+    public List<Needs> AllNeedsFilterCategory() {
+        try {
+            System.out.println(consulta);
+            AllNeeds = needsServices.AllNeedsFilterCategory(UserServicesBean.getId(),UserServicesBean.getRol(),categoriesServices.traerValuesCategories(categoriaReporte).get(0).getId());
+            return AllNeeds;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<Needs>();
+        }
+    }
+    public List<Needs> AllNeedsFilterStatus() {
+        try {
+            System.out.println(estadosReporte.indexOf(estadoReporte));
+
+            AllNeeds = needsServices.AllNeedsFilterStatus(UserServicesBean.getId(),UserServicesBean.getRol(),estadosReporte.indexOf(estadoReporte));
+            System.out.println(AllNeeds);
+            return AllNeeds;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<Needs>();
+        }
+    }
+    public List<Needs> AllNeedsFilterCategoryStatus() {
+        try {
+            AllNeeds = needsServices.AllNeedsFilterCategoryStatus(UserServicesBean.getId(),UserServicesBean.getRol(),categoriesServices.traerValuesCategories(categoriaReporte).get(0).getId(),estadosReporte.indexOf(estadoReporte));
             return AllNeeds;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -191,7 +229,7 @@ public class NeedsServicesBean extends BasePageBean {
      * Obtener el grafico para mostrar en la interfaz grafica
      * @return
      */    
-    public HorizontalBarChartModel getGrafico() {
+    public HorizontalBarChartModel getGrafico() throws ServicesException, PersistenceException {
         createBarModel();
         return graphic;
     }
@@ -209,21 +247,29 @@ public class NeedsServicesBean extends BasePageBean {
         int[] values = new int[4];
 
         for(Needs need: AllNeeds){
-            if(need.getStatus() == 1){
-                values[0] +=1;                
-            }else if(need.getStatus() == 2){
-                values[1] +=1;                
+            if((need.getStatus() == 1 && estadoReporte=="Todos") || (need.getStatus() == 1 && estadoReporte=="Activa")){
+                values[0] +=1;
+            }else if((need.getStatus() == 2 && estadoReporte=="Todos") || (need.getStatus() == 1 && estadoReporte=="En proceso")){
+                values[1] +=1;
             }
-            else if(need.getStatus() == 3){
-                values[2] +=1;                
-            }else if(need.getStatus() == 4){
-                values[3] +=1;                
+            else if((need.getStatus() == 3 && estadoReporte=="Todos") || (need.getStatus() == 1 && estadoReporte=="Resuelta")){
+                values[2] +=1;
+            }else if((need.getStatus() == 4 && estadoReporte=="Todos") || (need.getStatus() == 1 && estadoReporte=="Cerrada")){
+                values[3] +=1;
             }
         }
-        chatSeries.set("Abierta", values[0]);
-        chatSeries.set("Cerrada", values[1]);    
-        chatSeries.set("En Proceso ", values[2]);    
-        chatSeries.set("Resuelta", values[3]);        
+        if (estadoReporte=="Todos" || estadoReporte=="Activa"){
+            chatSeries.set("Abierta", values[0]);
+        }
+        if (estadoReporte=="Todos" || estadoReporte=="En proceso"){
+            chatSeries.set("Cerrada", values[1]);
+        }
+        if (estadoReporte=="Todos" || estadoReporte=="Resuelta"){
+            chatSeries.set("En Proceso ", values[2]);
+        }
+        if (estadoReporte=="Todos" || estadoReporte=="Cerrada"){
+            chatSeries.set("Resuelta", values[3]);
+        }
         model.addSeries(chatSeries);
         return model;
     }
@@ -231,8 +277,24 @@ public class NeedsServicesBean extends BasePageBean {
     /**
      * Genera el modelo basico de la grafica
      */
-    private void createBarModel() {
-        AllNeeds();
+    private void createBarModel() throws ServicesException, PersistenceException {
+        filtros();
+        estadoReporte="Activa";
+        categoriaReporte="Todas";
+        consulta="";
+        if (estadoReporte=="Todos" && categoriaReporte=="Todas"){
+            AllNeeds();
+        }
+        if (estadoReporte!="Todos" && categoriaReporte=="Todas"){
+            AllNeedsFilterStatus();
+        }
+        if (estadoReporte=="Todos" && categoriaReporte!="Todas"){
+            AllNeedsFilterCategory();
+        }
+        if (estadoReporte!="Todos" && categoriaReporte!="Todas"){
+            AllNeedsFilterCategoryStatus();
+        }
+
         graphic = initBarModel();
         graphic.setTitle("Necesidades agrupadas por estado");
         graphic.setLegendPosition("ne");
@@ -240,6 +302,21 @@ public class NeedsServicesBean extends BasePageBean {
         Axis xAxis = graphic.getAxis(AxisType.X);
         Axis yAxis = graphic.getAxis(AxisType.Y);
         yAxis.setMin(0);
+    }
+
+    public void filtros() throws ServicesException, PersistenceException {
+        categoriasReporte=new ArrayList<String>();
+        categoriasReporte.add("Todas");
+        ArrayList<Categories> categoriesnames= (ArrayList<Categories>) categoriesServices.traerCategories();
+        for(int i=0;i<categoriesnames.size();i++){
+            categoriasReporte.add(categoriesnames.get(i).getValue());
+        }
+        estadosReporte=new ArrayList<String>();
+        estadosReporte.add("Todos");
+        ArrayList<Status> statusnames= (ArrayList<Status>) statusServices.traerStatus();
+        for(int i=0;i<statusnames.size();i++){
+            estadosReporte.add(statusnames.get(i).getValue());
+        }
     }
 
     /**
