@@ -119,6 +119,23 @@ public class OffersServicesBean extends BasePageBean {
      * 
      * @throws ServicesException controlador de errores de la capa de services
      */
+    public List<Offers> Reporte(){
+        try {
+            if(categoriaReporte=="Todas" && estadoReporte=="Todos"){
+                AllOffers();
+            }else if(categoriaReporte!="Todas" && estadoReporte=="Todos"){
+                AllOffersFilterCategory();
+            }else if(categoriaReporte=="Todas" && estadoReporte!="Todos"){
+                AllOffersFilterStatus();
+            }else if(categoriaReporte!="Todas" && estadoReporte!="Todos"){
+                AllOffersFilterCategoryStatus();
+            }
+            return AllOffers;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<Offers>();
+        }
+    }
     public List<Offers> AllOffers(){
         try {
             AllOffers = offersServices.AllOffers(UserServicesBean.getId(),UserServicesBean.getRol());
@@ -194,15 +211,15 @@ public class OffersServicesBean extends BasePageBean {
         model.setSeriesColors("B40001,93b75f,E7E658,cc6666");
         int[] values = new int[4];
 
-        for(Offers need: AllOffers){
-            if((need.getStatus() == 1 && estadoReporte=="Todos") || (need.getStatus() == 1 && estadoReporte=="Activa")){
+        for(Offers offer: AllOffers){
+            if((offer.getStatus() == 1 && estadoReporte=="Todos") || (offer.getStatus() == 1 && estadoReporte=="Activa")){
                 values[0] +=1;
-            }else if((need.getStatus() == 2 && estadoReporte=="Todos") || (need.getStatus() == 1 && estadoReporte=="Cerrada")){
+            }else if((offer.getStatus() == 2 && estadoReporte=="Todos") || (offer.getStatus() == 1 && estadoReporte=="Cerrada")){
                 values[1] +=1;
             }
-            else if((need.getStatus() == 3 && estadoReporte=="Todos") || (need.getStatus() == 1 && estadoReporte=="En Proceso")){
+            else if((offer.getStatus() == 3 && estadoReporte=="Todos") || (offer.getStatus() == 1 && estadoReporte=="En Proceso")){
                 values[2] +=1;
-            }else if((need.getStatus() == 4 && estadoReporte=="Todos") || (need.getStatus() == 1 && estadoReporte=="Resuelta")){
+            }else if((offer.getStatus() == 4 && estadoReporte=="Todos") || (offer.getStatus() == 1 && estadoReporte=="Resuelta")){
                 values[3] +=1;
             }
         }
@@ -227,8 +244,8 @@ public class OffersServicesBean extends BasePageBean {
      */
     private void createBarModel() throws ServicesException, PersistenceException {
         filtros();
-        estadoReporte="Activa";
-        categoriaReporte="sprint review";
+        estadoReporte="Todos";
+        categoriaReporte="Todas";
         if (estadoReporte=="Todos" && categoriaReporte=="Todas"){
             AllOffers();
         }

@@ -5,9 +5,7 @@ import com.google.inject.Inject;
 import edu.eci.cvds.dao.CategoriesDAO;
 import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.dao.UserDAO;
-import edu.eci.cvds.entities.Categories;
-import edu.eci.cvds.entities.Status;
-import edu.eci.cvds.entities.User;
+import edu.eci.cvds.entities.*;
 import edu.eci.cvds.services.*;
 import org.primefaces.PrimeFaces;
 import org.primefaces.model.chart.Axis;
@@ -16,8 +14,6 @@ import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.BarChartSeries;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.HorizontalBarChartModel;
-
-import edu.eci.cvds.entities.Needs;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -118,6 +114,23 @@ public class NeedsServicesBean extends BasePageBean {
      * 
      * @throws ServicesException controlador de errores de la capa de services
      */
+    public List<Needs> Reporte(){
+        try {
+            if(categoriaReporte=="Todas" && estadoReporte=="Todos"){
+                AllNeeds();
+            }else if(categoriaReporte!="Todas" && estadoReporte=="Todos"){
+                AllNeedsFilterCategory();
+            }else if(categoriaReporte=="Todas" && estadoReporte!="Todos"){
+                AllNeedsFilterStatus();
+            }else if(categoriaReporte!="Todas" && estadoReporte!="Todos"){
+                AllNeedsFilterCategoryStatus();
+            }
+            return AllNeeds;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<Needs>();
+        }
+    }
     public List<Needs> AllNeeds() {
         try {
             AllNeeds = needsServices.AllNeeds(UserServicesBean.getId(),UserServicesBean.getRol());

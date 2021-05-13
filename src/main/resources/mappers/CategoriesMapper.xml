@@ -31,6 +31,11 @@
         WHERE value=#{oldvalue} and status=true
     </select>
 
+    <select parameterType="map" id="AllCategories" resultMap="CategoriesResult">
+        select *
+        FROM categories
+    </select>
+
     <select parameterType="map" id="traerCategories" resultMap="CategoriesResult">
         select *
         FROM categories
