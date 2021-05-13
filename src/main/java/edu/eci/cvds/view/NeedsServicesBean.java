@@ -73,7 +73,6 @@ public class NeedsServicesBean extends BasePageBean {
     private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     private String categoriaReporte;
     private String estadoReporte;
-    private String consulta;
     private List<String> categoriasReporte;
     private List<String> estadosReporte;
 
@@ -121,7 +120,6 @@ public class NeedsServicesBean extends BasePageBean {
      */
     public List<Needs> AllNeeds() {
         try {
-            System.out.println(consulta);
             AllNeeds = needsServices.AllNeeds(UserServicesBean.getId(),UserServicesBean.getRol());
             return AllNeeds;
         } catch (Exception ex) {
@@ -131,7 +129,6 @@ public class NeedsServicesBean extends BasePageBean {
     }
     public List<Needs> AllNeedsFilterCategory() {
         try {
-            System.out.println(consulta);
             AllNeeds = needsServices.AllNeedsFilterCategory(UserServicesBean.getId(),UserServicesBean.getRol(),categoriesServices.traerValuesCategories(categoriaReporte).get(0).getId());
             return AllNeeds;
         } catch (Exception ex) {
@@ -141,10 +138,7 @@ public class NeedsServicesBean extends BasePageBean {
     }
     public List<Needs> AllNeedsFilterStatus() {
         try {
-            System.out.println(estadosReporte.indexOf(estadoReporte));
-
             AllNeeds = needsServices.AllNeedsFilterStatus(UserServicesBean.getId(),UserServicesBean.getRol(),estadosReporte.indexOf(estadoReporte));
-            System.out.println(AllNeeds);
             return AllNeeds;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -249,25 +243,25 @@ public class NeedsServicesBean extends BasePageBean {
         for(Needs need: AllNeeds){
             if((need.getStatus() == 1 && estadoReporte=="Todos") || (need.getStatus() == 1 && estadoReporte=="Activa")){
                 values[0] +=1;
-            }else if((need.getStatus() == 2 && estadoReporte=="Todos") || (need.getStatus() == 1 && estadoReporte=="En proceso")){
+            }else if((need.getStatus() == 2 && estadoReporte=="Todos") || (need.getStatus() == 1 && estadoReporte=="Cerrada")){
                 values[1] +=1;
             }
-            else if((need.getStatus() == 3 && estadoReporte=="Todos") || (need.getStatus() == 1 && estadoReporte=="Resuelta")){
+            else if((need.getStatus() == 3 && estadoReporte=="Todos") || (need.getStatus() == 1 && estadoReporte=="En Proceso")){
                 values[2] +=1;
-            }else if((need.getStatus() == 4 && estadoReporte=="Todos") || (need.getStatus() == 1 && estadoReporte=="Cerrada")){
+            }else if((need.getStatus() == 4 && estadoReporte=="Todos") || (need.getStatus() == 1 && estadoReporte=="Resuelta")){
                 values[3] +=1;
             }
         }
         if (estadoReporte=="Todos" || estadoReporte=="Activa"){
             chatSeries.set("Abierta", values[0]);
         }
-        if (estadoReporte=="Todos" || estadoReporte=="En proceso"){
+        if (estadoReporte=="Todos" || estadoReporte=="Cerrada"){
             chatSeries.set("Cerrada", values[1]);
         }
-        if (estadoReporte=="Todos" || estadoReporte=="Resuelta"){
+        if (estadoReporte=="Todos" || estadoReporte=="En Proceso"){
             chatSeries.set("En Proceso ", values[2]);
         }
-        if (estadoReporte=="Todos" || estadoReporte=="Cerrada"){
+        if (estadoReporte=="Todos" || estadoReporte=="Resuelta"){
             chatSeries.set("Resuelta", values[3]);
         }
         model.addSeries(chatSeries);
@@ -279,9 +273,8 @@ public class NeedsServicesBean extends BasePageBean {
      */
     private void createBarModel() throws ServicesException, PersistenceException {
         filtros();
-        estadoReporte="Activa";
+        estadoReporte="Todos";
         categoriaReporte="Todas";
-        consulta="";
         if (estadoReporte=="Todos" && categoriaReporte=="Todas"){
             AllNeeds();
         }

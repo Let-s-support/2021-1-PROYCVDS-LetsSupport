@@ -42,6 +42,27 @@
         WHERE idsolicitante=#{id} or #{rol}=1
     </select>
 
+    <select parameterType="map" id="AllOffersFilterCategory" resultMap="OffersResult">
+        select *
+        FROM offers
+        WHERE (idsolicitante=#{id} or #{rol}=1) and (category_id=#{category})
+        order by category_id;
+    </select>
+
+    <select parameterType="map" id="AllOffersFilterStatus" resultMap="OffersResult">
+        select *
+        FROM offers
+        WHERE (idsolicitante=#{id} or #{rol}=1) and (status=#{status})
+        order by category_id;
+    </select>
+
+    <select parameterType="map" id="AllOffersFilterCategoryStatus" resultMap="OffersResult">
+        select *
+        FROM offers
+        WHERE (idsolicitante=#{id} or #{rol}=1) and (category_id=#{category} and status=#{status})
+        order by category_id;
+    </select>
+
     <update parameterType="map" id="ModificarEstadoOffer">
         update offers set status=#{newstatus}
         WHERE value=#{value}

@@ -102,6 +102,33 @@ public class MyBatisOffersDAO implements OffersDAO {
     }
 
     @Override
+    public List<Offers> AllOffersFilterCategory(int id, int rol, int category)  throws PersistenceException {
+        try {
+            return offersMapper.AllOffersFilterCategory(id, rol,category);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("No se pudo consultar los nombres", e);
+        }
+    }
+
+    @Override
+    public List<Offers> AllOffersFilterStatus(int id, int rol, int status)  throws PersistenceException {
+        try {
+            return offersMapper.AllOffersFilterStatus(id, rol,status);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("No se pudo consultar los nombres", e);
+        }
+    }
+
+    @Override
+    public List<Offers> AllOffersFilterCategoryStatus(int id, int rol, int category, int status)  throws PersistenceException {
+        try {
+            return offersMapper.AllOffersFilterCategoryStatus(id, rol,category,status);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("No se pudo consultar los nombres", e);
+        }
+    }
+
+    @Override
     public List<Offers> OfferName(int id) throws PersistenceException {
         try {
             return offersMapper.OfferName(id);

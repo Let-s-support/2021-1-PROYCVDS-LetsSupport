@@ -103,6 +103,33 @@ public class OffersServicesImpl implements OffersServices {
     }
 
     @Override
+    public List<Offers> AllOffersFilterCategory(int id, int rol, int category)  throws PersistenceException {
+        try {
+            return offersDAO.AllOffersFilterCategory(id, rol,category);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("No se pudo consultar los nombres", e);
+        }
+    }
+
+    @Override
+    public List<Offers> AllOffersFilterStatus(int id, int rol, int status)  throws PersistenceException {
+        try {
+            return offersDAO.AllOffersFilterStatus(id, rol,status);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("No se pudo consultar los nombres", e);
+        }
+    }
+
+    @Override
+    public List<Offers> AllOffersFilterCategoryStatus(int id, int rol, int category, int status)  throws PersistenceException {
+        try {
+            return offersDAO.AllOffersFilterCategoryStatus(id, rol,category,status);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("No se pudo consultar los nombres", e);
+        }
+    }
+
+    @Override
     public List<Offers> OfferName(int id) throws ServicesException{
         try {
             return offersDAO.OfferName(id);

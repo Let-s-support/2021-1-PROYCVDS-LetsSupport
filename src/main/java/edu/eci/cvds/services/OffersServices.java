@@ -47,6 +47,12 @@ public interface OffersServices {
      */
     List<Offers> AllOffers(int id, int rol) throws ServicesException;
 
+    List<Offers> AllOffersFilterCategory(int id, int rol, int category)  throws PersistenceException;
+
+    List<Offers> AllOffersFilterStatus(int id, int rol, int status)  throws PersistenceException;
+
+    List<Offers> AllOffersFilterCategoryStatus(int id, int rol, int category, int status)  throws PersistenceException;
+
     List<Offers> OfferName(int id) throws ServicesException;
 
     List<Offers> OffersToAnswer() throws ServicesException;
