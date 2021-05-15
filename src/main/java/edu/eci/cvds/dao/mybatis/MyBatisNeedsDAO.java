@@ -101,6 +101,33 @@ public class MyBatisNeedsDAO implements NeedsDAO {
     }
 
     @Override
+    public List<Needs> AllNeedsFilterCategory(int id, int rol, int category)  throws PersistenceException {
+        try {
+            return needsMapper.AllNeedsFilterCategory(id, rol,category);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("No se pudo consultar los nombres", e);
+        }
+    }
+
+    @Override
+    public List<Needs> AllNeedsFilterStatus(int id, int rol, int status)  throws PersistenceException {
+        try {
+            return needsMapper.AllNeedsFilterStatus(id, rol,status);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("No se pudo consultar los nombres", e);
+        }
+    }
+
+    @Override
+    public List<Needs> AllNeedsFilterCategoryStatus(int id, int rol, int category, int status)  throws PersistenceException {
+        try {
+            return needsMapper.AllNeedsFilterCategoryStatus(id, rol,category,status);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("No se pudo consultar los nombres", e);
+        }
+    }
+
+    @Override
     public List<Needs> NeedName(int id) throws PersistenceException {
         try {
             return needsMapper.NeedName(id);

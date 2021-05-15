@@ -2,7 +2,10 @@ package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
 
+import edu.eci.cvds.dao.PersistenceException;
+import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.entities.Needs;
+import edu.eci.cvds.entities.Status;
 import edu.eci.cvds.services.*;
 import edu.eci.cvds.services.Impl.UserServicesImpl;
 import org.primefaces.PrimeFaces;
@@ -60,6 +63,10 @@ public class OffersServicesBean extends BasePageBean {
     private List<String> names;
     private List<Offers> OffersToAnswer;
     private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    private String categoriaReporte;
+    private String estadoReporte;
+    private List<String> categoriasReporte;
+    private List<String> estadosReporte;
 
     /**
      * Crea una nueva oferta
@@ -75,11 +82,15 @@ public class OffersServicesBean extends BasePageBean {
                         .get(CategoriesServicesBean.getCategories().indexOf(selectedCategory));
 
                 try {
-                    Offers offer = new Offers(value, description, 1, category_id, idsolicitante);
-                    offersServices.agregarOfertas(offer);
-
-                    //FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
-                    System.out.println("Oferta creada");
+                    List<Categories> invalida = categoriesServices.categoriaInvalida(category_id);
+                    if(!invalida.get(0).isInvalida()) {
+                        Offers offer = new Offers(value, description, 1, category_id, idsolicitante);
+                        offersServices.agregarOfertas(offer);
+                    }else{
+                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+                                "La categoria seleccionada es una categoria invalida "+invalida.get(0).getComentarioinvalida());
+                        PrimeFaces.current().dialog().showMessageDynamic(message);
+                    }
                 } catch (Exception e) {
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
                             "Ha ocurrido un error");
@@ -108,9 +119,54 @@ public class OffersServicesBean extends BasePageBean {
      * 
      * @throws ServicesException controlador de errores de la capa de services
      */
+    public List<Offers> Reporte(){
+        try {
+            if(categoriaReporte=="Todas" && estadoReporte=="Todos"){
+                AllOffers();
+            }else if(categoriaReporte!="Todas" && estadoReporte=="Todos"){
+                AllOffersFilterCategory();
+            }else if(categoriaReporte=="Todas" && estadoReporte!="Todos"){
+                AllOffersFilterStatus();
+            }else if(categoriaReporte!="Todas" && estadoReporte!="Todos"){
+                AllOffersFilterCategoryStatus();
+            }
+            return AllOffers;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<Offers>();
+        }
+    }
     public List<Offers> AllOffers(){
         try {
             AllOffers = offersServices.AllOffers(UserServicesBean.getId(),UserServicesBean.getRol());
+            return AllOffers;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<Offers>();
+        }
+    }
+
+    public List<Offers> AllOffersFilterCategory() {
+        try {
+            AllOffers = offersServices.AllOffersFilterCategory(UserServicesBean.getId(),UserServicesBean.getRol(),categoriesServices.traerValuesCategories(categoriaReporte).get(0).getId());
+            return AllOffers;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<Offers>();
+        }
+    }
+    public List<Offers> AllOffersFilterStatus() {
+        try {
+            AllOffers = offersServices.AllOffersFilterStatus(UserServicesBean.getId(),UserServicesBean.getRol(),estadosReporte.indexOf(estadoReporte));
+            return AllOffers;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<Offers>();
+        }
+    }
+    public List<Offers> AllOffersFilterCategoryStatus() {
+        try {
+            AllOffers = offersServices.AllOffersFilterCategoryStatus(UserServicesBean.getId(),UserServicesBean.getRol(),categoriesServices.traerValuesCategories(categoriaReporte).get(0).getId(),estadosReporte.indexOf(estadoReporte));
             return AllOffers;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -138,7 +194,7 @@ public class OffersServicesBean extends BasePageBean {
      * Obtener el grafico para mostrar en la interfaz grafica
      * @return
      */    
-    public HorizontalBarChartModel getGrafico() {
+    public HorizontalBarChartModel getGrafico() throws ServicesException, PersistenceException {
         createBarModel();
         return graphic;
     }
@@ -155,22 +211,30 @@ public class OffersServicesBean extends BasePageBean {
         model.setSeriesColors("B40001,93b75f,E7E658,cc6666");
         int[] values = new int[4];
 
-        for(Offers need: AllOffers){
-            if(need.getStatus() == 1){
-                values[0] +=1;                
-            }else if(need.getStatus() == 2){
-                values[1] +=1;                
+        for(Offers offer: AllOffers){
+            if((offer.getStatus() == 1 && estadoReporte=="Todos") || (offer.getStatus() == 1 && estadoReporte=="Activa")){
+                values[0] +=1;
+            }else if((offer.getStatus() == 2 && estadoReporte=="Todos") || (offer.getStatus() == 1 && estadoReporte=="Cerrada")){
+                values[1] +=1;
             }
-            else if(need.getStatus() == 3){
-                values[2] +=1;                
-            }else if(need.getStatus() == 4){
-                values[3] +=1;                
+            else if((offer.getStatus() == 3 && estadoReporte=="Todos") || (offer.getStatus() == 1 && estadoReporte=="En Proceso")){
+                values[2] +=1;
+            }else if((offer.getStatus() == 4 && estadoReporte=="Todos") || (offer.getStatus() == 1 && estadoReporte=="Resuelta")){
+                values[3] +=1;
             }
         }
-        chatSeries.set("Abierta", values[0]);
-        chatSeries.set("Cerrada", values[1]);    
-        chatSeries.set("En Proceso ", values[2]);    
-        chatSeries.set("Resuelta", values[3]);        
+        if (estadoReporte=="Todos" || estadoReporte=="Activa"){
+            chatSeries.set("Abierta", values[0]);
+        }
+        if (estadoReporte=="Todos" || estadoReporte=="Cerrada"){
+            chatSeries.set("Cerrada", values[1]);
+        }
+        if (estadoReporte=="Todos" || estadoReporte=="En proceso"){
+            chatSeries.set("En Proceso ", values[2]);
+        }
+        if (estadoReporte=="Todos" || estadoReporte=="Resuelta"){
+            chatSeries.set("Resuelta", values[3]);
+        }
         model.addSeries(chatSeries);
         return model;
     }
@@ -178,8 +242,22 @@ public class OffersServicesBean extends BasePageBean {
     /**
      * Genera el modelo basico de la grafica
      */
-    private void createBarModel() {
-        AllOffers();
+    private void createBarModel() throws ServicesException, PersistenceException {
+        filtros();
+        estadoReporte="Todos";
+        categoriaReporte="Todas";
+        if (estadoReporte=="Todos" && categoriaReporte=="Todas"){
+            AllOffers();
+        }
+        if (estadoReporte!="Todos" && categoriaReporte=="Todas"){
+            AllOffersFilterStatus();
+        }
+        if (estadoReporte=="Todos" && categoriaReporte!="Todas"){
+            AllOffersFilterCategory();
+        }
+        if (estadoReporte!="Todos" && categoriaReporte!="Todas"){
+            AllOffersFilterCategoryStatus();
+        }
         graphic = initBarModel();
         graphic.setTitle("Ofertas agrupadas por estado");
         graphic.setLegendPosition("ne");
@@ -187,6 +265,21 @@ public class OffersServicesBean extends BasePageBean {
         Axis xAxis = graphic.getAxis(AxisType.X);
         Axis yAxis = graphic.getAxis(AxisType.Y);
         yAxis.setMin(0);
+    }
+
+    public void filtros() throws ServicesException, PersistenceException {
+        categoriasReporte=new ArrayList<String>();
+        categoriasReporte.add("Todas");
+        ArrayList<Categories> categoriesnames= (ArrayList<Categories>) categoriesServices.traerCategories();
+        for(int i=0;i<categoriesnames.size();i++){
+            categoriasReporte.add(categoriesnames.get(i).getValue());
+        }
+        estadosReporte=new ArrayList<String>();
+        estadosReporte.add("Todos");
+        ArrayList<Status> statusnames= (ArrayList<Status>) statusServices.traerStatus();
+        for(int i=0;i<statusnames.size();i++){
+            estadosReporte.add(statusnames.get(i).getValue());
+        }
     }
 
     public void cleanData() {

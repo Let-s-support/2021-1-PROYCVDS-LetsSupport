@@ -47,7 +47,14 @@ public interface NeedsServices {
      * @return List de tipo needs
      * @throws ServicesException controlador de errores de la capa de services
      */
-    List<Needs> AllNeeds(int id, int rol) throws ServicesException;
+    List<Needs> AllNeeds(int id, int rol) throws PersistenceException, ServicesException;
+
+    List<Needs> AllNeedsFilterCategory(int id, int rol, int category)  throws PersistenceException;
+
+    List<Needs> AllNeedsFilterStatus(int id, int rol, int status)  throws PersistenceException;
+
+    List<Needs> AllNeedsFilterCategoryStatus(int id, int rol, int category, int status)  throws PersistenceException;
+
 
     List<Needs> NeedName(int id) throws ServicesException;
 

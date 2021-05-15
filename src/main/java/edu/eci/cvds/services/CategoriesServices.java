@@ -41,4 +41,6 @@ public interface CategoriesServices {
     List<Categories> nameCategorie(int id) throws ServicesException;
 
     void EliminarCategoria(String value) throws ServicesException;
+
+    List<Categories> categoriaInvalida(int id) throws ServicesException;
 }

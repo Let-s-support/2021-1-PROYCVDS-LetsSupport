@@ -2,14 +2,18 @@ package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
 
+import edu.eci.cvds.entities.Needs;
+import edu.eci.cvds.entities.Offers;
+import edu.eci.cvds.services.*;
 import org.primefaces.PrimeFaces;
 
 import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.entities.Status;
-import edu.eci.cvds.services.CategoriesServices;
-import edu.eci.cvds.services.ServicesException;
-import edu.eci.cvds.services.StatusServices;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartSeries;
+import org.primefaces.model.chart.HorizontalBarChartModel;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
@@ -19,6 +23,7 @@ import javax.faces.event.ValueChangeEvent;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @javax.faces.bean.ManagedBean(name = "categoryBean")
@@ -38,16 +43,35 @@ public class CategoriesServicesBean extends BasePageBean {
     private List<String> statuses;
     private String selectedStatus;
     private List<String> estado;
-    private List<Categories> populares;
     private boolean invalida;
     private boolean eliminada;
     private String comentarioinvalida;
+    private ArrayList<String> nombres;
+    private ArrayList<ArrayList<Integer>> totales;
+    private ArrayList<String> estadosReporte;
+    private ArrayList<String> invalidasReporte;
+    private ArrayList<String> eliminadasReporte;
+    private ArrayList<String> categoriasReporte;
+    private String estadoReporte;
+    private String invalidaReporte;
+    private String eliminadaReporte;
+    private String categoriaReporte;
+    private int numeroNecesidaes;
+    private int numeroOfertas;
+    private int numeroTotales;
+    private HorizontalBarChartModel graphic;
 
     @Inject
     CategoriesServices categoriesServices;
 
     @Inject
     StatusServices statusServices;
+
+    @Inject
+    NeedsServices needsServices;
+
+    @Inject
+    OffersServices offersServices;
 
     /**
      * Inicaliza la listas como vacias
@@ -187,10 +211,234 @@ public class CategoriesServicesBean extends BasePageBean {
         }
     }
 
-    public String populares(String nameCategory) throws ServicesException, PersistenceException {
-
-        return nameCategory;
+    public HorizontalBarChartModel getGrafico(int i) throws ServicesException, PersistenceException {
+        createBarModel(i);
+        return graphic;
     }
+
+
+    private HorizontalBarChartModel initBarModelNeeds() throws ServicesException, PersistenceException {
+        HorizontalBarChartModel model = new HorizontalBarChartModel();
+        BarChartSeries chatSeries = new BarChartSeries();
+        chatSeries.setLabel("Ofertas");
+        model.setSeriesColors("B40001,93b75f,E7E658,cc6666");
+        int[] values = new int[allCategories.size()];
+        int i=0;
+        for(Categories categorie: allCategories){
+            for(Needs need: needsServices.AllNeeds(UserServicesBean.getId(),UserServicesBean.getRol())) {
+                if(need.getCategory_id()==categorie.getId()){
+                    if(estadoReporte=="Todos" || (categorie.isStatus()==true && estadoReporte=="Activos") || (categorie.isStatus()==false && estadoReporte=="Inactivos")){
+                        if(invalidaReporte=="Todas" || (categorie.isInvalida()==true && estadoReporte=="Validas") || (categorie.isInvalida()==false && estadoReporte=="Invalidas")){
+                            if(eliminadaReporte=="Todas" || (categorie.isEliminada()==true && estadoReporte=="Eliminadas") || (categorie.isEliminada()==false && estadoReporte=="No eliminadas")){
+                                if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
+                                    values[i] += 1;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            i+=1;
+        }
+        int j=0;
+        for(Categories categorie: allCategories){
+            if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
+                chatSeries.set(categorie.getValue(), values[j]);
+            }
+        }
+        model.addSeries(chatSeries);
+        return model;
+    }
+    private HorizontalBarChartModel initBarModelOffers() throws ServicesException, PersistenceException {
+        HorizontalBarChartModel model = new HorizontalBarChartModel();
+        BarChartSeries chatSeries = new BarChartSeries();
+        chatSeries.setLabel("Ofertas");
+        model.setSeriesColors("B40001,93b75f,E7E658,cc6666");
+        int[] values = new int[allCategories.size()];
+        int i=0;
+        for(Categories categorie: allCategories){
+            for(Offers offer: offersServices.AllOffers(UserServicesBean.getId(),UserServicesBean.getRol())) {
+                if(offer.getCategory_id()==categorie.getId()){
+                    if(estadoReporte=="Todos" || (categorie.isStatus()==true && estadoReporte=="Activos") || (categorie.isStatus()==false && estadoReporte=="Inactivos")){
+                        if(invalidaReporte=="Todas" || (categorie.isInvalida()==true && estadoReporte=="Validas") || (categorie.isInvalida()==false && estadoReporte=="Invalidas")){
+                            if(eliminadaReporte=="Todas" || (categorie.isEliminada()==true && estadoReporte=="Eliminadas") || (categorie.isEliminada()==false && estadoReporte=="No eliminadas")){
+                                if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
+                                    values[i] += 1;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            i+=1;
+        }
+
+        int j=0;
+        for(Categories categorie: allCategories){
+            if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
+                chatSeries.set(categorie.getValue(), values[j]);
+            }
+        }
+        model.addSeries(chatSeries);
+        return model;
+    }
+    private HorizontalBarChartModel initBarModelTotal() throws ServicesException, PersistenceException {
+        HorizontalBarChartModel model = new HorizontalBarChartModel();
+        BarChartSeries chatSeries = new BarChartSeries();
+        chatSeries.setLabel("Ofertas");
+        model.setSeriesColors("B40001,93b75f,E7E658,cc6666");
+        int[] values = new int[allCategories.size()];
+        int i=0;
+        for(Categories categorie: allCategories){
+            for(Needs need: needsServices.AllNeeds(UserServicesBean.getId(),UserServicesBean.getRol())) {
+                if(need.getCategory_id()==categorie.getId()){
+                    if(estadoReporte=="Todos" || (categorie.isStatus()==true && estadoReporte=="Activos") || (categorie.isStatus()==false && estadoReporte=="Inactivos")){
+                        if(invalidaReporte=="Todas" || (categorie.isInvalida()==true && estadoReporte=="Validas") || (categorie.isInvalida()==false && estadoReporte=="Invalidas")){
+                            if(eliminadaReporte=="Todas" || (categorie.isEliminada()==true && estadoReporte=="Eliminadas") || (categorie.isEliminada()==false && estadoReporte=="No eliminadas")){
+                                if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
+                                    values[i] += 1;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for(Offers offer: offersServices.AllOffers(UserServicesBean.getId(),UserServicesBean.getRol())) {
+                if(offer.getCategory_id()==categorie.getId()){
+                    if(estadoReporte=="Todos" || (categorie.isStatus()==true && estadoReporte=="Activos") || (categorie.isStatus()==false && estadoReporte=="Inactivos")){
+                        if(invalidaReporte=="Todas" || (categorie.isInvalida()==true && estadoReporte=="Validas") || (categorie.isInvalida()==false && estadoReporte=="Invalidas")){
+                            if(eliminadaReporte=="Todas" || (categorie.isEliminada()==true && estadoReporte=="Eliminadas") || (categorie.isEliminada()==false && estadoReporte=="No eliminadas")){
+                                if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
+                                    values[i] += 1;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            i+=1;
+        }
+        int j=0;
+        for(Categories categorie: allCategories){
+            if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
+                chatSeries.set(categorie.getValue(), values[j]);
+            }
+        }
+        model.addSeries(chatSeries);
+        return model;
+    }
+
+    private void createBarModel(int i) throws ServicesException, PersistenceException {
+        filtros();
+        allCategories = categoriesServices.traerCategories();
+        if(i==1){
+            graphic.setTitle("Categorias usadas por necesidades");
+            graphic = initBarModelNeeds();
+        }else if(i==2){
+            graphic.setTitle("Categorias usadas por ofertas");
+            graphic = initBarModelOffers();
+        }else if(i==3){
+            graphic.setTitle("Categorias usadas por ofertas y necesidades");
+            graphic = initBarModelTotal();
+        }
+
+        graphic.setLegendPosition("ne");
+
+        Axis xAxis = graphic.getAxis(AxisType.X);
+        Axis yAxis = graphic.getAxis(AxisType.Y);
+        yAxis.setMin(0);
+    }
+
+    public void filtros() throws ServicesException, PersistenceException {
+        invalidasReporte=new ArrayList<String>();
+        invalidasReporte.add("Todas");
+        invalidasReporte.add("Validas");
+        invalidasReporte.add("Invalidas");
+        estadosReporte=new ArrayList<String>();
+        estadosReporte.add("Todos");
+        estadosReporte.add("Activos");
+        estadosReporte.add("Inactivos");
+        eliminadasReporte=new ArrayList<String>();
+        eliminadasReporte.add("Todas");
+        eliminadasReporte.add("Eliminadas");
+        eliminadasReporte.add("No eliminadas");
+        categoriasReporte=new ArrayList<String>();
+        categoriasReporte.add("Todas");
+        ArrayList<Categories> categoriesnames= (ArrayList<Categories>) categoriesServices.traerCategories();
+        for(int i=0;i<categoriesnames.size();i++){
+            categoriasReporte.add(categoriesnames.get(i).getValue());
+        }
+    }
+
+    public ArrayList<String> populares() throws ServicesException, PersistenceException {
+        nombres=new ArrayList<String>();
+        totales=new ArrayList<ArrayList<Integer>>();
+        allCategories = categoriesServices.traerCategories();
+        int i=0;
+        for(Categories categorie: allCategories){
+            int necesidades=0,ofertas=0,total=0;
+            ArrayList<Integer> resultados = new ArrayList<Integer>();
+            for(Needs need: needsServices.AllNeeds(UserServicesBean.getId(),UserServicesBean.getRol())) {
+                if(need.getCategory_id()==categorie.getId()){
+                    if(estadoReporte=="Todos" || (categorie.isStatus()==true && estadoReporte=="Activos") || (categorie.isStatus()==false && estadoReporte=="Inactivos")){
+                        if(invalidaReporte=="Todas" || (categorie.isInvalida()==true && estadoReporte=="Validas") || (categorie.isInvalida()==false && estadoReporte=="Invalidas")){
+                            if(eliminadaReporte=="Todas" || (categorie.isEliminada()==true && estadoReporte=="Eliminadas") || (categorie.isEliminada()==false && estadoReporte=="No eliminadas")){
+                                if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
+                                    necesidades+= 1;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            resultados.add(necesidades);
+            for(Offers offer: offersServices.AllOffers(UserServicesBean.getId(),UserServicesBean.getRol())) {
+                if(offer.getCategory_id()==categorie.getId()){
+                    if(estadoReporte=="Todos" || (categorie.isStatus()==true && estadoReporte=="Activos") || (categorie.isStatus()==false && estadoReporte=="Inactivos")){
+                        if(invalidaReporte=="Todas" || (categorie.isInvalida()==true && estadoReporte=="Validas") || (categorie.isInvalida()==false && estadoReporte=="Invalidas")){
+                            if(eliminadaReporte=="Todas" || (categorie.isEliminada()==true && estadoReporte=="Eliminadas") || (categorie.isEliminada()==false && estadoReporte=="No eliminadas")){
+                                if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
+                                    ofertas+=1;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            resultados.add(ofertas);
+            resultados.add(necesidades+ofertas);
+            if(estadoReporte=="Todos" || (categorie.isStatus()==true && estadoReporte=="Activos") || (categorie.isStatus()==false && estadoReporte=="Inactivos")){
+                if(invalidaReporte=="Todas" || (categorie.isInvalida()==true && estadoReporte=="Validas") || (categorie.isInvalida()==false && estadoReporte=="Invalidas")){
+                    if(eliminadaReporte=="Todas" || (categorie.isEliminada()==true && estadoReporte=="Eliminadas") || (categorie.isEliminada()==false && estadoReporte=="No eliminadas")){
+                        if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
+                            boolean var=false;
+                            for(int n=0;n<totales.size();i++){
+                                if(resultados.get(2)<totales.get(i).get(2)){
+                                    var=true;
+                                    nombres.add(n,categorie.getValue());
+                                    totales.add(n,resultados);
+                                }
+                            }
+                            if (!var){
+                                nombres.add(categorie.getValue());
+                                totales.add(resultados);
+                            }
+                        }
+                    }
+                }
+            }
+            i+=1;
+        }
+        return nombres;
+    }
+
+    public String datos(String categorieBusca){
+        numeroNecesidaes=totales.get(nombres.indexOf(categorieBusca)).get(0);
+        numeroOfertas=totales.get(nombres.indexOf(categorieBusca)).get(1);
+        numeroTotales=totales.get(nombres.indexOf(categorieBusca)).get(2);
+        return categorieBusca;
+    }
+
 
     public int getId() {
         return id;

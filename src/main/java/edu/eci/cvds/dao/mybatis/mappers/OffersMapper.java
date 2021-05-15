@@ -56,6 +56,19 @@ public interface OffersMapper {
     List<Offers> AllOffers(@Param("id") int id,
                            @Param("rol") int rol) throws PersistenceException;
 
+    List<Offers> AllOffersFilterCategory(@Param("id") int id,
+                                       @Param("rol") int rol,
+                                       @Param("category") int category) throws PersistenceException;
+
+    List<Offers> AllOffersFilterStatus(@Param("id") int id,
+                                     @Param("rol") int rol,
+                                     @Param("status") int status) throws PersistenceException;
+
+    List<Offers> AllOffersFilterCategoryStatus(@Param("id") int id,
+                                             @Param("rol") int rol,
+                                             @Param("category") int category,
+                                             @Param("status") int status) throws PersistenceException;
+
     List<Offers> OfferName(@Param("id") int id);
 }
 

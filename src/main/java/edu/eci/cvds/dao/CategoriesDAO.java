@@ -46,4 +46,7 @@ public interface CategoriesDAO {
     List<Categories> nameCategorie(int id) throws PersistenceException;
 
     void EliminarCategoria(String value) throws PersistenceException;
+
+    List<Categories> categoriaInvalida(int id) throws PersistenceException;
+
 }

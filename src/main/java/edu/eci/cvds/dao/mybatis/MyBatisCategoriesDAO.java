@@ -89,4 +89,13 @@ public class MyBatisCategoriesDAO implements CategoriesDAO {
             throw new PersistenceException("Error al consultar nombres", e);
         }
     }
+
+    @Override
+    public List<Categories> categoriaInvalida(int id) throws PersistenceException {
+        try {
+            return categoriesMapper.categoriaInvalida(id);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al consultar nombres", e);
+        }
+    }
 }

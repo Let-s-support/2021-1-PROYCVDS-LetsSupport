@@ -54,5 +54,18 @@ public interface NeedsMapper {
     List<Needs> AllNeeds(@Param("id") int id,
                             @Param("rol") int rol) throws PersistenceException;
 
+    List<Needs> AllNeedsFilterCategory(@Param("id") int id,
+                                        @Param("rol") int rol,
+                                       @Param("category") int category) throws PersistenceException;
+
+    List<Needs> AllNeedsFilterStatus(@Param("id") int id,
+                                     @Param("rol") int rol,
+                                     @Param("status") int status) throws PersistenceException;
+
+    List<Needs> AllNeedsFilterCategoryStatus(@Param("id") int id,
+                                            @Param("rol") int rol,
+                                            @Param("category") int category,
+                                            @Param("status") int status) throws PersistenceException;
+
     List<Needs> NeedName(@Param("id") int id);
 }

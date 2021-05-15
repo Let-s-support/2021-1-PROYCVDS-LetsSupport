@@ -111,6 +111,33 @@ public class NeedsServicesImpl implements NeedsServices {
     }
 
     @Override
+    public List<Needs> AllNeedsFilterCategory(int id, int rol, int category)  throws PersistenceException {
+        try {
+            return needsDAO.AllNeedsFilterCategory(id, rol,category);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("No se pudo consultar los nombres", e);
+        }
+    }
+
+    @Override
+    public List<Needs> AllNeedsFilterStatus(int id, int rol, int status)  throws PersistenceException {
+        try {
+            return needsDAO.AllNeedsFilterStatus(id, rol,status);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("No se pudo consultar los nombres", e);
+        }
+    }
+
+    @Override
+    public List<Needs> AllNeedsFilterCategoryStatus(int id, int rol, int category, int status)  throws PersistenceException {
+        try {
+            return needsDAO.AllNeedsFilterCategoryStatus(id, rol,category,status);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("No se pudo consultar los nombres", e);
+        }
+    }
+
+    @Override
     public List<Needs> NeedName(int id) throws ServicesException{
         try {
             return needsDAO.NeedName(id);
