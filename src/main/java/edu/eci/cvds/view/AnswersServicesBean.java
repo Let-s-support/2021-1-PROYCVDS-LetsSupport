@@ -99,10 +99,10 @@ public class AnswersServicesBean extends BasePageBean{
     }
     public String clasifica(int offer_id, int need_id) throws ServicesException {
         String res="Respuesta a";
-        if (offer_id==0){
-            res+=" necesidad "+needsServices.NeedName(need_id);
+        if (offer_id == 0){
+            res+=" necesidad " + needsServices.NeedName(need_id);
         }else {
-            res+=" oferta "+offersServices.OfferName(need_id);
+            res+=" oferta " + offersServices.OfferName(offer_id);
         }
         return res;
     }
