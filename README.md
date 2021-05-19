@@ -12,6 +12,14 @@
 ### Profesor
 + Julián Velasco (Product Owner)
 
+
+## Contenidos:
+---
+- [Descripción del producto](#Descripción)
+- [Arquitectura y Diseño detallado](#Arquitectura-y-diseño-detallado)
+- [Descripción del proceso](#Descripción-del-proceso)
+- [Información adicional](#información-adicional)
+
 ## Descripción
 ---
 Lets Support  es  un sistema  que ayuda a que los estudiantes puedan dar a conocer a la comunidad de la escuela cualquier necesidad que tengan para poder llevar a cabo sus actividades académicas en la escuela y por otro lado, busca que los demás miembros de la escuela puedan facilitar estos elementos de forma fácil y sin complicaciones.De  igual forma también es una  plataforma que ayuda a que los demás miembros de la institución puedan ofertar productos sin necesidad de una solicitud en especial.Lets Support tambien es un sistema que permite una buena administracion y manejo de reportes en donde se pueden llevar un control completo de su funcionamiento y de las actividades que se estan dando en ella.
