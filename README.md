@@ -18,7 +18,6 @@
 - [Descripción del producto](#Descripción)
 - [Arquitectura y Diseño detallado](#Arquitectura-y-diseño-detallado)
 - [Descripción del proceso](#Descripción-del-proceso)
-- [Información adicional](#información-adicional)
 
 ## Descripción
 ---
