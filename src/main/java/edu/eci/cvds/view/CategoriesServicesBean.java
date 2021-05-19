@@ -52,10 +52,10 @@ public class CategoriesServicesBean extends BasePageBean {
     private ArrayList<String> invalidasReporte;
     private ArrayList<String> eliminadasReporte;
     private ArrayList<String> categoriasReporte;
-    private String estadoReporte;
-    private String invalidaReporte;
-    private String eliminadaReporte;
-    private String categoriaReporte;
+    private String estadoReporte= "Todos";
+    private String invalidaReporte= "Todas";;
+    private String eliminadaReporte= "Todas";;
+    private String categoriaReporte= "Todas";
     private int numeroNecesidaes;
     private int numeroOfertas;
     private int numeroTotales;
@@ -229,7 +229,7 @@ public class CategoriesServicesBean extends BasePageBean {
         int[] values = new int[allCategories.size()];
         int i = 0;
         for (Categories categorie : allCategories) {
-            for (Needs need : needsServices.AllNeeds(UserServicesBean.getId(), UserServicesBean.getRol())) {
+            for (Needs need : needsServices.AllNeeds(UserServicesBean.getId(), 1)) {
                 if (need.getCategory_id() == categorie.getId()) {
                     if (estadoReporte == "Todos" || (categorie.isStatus() == true && estadoReporte == "Activos")
                             || (categorie.isStatus() == false && estadoReporte == "Inactivos")) {
@@ -267,7 +267,7 @@ public class CategoriesServicesBean extends BasePageBean {
         int[] values = new int[allCategories.size()];
         int i = 0;
         for (Categories categorie : allCategories) {
-            for (Offers offer : offersServices.AllOffers(UserServicesBean.getId(), UserServicesBean.getRol())) {
+            for (Offers offer : offersServices.AllOffers(UserServicesBean.getId(), 1)) {
                 if (offer.getCategory_id() == categorie.getId()) {
                     if (estadoReporte == "Todos" || (categorie.isStatus() == true && estadoReporte == "Activos")
                             || (categorie.isStatus() == false && estadoReporte == "Inactivos")) {
@@ -305,7 +305,8 @@ public class CategoriesServicesBean extends BasePageBean {
         int[] values = new int[allCategories.size()];
         int i = 0;
         for (Categories categorie : allCategories) {
-            for (Needs need : needsServices.AllNeeds(UserServicesBean.getId(), UserServicesBean.getRol())) {
+
+            for (Needs need : needsServices.AllNeeds(UserServicesBean.getId(), 1)) {
                 if (need.getCategory_id() == categorie.getId()) {
                     if (estadoReporte == "Todos" || (categorie.isStatus() == true && estadoReporte == "Activos")
                             || (categorie.isStatus() == false && estadoReporte == "Inactivos")) {
@@ -322,7 +323,7 @@ public class CategoriesServicesBean extends BasePageBean {
                     }
                 }
             }
-            for (Offers offer : offersServices.AllOffers(UserServicesBean.getId(), UserServicesBean.getRol())) {
+            for (Offers offer : offersServices.AllOffers(UserServicesBean.getId(), 1)) {
                 if (offer.getCategory_id() == categorie.getId()) {
                     if (estadoReporte == "Todos" || (categorie.isStatus() == true && estadoReporte == "Activos")
                             || (categorie.isStatus() == false && estadoReporte == "Inactivos")) {
@@ -401,14 +402,13 @@ public class CategoriesServicesBean extends BasePageBean {
         for (Categories categorie : allCategories) {
             int necesidades = 0, ofertas = 0, total = 0;
             ArrayList<Integer> resultados = new ArrayList<Integer>();
-            for (Needs need : needsServices.AllNeeds(UserServicesBean.getId(), UserServicesBean.getRol())) {
+            for (Needs need : needsServices.AllNeeds(UserServicesBean.getId(), 1)) {
                 if (need.getCategory_id() == categorie.getId()) {
                     if (estadoReporte == "Todos" || (categorie.isStatus() == true && estadoReporte == "Activos")
                             || (categorie.isStatus() == false && estadoReporte == "Inactivos")) {
                         if (invalidaReporte == "Todas" || (categorie.isInvalida() == true && estadoReporte == "Validas")
                                 || (categorie.isInvalida() == false && estadoReporte == "Invalidas")) {
-                            if (eliminadaReporte == "Todas"
-                                    || (categorie.isEliminada() == true && estadoReporte == "Eliminadas")
+                            if (eliminadaReporte == "Todas" || (categorie.isEliminada() == true && estadoReporte == "Eliminadas")
                                     || (categorie.isEliminada() == false && estadoReporte == "No eliminadas")) {
                                 if (categoriaReporte == "Todas" || (categorie.getValue() == categoriaReporte)) {
                                     necesidades += 1;
@@ -419,7 +419,7 @@ public class CategoriesServicesBean extends BasePageBean {
                 }
             }
             resultados.add(necesidades);
-            for (Offers offer : offersServices.AllOffers(UserServicesBean.getId(), UserServicesBean.getRol())) {
+            for (Offers offer : offersServices.AllOffers(UserServicesBean.getId(), 1)) {
                 if (offer.getCategory_id() == categorie.getId()) {
                     if (estadoReporte == "Todos" || (categorie.isStatus() == true && estadoReporte == "Activos")
                             || (categorie.isStatus() == false && estadoReporte == "Inactivos")) {
@@ -438,6 +438,7 @@ public class CategoriesServicesBean extends BasePageBean {
             }
             resultados.add(ofertas);
             resultados.add(necesidades + ofertas);
+            System.out.println(resultados);
             if (estadoReporte == "Todos" || (categorie.isStatus() == true && estadoReporte == "Activos")
                     || (categorie.isStatus() == false && estadoReporte == "Inactivos")) {
                 if (invalidaReporte == "Todas" || (categorie.isInvalida() == true && estadoReporte == "Validas")
@@ -447,8 +448,9 @@ public class CategoriesServicesBean extends BasePageBean {
                             || (categorie.isEliminada() == false && estadoReporte == "No eliminadas")) {
                         if (categoriaReporte == "Todas" || (categorie.getValue() == categoriaReporte)) {
                             boolean var = false;
-                            for (int n = 0; n < totales.size(); i++) {
-                                if (resultados.get(2) < totales.get(i).get(2)) {
+                            System.out.println(totales);
+                            for (int n = 0; n < totales.size(); n++) {
+                                if (resultados.get(2) < totales.get(n).get(2)) {
                                     var = true;
                                     nombres.add(n, categorie.getValue());
                                     totales.add(n, resultados);
@@ -461,6 +463,7 @@ public class CategoriesServicesBean extends BasePageBean {
                         }
                     }
                 }
+
             }
             i += 1;
         }

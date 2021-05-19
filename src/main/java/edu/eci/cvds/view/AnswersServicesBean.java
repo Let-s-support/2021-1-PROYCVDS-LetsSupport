@@ -98,11 +98,13 @@ public class AnswersServicesBean extends BasePageBean{
         }
     }
     public String clasifica(int offer_id, int need_id) throws ServicesException {
+        System.out.println(offer_id);
+        System.out.println(need_id);
         String res="Respuesta a";
         if (offer_id == 0){
-            res+=" necesidad " + needsServices.NeedName(need_id);
+            res+=" necesidad " + needsServices.NeedName(need_id).get(0).getValue();
         }else {
-            res+=" oferta " + offersServices.OfferName(offer_id);
+            res+=" oferta " + offersServices.OfferName(offer_id).get(0).getValue();
         }
         return res;
     }
