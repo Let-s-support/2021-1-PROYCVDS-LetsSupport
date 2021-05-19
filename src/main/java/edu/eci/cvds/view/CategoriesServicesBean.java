@@ -85,6 +85,7 @@ public class CategoriesServicesBean extends BasePageBean {
         statuses = new ArrayList<String>();
         value = "";
         description = "";
+        cleanData();
     }
 
     /**
@@ -133,8 +134,10 @@ public class CategoriesServicesBean extends BasePageBean {
             cleanData();
             System.out.println("Categoria creada");
         } catch (ServicesException ex) {
+            cleanData();
             throw new ServicesException("El item no esta registrado", ex);
         }
+
         cleanData();
     }
 
@@ -461,10 +464,12 @@ public class CategoriesServicesBean extends BasePageBean {
             }
             i += 1;
         }
+        System.out.println(nombres);
         return nombres;
     }
 
     public String datos(String categorieBusca) {
+        System.out.println(categorieBusca);
         numeroNecesidaes = totales.get(nombres.indexOf(categorieBusca)).get(0);
         numeroOfertas = totales.get(nombres.indexOf(categorieBusca)).get(1);
         numeroTotales = totales.get(nombres.indexOf(categorieBusca)).get(2);

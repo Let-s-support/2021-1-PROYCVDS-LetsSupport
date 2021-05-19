@@ -28,15 +28,30 @@
         <div class="body" style="height: auto; padding-bottom: 5%;">
             <ui:include src="/WEB-INF/bases/menuPrincipal.xhtml" />
             <div class="container bg-light mt-5">
-                <h1>Reporte de Categorías</h1>
+                <h1>Categorías mas usadas - Necesidades</h1>
                 <p:chart type="bar" model="#{categoryBean.getGrafico(1)}" style="height:300px" />
             </div>
+            <div class="container bg-light mt-5">
+                <h1>Categorías mas usadas - Ofertas</h1>
+                <p:chart type="bar" model="#{categoryBean.getGrafico(2)}" style="height:300px" />
+            </div>
+            <div class="container bg-light mt-5">
+                <h1>Categorías mas usadas</h1>
+                <p:chart type="bar" model="#{categoryBean.getGrafico(3)}" style="height:300px" />
+            </div>
+
             <h:form>
                 <h1 class="mt-5 bg-dark mx-auto text-center text-light col-10">Categorías mas usadas</h1>
                 <div class="col-10 mx-auto">
                     <p:dataTable id="mydata" var="category" value="#{categoryBean.populares()}">
                         <p:column class="text-center mx-auto" headerText="Categoría">
-                            <h:outputText class="text-center mx-auto" value="#{category}" />
+                            <h:outputText class="text-center mx-auto" value="categoryBean.datos(category)" />
+                        </p:column>
+                        <p:column class="text-center mx-auto" headerText="Cantidad Ofertas">
+                            <h:outputText class="text-center mx-auto" value="#{categoryBean.numeroOfertas}" />
+                        </p:column>
+                        <p:column class="text-center mx-auto" headerText="Cantidad Necesidades">
+                            <h:outputText class="text-center mx-auto" value="#{categoryBean.numeroNecesidaes}" />
                         </p:column>
                     </p:dataTable>
                 </div>
