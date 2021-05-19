@@ -26,23 +26,47 @@
             <div class="col-6 bg-dark mx-auto m-0 p-0 pb-3 mt-5">
                 <h1 class="text-light col-6 w-100 mx-auto">Crear Categoria</h1>
                 <div class="col-12 m-1 mx-auto">
-                    <h:form>
+                    <h:form id="form">
                         <p:growl autoUpdate="true" />
                         <div style="margin: 0;">
                             <p:panel class="container">
                                 <h:panelGrid columns="1" style="margin: 0 auto;">
-                                    <div class="">
-                                        <strong class="text-dark">Nombre</strong>
-                                        <h:inputText class="text-center" id="value" value="#{categoryBean.value}" required="true"
-                                            label="Nombre" />
-                                        <strong>Descripción</strong>
-                                        <p:inputTextarea class="text-center" maxlength="500" id="description" rows="6" cols="33"
-                                            value="#{categoryBean.description}" label="Descripción" />
+                                    <div class="mx-auto align-items-center">
+                                        <div class="">
+                                            <h:panelGrid columns="2" style="margin: 0 auto;">
+                                                <div class="col-12 mx-auto">
+                                                    <strong>Categoría invalida:</strong>
+                                                </div>
+                                                <h:selectBooleanCheckbox value="#{categoryBean.invalida}"
+                                                    itemLabel="" ajax="true" update="form">
+                                                    <p:ajax update="form"/>
+                                                </h:selectBooleanCheckbox>
+                                            </h:panelGrid>
+                                        </div>
+                                        <div class="mt-3">
+                                            <strong class="text-dark">Nombre</strong>
+                                            <h:inputText class="text-center" id="value" value="#{categoryBean.value}"
+                                                required="true" label="Nombre" />
+                                            <strong>Descripción</strong>
+                                            <p:inputTextarea class="text-center" maxlength="500" id="description"
+                                                rows="6" cols="33" value="#{categoryBean.description}"
+                                                label="Descripción" />
+                                            
+                                                <ui:fragment id="fragment" rendered="#{categoryBean.isInvalida()}">
+                                                    <div>
+                                                        <strong>Mensaje de invalidez:</strong>
+                                                    </div>
+                                                    <p:inputTextarea class="text-center" maxlength="85" id="msg"
+                                                        rows="2" cols="33" value="#{categoryBean.comentarioinvalida}"
+                                                        label="Mensaje" />
+                                                </ui:fragment>
+                                        </div>
                                     </div>
                                 </h:panelGrid>
                                 <h:form>
                                     <h:commandButton value="Crear" title="Crear"
-                                        action="#{categoryBean.agregarCategoria()}" class="btn btn-dark btn-md pl-5 pr-5" />
+                                        action="#{categoryBean.agregarCategoria()}"
+                                        class="btn btn-dark btn-md pl-5 pr-5" />
                                 </h:form>
                             </p:panel>
                         </div>

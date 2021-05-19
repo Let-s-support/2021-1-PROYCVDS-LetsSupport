@@ -83,7 +83,6 @@ public class CategoriesServicesBean extends BasePageBean {
         allCategories = new ArrayList<Categories>();
         categories_id = new ArrayList<Integer>();
         statuses = new ArrayList<String>();
-        System.out.println("Primer llamado");
         value = "";
         description = "";
     }
@@ -124,8 +123,8 @@ public class CategoriesServicesBean extends BasePageBean {
     public void agregarCategoria() throws ServicesException {
         try {
             status = selectedStatus == "Activa" ? true : false;
-            eliminada=false;
-            Categories categorie = new Categories(value, description, status,invalida,eliminada,comentarioinvalida);
+            eliminada = false;
+            Categories categorie = new Categories(value, description, status, invalida, eliminada, comentarioinvalida);
             categoriesServices.agregarCategoria(categorie);
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message",
                     "Categoria creada correctamente");
@@ -143,6 +142,8 @@ public class CategoriesServicesBean extends BasePageBean {
         this.value = "";
         this.description = "";
         this.selectedStatus = "Activa";
+        this.invalida = false;
+        this.comentarioinvalida = "";
     }
 
     /**
@@ -201,12 +202,13 @@ public class CategoriesServicesBean extends BasePageBean {
         return categories;
     }
 
-    public void EliminarCategoria() throws ServicesException{
+    public void EliminarCategoria() throws ServicesException {
         try {
             categoriesServices.EliminarCategoria(value);
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message", "La catagoria Se ha eliminado");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message",
+                    "La catagoria Se ha eliminado");
             PrimeFaces.current().dialog().showMessageDynamic(message);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             throw new ServicesException("Error al eliminar la categoria", ex);
         }
     }
@@ -216,21 +218,24 @@ public class CategoriesServicesBean extends BasePageBean {
         return graphic;
     }
 
-
     private HorizontalBarChartModel initBarModelNeeds() throws ServicesException, PersistenceException {
         HorizontalBarChartModel model = new HorizontalBarChartModel();
         BarChartSeries chatSeries = new BarChartSeries();
         chatSeries.setLabel("Ofertas");
         model.setSeriesColors("B40001,93b75f,E7E658,cc6666");
         int[] values = new int[allCategories.size()];
-        int i=0;
-        for(Categories categorie: allCategories){
-            for(Needs need: needsServices.AllNeeds(UserServicesBean.getId(),UserServicesBean.getRol())) {
-                if(need.getCategory_id()==categorie.getId()){
-                    if(estadoReporte=="Todos" || (categorie.isStatus()==true && estadoReporte=="Activos") || (categorie.isStatus()==false && estadoReporte=="Inactivos")){
-                        if(invalidaReporte=="Todas" || (categorie.isInvalida()==true && estadoReporte=="Validas") || (categorie.isInvalida()==false && estadoReporte=="Invalidas")){
-                            if(eliminadaReporte=="Todas" || (categorie.isEliminada()==true && estadoReporte=="Eliminadas") || (categorie.isEliminada()==false && estadoReporte=="No eliminadas")){
-                                if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
+        int i = 0;
+        for (Categories categorie : allCategories) {
+            for (Needs need : needsServices.AllNeeds(UserServicesBean.getId(), UserServicesBean.getRol())) {
+                if (need.getCategory_id() == categorie.getId()) {
+                    if (estadoReporte == "Todos" || (categorie.isStatus() == true && estadoReporte == "Activos")
+                            || (categorie.isStatus() == false && estadoReporte == "Inactivos")) {
+                        if (invalidaReporte == "Todas" || (categorie.isInvalida() == true && estadoReporte == "Validas")
+                                || (categorie.isInvalida() == false && estadoReporte == "Invalidas")) {
+                            if (eliminadaReporte == "Todas"
+                                    || (categorie.isEliminada() == true && estadoReporte == "Eliminadas")
+                                    || (categorie.isEliminada() == false && estadoReporte == "No eliminadas")) {
+                                if (categoriaReporte == "Todas" || (categorie.getValue() == categoriaReporte)) {
                                     values[i] += 1;
                                 }
                             }
@@ -238,31 +243,37 @@ public class CategoriesServicesBean extends BasePageBean {
                     }
                 }
             }
-            i+=1;
+            i += 1;
         }
-        int j=0;
-        for(Categories categorie: allCategories){
-            if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
+        int j = 0;
+        for (Categories categorie : allCategories) {
+            if (categoriaReporte == "Todas" || (categorie.getValue() == categoriaReporte)) {
                 chatSeries.set(categorie.getValue(), values[j]);
             }
         }
+
         model.addSeries(chatSeries);
         return model;
     }
+
     private HorizontalBarChartModel initBarModelOffers() throws ServicesException, PersistenceException {
         HorizontalBarChartModel model = new HorizontalBarChartModel();
         BarChartSeries chatSeries = new BarChartSeries();
         chatSeries.setLabel("Ofertas");
         model.setSeriesColors("B40001,93b75f,E7E658,cc6666");
         int[] values = new int[allCategories.size()];
-        int i=0;
-        for(Categories categorie: allCategories){
-            for(Offers offer: offersServices.AllOffers(UserServicesBean.getId(),UserServicesBean.getRol())) {
-                if(offer.getCategory_id()==categorie.getId()){
-                    if(estadoReporte=="Todos" || (categorie.isStatus()==true && estadoReporte=="Activos") || (categorie.isStatus()==false && estadoReporte=="Inactivos")){
-                        if(invalidaReporte=="Todas" || (categorie.isInvalida()==true && estadoReporte=="Validas") || (categorie.isInvalida()==false && estadoReporte=="Invalidas")){
-                            if(eliminadaReporte=="Todas" || (categorie.isEliminada()==true && estadoReporte=="Eliminadas") || (categorie.isEliminada()==false && estadoReporte=="No eliminadas")){
-                                if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
+        int i = 0;
+        for (Categories categorie : allCategories) {
+            for (Offers offer : offersServices.AllOffers(UserServicesBean.getId(), UserServicesBean.getRol())) {
+                if (offer.getCategory_id() == categorie.getId()) {
+                    if (estadoReporte == "Todos" || (categorie.isStatus() == true && estadoReporte == "Activos")
+                            || (categorie.isStatus() == false && estadoReporte == "Inactivos")) {
+                        if (invalidaReporte == "Todas" || (categorie.isInvalida() == true && estadoReporte == "Validas")
+                                || (categorie.isInvalida() == false && estadoReporte == "Invalidas")) {
+                            if (eliminadaReporte == "Todas"
+                                    || (categorie.isEliminada() == true && estadoReporte == "Eliminadas")
+                                    || (categorie.isEliminada() == false && estadoReporte == "No eliminadas")) {
+                                if (categoriaReporte == "Todas" || (categorie.getValue() == categoriaReporte)) {
                                     values[i] += 1;
                                 }
                             }
@@ -270,32 +281,37 @@ public class CategoriesServicesBean extends BasePageBean {
                     }
                 }
             }
-            i+=1;
+            i += 1;
         }
 
-        int j=0;
-        for(Categories categorie: allCategories){
-            if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
+        int j = 0;
+        for (Categories categorie : allCategories) {
+            if (categoriaReporte == "Todas" || (categorie.getValue() == categoriaReporte)) {
                 chatSeries.set(categorie.getValue(), values[j]);
             }
         }
         model.addSeries(chatSeries);
         return model;
     }
+
     private HorizontalBarChartModel initBarModelTotal() throws ServicesException, PersistenceException {
         HorizontalBarChartModel model = new HorizontalBarChartModel();
         BarChartSeries chatSeries = new BarChartSeries();
         chatSeries.setLabel("Ofertas");
         model.setSeriesColors("B40001,93b75f,E7E658,cc6666");
         int[] values = new int[allCategories.size()];
-        int i=0;
-        for(Categories categorie: allCategories){
-            for(Needs need: needsServices.AllNeeds(UserServicesBean.getId(),UserServicesBean.getRol())) {
-                if(need.getCategory_id()==categorie.getId()){
-                    if(estadoReporte=="Todos" || (categorie.isStatus()==true && estadoReporte=="Activos") || (categorie.isStatus()==false && estadoReporte=="Inactivos")){
-                        if(invalidaReporte=="Todas" || (categorie.isInvalida()==true && estadoReporte=="Validas") || (categorie.isInvalida()==false && estadoReporte=="Invalidas")){
-                            if(eliminadaReporte=="Todas" || (categorie.isEliminada()==true && estadoReporte=="Eliminadas") || (categorie.isEliminada()==false && estadoReporte=="No eliminadas")){
-                                if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
+        int i = 0;
+        for (Categories categorie : allCategories) {
+            for (Needs need : needsServices.AllNeeds(UserServicesBean.getId(), UserServicesBean.getRol())) {
+                if (need.getCategory_id() == categorie.getId()) {
+                    if (estadoReporte == "Todos" || (categorie.isStatus() == true && estadoReporte == "Activos")
+                            || (categorie.isStatus() == false && estadoReporte == "Inactivos")) {
+                        if (invalidaReporte == "Todas" || (categorie.isInvalida() == true && estadoReporte == "Validas")
+                                || (categorie.isInvalida() == false && estadoReporte == "Invalidas")) {
+                            if (eliminadaReporte == "Todas"
+                                    || (categorie.isEliminada() == true && estadoReporte == "Eliminadas")
+                                    || (categorie.isEliminada() == false && estadoReporte == "No eliminadas")) {
+                                if (categoriaReporte == "Todas" || (categorie.getValue() == categoriaReporte)) {
                                     values[i] += 1;
                                 }
                             }
@@ -303,12 +319,16 @@ public class CategoriesServicesBean extends BasePageBean {
                     }
                 }
             }
-            for(Offers offer: offersServices.AllOffers(UserServicesBean.getId(),UserServicesBean.getRol())) {
-                if(offer.getCategory_id()==categorie.getId()){
-                    if(estadoReporte=="Todos" || (categorie.isStatus()==true && estadoReporte=="Activos") || (categorie.isStatus()==false && estadoReporte=="Inactivos")){
-                        if(invalidaReporte=="Todas" || (categorie.isInvalida()==true && estadoReporte=="Validas") || (categorie.isInvalida()==false && estadoReporte=="Invalidas")){
-                            if(eliminadaReporte=="Todas" || (categorie.isEliminada()==true && estadoReporte=="Eliminadas") || (categorie.isEliminada()==false && estadoReporte=="No eliminadas")){
-                                if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
+            for (Offers offer : offersServices.AllOffers(UserServicesBean.getId(), UserServicesBean.getRol())) {
+                if (offer.getCategory_id() == categorie.getId()) {
+                    if (estadoReporte == "Todos" || (categorie.isStatus() == true && estadoReporte == "Activos")
+                            || (categorie.isStatus() == false && estadoReporte == "Inactivos")) {
+                        if (invalidaReporte == "Todas" || (categorie.isInvalida() == true && estadoReporte == "Validas")
+                                || (categorie.isInvalida() == false && estadoReporte == "Invalidas")) {
+                            if (eliminadaReporte == "Todas"
+                                    || (categorie.isEliminada() == true && estadoReporte == "Eliminadas")
+                                    || (categorie.isEliminada() == false && estadoReporte == "No eliminadas")) {
+                                if (categoriaReporte == "Todas" || (categorie.getValue() == categoriaReporte)) {
                                     values[i] += 1;
                                 }
                             }
@@ -316,11 +336,11 @@ public class CategoriesServicesBean extends BasePageBean {
                     }
                 }
             }
-            i+=1;
+            i += 1;
         }
-        int j=0;
-        for(Categories categorie: allCategories){
-            if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
+        int j = 0;
+        for (Categories categorie : allCategories) {
+            if (categoriaReporte == "Todas" || (categorie.getValue() == categoriaReporte)) {
                 chatSeries.set(categorie.getValue(), values[j]);
             }
         }
@@ -331,15 +351,15 @@ public class CategoriesServicesBean extends BasePageBean {
     private void createBarModel(int i) throws ServicesException, PersistenceException {
         filtros();
         allCategories = categoriesServices.traerCategories();
-        if(i==1){
-            graphic.setTitle("Categorias usadas por necesidades");
+        if (i == 1) {
             graphic = initBarModelNeeds();
-        }else if(i==2){
-            graphic.setTitle("Categorias usadas por ofertas");
+            graphic.setTitle("Categorias usadas por necesidades");
+        } else if (i == 2) {
             graphic = initBarModelOffers();
-        }else if(i==3){
-            graphic.setTitle("Categorias usadas por ofertas y necesidades");
+            graphic.setTitle("Categorias usadas por ofertas");
+        } else if (i == 3) {
             graphic = initBarModelTotal();
+            graphic.setTitle("Categorias usadas por ofertas y necesidades");
         }
 
         graphic.setLegendPosition("ne");
@@ -350,41 +370,45 @@ public class CategoriesServicesBean extends BasePageBean {
     }
 
     public void filtros() throws ServicesException, PersistenceException {
-        invalidasReporte=new ArrayList<String>();
+        invalidasReporte = new ArrayList<String>();
         invalidasReporte.add("Todas");
         invalidasReporte.add("Validas");
         invalidasReporte.add("Invalidas");
-        estadosReporte=new ArrayList<String>();
+        estadosReporte = new ArrayList<String>();
         estadosReporte.add("Todos");
         estadosReporte.add("Activos");
         estadosReporte.add("Inactivos");
-        eliminadasReporte=new ArrayList<String>();
+        eliminadasReporte = new ArrayList<String>();
         eliminadasReporte.add("Todas");
         eliminadasReporte.add("Eliminadas");
         eliminadasReporte.add("No eliminadas");
-        categoriasReporte=new ArrayList<String>();
+        categoriasReporte = new ArrayList<String>();
         categoriasReporte.add("Todas");
-        ArrayList<Categories> categoriesnames= (ArrayList<Categories>) categoriesServices.traerCategories();
-        for(int i=0;i<categoriesnames.size();i++){
+        ArrayList<Categories> categoriesnames = (ArrayList<Categories>) categoriesServices.traerCategories();
+        for (int i = 0; i < categoriesnames.size(); i++) {
             categoriasReporte.add(categoriesnames.get(i).getValue());
         }
     }
 
     public ArrayList<String> populares() throws ServicesException, PersistenceException {
-        nombres=new ArrayList<String>();
-        totales=new ArrayList<ArrayList<Integer>>();
+        nombres = new ArrayList<String>();
+        totales = new ArrayList<ArrayList<Integer>>();
         allCategories = categoriesServices.traerCategories();
-        int i=0;
-        for(Categories categorie: allCategories){
-            int necesidades=0,ofertas=0,total=0;
+        int i = 0;
+        for (Categories categorie : allCategories) {
+            int necesidades = 0, ofertas = 0, total = 0;
             ArrayList<Integer> resultados = new ArrayList<Integer>();
-            for(Needs need: needsServices.AllNeeds(UserServicesBean.getId(),UserServicesBean.getRol())) {
-                if(need.getCategory_id()==categorie.getId()){
-                    if(estadoReporte=="Todos" || (categorie.isStatus()==true && estadoReporte=="Activos") || (categorie.isStatus()==false && estadoReporte=="Inactivos")){
-                        if(invalidaReporte=="Todas" || (categorie.isInvalida()==true && estadoReporte=="Validas") || (categorie.isInvalida()==false && estadoReporte=="Invalidas")){
-                            if(eliminadaReporte=="Todas" || (categorie.isEliminada()==true && estadoReporte=="Eliminadas") || (categorie.isEliminada()==false && estadoReporte=="No eliminadas")){
-                                if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
-                                    necesidades+= 1;
+            for (Needs need : needsServices.AllNeeds(UserServicesBean.getId(), UserServicesBean.getRol())) {
+                if (need.getCategory_id() == categorie.getId()) {
+                    if (estadoReporte == "Todos" || (categorie.isStatus() == true && estadoReporte == "Activos")
+                            || (categorie.isStatus() == false && estadoReporte == "Inactivos")) {
+                        if (invalidaReporte == "Todas" || (categorie.isInvalida() == true && estadoReporte == "Validas")
+                                || (categorie.isInvalida() == false && estadoReporte == "Invalidas")) {
+                            if (eliminadaReporte == "Todas"
+                                    || (categorie.isEliminada() == true && estadoReporte == "Eliminadas")
+                                    || (categorie.isEliminada() == false && estadoReporte == "No eliminadas")) {
+                                if (categoriaReporte == "Todas" || (categorie.getValue() == categoriaReporte)) {
+                                    necesidades += 1;
                                 }
                             }
                         }
@@ -392,13 +416,17 @@ public class CategoriesServicesBean extends BasePageBean {
                 }
             }
             resultados.add(necesidades);
-            for(Offers offer: offersServices.AllOffers(UserServicesBean.getId(),UserServicesBean.getRol())) {
-                if(offer.getCategory_id()==categorie.getId()){
-                    if(estadoReporte=="Todos" || (categorie.isStatus()==true && estadoReporte=="Activos") || (categorie.isStatus()==false && estadoReporte=="Inactivos")){
-                        if(invalidaReporte=="Todas" || (categorie.isInvalida()==true && estadoReporte=="Validas") || (categorie.isInvalida()==false && estadoReporte=="Invalidas")){
-                            if(eliminadaReporte=="Todas" || (categorie.isEliminada()==true && estadoReporte=="Eliminadas") || (categorie.isEliminada()==false && estadoReporte=="No eliminadas")){
-                                if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
-                                    ofertas+=1;
+            for (Offers offer : offersServices.AllOffers(UserServicesBean.getId(), UserServicesBean.getRol())) {
+                if (offer.getCategory_id() == categorie.getId()) {
+                    if (estadoReporte == "Todos" || (categorie.isStatus() == true && estadoReporte == "Activos")
+                            || (categorie.isStatus() == false && estadoReporte == "Inactivos")) {
+                        if (invalidaReporte == "Todas" || (categorie.isInvalida() == true && estadoReporte == "Validas")
+                                || (categorie.isInvalida() == false && estadoReporte == "Invalidas")) {
+                            if (eliminadaReporte == "Todas"
+                                    || (categorie.isEliminada() == true && estadoReporte == "Eliminadas")
+                                    || (categorie.isEliminada() == false && estadoReporte == "No eliminadas")) {
+                                if (categoriaReporte == "Todas" || (categorie.getValue() == categoriaReporte)) {
+                                    ofertas += 1;
                                 }
                             }
                         }
@@ -406,20 +434,24 @@ public class CategoriesServicesBean extends BasePageBean {
                 }
             }
             resultados.add(ofertas);
-            resultados.add(necesidades+ofertas);
-            if(estadoReporte=="Todos" || (categorie.isStatus()==true && estadoReporte=="Activos") || (categorie.isStatus()==false && estadoReporte=="Inactivos")){
-                if(invalidaReporte=="Todas" || (categorie.isInvalida()==true && estadoReporte=="Validas") || (categorie.isInvalida()==false && estadoReporte=="Invalidas")){
-                    if(eliminadaReporte=="Todas" || (categorie.isEliminada()==true && estadoReporte=="Eliminadas") || (categorie.isEliminada()==false && estadoReporte=="No eliminadas")){
-                        if(categoriaReporte=="Todas" || (categorie.getValue()==categoriaReporte)){
-                            boolean var=false;
-                            for(int n=0;n<totales.size();i++){
-                                if(resultados.get(2)<totales.get(i).get(2)){
-                                    var=true;
-                                    nombres.add(n,categorie.getValue());
-                                    totales.add(n,resultados);
+            resultados.add(necesidades + ofertas);
+            if (estadoReporte == "Todos" || (categorie.isStatus() == true && estadoReporte == "Activos")
+                    || (categorie.isStatus() == false && estadoReporte == "Inactivos")) {
+                if (invalidaReporte == "Todas" || (categorie.isInvalida() == true && estadoReporte == "Validas")
+                        || (categorie.isInvalida() == false && estadoReporte == "Invalidas")) {
+                    if (eliminadaReporte == "Todas"
+                            || (categorie.isEliminada() == true && estadoReporte == "Eliminadas")
+                            || (categorie.isEliminada() == false && estadoReporte == "No eliminadas")) {
+                        if (categoriaReporte == "Todas" || (categorie.getValue() == categoriaReporte)) {
+                            boolean var = false;
+                            for (int n = 0; n < totales.size(); i++) {
+                                if (resultados.get(2) < totales.get(i).get(2)) {
+                                    var = true;
+                                    nombres.add(n, categorie.getValue());
+                                    totales.add(n, resultados);
                                 }
                             }
-                            if (!var){
+                            if (!var) {
                                 nombres.add(categorie.getValue());
                                 totales.add(resultados);
                             }
@@ -427,18 +459,17 @@ public class CategoriesServicesBean extends BasePageBean {
                     }
                 }
             }
-            i+=1;
+            i += 1;
         }
         return nombres;
     }
 
-    public String datos(String categorieBusca){
-        numeroNecesidaes=totales.get(nombres.indexOf(categorieBusca)).get(0);
-        numeroOfertas=totales.get(nombres.indexOf(categorieBusca)).get(1);
-        numeroTotales=totales.get(nombres.indexOf(categorieBusca)).get(2);
+    public String datos(String categorieBusca) {
+        numeroNecesidaes = totales.get(nombres.indexOf(categorieBusca)).get(0);
+        numeroOfertas = totales.get(nombres.indexOf(categorieBusca)).get(1);
+        numeroTotales = totales.get(nombres.indexOf(categorieBusca)).get(2);
         return categorieBusca;
     }
-
 
     public int getId() {
         return id;
@@ -543,4 +574,177 @@ public class CategoriesServicesBean extends BasePageBean {
     public static void setCategories_id(List<Integer> categories_id2) {
         categories_id = categories_id2;
     }
+
+    public boolean isStatus() {
+        return this.status;
+    }
+
+    public List<String> getEstado() {
+        return this.estado;
+    }
+
+    public void setEstado(List<String> estado) {
+        this.estado = estado;
+    }
+
+    public boolean isInvalida() {
+        return this.invalida;
+    }
+
+    public boolean getInvalida() {
+        return this.invalida;
+    }
+
+    public void setInvalida(boolean invalida) {
+        this.invalida = invalida;
+    }
+
+    public boolean isEliminada() {
+        return this.eliminada;
+    }
+
+    public boolean getEliminada() {
+        return this.eliminada;
+    }
+
+    public void setEliminada(boolean eliminada) {
+        this.eliminada = eliminada;
+    }
+
+    public String getComentarioinvalida() {
+        return this.comentarioinvalida;
+    }
+
+    public void setComentarioinvalida(String comentarioinvalida) {
+        this.comentarioinvalida = comentarioinvalida;
+    }
+
+    public ArrayList<String> getNombres() {
+        return this.nombres;
+    }
+
+    public void setNombres(ArrayList<String> nombres) {
+        this.nombres = nombres;
+    }
+
+    public ArrayList<ArrayList<Integer>> getTotales() {
+        return this.totales;
+    }
+
+    public void setTotales(ArrayList<ArrayList<Integer>> totales) {
+        this.totales = totales;
+    }
+
+    public ArrayList<String> getEstadosReporte() {
+        return this.estadosReporte;
+    }
+
+    public void setEstadosReporte(ArrayList<String> estadosReporte) {
+        this.estadosReporte = estadosReporte;
+    }
+
+    public ArrayList<String> getInvalidasReporte() {
+        return this.invalidasReporte;
+    }
+
+    public void setInvalidasReporte(ArrayList<String> invalidasReporte) {
+        this.invalidasReporte = invalidasReporte;
+    }
+
+    public ArrayList<String> getEliminadasReporte() {
+        return this.eliminadasReporte;
+    }
+
+    public void setEliminadasReporte(ArrayList<String> eliminadasReporte) {
+        this.eliminadasReporte = eliminadasReporte;
+    }
+
+    public ArrayList<String> getCategoriasReporte() {
+        return this.categoriasReporte;
+    }
+
+    public void setCategoriasReporte(ArrayList<String> categoriasReporte) {
+        this.categoriasReporte = categoriasReporte;
+    }
+
+    public String getEstadoReporte() {
+        return this.estadoReporte;
+    }
+
+    public void setEstadoReporte(String estadoReporte) {
+        this.estadoReporte = estadoReporte;
+    }
+
+    public String getInvalidaReporte() {
+        return this.invalidaReporte;
+    }
+
+    public void setInvalidaReporte(String invalidaReporte) {
+        this.invalidaReporte = invalidaReporte;
+    }
+
+    public String getEliminadaReporte() {
+        return this.eliminadaReporte;
+    }
+
+    public void setEliminadaReporte(String eliminadaReporte) {
+        this.eliminadaReporte = eliminadaReporte;
+    }
+
+    public String getCategoriaReporte() {
+        return this.categoriaReporte;
+    }
+
+    public void setCategoriaReporte(String categoriaReporte) {
+        this.categoriaReporte = categoriaReporte;
+    }
+
+    public int getNumeroNecesidaes() {
+        return this.numeroNecesidaes;
+    }
+
+    public void setNumeroNecesidaes(int numeroNecesidaes) {
+        this.numeroNecesidaes = numeroNecesidaes;
+    }
+
+    public int getNumeroOfertas() {
+        return this.numeroOfertas;
+    }
+
+    public void setNumeroOfertas(int numeroOfertas) {
+        this.numeroOfertas = numeroOfertas;
+    }
+
+    public int getNumeroTotales() {
+        return this.numeroTotales;
+    }
+
+    public void setNumeroTotales(int numeroTotales) {
+        this.numeroTotales = numeroTotales;
+    }
+
+    public HorizontalBarChartModel getGraphic() {
+        return this.graphic;
+    }
+
+    public void setGraphic(HorizontalBarChartModel graphic) {
+        this.graphic = graphic;
+    }
+
+    public NeedsServices getNeedsServices() {
+        return this.needsServices;
+    }
+
+    public void setNeedsServices(NeedsServices needsServices) {
+        this.needsServices = needsServices;
+    }
+
+    public OffersServices getOffersServices() {
+        return this.offersServices;
+    }
+
+    public void setOffersServices(OffersServices offersServices) {
+        this.offersServices = offersServices;
+    }
+
 }
