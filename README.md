@@ -64,15 +64,18 @@ En la página de bienvenida podrá conocer todas las ofertas disponibles dadas p
 ### Metodología
 ### Taiga 
 [![Taiga](Assets/Images/Taiga.jpg)](https://tree.taiga.io/project/richardug-solidaridad-escuela/backlog)
-### Release-burndown chart
 ### Sprint's
 #### Sprint1
+##### Release-burndown chart and backlog
 [![Burndown chart and backlog Sprint 1](https://github.com/Let-s-support/2021-1-PROYCVDS-LetsSupport/blob/master/Assets/Images/sprint1.PNG)](https://tree.taiga.io/project/richardug-solidaridad-escuela/taskboard/sprint-1-16929)
 #### Sprint2
+##### Release-burndown chart and backlog
 [![Burndown chart and backlog Sprint 2](https://github.com/Let-s-support/2021-1-PROYCVDS-LetsSupport/blob/master/Assets/Images/sprint2.PNG)](https://tree.taiga.io/project/richardug-solidaridad-escuela/taskboard/sprint-2-9441)
 #### Sprint3
+##### Release-burndown chart and backlog
 [![Burndown chart and backlog Sprint 3](https://github.com/Let-s-support/2021-1-PROYCVDS-LetsSupport/blob/master/Assets/Images/Sprint3.PNG)](https://tree.taiga.io/project/richardug-solidaridad-escuela/taskboard/sprint-3-6363)
 ### Reporte de pruebas
+(jacoco)
 ### Reporte análisis estático
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/cba8fd0874ac4f569f4f880e473cbac9)](https://www.codacy.com/gh/Let-s-support/2021-1-PROYCVDS-LetsSupport/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Let-s-support/2021-1-PROYCVDS-LetsSupport&amp;utm_campaign=Badge_Grade)
 
