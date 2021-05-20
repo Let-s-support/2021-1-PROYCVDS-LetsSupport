@@ -3,9 +3,15 @@
 <configuration>
 
     <typeAliases>
-        <typeAlias type="edu.eci.cvds.entities.User" alias="User"/>
-        <typeAlias type="edu.eci.cvds.entities.Needs" alias="Needs"/>
-        <typeAlias type="edu.eci.cvds.entities.Categories" alias="Categories"/>
+        <typeAlias type="edu.eci.cvds.entities.User" alias="User" />
+        <typeAlias type="edu.eci.cvds.entities.Needs" alias="Needs" />
+        <typeAlias type="edu.eci.cvds.entities.Categories" alias="Categories" />
+        <typeAlias type="edu.eci.cvds.entities.Roles" alias="Roles" />
+        <typeAlias type="edu.eci.cvds.entities.Status" alias="Status"/>
+        <typeAlias type="edu.eci.cvds.entities.MaxiumRequerements" alias="MaxiumRequerements"/>
+        <typeAlias type="edu.eci.cvds.entities.Offers" alias="Offers"/>
+        <typeAlias type="edu.eci.cvds.entities.Answers" alias="Answers"/>
+        <typeAlias type="edu.eci.cvds.entities.Cantidades" alias="Cantidades"/>
 
     </typeAliases>
 
@@ -25,6 +31,12 @@
         <mapper resource="mappers/CategoriesMapper.xml"></mapper>
         <mapper resource="mappers/NeedsMapper.xml"></mapper>
         <mapper resource="mappers/UserMapper.xml"></mapper>
+        <mapper resource="mappers/RolesMapper.xml"></mapper>
+        <mapper resource="mappers/StatusMapper.xml"></mapper>
+        <mapper resource="mappers/MaxiumRequerementsMapper.xml"></mapper>
+        <mapper resource="mappers/OffersMapper.xml"></mapper>
+        <mapper resource="mappers/AnswersMapper.xml"></mapper>
+        <mapper resource="mappers/CantidadesMapper.xml"></mapper>
     </mappers>
 
 </configuration>

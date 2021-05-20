@@ -1,8 +1,10 @@
 package edu.eci.cvds.services.Impl;
 
 import com.google.inject.Inject;
+import edu.eci.cvds.dao.CantidadesDAO;
 import edu.eci.cvds.dao.CategoriesDAO;
 import edu.eci.cvds.dao.PersistenceException;
+import edu.eci.cvds.entities.Cantidades;
 import edu.eci.cvds.entities.Categories;
 import edu.eci.cvds.services.CategoriesServices;
 import edu.eci.cvds.services.ServicesException;
@@ -17,6 +19,8 @@ public class CategoriesServicesImpl implements CategoriesServices {
 
     @Inject
     CategoriesDAO categoriesDAO;
+
+
 
     /**
      * Es usado por CategoriesServices para desplegar la funcionalidad de traerValuesCategories y asi obtener la información de los nombres de las categorias existentes, lo despliega a CategoriesDAO
@@ -121,4 +125,6 @@ public class CategoriesServicesImpl implements CategoriesServices {
             throw new ServicesException("Error al consultar nombres", e);
         }
     }
+
+
 }

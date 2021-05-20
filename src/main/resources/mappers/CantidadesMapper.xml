@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.eci.cvds.dao.mybatis.mappers.CantidadesMapper">
+    <resultMap id="SolicitudesCategorias" type="Cantidades">
+        <id property="category_id" column="category_id"/>
+        <result property="necesidades" column="necesidad"/>
+        <result property="ofertas" column="oferta"/>
+        <result property="total" column="total"/>
+    </resultMap>
+
+
+    <select parameterType="map" id="solicitudes" resultMap="SolicitudesCategorias">
+        select sum(need) as necesidad,sum(offer) as oferta,category_id,sum(need+offer) as total from
+        (select count(1) as need,0 as offer,category_id
+        from needs
+        group by category_id
+        union
+        select 0 as need,count(1) as offer,category_id
+        from offers
+        group by category_id) as query
+        group by category_id
+        order by total desc;
+    </select>
+</mapper>

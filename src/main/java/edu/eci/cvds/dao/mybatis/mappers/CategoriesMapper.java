@@ -1,5 +1,6 @@
 package edu.eci.cvds.dao.mybatis.mappers;
 
+import edu.eci.cvds.entities.Cantidades;
 import edu.eci.cvds.entities.Categories;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -46,4 +47,6 @@ public interface CategoriesMapper {
     void EliminarCategoria(@Param("value") String value);
 
     List<Categories> categoriaInvalida(@Param("id") int id);
+
+
 }

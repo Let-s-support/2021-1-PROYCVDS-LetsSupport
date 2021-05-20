@@ -10,6 +10,7 @@
         <typeAlias type="edu.eci.cvds.entities.MaxiumRequerements" alias="MaxiumRequerements"/>
         <typeAlias type="edu.eci.cvds.entities.Offers" alias="Offers"/>
         <typeAlias type="edu.eci.cvds.entities.Answers" alias="Answers"/>
+        <typeAlias type="edu.eci.cvds.entities.Cantidades" alias="Cantidades"/>
     </typeAliases>
 
     <environments default="development">
@@ -33,6 +34,7 @@
         <mapper resource="mappers/MaxiumRequerementsMapper.xml"></mapper>
         <mapper resource="mappers/OffersMapper.xml"></mapper>
         <mapper resource="mappers/AnswersMapper.xml"></mapper>
+        <mapper resource="mappers/CantidadesMapper.xml"></mapper>
     </mappers>
 
 

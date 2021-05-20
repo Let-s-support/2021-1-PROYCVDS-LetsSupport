@@ -1,5 +1,6 @@
 package edu.eci.cvds.dao;
 
+import edu.eci.cvds.entities.Cantidades;
 import edu.eci.cvds.entities.Categories;
 import org.apache.ibatis.annotations.Param;
 
@@ -48,5 +49,6 @@ public interface CategoriesDAO {
     void EliminarCategoria(String value) throws PersistenceException;
 
     List<Categories> categoriaInvalida(int id) throws PersistenceException;
+
 
 }

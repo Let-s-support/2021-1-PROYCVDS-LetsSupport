@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import edu.eci.cvds.dao.CategoriesDAO;
 import edu.eci.cvds.dao.PersistenceException;
 import edu.eci.cvds.dao.mybatis.mappers.CategoriesMapper;
+import edu.eci.cvds.entities.Cantidades;
 import edu.eci.cvds.entities.Categories;
 import org.apache.ibatis.annotations.Param;
 
@@ -98,4 +99,6 @@ public class MyBatisCategoriesDAO implements CategoriesDAO {
             throw new PersistenceException("Error al consultar nombres", e);
         }
     }
+
+
 }
