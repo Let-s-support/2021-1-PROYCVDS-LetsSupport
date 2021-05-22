@@ -8,7 +8,9 @@ import edu.eci.cvds.services.AnswersServices;
 import edu.eci.cvds.services.NeedsServices;
 import edu.eci.cvds.services.OffersServices;
 import edu.eci.cvds.services.ServicesException;
+import org.primefaces.PrimeFaces;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -71,6 +73,9 @@ public class AnswersServicesBean extends BasePageBean{
     public void agregarRespuestaOffer() throws ServicesException{
         Answers answer = new Answers(value, comentary,0, offer_id, UserServicesBean.getId());
         answersServices.agregarRespuesta(answer);
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message",
+                "Respuesta creada correctamente");
+        PrimeFaces.current().dialog().showMessageDynamic(message);
     }
 
     /**

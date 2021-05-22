@@ -39,7 +39,7 @@
     <select parameterType="map" id="AllOffers" resultMap="OffersResult">
         select *
         FROM offers
-        WHERE idsolicitante=#{id} or #{rol}=1
+        WHERE (idsolicitante=#{id} or #{rol}=1) and (status=1 or status=2)
     </select>
 
     <select parameterType="map" id="AllOffersFilterCategory" resultMap="OffersResult">
