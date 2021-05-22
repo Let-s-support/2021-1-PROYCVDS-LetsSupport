@@ -40,7 +40,7 @@
     <select parameterType="map" id="AllNeeds" resultMap="NeedsResult">
         select *
         FROM needs
-        WHERE (idsolicitante=#{id} or #{rol}=1) and (status=1 or status=2)
+        WHERE (idsolicitante=#{id} or #{rol}=1)
         order by category_id;
     </select>
 
