@@ -34,7 +34,15 @@ En ella , cualquier miembro de la comunidad educativa podrá acceder al sistema 
 
 En la página de bienvenida podrá conocer todas las ofertas disponibles dadas por cada miembro de la comunidad. A demás tendrá a disposición un menú interactivo con el cual podrá crear ofertas ,necesidades,categorías y dar respuestas a las solicitudes de los miembros entre otros.  
 #### Principales funcionalidades📋
-<p align="center"> Imagenes funcionalidades</p>
+
+* Unas de las principales funcionalidades es la capacidad de generar informes grafico de las principales categorias mas usadas tanto en ofertas como en necesidades no solo a nivel administrativo sino que tambien cada uno de los usuarios del sistema puede acceder a su propio reporte estadistico de barras.
+<p align="center"><img src="https://github.com/Let-s-support/2021-1-PROYCVDS-LetsSupport/blob/master/Assets/Images/categoriasmasusadas.PNG"/></p> 
+<p align="center"><img src="https://github.com/Let-s-support/2021-1-PROYCVDS-LetsSupport/blob/master/Assets/Images/reportenecesidadusuario.PNG"/></p> 
+* Generar un resumen para el Administrador de la interaccion de los usuarios por categorias mas usadas en la pagina; permite consultar cuales de los servicios de la pagina han sido más solicitados ya sea por necesidades o por ofertas de los usuarios, lo que facilita una mejor lectura de los datos. 
+<p align="center"><img src="https://github.com/Let-s-support/2021-1-PROYCVDS-LetsSupport/blob/master/Assets/Images/tablacategorias.PNG"/></p> 
+* Otra de las funcionalidades mas destacadas es la capacidad de generar los informes en formato pdf y excel lo que genera mayor portabilidad de los datos generados en la aplicacion  por la interaccion de los usuarios en ésta.
+<p align="center"><img src="https://github.com/Let-s-support/2021-1-PROYCVDS-LetsSupport/blob/master/Assets/Images/formatopdf.PNG"/></p> 
+<p align="center"><img src="https://github.com/Let-s-support/2021-1-PROYCVDS-LetsSupport/blob/master/Assets/Images/formatoexcel.PNG"/></p> 
 
 ## Arquitectura y diseño detallado
 ---
