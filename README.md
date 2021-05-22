@@ -76,18 +76,35 @@ En la página de bienvenida podrá conocer todas las ofertas disponibles dadas p
 ## Descripción del proceso
 ---
 ### Metodología
+Se trabajó mediante metodología ágil *SCRUM* , con el cual se elaboraron 3 sprints cada uno con una duraccion aproximada de 2 semanas.
+
 ### Taiga 
 [![Taiga](Assets/Images/Taiga.jpg)](https://tree.taiga.io/project/richardug-solidaridad-escuela/backlog)
 ### Sprint's
 #### Sprint1
 ##### Release-burndown chart and backlog
-[![Burndown chart and backlog Sprint 1](https://github.com/Let-s-support/2021-1-PROYCVDS-LetsSupport/blob/master/Assets/Images/sprint1.PNG)](https://tree.taiga.io/project/richardug-solidaridad-escuela/taskboard/sprint-1-16929)
+[Burndown chart Sprint 1](https://tree.taiga.io/project/richardug-solidaridad-escuela/taskboard/sprint-1-16929)
+![Burndown backlog Sprint 1](https://github.com/Let-s-support/2021-1-PROYCVDS-LetsSupport/blob/master/Assets/Images/sprint1.PNG)
+#### Resumen
+En este sprint  se realizaron todas las actividades correspondientes al login de los usuarios en la plataforma , creacion y actualizacion de categorias y registrar necesidad.
+Se lograron cumplir con todos los objetivos propuestos para la semana aunque con algunos problemas con apache shiro y de actualizacion de los campos en la pagina.
+
 #### Sprint2
 ##### Release-burndown chart and backlog
-[![Burndown chart and backlog Sprint 2](https://github.com/Let-s-support/2021-1-PROYCVDS-LetsSupport/blob/master/Assets/Images/sprint2.PNG)](https://tree.taiga.io/project/richardug-solidaridad-escuela/taskboard/sprint-2-9441)
+[Burndown chart Sprint 2](https://tree.taiga.io/project/richardug-solidaridad-escuela/taskboard/sprint-2-9441)
+![Burndown backlog Sprint 2](https://github.com/Let-s-support/2021-1-PROYCVDS-LetsSupport/blob/master/Assets/Images/sprint2.PNG)
+#### Resumen
+Para este sprint , se lograron hacer las correcciones correspondientes al sprint1 de forma satisfactoria, se solucionaron temas de autenticacion y autorizacion.
+En este sprint se logro la creacion del registro de las ofertas,respuestas, actualizar el estado de la necesidad y de la oferta
+
 #### Sprint3
 ##### Release-burndown chart and backlog
-[![Burndown chart and backlog Sprint 3](https://github.com/Let-s-support/2021-1-PROYCVDS-LetsSupport/blob/master/Assets/Images/Sprint3.PNG)](https://tree.taiga.io/project/richardug-solidaridad-escuela/taskboard/sprint-3-6363)
+[Burndown chart Sprint 3](https://tree.taiga.io/project/richardug-solidaridad-escuela/taskboard/sprint-3-6363)
+![Burndown backlog Sprint 3](https://github.com/Let-s-support/2021-1-PROYCVDS-LetsSupport/blob/master/Assets/Images/Sprint3.PNG)
+
+#### Resumen
+Por ultimo, en este sprint se lograron corregir las pequeñas correcciones tenidas en el anterior sprint , se lograron a cabalidad todas las tareas propuestas con un entregable de gran calidad en su elaboracion y diseño . Se logró añadir las funcionalidades correspondientes a reportes de necesidades,ofertas y respuestas al igual que la creacion de reportes de categorias mas solicitadas/ofrecidas y eliminacion de categorias.
+
 ### Reporte de pruebas
 (jacoco)
 ### Reporte análisis estático
