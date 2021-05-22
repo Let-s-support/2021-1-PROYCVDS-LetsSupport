@@ -41,7 +41,13 @@ En la página de bienvenida podrá conocer todas las ofertas disponibles dadas p
 ### Modelo E-R (Entidad-Relación)
 ![ModeloER](https://github.com/Let-s-support/2021-1-PROYCVDS-LetsSupport/blob/master/Assets/Images/ER.PNG)
 ### Diagrama de clases
-![Diagrama de clases](https://github.com/Let-s-support/2021-1-PROYCVDS-LetsSupport/blob/master/Assets/Images/DClases.PNG)
+#### Dao-Mybatis-Mapper
+![Dao-Mybatis-Mapper](https://github.com/Let-s-support/2021-1-PROYCVDS-LetsSupport/blob/master/Assets/Images/Diagrama%20de%20clases/Dao-Mybatis-Mapper.svg)
+#### Entities-Bean-Services
+![Entities-Bean-Services](https://github.com/Let-s-support/2021-1-PROYCVDS-LetsSupport/blob/master/Assets/Images/Diagrama%20de%20clases/Entities-Bean-Services.svg)
+#### Services-ServicesImpl-Dao
+![Services-ServicesImpl-Dao](https://github.com/Let-s-support/2021-1-PROYCVDS-LetsSupport/blob/master/Assets/Images/Diagrama%20de%20clases/Services-ServicesImpl-Dao.svg)
+
 ### Arquitectura
 #### Capa presentación
 *  Prime Faces
